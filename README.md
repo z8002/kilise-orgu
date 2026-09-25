@@ -6,6 +6,10 @@ Tek bir HTML dosyası: kurulum yok, internet bağlantısı gerekmez (yalnızca y
 
 ## Çalıştırma
 
+**Online çal:** https://z8002.github.io/kilise-orgu/
+
+Ya da bilgisayarına indir:
+
 1. `kilise-orgu.html` dosyasını indir.
 2. Çift tıkla; Chrome, Edge ya da Firefox'ta açılır.
 3. Bir tuşa bas. Org "rüzgârı" ilk tuşta kendiliğinden açılır.
