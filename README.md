@@ -229,6 +229,42 @@ Her satırın ilk ve son notası uzun. 4. satıra geçmeden **6 · Tutti**'ye ba
 
 İlk 4 satır en tanınan bölümdür. 12. satırın sonundaki `I·7` çok hızlı bir süs gibi geçer.
 
+### 9. Sessiz Gece, *Stille Nacht* (Gruber, 1818)
+
+Noel ilahisi, Do majör. Registrasyon: **1 · Dua**. Sakin, sallanır gibi bir ritimle çal.
+
+```
+ 1.  T·Y T   E ———        Sessiz gece
+ 2.  T·Y T   E ———        kutsal gece
+ 3.  O — O   U ———
+ 4.  I — I   T ———
+
+ 5.  Y — Y   I·U Y
+ 6.  T·Y T   E ———
+ 7.  Y — Y   I·U Y
+ 8.  T·Y T   E ———
+
+ 9.  O — O   Ğ·O U
+10.  I ———   P ———
+11.  I·T E   T·R W
+12.  Q —————
+```
+
+Son satırdaki `Q`'yu yankı sönene kadar tut. Son iki satırda **2 · İlahi**'ye geçersen kapanış daha dolgun duyulur.
+
+### 10. Amazing Grace (ilahi, 1835)
+
+*New Britain* ezgisi, Sol majör. Registrasyon: **4 · Kornet** ya da **2 · İlahi**. 3/4'lük: her satır bir cümle.
+
+```
+1.  W   T — U·T   U — Y   T — E   W — W
+2.      T — U·T   U — Y   O —————
+3.  U   O — U·T   U — Y   T — E   W — W
+4.      T — U·T   U — Y   T —————
+```
+
+Satır başındaki tek notalar (`W`, `U`) bir sonraki cümleye girişin ön vuruşudur. İkinci kıtada **5 · Plenum**'a geçersen ilahi daha görkemli duyulur.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
