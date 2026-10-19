@@ -265,6 +265,44 @@ Son satırdaki `Q`'yu yankı sönene kadar tut. Son iki satırda **2 · İlahi**
 
 Satır başındaki tek notalar (`W`, `U`) bir sonraki cümleye girişin ön vuruşudur. İkinci kıtada **5 · Plenum**'a geçersen ilahi daha görkemli duyulur.
 
+### 11. Carol of the Bells, *Şçedrık* (Leontoviç, 1916)
+
+Ukrayna halk ezgisinden doğan Noel şarkısı, Sol minör. Registrasyon: **4 · Kornet**, zile benzer bir ses verir. 3/4'lük; bütün parça tek bir dört notalı motif üzerine kuruludur.
+
+Ana motif (sağ el, dört kez):
+
+```
+7   Y·7   T        7   Y·7   T        7   Y·7   T        7   Y·7   T
+```
+
+İkinci ses, motifin üçlü yukarısı (dört kez):
+
+```
+O   I·O   7        O   I·O   7        O   I·O   7        O   I·O   7
+```
+
+İki el birlikte: sol el motifi alt sırada (`J N·J B`) çalarken sağ el ikinci sesi çalar (dört kez):
+
+```
+J + O    N + I · J + O    B + 7
+```
+
+Bitiş için **B + T + 7 + O** ile Sol minör akorunu yankı sönene kadar tut. Kısımları sırayla çalarken registeri giderek güçlendir: Kornet → **2 · İlahi** → **6 · Tutti**.
+
+### 12. Jesu, Joy of Man's Desiring, BWV 147 (Bach)
+
+*Jesus bleibet meine Freude* korali, Sol majör. Burada yalnızca en tanınan açılış teması var. Registrasyon: **3 · Flüt solo** ya da **2 · İlahi**.
+
+Melodi kesintisiz üçlüler hâlinde akar. Her üç notalık grubu eşit ve bağlı çal; gruplar arasında durma.
+
+```
+1.  T Y U    O I I    P O O
+2.  Ü - Ü    O U T    Y U I
+3.  O ———
+```
+
+2. satırdaki `-` tuşu notadır (Fa♯5), uzatma işareti değil. Kapanış için son `O`'dan sonra **T + U + O** ile Sol majör akoruna bas.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
