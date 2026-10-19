@@ -267,31 +267,34 @@ Satır başındaki tek notalar (`W`, `U`) bir sonraki cümleye girişin ön vuru
 
 ### 11. Carol of the Bells, *Şçedrık* (Leontoviç, 1916)
 
-Ukrayna halk ezgisinden doğan Noel şarkısı, Sol minör. Registrasyon: **4 · Kornet**, zile benzer bir ses verir. 3/4'lük; bütün parça tek bir dört notalı motif üzerine kuruludur.
-
-Ana motif (sağ el, dört kez):
+Ukrayna halk ezgisinden doğan Noel şarkısı, Sol minör. Leontoviç'in 1916 koro düzenlemesinin soprano partisi, [Vikipedi'deki nota](https://en.wikipedia.org/wiki/Shchedryk_(song)#Melody) üzerinden nota nota çevrildi. Registrasyon: **4 · Kornet**, zile benzer bir ses verir. 3/4'lük: her satır bir ölçü.
 
 ```
-7   Y·7   T        7   Y·7   T        7   Y·7   T        7   Y·7   T
+A.  7   Y·7   T                   ana motif: 16 kez
+
+B.  O   I·O   7                   4 kez
+    (iki sesli: 7+O   Y+I · 7+O   T+7)
+
+C.  Ü   Ü·Ü   Ğ·0
+    O   O·O   I·7
+    I   I·I   O·I
+    T   T·T   T
+
+D.  W·E·5·T·Y·7
+    I·O   I   7                   D kısmını 2 kez çal
+
+E.  7   Y·7   T                   4 kez
 ```
 
-İkinci ses, motifin üçlü yukarısı (dört kez):
-
-```
-O   I·O   7        O   I·O   7        O   I·O   7        O   I·O   7
-```
-
-İki el birlikte: sol el motifi alt sırada (`J N·J B`) çalarken sağ el ikinci sesi çalar (dört kez):
-
-```
-J + O    N + I · J + O    B + 7
-```
-
-Bitiş için **B + T + 7 + O** ile Sol minör akorunu yankı sönene kadar tut. Kısımları sırayla çalarken registeri giderek güçlendir: Kornet → **2 · İlahi** → **6 · Tutti**.
+- `7 Y·7 T`: ilk nota bir vuruş, ortadaki ikisi yarım vuruş, son nota bir vuruş ("Şçed-rık şçed-rık").
+- B kısmında alto ana motifi çalmaya devam eder. İki sesli satırda iki notaya birlikte bas (`7+O`).
+- C kısmındaki `0` tuşu notadır (Re♯5 / Mi♭5).
+- D kısmındaki ilk satır altı hızlı notalık yükselen bir koşudur.
+- Notada A–E iki kez çalınır. İkinci seferin sonunda `T`'yi üç ölçü boyunca tut, ardından **O I·O T** notalarını giderek yavaşlatarak bitir.
 
 ### 12. Jesu, Joy of Man's Desiring, BWV 147 (Bach)
 
-*Jesus bleibet meine Freude* korali, Sol majör. Burada yalnızca en tanınan açılış teması var. Registrasyon: **3 · Flüt solo** ya da **2 · İlahi**.
+*Jesus bleibet meine Freude* korali, Sol majör. Burada yalnızca en tanınan açılış teması var; bu tema henüz bir nota kaynağıyla karşılaştırılmadı. Registrasyon: **3 · Flüt solo** ya da **2 · İlahi**.
 
 Melodi kesintisiz üçlüler hâlinde akar. Her üç notalık grubu eşit ve bağlı çal; gruplar arasında durma.
 
@@ -302,6 +305,79 @@ Melodi kesintisiz üçlüler hâlinde akar. Her üç notalık grubu eşit ve ba�
 ```
 
 2. satırdaki `-` tuşu notadır (Fa♯5), uzatma işareti değil. Kapanış için son `O`'dan sonra **T + U + O** ile Sol majör akoruna bas.
+
+### 13. Ave Maria, D 839 (Schubert)
+
+*Ellens dritter Gesang*. Ses partisi, orijinal tonunda (Si♭ majör), [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1054)'teki telif dışı nota üzerinden nota nota çevrildi; küçük süs notaları atlandı. Registrasyon: **1 · Dua** ya da **3 · Flüt solo**. Çok yavaş çal (4/4, her satır bir ölçü).
+
+```
+ 1.  7 —     Y·7       O ——   I
+ 2.  7       (sus)     I      7·Y·T·Y
+ 3.  7       (sus) O   O·I·7  Y·T·O·P
+ 4.  O —     9·Y       I·7    Y·I·O   0·I·Y
+
+ 5.  7 —     O·I       I·Y    T·U·O   Ğ·O·U
+ 6.  I ——    T·Y·7·Y·T        R       (sus) R
+ 7.  I·I     I·U·I·O·I·O      7       (sus) 7
+ 8.  I·I     I·U·I     0·O·I  7 —     (sus) 7
+
+ 9.  I·I     O·O       O·I·O  0   0   (sus) T
+10.  I·I     7·Y·7     9·I·7  I ——
+11.  7 —     Y·7       O ——   I
+12.  7 ———
+```
+
+- `·` ile bağlı uzun gruplar tek nefeste, akıcı çalınır.
+- `9` (Do♯5 / Re♭5) ve `0` (Re♯5 / Mi♭5) tuşları notadır, satır numarası değil.
+- Şarkının üç kıtası da aynı ezgiyle söylenir; isteğe göre baştan tekrarla.
+
+### 14. Düğün Marşı, *Bir Yaz Gecesi Rüyası* (Mendelssohn)
+
+Kiliseden çıkışta çalınan düğün marşı, Do majör. Théodore Dubois'nın org düzenlemesinin üst sesi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2198)'teki nota (Durand, Paris) üzerinden nota nota çevrildi. Registrasyon: **6 · Tutti**.
+
+Melodi yüksekte olduğu için **başlamadan bir kez `↑` bas** (Oktav kutusunda Do4 – Sol6 yazmalı). Bu konumda alt sıra Do4'ten, üst sıra Do5'ten başlar. Bitince `↓` ile geri dön.
+
+Trompet çağrısı (alt sıra):
+
+```
+Z·Z·Z   Z —         Z·Z·Z   Z —         Z·Z·Z
+C   C·C·C   C   C·C·C
+B   B·B·B   B
+```
+
+Ana tema (her satır bir ölçü):
+
+```
+1.  I —    U·5
+2.  Y   T   R   W
+3.  Q —    W   B·W
+4.  E   (sus)   Q·E·T
+
+5.  I —    U·5
+6.  Y   T   R   W
+7.  Q —    E   W·E
+8.  W —    Q
+```
+
+Orta bölüm:
+
+```
+ 9.  Q —    Q·Q
+10.  E   W   M   B
+11.  B·Q    Q·E
+12.  E   W   M   B
+13.  B·E    E·T
+14.  T —    R   E
+15.  W   2·E   W   N·Q
+16.  M   T   Y   U
+```
+
+Ardından ana temayı (1–8) bir kez daha çal ve **Q + E + T** ile Do majör akorunda bitir.
+
+- Çağrıdaki `Z·Z·Z` üç hızlı nota (üçleme), ardından gelen nota bir vuruş.
+- `·` ile bağlı ikililerde ilk nota uzun, ikincisi kısa (`U·5`: Si yarım vuruştan uzun, Fa♯ kısa).
+- 3. ve 7. satırların başındaki uzun `Q` notada titremeli (trill) yazılıdır; istersen `Q` ile `W`'yi hızla değiştirerek çal.
+- Bu konumda `B` Sol4, `M` Si4, `N` La4'tür.
 
 ## Nasıl çalışıyor
 
@@ -315,3 +391,6 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 ## Kaynaklar
 
 - *Schafe können sicher weiden* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1794), kamu malı.
+- *Ave Maria* (D 839) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1054), kamu malı.
+- *Düğün Marşı* (Dubois org düzenlemesi) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2198), CC BY-SA 4.0.
+- *Şçedrık* (Leontoviç) notası: [Vikipedi](https://en.wikipedia.org/wiki/Shchedryk_(song)#Melody), CC BY-SA 4.0.
