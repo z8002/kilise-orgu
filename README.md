@@ -529,6 +529,73 @@ Reform kiliselerinin marşı sayılan Luther korali, Do majör. Soprano partisi,
 - `3` (Re♯4) ve `2` (Do♯4) tuşları notadır. `9` Do♯5'tir; 3. satırda Do♯, 4. satırda Do natürel (`I`) çalınır.
 - 3. ve 4. satırlar nakarattır ("This, this is Christ the King").
 
+### 22. Joy to the World, *Antioch* (Händel / Mason, 1839)
+
+Noel ilahisi, Re majör. Ezgi Lowell Mason'ın Händel'den uyarlamasıdır. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1223)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **6 · Tutti**. 2/4'lük, neşeli ve hızlı.
+
+```
+1.  O  9·U   Y·T   5  E   W·Y         Joy to the world! the Lord is come;
+2.  U·U   9·9   O·O                   Let earth receive her King;
+3.  O·9  U·Y   Y·T  Y·O
+4.  O·9  U·Y   Y·T  5·5
+5.  5·5  5·5·T   Y —  T·5
+6.  E·E  E·E·5   T —  5·E
+7.  W  O  U   Y·T  5·T   5  E   W ——
+```
+
+- Açılış (`O 9·U Y·T 5 E W`) yukarıdan aşağı inen bir gamdır; ilk dört notayı tören havasında, geniş çal.
+- 7. satırın başındaki `W` kısa, ardından gelen `O` uzundur.
+- `9` tuşu notadır (Do♯5).
+
+### 23. O Come, O Come, Emmanuel, *Veni Emmanuel* (15. yüzyıl)
+
+Advent ilahisi, Mi minör. Fransız ortaçağ ezgisi, Thomas Helmore'un 1856 düzenlemesi. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1300)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **1 · Dua**; nakarat (5. satır) için **5 · Plenum**. Ağır ve düzgün: her tuş eşit bir kısa vuruş, `—` olanlar uzun.
+
+```
+1.  E   T  U  U  U  Y  I  U  Y   T —  Y       O come, O come, Emmanuel,
+2.      U  T  E  T  Y  5  E  W   E —  Y       And ransom captive Israel,
+3.      Y  E  E  5  T —  5  E   W —  T        That mourns in lonely exile here
+4.      Y  U  U  U  Y  I  U  Y   T —  O       Until the Son of God appear.
+5.      O —  U   U —  U                       Rejoice! Rejoice!
+6.      Y  I  U  Y  T  Y  U  T               Emmanuel shall come to thee,
+7.      E  T  Y  5  E  W  E ———              O Israel.
+```
+
+- 1. satırın başındaki `E` ön vuruştur.
+
+### 24. Abide with Me, *Eventide* (Monk, 1861)
+
+Akşam ilahisi; cenaze ve anma törenlerinde de çalınır. Mutopia'daki nota Mi♭ majörden Re majöre aktarılmış; burada da Re majör. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1241)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **1 · Dua**. Çok yavaş: her satır iki ölçü.
+
+```
+1.  5 —  5  E   W —  Y —          Abide with me; fast falls the eventide;
+2.  U  Y  Y  T   5 ———
+3.  5 —  T  Y   U —  Y —
+4.  T  E  5  6   Y ———
+
+5.  5 —  5  E   W —  Y —
+6.  Y  T  T  5   E ———
+7.  E —  5  T   5  E  W  T
+8.  5 —  E —   W ———
+```
+
+- `6` tuşu notadır (Sol♯4), 4. satırda bir kez geçer.
+
+### 25. Lobe den Herren, *Praise to the Lord, the Almighty* (1665)
+
+Alman korali, Fa majör. Stralsund ilahi kitabından (1665), William S. Bennett'in 1864 düzenlemesi; Mutopia'daki nota Sol majörden Fa majöre aktarılmış. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1256)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **2 · İlahi**; son iki satırda **5 · Plenum**. 3/4'lük.
+
+```
+1.  R  R  I   Y·T  R   E  W  Q   W  E  R   T ——   R ——       Praise to the Lord, the Almighty,
+2.  R  R  I   Y·T  R   E  W  Q   W  E  R   T ——   R ——       the King of creation!
+3.  I  I  I   O ——   Y  7  I   I·7  Y   T ——
+4.  Q  W  E   R  T  Y   T ——   R ——
+```
+
+- `Y·T` ve `I·7`: ilk nota uzun (bir buçuk vuruş), ikincisi kısa.
+- `7` tuşu notadır (Si♭4).
+- 4. satır baştaki `Q`'dan (Do4) başlayıp adım adım yükselir.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
@@ -551,3 +618,7 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *Holy, Holy, Holy* (*Nicaea*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1284), kamu malı.
 - *Ein feste Burg* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1237), kamu malı.
 - *Greensleeves* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1247), kamu malı.
+- *Joy to the World* (*Antioch*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1223), kamu malı.
+- *O Come, O Come, Emmanuel* (*Veni Emmanuel*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1300), kamu malı.
+- *Abide with Me* (*Eventide*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1241), kamu malı.
+- *Lobe den Herren* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1256), kamu malı.
