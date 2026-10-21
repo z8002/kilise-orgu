@@ -379,6 +379,85 @@ Ardından ana temayı (1–8) bir kez daha çal ve **Q + E + T** ile Do majör a
 - 3. ve 7. satırların başındaki uzun `Q` notada titremeli (trill) yazılıdır; istersen `Q` ile `W`'yi hızla değiştirerek çal.
 - Bu konumda `B` Sol4, `M` Si4, `N` La4'tür.
 
+### 15. Adeste Fideles, *O Come, All Ye Faithful* (Wade, 1751)
+
+Noel ilahisi, Sol majör. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1220)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **2 · İlahi**; nakarat için **5 · Plenum**. 4/4'lük: her grup bir ölçü.
+
+```
+1.  T   T — W T   Y — W —   U Y U I   U — Y T
+2.      T — 5 E   5 T Y U   5 — E·W   W ———
+3.      O — I U   I — U —   Y U T Y   5·E W  U
+4.      U Y U I   U — Y U   U Y U I   U — Y U
+5.      I U Y T   5 — T I   U — Y·T   T ———
+```
+
+- 1. satırın başındaki tek `T` ön vuruştur ("Gel-").
+- 3. satırın sonundaki `U`, nakarata ("Ve-nite adoremus") girişin ön vuruşudur. 4. satır nakaratın kendisidir.
+- Nakaratta ses giderek büyür: 4. satırda **5 · Plenum**'a, 5. satırda **6 · Tutti**'ye geçebilirsin.
+
+### 16. Air, *G Teli Üzerine Arya*, BWV 1068 (Bach)
+
+Orkestra Süiti No. 3'ün ünlü ağır bölümü, Re majör. Üst ses (flüt düzenlemesi), [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534)'teki Bach-Gesellschaft kaynaklı telif dışı nota üzerinden nota nota çevrildi; küçük vurgu notaları atlandı. Registrasyon: **1 · Dua** ya da **3 · Flüt solo**. Çok yavaş ve bağlı çal.
+
+Melodi yüksekte olduğu için **başlamadan bir kez `↑` bas** (Oktav kutusunda Do4 – Sol6 yazmalı). Bu konumda alt sıradaki `N` La4, `J` La♯4, `M` Si4'tür; geri kalan notalar üst sıradadır. Bitince `↓` ile geri dön.
+
+1. bölüm (iki kez):
+
+```
+1.  5 ————
+2.  U·T·E·W·2·W   2   N
+3.  Y ——   5·Q·M·E·3·Y·T
+4.  T ——   E·M·N·W·2·T·5
+5.  5 —   6·Y   W   W·E·5   E·E·W
+6.  2·M·M·2·W   2·M   N ——
+```
+
+2. bölüm (iki kez):
+
+```
+ 7.  2 —   W·2·M·2·N   Y —   Q
+ 8.  M   U·Y·T·5   T —   5·E·W·2·M
+ 9.  J·M   2·W   E·5   T —   5
+10.  E·W·2·M·2·W·E·W   M ——
+11.  W —   5·E·W   U —   Y·6
+12.  5·E·Y   N   M·2·W   2·M   N —
+13.  W —   5·E   E —   T·5
+14.  5 —   Y·T   T ——
+15.  N —   2·E·T·T·E   5 —   T·Y
+16.  W —   5·Y·I   U —   W
+17.  2·E   T   M·N   E·5·T   5·E
+18.  W·2·M   2·W·2·W   W ———
+```
+
+- Uzun notalar (`5 ————`, `Y ——`) sonraki hızlı grup başlayana kadar basılı kalır; Bach'ın bu parçası uzun tutulan notalarla ünlüdür.
+- `·` ile bağlı gruplar tek bir akıcı süs gibi geçer.
+- `Q` burada Do5 (natürel), `I` Do6'dır. 3. satırdaki `Q` ve 16. satırdaki `I` notada natürel işaretlidir.
+- `2`, `3`, `6` tuşları notadır (Do♯5, Re♯5, Sol♯5), satır numarası değil.
+
+### 17. Hallelujah, *Mesih* (Händel, 1741)
+
+*Messiah* oratoryosunun ünlü korosu, Re majör. Soprano partisinin açılışı, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=459)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **6 · Tutti**.
+
+```
+1.  O·Y   U·Y   (sus)                                    Hal-le-lu-jah!
+2.  O·Y   U·Y   (sus) O·O   O O   (sus) O·O   O O   (sus) O
+3.  9 O —   9 O —   (sus)
+
+4.  P·Y   -·P   (sus)
+5.  P·Y   -·P   (sus) P·P   - P   (sus) P·P   - P   (sus) P
+6.  -·P   O   9   (sus)
+
+7.  Y —   U   9                                          For the Lord God
+8.  O W   O·O   9                                        om-ni-po-tent
+9.  U —   Y   (sus) P·P                                  reign-eth
+10. O 9   (sus) P·P   O 9   (sus) P·P   - P   (sus) P·P   - P
+```
+
+- `O·Y`: ilk nota uzun (bir buçuk vuruş), ikincisi kısa. `U·Y` iki eşit kısa nota.
+- `O·O` ve `P·P` ikilileri çok hızlı ön vuruşlardır ("Hal-le-").
+- `-` tuşu notadır (Fa♯5), uzatma işareti değil. `9` Do♯5'tir.
+- 8. satırdaki `W` bir oktav aşağıya (Re4) atlar.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
@@ -394,3 +473,6 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *Ave Maria* (D 839) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1054), kamu malı.
 - *Düğün Marşı* (Dubois org düzenlemesi) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2198), CC BY-SA 4.0.
 - *Şçedrık* (Leontoviç) notası: [Vikipedi](https://en.wikipedia.org/wiki/Shchedryk_(song)#Melody), CC BY-SA 4.0.
+- *Adeste Fideles* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1220), kamu malı.
+- *Air* (BWV 1068) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534), kamu malı.
+- *Hallelujah* (*Messiah*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=459), kamu malı.
