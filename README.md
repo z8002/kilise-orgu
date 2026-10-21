@@ -458,6 +458,77 @@ Melodi yüksekte olduğu için **başlamadan bir kez `↑` bas** (Oktav kutusund
 - `-` tuşu notadır (Fa♯5), uzatma işareti değil. `9` Do♯5'tir.
 - 8. satırdaki `W` bir oktav aşağıya (Re4) atlar.
 
+### 18. Hark! The Herald Angels Sing (Mendelssohn, 1840)
+
+Noel ilahisi, Fa majör. Ezgi Mendelssohn'un, söz Charles Wesley'nin. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1261)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **2 · İlahi**; 7. satırdan sonra **6 · Tutti**. 4/4'lük: her satır iki ölçü.
+
+```
+ 1.  Q  R  R·E   R  Y  Y  T         Hark! the herald angels sing
+ 2.  I  I  I·7   Y  T  Y —          "Glory to the newborn King;
+ 3.  Q  R  R·E   R  Y  Y  T         Peace on earth, and mercy mild,
+ 4.  I  T  T·E   E  W  Q —          God and sinners reconciled!"
+ 5.  I  I  I  R   7  Y  Y  T        Joyful, all ye nations, rise,
+ 6.  I  I  I  R   7  Y  Y  T        Join the triumph of the skies;
+ 7.  O  O  O  I   7  Y  7 —         With th'angelic host proclaim,
+ 8.  T  Y·7  I·R   R  T  Y —        "Christ is born in Bethlehem!"
+ 9.  O·O  O  I   7  Y  7 —          Hark! the herald angels sing,
+10.  T  Y·7  I·R   R  T  R —        "Glory to the newborn King!"
+```
+
+- `7` tuşu notadır (Si♭4), satır numarası değil.
+- 8. ve 10. satırdaki `Y·7` iki eşit kısa nota, `I·R` ise uzun-kısa.
+
+### 19. Holy, Holy, Holy, *Nicaea* (Dykes, 1861)
+
+Kilisede en çok söylenen ilahilerden biri, Re majör. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1284)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **5 · Plenum**. 4/4'lük, ağır ve görkemli: her satır iki ölçü.
+
+```
+1.  W  W  5  5   Y —  Y —           Ho-ly, ho-ly, ho-ly!
+2.  U —  U  U   Y —  5 —
+3.  Y·Y  Y  Y   O —  9  Y
+4.  E  Y  U·Y   Y ———
+
+5.  W  W  5  5   Y —  Y —
+6.  U·U  U  U   Y —  Y —
+7.  O —  Y  Y   U —  5 —
+8.  T  E  E·W   W ———
+```
+
+- `9` tuşu notadır (Do♯5).
+- İlk satır parçanın adı gibi söylenir: üç kez "Holy".
+
+### 20. Ein feste Burg ist unser Gott (Luther, 1529)
+
+Reform kiliselerinin marşı sayılan Luther korali, Do majör. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1237)'teki telif dışı nota üzerinden nota nota çevrildi; bu, bugün ilahi kitaplarında yaygın olan düz ritimli sürümdür. Registrasyon: **5 · Plenum**; son iki satırda **6 · Tutti**. 4/4'lük.
+
+```
+1.  I   I  I  T·Y  U   I·U  Y  T  I   U  Y  T  Y   R·E  W  Q
+2.  I   I  I  T·Y  U   I·U  Y  T  I   U  Y  T  Y   R·E  W  Q
+
+3.  Q   T  Y  T  5   T ——  Q   T  T  Y  U   I ——  U
+4.      I  U  Y  Y   T ——  Y   Y  T  Y  R   E ——  I
+5.      U  Y  T  Y   R·E  W  Q
+```
+
+- Satır başlarındaki tek notalar (`I`, `Q`) ön vuruştur.
+- `T·Y`, `I·U`, `R·E` iki eşit kısa nota.
+
+### 21. Greensleeves, *What Child Is This* (16. yüzyıl)
+
+İngiliz halk ezgisi; Noel'de *What Child Is This?* sözleriyle söylenir. Mi minör. Soprano partisi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1247)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **3 · Flüt solo** ya da **1 · Dua**. 6/8'lik, sallanır gibi: her ölçüde "uzun-kısa" ritmi tekrar eder.
+
+```
+1.  E   T  Y  U·I  U   Y  5  W·E  5   T  E  E·3  E   5 —  M  E
+2.      T  Y  U·I  U   Y  5  W·E  5   T·5  E  3·2  3   E —  E
+3.      O —  O·9  U   Y  5  W·E  5   T  E  E·3  E   5  3  M
+4.      O —  O·I  U   Y  5  W·E  5   T·5  E  3·2  3   E —  E
+```
+
+- 1. satırdaki ilk `E` ön vuruştur.
+- `M` alt sıradadır (Si3).
+- `3` (Re♯4) ve `2` (Do♯4) tuşları notadır. `9` Do♯5'tir; 3. satırda Do♯, 4. satırda Do natürel (`I`) çalınır.
+- 3. ve 4. satırlar nakarattır ("This, this is Christ the King").
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
@@ -476,3 +547,7 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *Adeste Fideles* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1220), kamu malı.
 - *Air* (BWV 1068) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534), kamu malı.
 - *Hallelujah* (*Messiah*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=459), kamu malı.
+- *Hark! The Herald Angels Sing* (Mendelssohn ezgisi) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1261), kamu malı.
+- *Holy, Holy, Holy* (*Nicaea*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1284), kamu malı.
+- *Ein feste Burg* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1237), kamu malı.
+- *Greensleeves* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1247), kamu malı.
