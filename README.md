@@ -596,6 +596,55 @@ Alman korali, Fa majör. Stralsund ilahi kitabından (1665), William S. Bennett'
 - `7` tuşu notadır (Si♭4).
 - 4. satır baştaki `Q`'dan (Do4) başlayıp adım adım yükselir.
 
+### 26. Görsev İçin Balad (özgün parça, Kerem Görsev'e ithaf)
+
+Bu parça Kerem Görsev'in bir eseri **değildir**: onun klasik müzikle cazı harmanlayan piyano üslubundan esinlenerek bu proje için yazılmış özgün bir caz baladıdır ve ona ithaf edilmiştir. Re minör, 4/4, yavaş: her vuruş yaklaşık bir saniye.
+
+Registrasyon: **3 · Flüt solo** (tremololu flüt). Köprüde (9–16. ölçüler) istersen **4 · Kornet**'e geç, son A'da Flüt solo'ya dön. Kornet'teki ayak uzunlukları (8′, 4′, 2⅔′, 2′, 1⅗′), caz orgcularının kullandığı Hammond orgunun çekme ayarlarında da bulunur.
+
+Çalma sırası caz standartlarındaki gibi **A – A – B – A**: 1–8, yine 1–8, sonra 9–16, en son 1–8 ve bitiş akorları.
+
+```
+      akor            sol el           sağ el (melodi)
+
+A (iki kez)
+  1.  Dm              X + Ç            O  Y·P  Ğ —
+  2.  Dm(maj7)        X + L            P  O  9 —
+  3.  Dm7             X + Ö            I  T·O  P —
+  4.  Dm7 | Dm6       X + Ö | X + M    O  I  |  U —
+  5.  Gm7 | C7        B + J | Z + J    7·O  Ğ  |  P —
+  6.  Fmaj7 | B♭maj7  V + N | J + Ç    Y·I  P  |  O —
+  7.  Em7♭5 | A7      C + Ç | N + L    T·7  O  |  9 —
+  8.  Dm              X + Ç            O ———
+
+B (köprü)
+  9.  Cm7             Z + J            0  O·0  Ü —
+ 10.  F7              V + N            Ğ  0·I  Y —
+ 11.  B♭maj7          J + Ç            O  I·O  Ğ —
+ 12.  B♭/F            V + J            0  O·7  T —
+ 13.  Em7♭5           C + Ç            7  O  Ü —
+ 14.  A7              N + L            Ğ  P  9 —
+ 15.  Dm              X + Ç            O ——  Y
+ 16.  A7              N + L            P·O  9·7  Y —
+
+Bitiş (son A'nın 8. ölçüsünden sonra)
+      Dm6             X + M + Ğ  ———
+      D               X + N + -  ———
+```
+
+- **Yalnızca melodi:** "sağ el" sütununu çalman yeterli.
+- **İki elle:** sol el ölçünün başında iki tuşa birlikte basar ve ölçü boyunca tutar. `|` ölçünün ortasıdır; sol el orada akor değiştirir. Bir tuş sonraki akorda da varsa (1–4. ölçülerdeki `X`, 5. ölçüdeki `J` gibi) kaldırmadan basılı tut.
+- Tek tuş bir vuruş, her `—` bir vuruş daha uzatır. `·` ile bağlı ikili toplam bir vuruştur; cazdaki gibi "sallanarak" çal: ilki biraz uzun, ikincisi kısa.
+- Akor sütunu yalnızca bilgi içindir.
+- `7` (Si♭4), `9` (Do♯5), `0` (Mi♭5) ve `-` (Fa♯5) tuşları notadır.
+
+Parçanın içinden, klasik ile cazın buluştuğu yerler:
+
+- 1–4. ölçülerde sol el `X`'i (Re3) tutarken yanındaki tuş `Ç → L → Ö → M` diye yarım ses yarım ses iner (Re–Do♯–Do–Si). Caz baladlarının sevdiği bu inen iç ses, aynı minör akoru dört ayrı renge boyar.
+- 5–8. ölçülerde akor kökleri Sol–Do–Fa–Si♭–Mi–La–Re diye beşli aralıklarla iner. Bu dizi barok müziğin de cazın da temel taşlarından biridir; melodi aynı küçük motifi her ölçüde bir basamak aşağıdan tekrarlar.
+- 12. ölçünün başındaki `0` (Mi♭5), bir sonraki `O`'ya (Re5) çözülen klasik bir geciktirmedir.
+- Bitişte önce cazın sevdiği minör altılı akor (`X + M + Ğ`) gelir. Ardından, Bach'ın minör parçalarını bitirirken sık yaptığı gibi majör akora dönülür: üstteki `Ğ` yarım ses kalkıp `-` olur, `M` de `N`'ye iner. Son akoru yankı sönene kadar tut.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
@@ -622,3 +671,4 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *O Come, O Come, Emmanuel* (*Veni Emmanuel*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1300), kamu malı.
 - *Abide with Me* (*Eventide*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1241), kamu malı.
 - *Lobe den Herren* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1256), kamu malı.
+- *Görsev İçin Balad*: bu proje için yazılmış özgün parça; Kerem Görsev'e ithaf edilmiştir, onun bir eserinin kopyası ya da düzenlemesi değildir.
