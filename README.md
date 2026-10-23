@@ -645,6 +645,120 @@ Parçanın içinden, klasik ile cazın buluştuğu yerler:
 - 12. ölçünün başındaki `0` (Mi♭5), bir sonraki `O`'ya (Re5) çözülen klasik bir geciktirmedir.
 - Bitişte önce cazın sevdiği minör altılı akor (`X + M + Ğ`) gelir. Ardından, Bach'ın minör parçalarını bitirirken sık yaptığı gibi majör akora dönülür: üstteki `Ğ` yarım ses kalkıp `-` olur, `M` de `N`'ye iner. Son akoru yankı sönene kadar tut.
 
+### 27. Für Elise, WoO 59 (Beethoven)
+
+Beethoven'ın en ünlü piyano parçası, La minör. Sağ el partisinin ilk bölümü (A – A – B – A), [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **3 · Flüt solo**. 3/8'lik, akıcı.
+
+Bu parçada her işaret eşit, kısa bir zamandır (on altılık): tuş = bas, `—` = önceki notayı tut, `_` = es. `|` ölçü çizgisidir.
+
+```
+ön vuruş   P 0
+A          P 0 P U O I | Y — _ Q E Y
+           U — _ E 6 U | I — _ E P 0
+           P 0 P U O I | Y — _ Q E Y
+           U — _ E I U
+  1. kez:  Y — — — P 0      ← baştan; son iki tuş ön vuruştur
+  2. kez:  Y — _ U I O
+B          P — — T Ğ P | O — — R P O
+           I — — E O I | U — _ E P _
+           _ P P _ _ 0 | P — _ 0 P 0
+A (son)    P 0 P U O I | Y — _ Q E Y
+           U — _ E 6 U | I — _ E P 0
+           P 0 P U O I | Y — _ Q E Y
+           U — _ E I U | Y — — — — —
+```
+
+- `0` tuşu notadır (Re♯5); es `_` ile gösterilir. `6` de notadır (Sol♯4).
+- B'nin 5. ölçüsündeki ikinci `P`, notada bir oktav yukarıdadır (Mi6). Org klavyesine sığmadığı için Mi5 yazıldı.
+- Sol eldeki bas notaları (La2, Mi2) klavyenin altında kaldığı için yalnızca sağ el yazıldı; melodi kendi başına tanınır.
+
+### 28. Gymnopédie No. 1 (Satie, 1888)
+
+Erik Satie'nin ağır, rüya gibi piyano parçası; caz baladlarını andıran yedili akorlarıyla bilinir. Melodi, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=37)'teki telif dışı nota üzerinden nota nota çevrildi. Registrasyon: **1 · Dua**. 3/4'lük, çok yavaş: notada *Lent et douloureux* (ağır ve acılı) yazar.
+
+Melodi yüksekte olduğu için **başlamadan bir kez `↑` bas** (Oktav kutusunda Do4 – Sol6 yazmalı). Bu konumda alt sıradaki `C` Mi4, `V` Fa4, `G` Fa♯4, `N` La4, `M` Si4'tür; Do5 ve üstü üst sıradadır. Bitince `↓` ile geri dön.
+
+Bu parçada her işaret bir vuruştur: tuş = bas, `—` = tut, `_` = es. `|` ölçü çizgisidir.
+
+```
+_ 5 Y | T 5 2 | M 2 W | N — —
+G — — | — — — | — — — | — — —
+_ 5 Y | T 5 2 | M 2 W | N — —
+2 — — | 5 — — | C — — | — — —
+— — — | N M Q | E W M | W Q M
+W — — | — — W | E R T | Y Q W
+E W M | W — — | — — W
+
+1. bitiş: T — — | 5 — — | M N M | 2 W E
+          2 W E | G — — | Q — — | W — —
+
+2. bitiş: T — — | R — — | M Q R | E W Q
+          E W Q | V — — | Q — — | W — —
+```
+
+- Önce melodiyi ve 1. bitişi çal, sonra baştan alıp 2. bitişle bitir. Notada ilk dört ölçüde yalnızca eşlik çalar; melodi 5. ölçüde başlar.
+- Ortadaki bölümde `Q` (Do5) ve `R` (Fa5) natüreldir; parçanın renk değiştirdiği yer orası.
+- Bitişlerin son iki ölçüsünde notada akor var. İstersen 1. bitişte `C + N + Q` ve `G + N + W`, 2. bitişte `C + N + Q` ve `V + N + W` bas. Parça böylece Re minör akorla biter.
+
+### 29. Türk Marşı, *Rondo alla Turca*, K. 331 (Mozart, 1783)
+
+Mozart'ın La majör piyano sonatının son bölümü, La minör; Osmanlı mehter müziğinden esinlenir. Sağ el partisinin ilk bölümü, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=108)'teki telif dışı nota üzerinden nota nota çevrildi; akorlarda üst ses alındı. Registrasyon: **4 · Kornet**; B bölümünde **6 · Tutti**. 2/4'lük, canlı.
+
+Melodi yüksekte olduğu için **başlamadan bir kez `↑` bas** (Do4 – Sol6). Bu konumda Re5'e kadar olan notalar alt sırada (`H` Sol♯4, `N` La4, `M` Si4, `Ö` Do5, `Ç` Re5), Re♯5 ve üstü üst sıradadır. Böylece "Do–Re–Do–Si–Do" süsü alt sırada yan yana tuşlara düşer.
+
+Bu parçada her işaret eşit, kısa bir zamandır (on altılık): tuş = bas, `—` = önceki notayı tut, `_` = es. `|` ölçü çizgisidir.
+
+```
+ön vuruş   M N H N
+A          Ö — _ _ Ç Ö M Ö | E — _ _ R E 3 E
+           U Y 6 Y U Y 6 Y | I — — — Y — I —
+           U — Y — T — Y — | U — Y — T — Y —
+           U — Y — T — 5 —
+  1. kez:  E — — — M N H N      ← baştan; son dört tuş ön vuruştur
+  2. kez:  E — — — E — R —      ← B'ye
+B          T — T — Y T R E | Ç — — — E — R —
+           T — T — Y T R E | Ç — — — Ö — Ç —
+           E — E — R E Ç Ö | M — — — Ö — Ç —
+           E — E — R E Ç Ö | M — — — M N H N
+A'         Ö — _ _ Ç Ö M Ö | E — _ _ R E 3 E
+           U Y 6 Y U Y 6 Y | I — _ _ Y — U —
+           I — U — Y — 6 — | Y — E — R — Ç —
+           Ö — — — M — — N·M | N — — —
+```
+
+- `3` (Re♯5) ve `6` (Sol♯5) tuşları notadır.
+- A'nın 5–7. ölçülerinde her `U`'nun önünde notada iki küçük süs notası var (Sol5–La5); istersen `T·Y U` diye ekleyebilirsin.
+- A' bölümünün sondan bir önceki ölçüsündeki `M` (Si4) notada titremelidir; ardından gelen `N·M` iki çok hızlı nota.
+- Notada B ile A' iki kez çalınır.
+
+### 30. The Entertainer (Scott Joplin, 1902)
+
+Ragtime'ın en ünlü parçası, Do majör; caz bu müzikten doğdu. Sağ el partisinin girişi ve ilk teması, [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263)'teki telif dışı nota üzerinden nota nota çevrildi; akorlarda üst ses alındı. Registrasyon: **4 · Kornet**, parlak ve oyunbaz bir ses verir. 2/4'lük; notada *Not fast* (aceleye getirmeden) yazar.
+
+Melodi iki oktavdan geniş olduğu için **başlamadan bir kez `↑` bas** (Do4 – Sol6). Bu konumda Mi5'e kadar olan notalar alt sırada (`X` Re4, `D` Mi♭4, `C` Mi4, `B` Sol4, `N` La4, `M` Si4, `Ö` Do5, `Ç` Re5, `.` Mi5), Fa5 ve üstü üst sıradadır.
+
+Bu parçada her işaret eşit, kısa bir zamandır (on altılık): tuş = bas, `—` = önceki notayı tut, `_` = es. `|` ölçü çizgisidir.
+
+```
+giriş      O P I Y — U T — | Ç . Ö N — M B —
+ön vuruş   X D
+tema       C Ö — C Ö — C Ö | — — — — — I O 0
+           P I O P — U O — | I — — — — — X D
+           C Ö — C Ö — C Ö | — — — — — — Y T
+           5 Y I P — O I Y | O — — — — — X D
+           C Ö — C Ö — C Ö | — — — — — I O 0
+           P I O P — U O — | I — — — — — I O
+           P I O P — I O I | P I O P — I O I
+           P I O P — U O —
+  1. kez:  I — — — — — X D      ← temanın başına; son iki tuş ön vuruştur
+  2. kez:  I — — — — — — —
+```
+
+- `C Ö — C Ö — C Ö` gibi aksak (senkoplu) ritim parçanın ruhudur: kısa-uzun, kısa-uzun.
+- `.` tuşu notadır (Mi5); `0` da notadır (Re♯6).
+- Girişin 3. ve 4. ölçüsündeki pes notalar (La3–Sol3) bu konumda klavyeye sığmadığı için atlandı; girişten sonra doğrudan `X D` ön vuruşuyla temaya geç.
+- Ragtime'da sol el "um-pa" diye bas ve akor çalar; burada yalnızca sağ el var.
+
 ## Nasıl çalışıyor
 
 Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
@@ -672,3 +786,7 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *Abide with Me* (*Eventide*) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1241), kamu malı.
 - *Lobe den Herren* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1256), kamu malı.
 - *Görsev İçin Balad*: bu proje için yazılmış özgün parça; Kerem Görsev'e ithaf edilmiştir, onun bir eserinin kopyası ya da düzenlemesi değildir.
+- *Für Elise* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931), kamu malı.
+- *Gymnopédie No. 1* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=37), kamu malı.
+- *Rondo alla Turca* (K. 331) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=108), kamu malı.
+- *The Entertainer* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263), kamu malı.
