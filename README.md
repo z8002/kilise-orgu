@@ -792,3 +792,13 @@ Sesler kayıt değil, tarayıcıda Web Audio API ile üretiliyor:
 - *Gymnopédie No. 1* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=37), kamu malı.
 - *Rondo alla Turca* (K. 331) notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=108), kamu malı.
 - *The Entertainer* notası: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263), kamu malı.
+
+## Geliştirme
+
+`kilise-orgu.html`, `kaynak/` klasöründeki parçalardan üretilir ve her değişiklik otomatik testlerden geçer. Ayrıntılar [GELISTIRME.md](GELISTIRME.md) dosyasında, yapılacakların sırası [GELISTIRME-PROGRAMI.md](GELISTIRME-PROGRAMI.md) dosyasında.
+
+## Lisans
+
+- **Program ve bu depodaki diğer her şey:** [MIT](LICENSE). İsteyen kullanıp değiştirebilir; lisans notunu koruması yeter.
+- **İstisna:** *Düğün Marşı* ve *Şçedrık* (Carol of the Bells) çevirilerinin kaynağı CC BY-SA 4.0 lisanslıdır; bu iki parçanın buradaki çevirileri de [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr) ile paylaşılır.
+- Çalınan bestelerin hepsi kamu malıdır. *Görsev İçin Balad* bu proje için yazılmıştır.

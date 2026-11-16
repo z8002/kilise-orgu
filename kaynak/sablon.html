@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kilise Orgu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cormorant+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IM+Fell+English+SC&display=swap">
+<style>
+/*@ekle stil/ana.css*/
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div>
+      <h1>Kilise Orgu</h1>
+      <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+    </div>
+    <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
+      <span class="lamp" aria-hidden="true"></span>
+      <span id="windLabel">Rüzgârı aç</span>
+    </button>
+  </header>
+
+  <p id="focusHint" class="focus-hint" hidden>Klavyeden çalmak için önce sayfaya bir kez tıkla.</p>
+
+  <div class="organ">
+    <div class="case">
+      <canvas id="facade" aria-hidden="true"></canvas>
+    </div>
+
+    <section class="console" aria-label="Org konsolu">
+      <div class="jambs">
+        <div class="division" id="jamb-temel"></div>
+        <div class="center">
+          <h3>Kombinasyonlar</h3>
+          <div class="pistons" id="pistons" role="group" aria-label="Kombinasyon pistonları"></div>
+          <div class="legend" aria-label="Register yazı renkleri">
+            <span class="chip">Ağızlı boru</span>
+            <span class="chip mut">Mutasyon</span>
+            <span class="chip reed">Dilli boru</span>
+            <span class="chip trem">Tremolo</span>
+          </div>
+        </div>
+        <div class="division" id="jamb-parlak"></div>
+      </div>
+
+      <div class="manual-wrap">
+        <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+      </div>
+
+      <div class="controls">
+        <div class="ctl">
+          <span class="ctl-label">Oktav</span>
+          <div class="stepper">
+            <button id="octDown" type="button" aria-label="Bir oktav aşağı">−</button>
+            <output id="octOut" aria-live="polite">Do3 – Sol5</output>
+            <button id="octUp" type="button" aria-label="Bir oktav yukarı">+</button>
+          </div>
+        </div>
+        <label class="ctl" for="room">
+          <span class="ctl-label">Mekân</span>
+          <select id="room">
+            <option value="sapel">Şapel · 1,8 sn</option>
+            <option value="kilise">Kilise · 3,6 sn</option>
+            <option value="katedral">Katedral · 6,5 sn</option>
+          </select>
+        </label>
+        <label class="ctl" for="reverb">
+          <span class="ctl-label">Yankı <output id="revOut">45</output></span>
+          <input type="range" id="reverb" min="0" max="100" value="45">
+        </label>
+        <label class="ctl" for="volume">
+          <span class="ctl-label">Ses <output id="volOut">70</output></span>
+          <input type="range" id="volume" min="0" max="100" value="70">
+        </label>
+        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd>Boşluk</kbd></button>
+        <p class="readout" id="readout">Çalan:<b>—</b></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="howto">
+    <h2>Nasıl çalınır</h2>
+    <ul>
+      <li><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
+        <br><span class="rowkeys" id="rowLower"></span>
+        <br><span class="rowkeys" id="rowUpper"></span></li>
+      <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
+      <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+/*@ekle js/veri.js*/
+/*@ekle js/durum.js*/
+/*@ekle js/ses.js*/
+/*@ekle js/notalar.js*/
+/*@ekle js/registerler.js*/
+/*@ekle js/manuel.js*/
+/*@ekle js/gorunum.js*/
+/*@ekle js/cephe.js*/
+/*@ekle js/olaylar.js*/
+/*@ekle js/baslat.js*/
+})();
+</script>
+</body>
+</html>

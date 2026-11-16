@@ -1,0 +1,15 @@
+{
+  "name": "kilise-orgu",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Bilgisayar klavyesiyle çalınan borulu org (tek HTML dosyası)",
+  "license": "MIT",
+  "scripts": {
+    "derle": "python3 araclar/derle.py",
+    "denetle": "python3 araclar/derle.py --denetle",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}
