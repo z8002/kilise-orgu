@@ -1,0 +1,29 @@
+name: Denetim
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  denetim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Üretilen dosyalar güncel mi
+        run: python3 araclar/derle.py --denetle
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Testler
+        run: npm test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-sonuclari
+          path: test-results/
+          retention-days: 7
