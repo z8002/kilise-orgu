@@ -14,6 +14,8 @@ Ya da bilgisayarına indir:
 2. Çift tıkla; Chrome, Edge ya da Firefox'ta açılır.
 3. Bir tuşa bas. Org "rüzgârı" ilk tuşta kendiliğinden açılır.
 
+**Özgün sürüm (v1):** Programın ilk hâli [`v1/`](v1/) klasöründe değiştirilmeden duruyor ve https://z8002.github.io/kilise-orgu/v1/ adresinden çalınabiliyor.
+
 ## Özellikler
 
 - **Sürekli ses:** Tuş basılı kaldıkça nota çalar, bırakınca yankıyla söner. `Boşluk` basılıyken bıraktığın notalar da çalmaya devam eder.

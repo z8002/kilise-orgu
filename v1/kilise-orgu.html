@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kilise Orgu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cormorant+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IM+Fell+English+SC&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --oak-deep: #1a120c;
+    --oak-glow: #2e1f14;
+    --oak: #2b1d13;
+    --oak-2: #3a281b;
+    --oak-edge: #563b27;
+    --ivory: #eee4cc;
+    --ivory-dim: #b8a98b;
+    --ivory-mute: #8f8068;
+    --knob-ivory: #f2e9d3;
+    --knob-shade: #c7b58f;
+    --knob-collar: #1c130c;
+    --gilt: #cfa34b;
+    --gilt-bright: #f0cd78;
+    --gilt-deep: #8a6a2e;
+    --brass-ink: #2a1a08;
+    --ebony: #110c08;
+    --ink: #2a1c12;
+    --reed: #a3321f;
+    --mutation: #2e5a3e;
+    --trem: #2c4870;
+    --key-ivory: #fbf6ea;
+    --key-shade: #d9ccae;
+    --key-edge: #9e8f72;
+    --key-lit: #ecd28f;
+    --cap-ink: #6b5d47;
+    --focus: #f0cd78;
+    --font-display: "IM Fell English SC", "Cormorant SC", Georgia, "Times New Roman", serif;
+    --font-stop: "Cormorant SC", Georgia, "Times New Roman", serif;
+    --font-ui: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+    --knob: 76px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { background: var(--oak-deep); }
+  body {
+    margin: 0;
+    color: var(--ivory);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.5;
+    padding-inline: 16px;
+    padding-block: 24px 48px;
+    background: radial-gradient(ellipse 90% 40% at 50% 0%, var(--oak-glow) 0%, var(--oak-deep) 70%) no-repeat, var(--oak-deep);
+  }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  button { font: inherit; }
+
+  .page { max-width: 1080px; margin-inline: auto; display: grid; gap: 22px; }
+
+  /* ---------- Başlık ---------- */
+  .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; }
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6.5vw, 4rem);
+    line-height: .95;
+    letter-spacing: .01em;
+    text-wrap: balance;
+  }
+  .sub { margin: .6rem 0 0; color: var(--ivory-dim); max-width: 56ch; text-wrap: pretty; }
+  .wind {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-weight: 500; font-size: .95rem; color: var(--ivory);
+    background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 999px;
+    padding: .55rem 1.05rem .55rem .75rem; cursor: pointer;
+  }
+  .wind:hover { border-color: var(--gilt-deep); }
+  .lamp { width: 14px; height: 14px; border-radius: 50%; background: var(--oak-edge); box-shadow: inset 0 1px 3px rgba(0,0,0,.7); }
+  .wind[aria-pressed="true"] .lamp {
+    background: radial-gradient(circle at 40% 35%, #fff3c9, var(--gilt-bright) 45%, var(--gilt-deep));
+    box-shadow: 0 0 10px 2px rgba(240,205,120,.5);
+  }
+  .focus-hint {
+    margin: 0; padding: .6rem .9rem; border: 1px dashed var(--gilt-deep); border-radius: 8px;
+    color: var(--gilt-bright); background: rgba(207,163,75,.07); font-size: .95rem;
+  }
+
+  /* ---------- Org gövdesi ---------- */
+  .organ { display: grid; }
+  .case {
+    border: 1px solid var(--oak-edge); border-bottom: 3px solid var(--gilt-deep);
+    border-radius: 12px 12px 0 0; overflow: hidden; background: var(--ebony);
+  }
+  #facade { display: block; width: 100%; height: clamp(150px, 27vw, 270px); }
+
+  .console {
+    display: grid; gap: 24px;
+    padding: clamp(16px, 3vw, 30px);
+    border: 1px solid var(--oak-edge); border-top: 0; border-radius: 0 0 12px 12px;
+    background:
+      repeating-linear-gradient(92deg, rgba(255,235,200,.02) 0 1px, transparent 1px 9px),
+      repeating-linear-gradient(88deg, rgba(0,0,0,.09) 0 2px, transparent 2px 23px),
+      linear-gradient(180deg, var(--oak-2), var(--oak));
+  }
+  .console h3 {
+    margin: 0; font: 700 .72rem/1.2 var(--font-ui); letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ivory-mute);
+  }
+
+  /* Register düğmeleri (drawknob) */
+  .jambs { display: grid; gap: 28px; justify-items: center; }
+  .division { display: grid; gap: 14px; align-content: start; }
+  .knobs { display: grid; grid-template-columns: repeat(var(--cols), var(--knob)); gap: 16px 14px; }
+  .knob {
+    width: var(--knob); height: var(--knob); border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+    display: grid; place-content: center; gap: 2px; text-align: center;
+    color: var(--ink);
+    background: radial-gradient(circle at 36% 30%, #fffaf0 0%, var(--knob-ivory) 40%, var(--knob-shade) 100%);
+    box-shadow: 0 0 0 5px var(--knob-collar), 0 0 0 6px var(--oak-edge), inset 0 -4px 7px rgba(60,40,20,.3);
+    transform: scale(.88);
+    filter: brightness(.66) sepia(.2);
+    transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
+  }
+  .knob:hover { filter: brightness(.8) sepia(.15); }
+  .knob[aria-pressed="true"] {
+    transform: scale(1); filter: none;
+    box-shadow: 0 0 0 5px var(--knob-collar), 0 0 0 7px var(--gilt), 0 10px 18px rgba(0,0,0,.6), inset 0 -4px 7px rgba(60,40,20,.22);
+  }
+  .knob:focus-visible { outline-offset: 10px; }
+  .knob .nm { font: 700 .8rem/1 var(--font-stop); letter-spacing: .02em; white-space: pre-line; }
+  .knob .ft { font: 700 1.1rem/1 var(--font-stop); }
+  .knob[data-family="mutation"] { color: var(--mutation); }
+  .knob[data-family="reed"] { color: var(--reed); }
+  .knob[data-family="trem"] { color: var(--trem); }
+
+  .center { display: grid; gap: 14px; justify-items: center; align-content: start; text-align: center; order: 3; }
+  .pistons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 10px; max-width: 340px; }
+  .piston {
+    width: 64px; display: grid; justify-items: center; gap: 6px; padding: 0;
+    background: none; border: 0; cursor: pointer; color: var(--ivory-dim); font-size: .8rem; line-height: 1.15;
+  }
+  .piston .btn {
+    width: 34px; height: 34px; border-radius: 50%; display: grid; place-content: center;
+    font: 500 .85rem var(--font-mono); color: var(--brass-ink);
+    background: radial-gradient(circle at 40% 35%, #f6dc9a, var(--gilt) 55%, var(--gilt-deep));
+    box-shadow: 0 2px 0 var(--ebony), inset 0 -2px 3px rgba(0,0,0,.3);
+    transition: transform .08s ease;
+  }
+  .piston:active .btn { transform: translateY(2px); box-shadow: 0 0 0 var(--ebony), inset 0 -1px 2px rgba(0,0,0,.3); }
+  .piston[aria-current="true"] { color: var(--ivory); }
+  .piston[aria-current="true"] .btn { box-shadow: 0 2px 0 var(--ebony), 0 0 0 2px var(--ivory), 0 0 14px rgba(240,205,120,.55); }
+  .legend { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; font-size: .8rem; color: var(--ivory-mute); }
+  .chip { background: var(--knob-ivory); color: var(--ink); font: 700 .8rem/1 var(--font-stop); padding: 4px 9px; border-radius: 999px; }
+  .chip.mut { color: var(--mutation); }
+  .chip.reed { color: var(--reed); }
+  .chip.trem { color: var(--trem); }
+
+  @media (min-width: 920px) {
+    .jambs { grid-template-columns: auto 1fr auto; align-items: start; justify-items: stretch; }
+    .center { order: 0; padding-top: 4px; }
+  }
+  @media (max-width: 480px) {
+    :root { --knob: 64px; }
+    .knob .nm { font-size: .7rem; }
+    .knob .ft { font-size: .95rem; }
+    .knobs { gap: 14px 10px; }
+  }
+
+  /* Manuel (klavye) */
+  .manual-wrap {
+    background: var(--ebony); padding: 10px 10px 0; border-radius: 6px;
+    box-shadow: inset 0 8px 14px rgba(0,0,0,.65);
+  }
+  .manual {
+    position: relative; height: clamp(120px, 19vw, 184px);
+    touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  .key { position: absolute; top: 0; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
+  .key.white {
+    bottom: 0; padding-bottom: 12px;
+    background: linear-gradient(var(--key-ivory), var(--ivory) 70%, var(--key-shade));
+    border: 1px solid var(--key-edge); border-top: 0; border-radius: 0 0 5px 5px;
+    box-shadow: inset 0 -7px 0 var(--key-shade);
+  }
+  .key.black {
+    height: 61%; z-index: 2; transform: translateX(-50%); padding-bottom: 8px;
+    background: linear-gradient(#2e251d, var(--ebony) 85%);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 3px 5px rgba(0,0,0,.6), inset 0 -6px 0 #261c15;
+  }
+  .key.white.down { background: linear-gradient(#f7e6b8, var(--key-lit) 70%, #d8b86a); box-shadow: inset 0 -2px 0 #c9a459; }
+  .key.black.down { background: linear-gradient(#6a4e26, #33240f); box-shadow: inset 0 -2px 0 #7a5a26; }
+  .key.white.held { box-shadow: inset 0 -7px 0 var(--gilt); }
+  .key.black.held { box-shadow: inset 0 -6px 0 var(--gilt); }
+  .labels { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .cap {
+    font: 500 .68rem/1 var(--font-mono); color: var(--cap-ink);
+    border: 1px solid var(--key-shade); border-radius: 3px; padding: 2px 3px; min-width: 1.5em; text-align: center;
+  }
+  .key.black .cap { color: var(--knob-shade); border-color: #4a3b2c; }
+  .note { font: 700 .72rem/1 var(--font-ui); color: var(--gilt-deep); }
+  @media (max-width: 560px) { .cap { display: none; } .note { font-size: .6rem; } }
+
+  /* Kontroller */
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px;
+    padding-top: 18px; border-top: 1px solid rgba(86,59,39,.7);
+  }
+  .ctl { display: grid; gap: 6px; min-width: 0; }
+  .ctl-label {
+    display: flex; justify-content: space-between; gap: 10px;
+    font: 700 .72rem/1.2 var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--ivory-mute);
+  }
+  .ctl-label output { font: 500 .78rem/1.2 var(--font-mono); letter-spacing: 0; color: var(--ivory-dim); }
+  .stepper { display: flex; align-items: center; gap: 8px; }
+  .stepper button, .hold {
+    height: 36px; border-radius: 8px; border: 1px solid var(--oak-edge);
+    background: var(--oak); color: var(--ivory); cursor: pointer;
+  }
+  .stepper button { width: 36px; font-size: 1.15rem; }
+  .stepper button:hover, .hold:hover { border-color: var(--gilt-deep); }
+  .stepper output { font: 500 .88rem var(--font-mono); min-width: 12ch; text-align: center; font-variant-numeric: tabular-nums; }
+  select {
+    height: 36px; font: 500 .95rem var(--font-ui); color: var(--ivory);
+    background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 8px; padding: 0 .6rem;
+  }
+  input[type="range"] { width: min(170px, 100%); accent-color: var(--gilt); height: 36px; margin: 0; }
+  .hold { display: inline-flex; align-items: center; gap: .5rem; padding: 0 .8rem; font-weight: 500; }
+  .hold[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .hold[aria-pressed="true"] kbd { background: transparent; border-color: var(--brass-ink); color: var(--brass-ink); }
+  .readout { margin: 0 0 0 auto; min-height: 36px; display: flex; align-items: center; color: var(--ivory-dim); font-size: .95rem; }
+  .readout b { color: var(--ivory); font-weight: 500; margin-left: .4em; }
+  kbd {
+    font: 500 .76rem/1.4 var(--font-mono); color: var(--ivory);
+    background: var(--oak); border: 1px solid var(--oak-edge); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px;
+  }
+
+  /* Nasıl çalınır */
+  .howto { display: grid; gap: 12px; max-width: 72ch; }
+  .howto h2 { margin: 0; font-family: var(--font-stop); font-weight: 700; font-size: 1.7rem; line-height: 1.1; text-wrap: balance; }
+  .howto ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 10px; color: var(--ivory-dim); }
+  .howto li strong { color: var(--ivory); font-weight: 500; }
+  .rowkeys { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div>
+      <h1>Kilise Orgu</h1>
+      <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+    </div>
+    <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
+      <span class="lamp" aria-hidden="true"></span>
+      <span id="windLabel">Rüzgârı aç</span>
+    </button>
+  </header>
+
+  <p id="focusHint" class="focus-hint" hidden>Klavyeden çalmak için önce sayfaya bir kez tıkla.</p>
+
+  <div class="organ">
+    <div class="case">
+      <canvas id="facade" aria-hidden="true"></canvas>
+    </div>
+
+    <section class="console" aria-label="Org konsolu">
+      <div class="jambs">
+        <div class="division" id="jamb-temel"></div>
+        <div class="center">
+          <h3>Kombinasyonlar</h3>
+          <div class="pistons" id="pistons" role="group" aria-label="Kombinasyon pistonları"></div>
+          <div class="legend" aria-label="Register yazı renkleri">
+            <span class="chip">Ağızlı boru</span>
+            <span class="chip mut">Mutasyon</span>
+            <span class="chip reed">Dilli boru</span>
+            <span class="chip trem">Tremolo</span>
+          </div>
+        </div>
+        <div class="division" id="jamb-parlak"></div>
+      </div>
+
+      <div class="manual-wrap">
+        <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+      </div>
+
+      <div class="controls">
+        <div class="ctl">
+          <span class="ctl-label">Oktav</span>
+          <div class="stepper">
+            <button id="octDown" type="button" aria-label="Bir oktav aşağı">−</button>
+            <output id="octOut" aria-live="polite">Do3 – Sol5</output>
+            <button id="octUp" type="button" aria-label="Bir oktav yukarı">+</button>
+          </div>
+        </div>
+        <label class="ctl" for="room">
+          <span class="ctl-label">Mekân</span>
+          <select id="room">
+            <option value="sapel">Şapel · 1,8 sn</option>
+            <option value="kilise">Kilise · 3,6 sn</option>
+            <option value="katedral">Katedral · 6,5 sn</option>
+          </select>
+        </label>
+        <label class="ctl" for="reverb">
+          <span class="ctl-label">Yankı <output id="revOut">45</output></span>
+          <input type="range" id="reverb" min="0" max="100" value="45">
+        </label>
+        <label class="ctl" for="volume">
+          <span class="ctl-label">Ses <output id="volOut">70</output></span>
+          <input type="range" id="volume" min="0" max="100" value="70">
+        </label>
+        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd>Boşluk</kbd></button>
+        <p class="readout" id="readout">Çalan:<b>—</b></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="howto">
+    <h2>Nasıl çalınır</h2>
+    <ul>
+      <li><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
+        <br><span class="rowkeys" id="rowLower"></span>
+        <br><span class="rowkeys" id="rowUpper"></span></li>
+      <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
+      <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ================= Veri ================= */
+  const SOLFEJ = ['Do', 'Do♯', 'Re', 'Re♯', 'Mi', 'Fa', 'Fa♯', 'Sol', 'Sol♯', 'La', 'La♯', 'Si'];
+  const BLACK_PCS = new Set([1, 3, 6, 8, 10]);
+  const LOWER_ROW = ['KeyZ', 'KeyS', 'KeyX', 'KeyD', 'KeyC', 'KeyV', 'KeyG', 'KeyB', 'KeyH', 'KeyN', 'KeyJ', 'KeyM', 'Comma', 'KeyL', 'Period', 'Semicolon', 'Slash'];
+  const UPPER_ROW = ['KeyQ', 'Digit2', 'KeyW', 'Digit3', 'KeyE', 'KeyR', 'Digit5', 'KeyT', 'Digit6', 'KeyY', 'Digit7', 'KeyU', 'KeyI', 'Digit9', 'KeyO', 'Digit0', 'KeyP', 'BracketLeft', 'Equal', 'BracketRight'];
+  const SPAN = 32;
+  const CODE_TO_OFFSET = new Map();
+  LOWER_ROW.forEach((c, i) => CODE_TO_OFFSET.set(c, i));
+  UPPER_ROW.forEach((c, i) => CODE_TO_OFFSET.set(c, i + 12));
+  const OFFSET_CODES = Array.from({ length: SPAN }, () => []);
+  UPPER_ROW.forEach((c, i) => OFFSET_CODES[i + 12].push(c));
+  LOWER_ROW.forEach((c, i) => OFFSET_CODES[i].push(c));
+
+  // Boru tipleri: harmonik genlikleri (1. harmonikten başlayarak)
+  const WAVES = {
+    principal: [1, 0.52, 0.34, 0.22, 0.15, 0.1, 0.07, 0.05, 0.035, 0.025, 0.018, 0.012, 0.008],
+    stopped: [1, 0.035, 0.24, 0.02, 0.075, 0.01, 0.03, 0.005, 0.012],
+    flute: [1, 0.16, 0.06, 0.03, 0.014, 0.007],
+    string: Array.from({ length: 28 }, (_, i) => (i === 0 ? 0.55 : 0.75 / Math.pow(i + 1, 0.55))),
+    reed: Array.from({ length: 36 }, (_, i) => {
+      const n = i + 1;
+      return n === 1 ? 0.6 : Math.min(1, 1.25 / Math.pow(n, 0.45)) * (n % 2 ? 1 : 0.88);
+    }),
+  };
+
+  // mult: 8′ ayağa göre frekans çarpanı (16′ = 0.5, 4′ = 2, 2⅔′ = 3 …)
+  const STOPS = [
+    { id: 'burdon16', name: 'Burdon', foot: '16′', family: 'flue', jamb: 'temel', desc: 'Kapalı ahşap borular; bir oktav aşağıdan yumuşak, derin bir bas.', ranks: [{ mult: 0.5, wave: 'stopped', level: 0.62 }] },
+    { id: 'prinsipal8', name: 'Prinsipal', foot: '8′', family: 'flue', jamb: 'temel', desc: 'Orgun omurgası: açık metal boruların dolgun ana sesi.', ranks: [{ mult: 1, wave: 'principal', level: 0.5 }] },
+    { id: 'gedakt8', name: 'Gedakt', foot: '8′', family: 'flue', jamb: 'temel', desc: 'Kapalı flüt borusu; yuvarlak, sıcak ve hafif boğuk.', ranks: [{ mult: 1, wave: 'stopped', level: 0.5 }] },
+    { id: 'gamba8', name: 'Gamba', foot: '8′', family: 'flue', jamb: 'temel', desc: 'Dar borulu yaylı ses; keman gibi tınılı.', ranks: [{ mult: 1, wave: 'string', level: 0.3 }] },
+    { id: 'oktav4', name: 'Oktav', foot: '4′', family: 'flue', jamb: 'temel', desc: 'Prinsipalin bir oktav üstü; sese parlaklık katar.', ranks: [{ mult: 2, wave: 'principal', level: 0.34 }] },
+    { id: 'flut4', name: 'Flüt', foot: '4′', family: 'flue', jamb: 'temel', desc: 'Açık flüt, bir oktav yukarıda; berrak ve tatlı.', ranks: [{ mult: 2, wave: 'flute', level: 0.34 }] },
+    { id: 'celeste8', name: 'Voix\nCéleste', foot: '8′', family: 'flue', jamb: 'temel', desc: 'Hafif tiz akortlanmış yaylı; Gamba ile birlikte dalgalanır.', ranks: [{ mult: 1, wave: 'string', level: 0.27, cents: 7 }] },
+    { id: 'nazard', name: 'Nazard', foot: '2⅔′', family: 'mutation', jamb: 'parlak', desc: 'Bir oktav ve beşli yukarıda flüt; genizden, renkli bir ton.', ranks: [{ mult: 3, wave: 'flute', level: 0.2 }] },
+    { id: 'superoktav2', name: 'Süperoktav', foot: '2′', family: 'flue', jamb: 'parlak', desc: 'İki oktav yukarıda prinsipal; plenumun ışıltısı.', ranks: [{ mult: 4, wave: 'principal', level: 0.22 }] },
+    { id: 'terz', name: 'Terz', foot: '1⅗′', family: 'mutation', jamb: 'parlak', desc: 'İki oktav ve üçlü yukarıda; kornet sesinin tuzu.', ranks: [{ mult: 5, wave: 'flute', level: 0.14 }] },
+    { id: 'mikstur', name: 'Mikstür', foot: 'IV', family: 'mutation', jamb: 'parlak', desc: 'Dört sıra yüksek boru; kilise orgunun görkemli taç sesi.', ranks: [
+      { mult: 6, wave: 'principal', level: 0.11, breaks: true },
+      { mult: 8, wave: 'principal', level: 0.11, breaks: true },
+      { mult: 12, wave: 'principal', level: 0.08, breaks: true },
+      { mult: 16, wave: 'principal', level: 0.07, breaks: true },
+    ] },
+    { id: 'trompet8', name: 'Trompet', foot: '8′', family: 'reed', jamb: 'parlak', desc: 'Dilli boru; parlak, buyurgan bir tören sesi.', ranks: [{ mult: 1, wave: 'reed', level: 0.24 }] },
+    { id: 'tremolo', name: 'Tremolo', foot: '', family: 'trem', jamb: 'parlak', effect: true, desc: 'Rüzgâr basıncını titreştirir; ses dalgalanır.', ranks: [] },
+  ];
+  const STOP_BY_ID = Object.fromEntries(STOPS.map(s => [s.id, s]));
+
+  const PISTONS = [
+    { n: '1', name: 'Dua', stops: ['gedakt8', 'gamba8', 'celeste8'] },
+    { n: '2', name: 'İlahi', stops: ['prinsipal8', 'gedakt8', 'oktav4', 'flut4'] },
+    { n: '3', name: 'Flüt solo', stops: ['gedakt8', 'flut4', 'tremolo'] },
+    { n: '4', name: 'Kornet', stops: ['gedakt8', 'flut4', 'nazard', 'superoktav2', 'terz'] },
+    { n: '5', name: 'Plenum', stops: ['burdon16', 'prinsipal8', 'oktav4', 'superoktav2', 'mikstur'] },
+    { n: '6', name: 'Tutti', stops: ['burdon16', 'prinsipal8', 'gedakt8', 'gamba8', 'oktav4', 'flut4', 'nazard', 'superoktav2', 'terz', 'mikstur', 'trompet8'] },
+    { n: '0', name: 'İptal', stops: [] },
+  ];
+
+  const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
+  const MAX_VOICES = 24;
+
+  /* ================= Durum ================= */
+  const $ = s => document.querySelector(s);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3 };
+  const stopsOn = new Set(PISTONS[4].stops);
+  const STORE_KEY = 'kilise-orgu-v1';
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (saved) {
+      if (ROOMS[saved.room]) settings.room = saved.room;
+      if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
+      if (Number.isFinite(saved.volume)) settings.volume = clamp(saved.volume, 0, 100);
+      if (Number.isFinite(saved.octave)) settings.octave = clamp(saved.octave, 1, 5);
+      if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => STOP_BY_ID[id] && stopsOn.add(id)); }
+    }
+  } catch (_) {}
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn] })); } catch (_) {}
+  }
+
+  const baseMidi = () => 12 * (settings.octave + 1);
+  const noteName = m => SOLFEJ[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
+
+  /* ================= Ses motoru ================= */
+  let ctx = null;
+  let A = null;
+  let windOn = false;
+
+  function buildAudio() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    ctx = new AC({ latencyHint: 'interactive' });
+
+    const bus = ctx.createGain(); bus.gain.value = 0.2;
+    const trem = ctx.createGain(); trem.gain.value = 1;
+    const tone = ctx.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 9000; tone.Q.value = 0.4;
+    const dry = ctx.createGain();
+    const wet = ctx.createGain();
+    const conv = ctx.createConvolver();
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -18; comp.knee.value = 14; comp.ratio.value = 5; comp.attack.value = 0.004; comp.release.value = 0.3;
+    const master = ctx.createGain();
+
+    bus.connect(trem); trem.connect(tone);
+    tone.connect(dry); tone.connect(conv); conv.connect(wet);
+    dry.connect(comp); wet.connect(comp);
+    comp.connect(master); master.connect(ctx.destination);
+
+    // Tremolo: genlik ve perdeyi titreten tek bir LFO
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 5.4;
+    const lfoAmp = ctx.createGain(); lfoAmp.gain.value = 0;
+    const lfoPitch = ctx.createGain(); lfoPitch.gain.value = 0;
+    lfo.connect(lfoAmp); lfoAmp.connect(trem.gain);
+    lfo.connect(lfoPitch);
+    lfo.start();
+
+    const noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+    const nd = noise.getChannelData(0);
+    for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+
+    const waves = {};
+    for (const [k, amps] of Object.entries(WAVES)) {
+      const real = new Float32Array(amps.length + 1);
+      const imag = new Float32Array(amps.length + 1);
+      amps.forEach((a, i) => { imag[i + 1] = a; });
+      waves[k] = ctx.createPeriodicWave(real, imag);
+    }
+
+    A = { bus, dry, wet, conv, master, lfoAmp, lfoPitch, noise, waves };
+    applyRoom();
+    applyMix();
+    applyTremolo();
+    return true;
+  }
+
+  // Kilise akustiği: gecikmeli, zamanla kararan gürültü kuyruğu + erken yansımalar
+  function buildImpulse(seconds) {
+    const sr = ctx.sampleRate;
+    const pre = Math.floor(sr * 0.022);
+    const len = pre + Math.floor(sr * seconds);
+    const buf = ctx.createBuffer(2, len, sr);
+    for (let ch = 0; ch < 2; ch++) {
+      const d = buf.getChannelData(ch);
+      let lp = 0;
+      for (let i = pre; i < len; i++) {
+        const t = (i - pre) / sr;
+        const env = Math.exp(-6.9 * t / seconds);
+        const a = 0.85 - 0.72 * Math.min(1, t / seconds);
+        lp += a * ((Math.random() * 2 - 1) - lp);
+        d[i] = lp * env * (t < 0.015 ? t / 0.015 : 1);
+      }
+      for (let k = 0; k < 14; k++) {
+        const ti = pre + Math.floor(sr * (0.006 + Math.random() * 0.09));
+        if (ti < len) d[ti] += (Math.random() * 2 - 1) * 0.6 * Math.exp(-(ti / sr) * 8);
+      }
+    }
+    return buf;
+  }
+
+  function applyRoom() { if (ctx) A.conv.buffer = buildImpulse(ROOMS[settings.room]); }
+  function applyMix() {
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    const rev = settings.reverb / 100, vol = settings.volume / 100;
+    A.dry.gain.setTargetAtTime(1 - rev * 0.45, t, 0.05);
+    A.wet.gain.setTargetAtTime(rev * 1.2, t, 0.05);
+    A.master.gain.setTargetAtTime(vol * vol * 1.4, t, 0.05);
+  }
+  function applyTremolo() {
+    if (!ctx) return;
+    const on = stopsOn.has('tremolo'), t = ctx.currentTime;
+    A.lfoAmp.gain.setTargetAtTime(on ? 0.13 : 0, t, 0.08);
+    A.lfoPitch.gain.setTargetAtTime(on ? 6 : 0, t, 0.08);
+  }
+
+  function freeze(param, t) {
+    if (param.cancelAndHoldAtTime) param.cancelAndHoldAtTime(t);
+    else { const v = param.value; param.cancelScheduledValues(t); param.setValueAtTime(v, t); }
+  }
+  function fadeOut(s, t, tau, stopAt) {
+    freeze(s.g.gain, t);
+    s.g.gain.setTargetAtTime(0, t, tau);
+    s.oscs.forEach(o => { try { o.stop(stopAt); } catch (_) {} });
+    s.oscs[0].addEventListener('ended', () => { try { s.g.disconnect(); } catch (_) {} });
+  }
+  // Borunun "konuşma" süresi: kalın borular geç, ince borular hızlı konuşur
+  function speechTime(f, family) {
+    let t = clamp(0.012 + 7 / f, 0.018, 0.12);
+    if (family === 'reed') t *= 0.45;
+    return t;
+  }
+  const keyScale = f => (f > 1800 ? Math.pow(1800 / f, 0.5) : 1);
+
+  class Voice {
+    constructor(midi, t0) {
+      this.midi = midi;
+      this.freq = 440 * Math.pow(2, (midi - 69) / 12);
+      this.stops = new Map();
+      this.released = false;
+      this.breath = null;
+      this.out = ctx.createGain();
+      this.out.connect(A.bus);
+      for (const id of stopsOn) this.addStop(STOP_BY_ID[id], t0);
+      if (this.stops.size) this.articulate(t0);
+    }
+
+    addStop(stop, t0) {
+      if (stop.effect || this.released || this.stops.has(stop.id)) return;
+      const g = ctx.createGain();
+      g.gain.value = 0;
+      g.connect(this.out);
+      const oscs = [];
+      let speak = 0.018;
+      for (const r of stop.ranks) {
+        let mult = r.mult;
+        if (r.breaks) while (this.freq * mult > 5200 && mult >= 4) mult /= 2; // mikstür "geri kırılır"
+        const f = this.freq * mult;
+        if (f < 15 || f > 11000) continue;
+        const o = ctx.createOscillator();
+        o.setPeriodicWave(A.waves[r.wave]);
+        o.frequency.value = f;
+        const cents = (r.cents || 0) + (Math.random() * 2 - 1) * 2.2; // borular asla tam aynı akortta değildir
+        if (stop.family === 'reed') o.detune.value = cents;
+        else { o.detune.setValueAtTime(cents - 8, t0); o.detune.setTargetAtTime(cents, t0, 0.04); }
+        A.lfoPitch.connect(o.detune);
+        const rg = ctx.createGain();
+        rg.gain.value = r.level * keyScale(f);
+        o.connect(rg); rg.connect(g);
+        o.start(t0);
+        o.onended = () => {
+          try { A.lfoPitch.disconnect(o.detune); } catch (_) {}
+          o.disconnect(); rg.disconnect();
+        };
+        oscs.push(o);
+        speak = Math.max(speak, speechTime(f, stop.family));
+      }
+      if (!oscs.length) { g.disconnect(); return; }
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(1, t0 + speak);
+      this.stops.set(stop.id, { g, oscs });
+    }
+
+    removeStop(id, t) {
+      const s = this.stops.get(id);
+      if (!s) return;
+      this.stops.delete(id);
+      fadeOut(s, t, 0.035, t + 0.3);
+    }
+
+    // Borunun ağzındaki hava: kısa "chiff" ve çok hafif rüzgâr hışırtısı
+    articulate(t0) {
+      const flue = [...this.stops.keys()].some(id => STOP_BY_ID[id].family !== 'reed');
+      if (flue) {
+        const src = ctx.createBufferSource(); src.buffer = A.noise;
+        const bp = ctx.createBiquadFilter(); bp.type = 'bandpass';
+        bp.frequency.value = Math.min(this.freq * 3, 7500); bp.Q.value = 6;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime(0.9, t0 + 0.006);
+        g.gain.setTargetAtTime(0, t0 + 0.012, 0.03);
+        src.connect(bp); bp.connect(g); g.connect(this.out);
+        src.start(t0, Math.random() * 1.5, 0.25);
+        src.onended = () => { try { g.disconnect(); } catch (_) {} };
+      }
+      const br = ctx.createBufferSource(); br.buffer = A.noise; br.loop = true;
+      const bf = ctx.createBiquadFilter(); bf.type = 'bandpass';
+      bf.frequency.value = Math.min(this.freq * 2, 6000); bf.Q.value = 1.2;
+      const bg = ctx.createGain();
+      bg.gain.setValueAtTime(0, t0);
+      bg.gain.linearRampToValueAtTime(0.06, t0 + 0.05);
+      br.connect(bf); bf.connect(bg); bg.connect(this.out);
+      br.start(t0, Math.random() * 1.5);
+      this.breath = { src: br, g: bg };
+    }
+
+    release(t) {
+      if (this.released) return;
+      this.released = true;
+      const rel = clamp(0.05 + 4 / this.freq, 0.07, 0.2);
+      const end = t + rel * 2.4 + 0.05;
+      for (const s of this.stops.values()) fadeOut(s, t, rel / 3, end);
+      if (this.breath) {
+        freeze(this.breath.g.gain, t);
+        this.breath.g.gain.setTargetAtTime(0, t, 0.03);
+        try { this.breath.src.stop(t + 0.3); } catch (_) {}
+      }
+      const out = this.out;
+      setTimeout(() => { try { out.disconnect(); } catch (_) {} }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
+    }
+  }
+
+  function whoosh() {
+    const t = ctx.currentTime;
+    const src = ctx.createBufferSource(); src.buffer = A.noise; src.loop = true;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(150, t);
+    lp.frequency.exponentialRampToValueAtTime(700, t + 0.8);
+    lp.frequency.exponentialRampToValueAtTime(250, t + 2.4);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.5, t + 0.6);
+    g.gain.setTargetAtTime(0, t + 0.8, 0.5);
+    src.connect(lp); lp.connect(g); g.connect(A.master);
+    src.start(t); src.stop(t + 3.5);
+    src.onended = () => { try { g.disconnect(); } catch (_) {} };
+  }
+
+  /* ================= Nota yönetimi ================= */
+  const holders = new Map();   // midi -> Set(kaynak)
+  const voices = new Map();    // midi -> Voice
+  const sustained = new Set(); // "Tut" ile bırakılmış ama çalan notalar
+  const codeHeld = new Map();  // klavye kodu -> midi
+  const ptr = new Map();       // pointerId -> midi
+  let sustainKey = false, sustainLatch = false, sustainOn = false;
+
+  function ensureWind() {
+    if (!ctx && !buildAudio()) {
+      focusHint.textContent = 'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.';
+      focusHint.hidden = false;
+      return false;
+    }
+    if (!windOn) { windOn = true; updateWindUI(); }
+    if (ctx.state !== 'running') ctx.resume().catch(() => {});
+    return true;
+  }
+
+  function noteOn(midi, src) {
+    if (midi < 12 || midi > 115) return;
+    if (!ensureWind()) return;
+    let h = holders.get(midi);
+    if (!h) { h = new Set(); holders.set(midi, h); }
+    const first = h.size === 0;
+    h.add(src);
+    if (!first) return;
+    sustained.delete(midi);
+    if (!voices.has(midi)) {
+      if (voices.size >= MAX_VOICES) killVoice(voices.keys().next().value);
+      voices.set(midi, new Voice(midi, ctx.currentTime));
+    }
+    refreshView();
+  }
+
+  function noteOff(midi, src) {
+    const h = holders.get(midi);
+    if (!h || !h.delete(src)) return;
+    if (h.size) return;
+    holders.delete(midi);
+    if (sustainOn && voices.has(midi)) sustained.add(midi);
+    else killVoice(midi);
+    refreshView();
+  }
+
+  function killVoice(midi) {
+    const v = voices.get(midi);
+    if (!v) return;
+    v.release(ctx.currentTime);
+    voices.delete(midi);
+    sustained.delete(midi);
+  }
+
+  function releaseAll() {
+    codeHeld.clear(); ptr.clear(); holders.clear(); sustained.clear();
+    if (ctx) for (const v of voices.values()) v.release(ctx.currentTime);
+    voices.clear();
+    refreshView();
+  }
+
+  function updateSustain() {
+    const on = sustainKey || sustainLatch;
+    holdBtn.setAttribute('aria-pressed', String(on));
+    if (on === sustainOn) return;
+    sustainOn = on;
+    if (!on) {
+      for (const m of [...sustained]) killVoice(m);
+      sustained.clear();
+      refreshView();
+    }
+  }
+
+  /* ================= Registerler ================= */
+  const knobEls = {};
+  const pistonEls = [];
+
+  function setStop(id, on) {
+    const stop = STOP_BY_ID[id];
+    if (!stop || on === stopsOn.has(id)) return;
+    if (on) stopsOn.add(id); else stopsOn.delete(id);
+    if (ctx) {
+      const t = ctx.currentTime;
+      if (stop.effect) applyTremolo();
+      else for (const v of voices.values()) (on ? v.addStop(stop, t) : v.removeStop(id, t));
+    }
+    knobEls[id].setAttribute('aria-pressed', String(on));
+  }
+
+  function afterRegistration() { updatePistons(); refreshView(); save(); }
+
+  function buildStops() {
+    for (const jamb of ['temel', 'parlak']) {
+      const host = document.getElementById('jamb-' + jamb);
+      const list = STOPS.filter(s => s.jamb === jamb);
+      const h = document.createElement('h3');
+      h.textContent = jamb === 'temel' ? 'Temel sesler' : 'Parlak sesler';
+      const grid = document.createElement('div');
+      grid.className = 'knobs';
+      grid.style.setProperty('--cols', jamb === 'temel' ? 4 : 3);
+      for (const s of list) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'knob';
+        b.dataset.family = s.family;
+        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim();
+        b.title = `${label} — ${s.desc}`;
+        b.setAttribute('aria-label', label);
+        b.setAttribute('aria-pressed', String(stopsOn.has(s.id)));
+        b.innerHTML = '<span class="nm"></span><span class="ft"></span>';
+        b.firstChild.textContent = s.name;
+        b.lastChild.textContent = s.foot;
+        b.addEventListener('click', () => { setStop(s.id, !stopsOn.has(s.id)); afterRegistration(); });
+        knobEls[s.id] = b;
+        grid.appendChild(b);
+      }
+      host.append(h, grid);
+    }
+  }
+
+  function buildPistons() {
+    const host = $('#pistons');
+    for (const p of PISTONS) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'piston';
+      b.setAttribute('aria-label', `Kombinasyon ${p.n}: ${p.name}`);
+      b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
+      b.firstChild.textContent = p.n;
+      b.lastChild.textContent = p.name;
+      b.addEventListener('click', () => {
+        const want = new Set(p.stops);
+        STOPS.forEach(s => setStop(s.id, want.has(s.id)));
+        afterRegistration();
+      });
+      pistonEls.push({ el: b, set: new Set(p.stops) });
+      host.appendChild(b);
+    }
+  }
+
+  function updatePistons() {
+    for (const { el, set } of pistonEls) {
+      const same = set.size === stopsOn.size && [...set].every(id => stopsOn.has(id));
+      el.setAttribute('aria-current', String(same));
+    }
+  }
+
+  /* ================= Manuel (ekran klavyesi) ================= */
+  const manual = $('#manual');
+  const keyEls = [];
+  const US_LABELS = { Comma: ',', Period: '.', Semicolon: ';', Slash: '/', BracketLeft: '[', BracketRight: ']', Equal: '=' };
+  const TRQ_LABELS = { Comma: 'Ö', Period: 'Ç', Semicolon: 'Ş', Slash: '.', BracketLeft: 'Ğ', BracketRight: 'Ü', Equal: '-' };
+  const isTurkish = (navigator.languages || [navigator.language || '']).some(l => /^tr\b/i.test(l));
+  const labels = {};
+  for (const code of CODE_TO_OFFSET.keys()) {
+    labels[code] = code.startsWith('Key') ? code.slice(3)
+      : code.startsWith('Digit') ? code.slice(5)
+      : (isTurkish ? TRQ_LABELS : US_LABELS)[code];
+  }
+
+  function buildManual() {
+    const WN = [...Array(SPAN).keys()].filter(o => !BLACK_PCS.has(o % 12)).length;
+    let wi = 0;
+    for (let off = 0; off < SPAN; off++) {
+      const black = BLACK_PCS.has(off % 12);
+      const k = document.createElement('div');
+      k.className = 'key ' + (black ? 'black' : 'white');
+      k.dataset.off = off;
+      k.style.left = (wi / WN * 100) + '%';
+      k.style.width = (100 / WN * (black ? 0.62 : 1)) + '%';
+      if (!black) wi++;
+      if (off % 12 === 0) {
+        const n = document.createElement('span');
+        n.className = 'note';
+        k.appendChild(n);
+      }
+      const lab = document.createElement('span');
+      lab.className = 'labels';
+      for (const code of OFFSET_CODES[off]) {
+        const c = document.createElement('span');
+        c.className = 'cap';
+        c.dataset.code = code;
+        lab.appendChild(c);
+      }
+      k.appendChild(lab);
+      manual.appendChild(k);
+      keyEls[off] = k;
+    }
+  }
+
+  function renderCaps() {
+    manual.querySelectorAll('.cap').forEach(c => { c.textContent = labels[c.dataset.code]; });
+    const fill = (host, row) => {
+      host.textContent = '';
+      row.forEach(code => {
+        const k = document.createElement('kbd');
+        k.textContent = labels[code];
+        host.appendChild(k);
+      });
+    };
+    fill($('#rowLower'), LOWER_ROW);
+    fill($('#rowUpper'), UPPER_ROW);
+  }
+
+  function renderOctave() {
+    const base = baseMidi();
+    keyEls.forEach((k, off) => {
+      const n = k.querySelector('.note');
+      if (n) n.textContent = noteName(base + off);
+    });
+    $('#octOut').textContent = `${noteName(base)} – ${noteName(base + SPAN - 1)}`;
+    $('#octDown').disabled = settings.octave <= 1;
+    $('#octUp').disabled = settings.octave >= 5;
+  }
+
+  async function readLayout() {
+    try {
+      if (!navigator.keyboard || !navigator.keyboard.getLayoutMap) return;
+      const map = await navigator.keyboard.getLayoutMap();
+      for (const code of CODE_TO_OFFSET.keys()) {
+        const ch = map.get(code);
+        if (ch) labels[code] = ch.toLocaleUpperCase(isTurkish ? 'tr' : undefined);
+      }
+      renderCaps();
+    } catch (_) {}
+  }
+
+  function shiftOctave(d) {
+    const n = clamp(settings.octave + d, 1, 5);
+    if (n === settings.octave) return;
+    settings.octave = n;
+    renderOctave();
+    refreshView();
+    save();
+  }
+
+  /* ================= Görünüm ================= */
+  const readout = $('#readout');
+  function refreshView() {
+    const base = baseMidi();
+    keyEls.forEach((k, off) => {
+      const m = base + off;
+      const down = holders.has(m);
+      k.classList.toggle('down', down);
+      k.classList.toggle('held', !down && sustained.has(m));
+    });
+    const playing = [...voices.keys()].sort((a, b) => a - b);
+    readout.innerHTML = 'Çalan:<b></b>';
+    readout.lastChild.textContent = playing.length ? playing.map(noteName).join(' · ') : '—';
+    updateFacadeTargets();
+  }
+
+  /* ================= Boru cephesi ================= */
+  const fac = { el: $('#facade'), g: null, W: 0, H: 0, pipes: [], pairOrder: [], glow: new Float32Array(1), target: new Float32Array(1), raf: 0 };
+
+  function layoutFacade() {
+    const r = fac.el.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    fac.el.width = Math.round(r.width * dpr);
+    fac.el.height = Math.round(r.height * dpr);
+    fac.g = fac.el.getContext('2d');
+    fac.g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fac.W = r.width; fac.H = r.height;
+
+    const N = r.width < 480 ? 17 : r.width < 800 ? 23 : 31;
+    const M = (N - 1) / 2;
+    const cEnd = Math.max(1, Math.round(M * 0.2));   // orta kule
+    const fEnd = Math.round(M * 0.66);               // yassı bölümler
+    const sideMid = (fEnd + 1 + M) / 2;              // yan kuleler
+    const sideHalf = Math.max(1, (M - fEnd) / 2);
+    const pad = 14;
+    const slot = (r.width - pad * 2) / N;
+    fac.pipes = [];
+    for (let i = 0; i < N; i++) {
+      const j = Math.abs(i - M);
+      let h, tower = true;
+      if (j <= cEnd) h = 1 - 0.07 * j;
+      else if (j <= fEnd) { tower = false; h = 0.44 + 0.16 * (j - cEnd - 1) / Math.max(1, fEnd - cEnd - 1); }
+      else h = 0.82 - 0.12 * Math.abs(j - sideMid) / sideHalf;
+      fac.pipes.push({ x: pad + slot * (i + 0.5), w: slot * (tower ? 0.8 : 0.66), h, pair: j });
+    }
+    const pairs = [];
+    for (let j = 0; j <= M; j++) pairs.push({ j, h: fac.pipes[M + j].h });
+    pairs.sort((a, b) => b.h - a.h);
+    fac.pairOrder = pairs.map(p => p.j);
+    fac.glow = new Float32Array(M + 1);
+    fac.target = new Float32Array(M + 1);
+    updateFacadeTargets();
+    fac.glow.set(fac.target);
+    drawFacade();
+  }
+
+  function updateFacadeTargets() {
+    if (!fac.pairOrder.length) return;
+    fac.target.fill(0);
+    const M = fac.target.length - 1;
+    for (const [midi, v] of voices) {
+      if (!v.stops.size) continue;
+      const u = clamp((96 - midi) / (96 - 28), 0, 1); // kalın notalar uzun boruları yakar
+      fac.target[fac.pairOrder[Math.round(u * M)]] = 1;
+    }
+    if (!fac.raf) fac.raf = requestAnimationFrame(stepFacade);
+  }
+
+  function stepFacade() {
+    fac.raf = 0;
+    let moving = false;
+    for (let j = 0; j < fac.glow.length; j++) {
+      const d = fac.target[j] - fac.glow[j];
+      if (reducedMotion || Math.abs(d) < 0.004) fac.glow[j] = fac.target[j];
+      else { fac.glow[j] += d * (d > 0 ? 0.45 : 0.08); moving = true; }
+    }
+    drawFacade();
+    if (moving) fac.raf = requestAnimationFrame(stepFacade);
+  }
+
+  function drawFacade() {
+    const g = fac.g;
+    if (!g) return;
+    const { W, H } = fac;
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#0d0805'); bg.addColorStop(1, '#241810');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const light = g.createRadialGradient(W / 2, H * 0.05, 0, W / 2, H * 0.05, W * 0.5);
+    light.addColorStop(0, 'rgba(240,205,120,0.12)'); light.addColorStop(1, 'rgba(240,205,120,0)');
+    g.fillStyle = light; g.fillRect(0, 0, W, H);
+
+    const ledge = 16;
+    const toeY = H - ledge;
+    const mouthY = H - ledge - Math.max(26, H * 0.2);
+    for (const p of fac.pipes) {
+      const top = mouthY - p.h * (mouthY - 12);
+      drawPipe(g, p.x, p.w, top, mouthY, toeY, fac.glow[p.pair] || 0);
+    }
+    const wood = g.createLinearGradient(0, H - ledge, 0, H);
+    wood.addColorStop(0, '#5a3e29'); wood.addColorStop(1, '#2b1d13');
+    g.fillStyle = wood; g.fillRect(0, H - ledge, W, ledge);
+    g.fillStyle = 'rgba(207,163,75,0.75)'; g.fillRect(0, H - ledge, W, 1.5);
+  }
+
+  function drawPipe(g, x, w, top, mouthY, toeY, glow) {
+    const L = x - w / 2;
+    const metal = g.createLinearGradient(L, 0, L + w, 0);
+    metal.addColorStop(0, '#4d4840'); metal.addColorStop(0.18, '#a39c8c'); metal.addColorStop(0.36, '#eee8da');
+    metal.addColorStop(0.5, '#c4bdad'); metal.addColorStop(0.82, '#6f695e'); metal.addColorStop(1, '#3e3a33');
+    g.fillStyle = metal;
+    g.fillRect(L, top, w, mouthY - top);
+    const toeW = Math.max(2, w * 0.16);
+    g.beginPath();
+    g.moveTo(L, mouthY); g.lineTo(L + w, mouthY); g.lineTo(x + toeW / 2, toeY); g.lineTo(x - toeW / 2, toeY);
+    g.closePath(); g.fill();
+    g.fillStyle = '#17110c';
+    g.beginPath(); g.ellipse(x, top, w / 2, Math.max(1.2, w * 0.12), 0, 0, Math.PI * 2); g.fill();
+
+    const mw = w * 0.62, mh = Math.max(2, w * 0.2);
+    g.fillStyle = 'rgba(207,163,75,0.9)'; // yaldızlı üst dudak
+    g.beginPath();
+    g.moveTo(x - mw / 2, mouthY - mh);
+    g.quadraticCurveTo(x - mw / 2, mouthY - mh - w * 0.5, x, mouthY - mh - w * 0.62);
+    g.quadraticCurveTo(x + mw / 2, mouthY - mh - w * 0.5, x + mw / 2, mouthY - mh);
+    g.closePath(); g.fill();
+    g.fillStyle = '#120c08';
+    g.fillRect(x - mw / 2, mouthY - mh, mw, mh);
+    g.fillStyle = 'rgba(0,0,0,0.2)';
+    g.beginPath();
+    g.moveTo(x - mw / 2, mouthY);
+    g.quadraticCurveTo(x - mw / 2, mouthY + w * 0.35, x, mouthY + w * 0.45);
+    g.quadraticCurveTo(x + mw / 2, mouthY + w * 0.35, x + mw / 2, mouthY);
+    g.closePath(); g.fill();
+
+    if (glow > 0.01) {
+      g.save();
+      g.globalCompositeOperation = 'lighter';
+      g.shadowColor = `rgba(240,205,120,${0.8 * glow})`;
+      g.shadowBlur = 22 * glow;
+      g.fillStyle = `rgba(240,190,90,${0.38 * glow})`;
+      g.fillRect(L, top, w, mouthY - top);
+      g.restore();
+    }
+  }
+
+  /* ================= Olaylar ================= */
+  const windBtn = $('#wind');
+  const holdBtn = $('#hold');
+  const focusHint = $('#focusHint');
+
+  function updateWindUI() {
+    windBtn.setAttribute('aria-pressed', String(windOn));
+    $('#windLabel').textContent = windOn ? 'Rüzgâr açık' : 'Rüzgârı aç';
+  }
+  windBtn.addEventListener('click', () => {
+    if (windOn) {
+      windOn = false;
+      releaseAll();
+      updateWindUI();
+      setTimeout(() => { if (!windOn && ctx) ctx.suspend().catch(() => {}); }, 3000);
+    } else if (ensureWind()) {
+      whoosh();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = e.target && e.target.tagName;
+    const inField = tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';
+    if (e.code === 'Space') {
+      e.preventDefault();
+      if (!e.repeat) { sustainKey = true; updateSustain(); }
+      return;
+    }
+    if (e.code === 'Escape') { releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (!inField && (e.code === 'ArrowUp' || e.code === 'ArrowDown')) {
+      e.preventDefault();
+      if (!e.repeat) shiftOctave(e.code === 'ArrowUp' ? 1 : -1);
+      return;
+    }
+    const off = CODE_TO_OFFSET.get(e.code);
+    if (off === undefined) return;
+    e.preventDefault();
+    if (e.repeat || codeHeld.has(e.code)) return;
+    const midi = baseMidi() + off;
+    codeHeld.set(e.code, midi);
+    noteOn(midi, 'k:' + e.code);
+  });
+
+  document.addEventListener('keyup', e => {
+    if (e.code === 'Space') { e.preventDefault(); sustainKey = false; updateSustain(); return; }
+    const midi = codeHeld.get(e.code);
+    if (midi === undefined) return;
+    codeHeld.delete(e.code);
+    noteOff(midi, 'k:' + e.code);
+  });
+
+  function keyAt(x, y) {
+    const el = document.elementFromPoint(x, y);
+    const k = el && el.closest ? el.closest('.key') : null;
+    return k && manual.contains(k) ? baseMidi() + Number(k.dataset.off) : null;
+  }
+  manual.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    e.preventDefault();
+    window.focus();
+    try { manual.setPointerCapture(e.pointerId); } catch (_) {}
+    const m = keyAt(e.clientX, e.clientY);
+    ptr.set(e.pointerId, m);
+    if (m != null) noteOn(m, 'p:' + e.pointerId);
+  });
+  manual.addEventListener('pointermove', e => {
+    if (!ptr.has(e.pointerId)) return;
+    const m = keyAt(e.clientX, e.clientY);
+    const prev = ptr.get(e.pointerId);
+    if (m === prev) return;
+    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+    ptr.set(e.pointerId, m);
+    if (m != null) noteOn(m, 'p:' + e.pointerId);
+  });
+  const endPointer = e => {
+    if (!ptr.has(e.pointerId)) return;
+    const prev = ptr.get(e.pointerId);
+    ptr.delete(e.pointerId);
+    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+  };
+  manual.addEventListener('pointerup', endPointer);
+  manual.addEventListener('pointercancel', endPointer);
+  manual.addEventListener('lostpointercapture', endPointer);
+
+  // Dokunmatik ekranlarda ses bağlamı ancak parmak kalkınca açılabiliyor
+  const resumeIfNeeded = () => { if (ctx && windOn && ctx.state === 'suspended') ctx.resume().catch(() => {}); };
+  document.addEventListener('pointerup', resumeIfNeeded);
+  document.addEventListener('touchend', resumeIfNeeded);
+
+  holdBtn.addEventListener('click', () => { sustainLatch = !sustainLatch; updateSustain(); });
+  $('#octDown').addEventListener('click', () => shiftOctave(-1));
+  $('#octUp').addEventListener('click', () => shiftOctave(1));
+
+  const roomSel = $('#room'), revIn = $('#reverb'), volIn = $('#volume');
+  roomSel.value = settings.room;
+  revIn.value = settings.reverb; $('#revOut').textContent = settings.reverb;
+  volIn.value = settings.volume; $('#volOut').textContent = settings.volume;
+  roomSel.addEventListener('change', () => { settings.room = roomSel.value; applyRoom(); save(); roomSel.blur(); });
+  revIn.addEventListener('input', () => { settings.reverb = Number(revIn.value); $('#revOut').textContent = revIn.value; applyMix(); save(); });
+  volIn.addEventListener('input', () => { settings.volume = Number(volIn.value); $('#volOut').textContent = volIn.value; applyMix(); save(); });
+
+  function updateFocusHint() { focusHint.hidden = document.hasFocus(); }
+  window.addEventListener('focus', updateFocusHint);
+  window.addEventListener('blur', () => {
+    releaseAll();
+    sustainKey = false;
+    updateSustain();
+    updateFocusHint();
+  });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
+
+  /* ================= Başlat ================= */
+  buildStops();
+  buildPistons();
+  buildManual();
+  renderCaps();
+  renderOctave();
+  updatePistons();
+  refreshView();
+  updateFocusHint();
+  readLayout();
+
+  let resizeRaf = 0;
+  const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };
+  if (window.ResizeObserver) new ResizeObserver(relayout).observe(fac.el);
+  else window.addEventListener('resize', relayout);
+  layoutFacade();
+})();
+</script>
+</body>
+</html>
