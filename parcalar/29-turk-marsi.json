@@ -1,0 +1,72 @@
+{
+  "no": 29,
+  "id": "turk-marsi",
+  "ad": "Türk Marşı",
+  "baslik": "Türk Marşı, *Rondo alla Turca*, K. 331 (Mozart, 1783)",
+  "besteci": "Wolfgang Amadeus Mozart",
+  "yil": 1783,
+  "etiketler": ["klasik"],
+  "zorluk": 3,
+  "ton": "La minör",
+  "olcu": "2/4",
+  "tempo": 120,
+  "birim": "1/16",
+  "oktav": 4,
+  "piston": "4",
+  "sagAltSinir": "D5",
+  "bolumPiston": {"B": "6"},
+  "aciklama": "Mozart'ın La majör piyano sonatının son bölümü; Osmanlı mehter müziğinden esinlenir. Burada sağ el partisinin ilk bölümü var; akorlarda üst ses alındı. Re5'e kadar olan notalar alt sıraya yazıldı, böylece baştaki \"Do–Re–Do–Si–Do\" süsü yan yana tuşlara düşer.",
+  "bolumler": {
+    "giris": {
+      "ad": "ön vuruş",
+      "sag": ["B4 A4 G#4 A4"]
+    },
+    "A": {
+      "sag": [
+        "C5 r:3 D5 C5 B4 C5 | E5 r:3 F5 E5 D#5 E5",
+        "B5 A5 G#5 A5 B5 A5 G#5 A5 | C6:4 A5 r C6 r",
+        "B5 r A5 r G5 r A5 r | B5 r A5 r G5 r A5 r",
+        "B5 r A5 r G5 r F#5 r"
+      ]
+    },
+    "A1": {
+      "ad": "1. bitiş",
+      "sag": ["E5:4 B4 A4 G#4 A4"]
+    },
+    "A2": {
+      "ad": "2. bitiş",
+      "sag": ["E5:4 E5 r F5 r"]
+    },
+    "B": {
+      "sag": [
+        "G5 r G5 r A5 G5 F5 E5 | D5:4 E5 r F5 r",
+        "G5 r G5 r A5 G5 F5 E5 | D5:4 C5 r D5 r",
+        "E5 r E5 r F5 E5 D5 C5 | B4:4 C5 r D5 r",
+        "E5 r E5 r F5 E5 D5 C5 | B4:4 B4 A4 G#4 A4"
+      ]
+    },
+    "kapanis": {
+      "ad": "kapanış",
+      "sag": [
+        "C5 r:3 D5 C5 B4 C5 | E5 r:3 F5 E5 D#5 E5",
+        "B5 A5 G#5 A5 B5 A5 G#5 A5 | C6:2 r:2 A5 r B5 r",
+        "C6 r B5 r A5 r G#5 r | A5 r E5 r F5 r D5 r",
+        "C5:4 B4:3 A4:.5 B4:.5 | A4:4"
+      ]
+    }
+  },
+  "sira": ["giris", "A", "A1", "A", "A2", "B", "kapanis"],
+  "ipuclari": [
+    "Sekizlik notaların çoğu notada kesik (staccato) yazılıdır; bu yüzden burada kısa bir nota ve ardından sus olarak görünürler.",
+    "`3` (Re♯5) ve `6` (Sol♯5) tuşları notadır.",
+    "A'nın 5–7. ölçülerinde her `U`'nun önünde notada iki küçük süs notası vardır (Sol5–La5); istersen ekleyebilirsin.",
+    "Kapanışın sondan bir önceki ölçüsündeki `M` (Si4) notada titremelidir.",
+    "Notada B ile kapanış iki kez çalınır."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=108",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

@@ -1,0 +1,48 @@
+{
+  "no": 20,
+  "id": "ein-feste-burg",
+  "ad": "Ein feste Burg",
+  "baslik": "Ein feste Burg ist unser Gott (Luther, 1529)",
+  "besteci": "Martin Luther",
+  "yil": 1529,
+  "etiketler": ["ilahi"],
+  "zorluk": 1,
+  "ton": "Do majör",
+  "olcu": "4/4",
+  "tempo": 84,
+  "birim": "1/4",
+  "oktav": 3,
+  "piston": "5",
+  "bolumPiston": {"C": "6"},
+  "aciklama": "Reform kiliselerinin marşı sayılan Luther korali. Burada, bugün ilahi kitaplarında yaygın olan düz ritimli sürümün soprano partisi var.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "C5 | C5 C5 G4:.5 A4:.5 B4 | C5:.5 B4:.5 A4 G4 C5",
+        "B4 A4 G4 A4 | F4:.5 E4:.5 D4 C4"
+      ]
+    },
+    "B": {
+      "sag": [
+        "C4 | G4 A4 G4 F#4 | G4:3 C4 | G4 G4 A4 B4 | C5:3 B4"
+      ]
+    },
+    "C": {
+      "sag": [
+        "C5 B4 A4 A4 | G4:3 A4 | A4 G4 A4 F4 | E4:3 C5",
+        "B4 A4 G4 A4 | F4:.5 E4:.5 D4 C4"
+      ]
+    }
+  },
+  "sira": ["A", "A", "B", "C"],
+  "ipuclari": [
+    "A ve B bölümlerinin başındaki tek nota ön vuruştur.",
+    "Koralin ilk cümlesi (A) iki kez çalınır."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1237",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

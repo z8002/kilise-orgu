@@ -1,0 +1,47 @@
+{
+  "no": 15,
+  "id": "adeste-fideles",
+  "ad": "Adeste Fideles",
+  "baslik": "Adeste Fideles, *O Come, All Ye Faithful* (Wade, 1751)",
+  "besteci": "John Francis Wade",
+  "yil": 1751,
+  "etiketler": ["noel", "ilahi"],
+  "zorluk": 1,
+  "ton": "Sol majör",
+  "olcu": "4/4",
+  "tempo": 100,
+  "birim": "1/4",
+  "oktav": 3,
+  "piston": "2",
+  "bolumPiston": {"nakarat": "5"},
+  "aciklama": "En çok söylenen Noel ilahilerinden biri. Burada soprano partisinin tamamı var.",
+  "bolumler": {
+    "A": {
+      "ad": "kıta",
+      "sag": [
+        "G4 | G4:2 D4 G4 | A4:2 D4:2 | B4 A4 B4 C5 | B4:2 A4 G4",
+        "G4:2 F#4 E4 | F#4 G4 A4 B4 | F#4:2 E4:1.5 D4:.5 | D4:4",
+        "D5:2 C5 B4 | C5:2 B4:2 | A4 B4 G4 A4 | F#4:1.5 E4:.5 D4 B4"
+      ]
+    },
+    "nakarat": {
+      "sag": [
+        "B4 A4 B4 C5 | B4:2 A4 B4 | B4 A4 B4 C5 | B4:2 A4 B4",
+        "C5 B4 A4 G4 | F#4:2 G4 C5 | B4:2 A4:1.5 G4:.5 | G4:3"
+      ],
+      "not": ["Venite adoremus, venite adoremus,", "venite adoremus Dominum."]
+    }
+  },
+  "sira": ["A", "nakarat"],
+  "ipuclari": [
+    "İlk satırın başındaki tek `T` ön vuruştur.",
+    "Kıtanın son notası (`U`), nakarata girişin ön vuruşudur.",
+    "Nakaratta ses giderek büyür: programda **5 · Plenum**'a geçilir; son satırda **6 · Tutti**'ye de geçebilirsin."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1220",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

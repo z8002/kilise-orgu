@@ -1,0 +1,141 @@
+{
+  "no": 11,
+  "id": "carol-of-the-bells",
+  "ad": "Carol of the Bells",
+  "baslik": "Carol of the Bells, *Şçedrık* (Leontoviç, 1916)",
+  "besteci": "Mikola Leontoviç",
+  "yil": 1916,
+  "etiketler": [
+    "noel"
+  ],
+  "zorluk": 2,
+  "ton": "Sol minör",
+  "olcu": "3/4",
+  "tempo": 168,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "4",
+  "bolumTempo": {
+    "son2": 0.75
+  },
+  "aciklama": "Ukrayna halk ezgisinden doğan Noel şarkısı; Leontoviç'in 1916 tarihli koro düzenlemesi. Bütün parça dört notalı tek bir motif üzerine kuruludur. Sağ el soprano partisidir; sol el, korodaki alto partisinin bir oktav aşağısıdır. **4 · Kornet** zile benzer bir ses verir.",
+  "bolumler": {
+    "giris": {
+      "ad": "giriş",
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "r:6"
+      ]
+    },
+    "A1": {
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "r:6 | r:6 | r:6"
+      ]
+    },
+    "A2": {
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2",
+        "Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "G3:6 | F3:6 | Eb3:6 | D3:6",
+        "G3:6 | F3:6 | Eb3:6 | D3:6"
+      ]
+    },
+    "A3": {
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2"
+      ]
+    },
+    "B": {
+      "sag": [
+        "D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2"
+      ],
+      "sol": [
+        "Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2"
+      ]
+    },
+    "C": {
+      "sag": [
+        "G5:2 G5 G5 F5 Eb5 | D5:2 D5 D5 C5 Bb4 | C5:2 C5 C5 D5 C5 | G4:2 G4 G4 G4:2"
+      ],
+      "sol": [
+        "G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2"
+      ]
+    },
+    "D": {
+      "sag": [
+        "D4 E4 F#4 G4 A4 Bb4 | C5 D5 C5:2 Bb4:2 | D4 E4 F#4 G4 A4 Bb4 | C5 D5 C5:2 Bb4:2"
+      ],
+      "sol": [
+        "D3:6 | E3:2 F#3:2 G3:2 | D3:6 | E3:2 F#3:2 G3:2"
+      ]
+    },
+    "E": {
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "D3:6 | C3:6 | F3:6 | Eb3:6"
+      ]
+    },
+    "son1": {
+      "ad": "1. bitiş",
+      "sag": [
+        "Bb4:2 A4 Bb4 G4:2"
+      ],
+      "sol": [
+        "D3:4 r:2"
+      ]
+    },
+    "son2": {
+      "ad": "2. bitiş",
+      "sag": [
+        "G4:6 | ~:6 | ~:6 | D5:2 C5 D5 G4:2"
+      ],
+      "sol": [
+        "D3:6 | ~:6 | ~:6 | Bb3:2 A3 Bb3 G3:2"
+      ]
+    }
+  },
+  "sira": [
+    "giris",
+    "A1",
+    "A2",
+    "A3",
+    "B",
+    "C",
+    "D",
+    "E",
+    "son1",
+    "A1",
+    "A2",
+    "A3",
+    "B",
+    "C",
+    "D",
+    "E",
+    "son2"
+  ],
+  "ipuclari": [
+    "Motifin ritmi: ilk nota bir vuruş, ortadaki ikisi yarım vuruş, son nota bir vuruş (\"Şçed-rık şçed-rık\").",
+    "B bölümünde sol el ana motifi çalar, sağ el aynı motifi üçlü yukarıdan söyler.",
+    "D bölümünün ilk ölçüsü altı notalık yükselen bir koşudur.",
+    "`0` tuşu notadır (Mi♭5); C bölümünde bir kez geçer.",
+    "Yalnızca sağ eli çalmak istersen üst satır yeterli; parça yine tanınır."
+  ],
+  "kaynak": {
+    "ad": "Vikipedi (İngilizce), \"Shchedryk (song)\" maddesindeki nota",
+    "url": "https://en.wikipedia.org/wiki/Shchedryk_(song)#Melody",
+    "lisans": "CC BY-SA 4.0"
+  },
+  "dogrulama": "kaynak"
+}

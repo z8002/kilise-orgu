@@ -1,0 +1,47 @@
+{
+  "no": 23,
+  "id": "veni-emmanuel",
+  "ad": "O Come, O Come, Emmanuel",
+  "baslik": "O Come, O Come, Emmanuel, *Veni Emmanuel* (15. yüzyıl)",
+  "besteci": "Fransız ortaçağ ezgisi",
+  "etiketler": ["noel", "ilahi"],
+  "zorluk": 1,
+  "ton": "Mi minör",
+  "olcu": "4/4",
+  "tempo": 72,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "1",
+  "bolumPiston": {"nakarat": "5"},
+  "aciklama": "Advent ilahisi. Ezgi 15. yüzyıldan kalma bir Fransız ezgisidir; Thomas Helmore 1856'da düzenlemiştir. Ağır ve düzgün çalınır; cümleler ölçü çizgilerine uymaz.",
+  "bolumler": {
+    "A": {
+      "ad": "kıta",
+      "sag": [
+        "E4 | G4 B4 B4 B4 A4 C5 B4 A4 | G4:3",
+        "A4 B4 G4 E4 G4 | A4 F#4 E4 D4 E4:3",
+        "A4 | A4 E4 E4 F#4 G4:2 F#4 E4 | D4:3",
+        "G4 A4 B4 B4 B4 | A4 C5 B4 A4 G4:3"
+      ],
+      "not": ["O come, O come, Emmanuel,", "And ransom captive Israel,", "That mourns in lonely exile here", "Until the Son of God appear."]
+    },
+    "nakarat": {
+      "sag": [
+        "D5 | D5:3 B4 B4:3",
+        "B4 | A4 C5 B4 A4 G4 A4 B4 G4",
+        "E4 G4 A4 F#4 E4 D4 E4"
+      ],
+      "not": ["Rejoice! Rejoice!", "Emmanuel shall come to thee,", "O Israel."]
+    }
+  },
+  "sira": ["A", "nakarat"],
+  "ipuclari": [
+    "İlk `E` ön vuruştur."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1300",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

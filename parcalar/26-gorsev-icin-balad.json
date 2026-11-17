@@ -1,0 +1,75 @@
+{
+  "no": 26,
+  "id": "gorsev-icin-balad",
+  "ad": "Görsev İçin Balad",
+  "baslik": "Görsev İçin Balad (özgün parça, Kerem Görsev'e ithaf)",
+  "besteci": "Claude",
+  "yil": 2026,
+  "etiketler": ["caz", "ozgun"],
+  "zorluk": 2,
+  "ton": "Re minör",
+  "olcu": "4/4",
+  "tempo": 60,
+  "birim": "1/4",
+  "swing": 0.58,
+  "oktav": 3,
+  "piston": "3",
+  "bolumPiston": {"B": "4"},
+  "bolumTempo": {"bitis": 0.75},
+  "aciklama": "Bu parça Kerem Görsev'in bir eseri **değildir**: onun klasik müzikle cazı harmanlayan piyano üslubundan esinlenerek bu proje için yazılmış özgün bir caz baladıdır ve ona ithaf edilmiştir. Çalma sırası caz standartlarındaki gibi A – A – B – A'dır. Lead sheet'i ve piyano düzenlemesi [`notalar/gorsev-icin-balad/`](notalar/gorsev-icin-balad/) klasöründe.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "D5 A4:.5 E5:.5 F5:2 | E5 D5 C#5:2",
+        "C5 G4:.5 D5:.5 E5:2 | D5 C5 B4:2",
+        "Bb4:.5 D5:.5 F5 E5:2 | A4:.5 C5:.5 E5 D5:2",
+        "G4:.5 Bb4:.5 D5 C#5:2 | D5:4"
+      ],
+      "sol": [
+        "D3+D4:4 | D3+C#4:4",
+        "D3+C4:4 | D3+C4:2 D3+B3:2",
+        "G3+Bb3:2 C3+Bb3:2 | F3+A3:2 Bb3+D4:2",
+        "E3+D4:2 A3+C#4:2 | D3+D4:4"
+      ],
+      "not": ["Dm · Dm(maj7)", "Dm7 · Dm7 Dm6", "Gm7 C7 · Fmaj7 B♭maj7", "Em7♭5 A7 · Dm"]
+    },
+    "B": {
+      "ad": "B (köprü)",
+      "sag": [
+        "Eb5 D5:.5 Eb5:.5 G5:2 | F5 Eb5:.5 C5:.5 A4:2",
+        "D5 C5:.5 D5:.5 F5:2 | Eb5 D5:.5 Bb4:.5 G4:2",
+        "Bb4 D5 G5:2 | F5 E5 C#5:2",
+        "D5:3 A4 | E5:.5 D5:.5 C#5:.5 Bb4:.5 A4:2"
+      ],
+      "sol": [
+        "C3+Bb3:4 | F3+A3:4",
+        "Bb3+D4:4 | F3+Bb3:4",
+        "E3+D4:4 | A3+C#4:4",
+        "D3+D4:4 | A3+C#4:4"
+      ],
+      "not": ["Cm7 · F7", "B♭maj7 · B♭/F", "Em7♭5 · A7", "Dm · A7"]
+    },
+    "bitis": {
+      "ad": "bitiş",
+      "sag": ["F5:4 | F#5:4"],
+      "sol": ["D3+B3:4 | D3+A3:4"],
+      "not": ["Dm6 · D"]
+    }
+  },
+  "sira": ["A", "A", "B", "A", "bitis"],
+  "ipuclari": [
+    "Yalnızca melodiyi çalmak istersen sağ el satırı yeterli.",
+    "`·` ile bağlı ikilileri cazdaki gibi \"sallanarak\" çal: ilki biraz uzun, ikincisi kısa.",
+    "Satır sonlarındaki akor adları yalnızca bilgi içindir; `·` ölçü çizgisini gösterir.",
+    "Köprüde (B) **4 · Kornet**'e geçip son A'da **3 · Flüt solo**'ya dönebilirsin. Kornet'teki ayak uzunlukları (8′, 4′, 2⅔′, 2′, 1⅗′), caz orgcularının kullandığı Hammond orgunun çekme ayarlarında da bulunur.",
+    "İlk dört ölçüde sol elin üst notası Re–Do♯–Do–Si diye yarım ses yarım ses iner. Caz baladlarının sevdiği bu inen iç ses, aynı minör akoru dört ayrı renge boyar.",
+    "A'nın ikinci yarısında akor kökleri Sol–Do–Fa–Si♭–Mi–La–Re diye beşli aralıklarla iner. Bu dizi barok müziğin de cazın da temel taşlarından biridir; melodi aynı küçük motifi her ölçüde bir basamak aşağıdan tekrarlar.",
+    "Bitişte önce cazın sevdiği minör altılı akor gelir; ardından, Bach'ın minör parçalarını bitirirken sık yaptığı gibi majör akora dönülür. Son akoru yankı sönene kadar tut."
+  ],
+  "kaynak": {
+    "ad": "Bu proje için yazıldı",
+    "url": "https://github.com/z8002/kilise-orgu/tree/main/notalar/gorsev-icin-balad",
+    "lisans": "MIT"
+  },
+  "dogrulama": "ozgun"
+}

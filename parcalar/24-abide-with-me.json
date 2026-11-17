@@ -1,0 +1,47 @@
+{
+  "no": 24,
+  "id": "abide-with-me",
+  "ad": "Abide with Me",
+  "baslik": "Abide with Me, *Eventide* (Monk, 1861)",
+  "besteci": "William Henry Monk",
+  "yil": 1861,
+  "etiketler": ["ilahi"],
+  "zorluk": 1,
+  "ton": "Re majör",
+  "olcu": "4/4",
+  "tempo": 72,
+  "birim": "1/4",
+  "oktav": 3,
+  "piston": "1",
+  "aciklama": "Akşam ilahisi; cenaze ve anma törenlerinde de çalınır. Kaynaktaki nota Mi♭ majörden Re majöre aktarılmıştır; burada da Re majör.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "F#4:2 F#4 E4 | D4:2 A4:2",
+        "B4 A4 A4 G4 | F#4:4",
+        "F#4:2 G4 A4 | B4:2 A4:2",
+        "G4 E4 F#4 G#4 | A4:4"
+      ],
+      "not": ["Abide with me; fast falls the eventide;", "the darkness deepens; Lord, with me abide.", "", ""]
+    },
+    "B": {
+      "sag": [
+        "F#4:2 F#4 E4 | D4:2 A4:2",
+        "A4 G4 G4 F#4 | E4:4",
+        "E4:2 F#4 G4 | F#4 E4 D4 G4",
+        "F#4:2 E4:2 | D4:4"
+      ],
+      "not": ["When other helpers fail and comforts flee,", "", "Help of the helpless, O abide with me.", ""]
+    }
+  },
+  "sira": ["A", "B"],
+  "ipuclari": [
+    "`6` tuşu notadır (Sol♯4); A'nın son satırında bir kez geçer."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1241",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

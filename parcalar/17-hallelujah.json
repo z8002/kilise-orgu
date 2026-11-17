@@ -1,0 +1,85 @@
+{
+  "no": 17,
+  "id": "hallelujah",
+  "ad": "Hallelujah",
+  "baslik": "Hallelujah, *Mesih* (Händel, 1741)",
+  "besteci": "Georg Friedrich Händel",
+  "yil": 1741,
+  "etiketler": [
+    "klasik",
+    "ilahi"
+  ],
+  "zorluk": 2,
+  "ton": "Re majör",
+  "olcu": "4/4",
+  "tempo": 112,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "6",
+  "aciklama": "*Messiah* oratoryosunun ünlü korosu. Burada soprano partisinin açılışı var: \"Hallelujah\" çağrıları ve iki kez \"For the Lord God omnipotent reigneth\". Sopranoların sustuğu iki buçuk ölçü atlandı.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "D5:3 A4 B4 A4 r:2",
+        "D5:3 A4 B4 A4 r D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r D5",
+        "C#5 D5:2 C#5 D5:2 r:2"
+      ],
+      "not": [
+        "Hallelujah!",
+        "Hallelujah! Hallelujah! Hallelujah! Hal-",
+        "-lelujah!"
+      ]
+    },
+    "B": {
+      "sag": [
+        "E5:3 A4 F#5 E5 r:2",
+        "E5:3 A4 F#5 E5 r E5:.5 E5:.5 | F#5 E5 r E5:.5 E5:.5 F#5 E5 r E5",
+        "F#5 E5 D5:2 C#5:2 r:2"
+      ],
+      "not": [
+        "Hallelujah!",
+        "Hallelujah! Hallelujah! Hallelujah! Hal-",
+        "-lelujah!"
+      ]
+    },
+    "C": {
+      "sag": [
+        "A4:4 B4:2 C#5:2 | D5 D4 D5:3 D5 C#5:2",
+        "B4:4 A4:2 r E5:.5 E5:.5",
+        "D5 C#5 r E5:.5 E5:.5 D5 C#5 r E5:.5 E5:.5 | F#5 E5 r E5:.5 E5:.5 F#5 E5 r"
+      ],
+      "not": [
+        "For the Lord God omnipotent",
+        "reigneth.",
+        "Hallelujah! Hallelujah! Hallelujah! Hallelujah!"
+      ]
+    },
+    "D": {
+      "sag": [
+        "D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r:2",
+        "D5:4 E5:2 F#5:2 | G5 G4 G5:3 G5 F#5:2 | E5:4 D5:2"
+      ],
+      "not": [
+        "Hallelujah! Hallelujah! Hallelujah! Hallelujah!",
+        "For the Lord God omnipotent reigneth."
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "ipuclari": [
+    "`·` ile bağlı `O·O` ve `P·P` ikilileri çok hızlı ön vuruşlardır (\"Hal-le-\").",
+    "`-` tuşu notadır (Fa♯5), uzatma işareti değil. `9` Do♯5'tir.",
+    "C ve D bölümlerinde ezgi bir oktav aşağı atlar (`W`, sonra `T`)."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=459",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

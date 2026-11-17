@@ -1,0 +1,75 @@
+{
+  "no": 16,
+  "id": "air",
+  "ad": "Air",
+  "baslik": "Air, *G Teli Üzerine Arya*, BWV 1068 (Bach)",
+  "besteci": "Johann Sebastian Bach",
+  "yil": 1731,
+  "etiketler": [
+    "klasik",
+    "dugun"
+  ],
+  "zorluk": 3,
+  "ton": "Re majör",
+  "olcu": "4/4",
+  "tempo": 36,
+  "birim": "1/8",
+  "oktav": 4,
+  "piston": "1",
+  "aciklama": "Orkestra Süiti No. 3'ün ünlü ağır bölümü. Burada üst ses var; küçük vurgu notaları atlandı. Uzun tutulan notalarıyla ünlüdür: bir nota, sonraki hızlı grup başlayana kadar basılı kalır.",
+  "bolumler": {
+    "A": {
+      "ad": "1. bölüm",
+      "sag": [
+        "F#5:8",
+        "~ B5:.5 G5:.5 E5:.5 D5:.5 C#5:.5 D5:.5 C#5:2 A4:2",
+        "A5:4.5 F#5:.5 C5:.5 B4:.5 E5:.5 D#5:.5 A5:.5 G5:.5",
+        "G5:4.5 E5:.5 B4:.5 A4:.5 D5:.5 C#5:.5 G5:.5 F#5:.5",
+        "F#5:3 G#5:.5 A5:.5 D5 D5:.25 E5:.25 F#5 E5:.5 E5:.5 D5:.5"
+      ]
+    },
+    "Ason": {
+      "ad": "1. bölümün bitişi",
+      "sag": [
+        "C#5:.5 B4:.5 B4:.25 C#5:.25 D5:1.5 C#5:.5 B4:.5 A4:4"
+      ]
+    },
+    "B": {
+      "ad": "2. bölüm",
+      "sag": [
+        "C#5:2.5 D5:.25 C#5:.25 B4:.25 C#5:.25 A4:.5 A5:3 C5",
+        "B4 B5:1.5 A5:.5 G5:.5 F#5:.5 G5:2.25 F#5:.25 E5:.25 D5:.25 C#5:.5 B4:.5",
+        "A#4:.5 B4:.5 C#5:1.5 D5:.5 E5:1.5 F#5:.5 G5:2 F#5",
+        "E5:.5 D5:.5 C#5:.5 B4:.5 C#5:.5 D5:.25 E5:.25 D5 B4:4",
+        "D5:2.5 F#5:.5 E5:.5 D5:.5 B5:3 A5:.5 G#5:.5",
+        "F#5:.25 E5:.25 A5:.5 A4 B4:1.5 C#5:.25 D5:.25 C#5:1.5 B4:.5 A4:2",
+        "D5:3 F#5:.5 E5:.5 E5:3 G5:.5 F#5:.5",
+        "F#5:3 A5:.5 G5:.5 G5:4",
+        "A4:2.5 C#5:.5 E5:.5 G5:.5 G5:.5 E5:.5 F#5:2.5 G5:.25 A5:.25",
+        "D5:2.5 F#5:.5 A5:.5 C6:.5 B5:3 D5",
+        "C#5:.5 E5:.5 G5:2 B4 A4 E5:.5 F#5:.25 G5:.75 F#5 E5:.5",
+        "D5:.25 C#5:.25 B4 C#5:.5 D5 C#5:.5 D5:.5 D5:4"
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "Ason",
+    "A",
+    "Ason",
+    "B",
+    "B"
+  ],
+  "ipuclari": [
+    "Her satır bir ölçüdür. `·` ile bağlı gruplar tek bir akıcı süs gibi geçer.",
+    "Bu konumda alt sıradaki `N` La4, `J` La♯4, `M` Si4'tür; geri kalan notalar üst sıradadır.",
+    "`Q` burada Do5 (natürel), `I` Do6'dır; ikisi de notada natürel işaretlidir.",
+    "`2` (Do♯5), `3` (Re♯5) ve `6` (Sol♯5) tuşları notadır."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak"
+}

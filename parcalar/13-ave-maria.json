@@ -1,0 +1,73 @@
+{
+  "no": 13,
+  "id": "ave-maria",
+  "ad": "Ave Maria",
+  "baslik": "Ave Maria, D 839 (Schubert)",
+  "besteci": "Franz Schubert",
+  "yil": 1825,
+  "etiketler": [
+    "klasik",
+    "dugun"
+  ],
+  "zorluk": 3,
+  "ton": "Si♭ majör",
+  "olcu": "4/4",
+  "tempo": 44,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "1",
+  "aciklama": "*Ellens dritter Gesang*; ses partisinin ilk kıtası, orijinal tonunda. Çok yavaş çalınır (notada *Sehr langsam*). Küçük süs notaları atlandı.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "Bb4:3 A4:.5 Bb4:.5 D5:3.5 C5:.5",
+        "Bb4:2 r:2 C5:2 Bb4:.5 A4:.5 G4:.5 A4:.5",
+        "Bb4:2 r D5 D5:1.5 C5:.25 Bb4:.25 A4:.5 G4:.5 D5:.5 E5:.5",
+        "D5:2 Db5:1.5 A4:.5 C5:1.5 Bb4:.5 A4:1/3 C5:1/3 D5:1/3 Eb5:1/3 C5:1/3 A4:1/3",
+        "Bb4:3 D5:.5 C5:.5 C5:1.5 A4:.5 G4:1/3 B4:1/3 D5:1/3 F5:1/3 D5:1/3 B4:1/3",
+        "C5:7/3 G4:1/3 A4:1/3 Bb4:1/3 A4:1/3 G4:1/3 F4:2 r F4",
+        "C5:1.5 C5:.5 C5:.75 B4:.25 C5:.75 D5:.25 C5:.75 D5:.25 Bb4 r Bb4",
+        "C5:1.5 C5:.5 C5:1/3 B4:1/3 C5:1/3 Eb5:1/3 D5:1/3 C5:1/3 Bb4:2 r Bb4",
+        "C5:1.5 C5:.5 D5:.75 D5:.25 D5:1/3 C5:1/3 D5:1/3 Eb5 Eb5 r:1.5 G4:.5",
+        "C5:1.5 C5:.5 Bb4:1/3 A4:1/3 Bb4:1/3 Db5:1/3 C5:1/3 Bb4:1/3 C5:3 r",
+        "Bb4:3 A4:.5 Bb4:.5 D5:3.5 C5:.5",
+        "Bb4:2"
+      ],
+      "not": [
+        "Ave Maria!",
+        "Jungfrau mild,",
+        "erhöre einer Jungfrau Flehen,",
+        "aus diesem Felsen starr und wild",
+        "soll mein Gebet zu dir hinwehen.",
+        "",
+        "Wir schlafen sicher bis zum Morgen,",
+        "ob Menschen noch so grausam sind.",
+        "O Jungfrau, sieh der Jungfrau Sorgen,",
+        "o Mutter, hör ein bittend Kind!",
+        "Ave Maria!",
+        ""
+      ]
+    }
+  },
+  "sira": [
+    "A"
+  ],
+  "ipuclari": [
+    "Her satır bir ölçüdür. `·` ile bağlı uzun gruplar tek nefeste, akıcı çalınır.",
+    "`9` (Re♭5) ve `0` (Mi♭5) tuşları notadır.",
+    "Şarkının üç kıtası da aynı ezgiyle söylenir; istersen baştan tekrarla."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1054",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak",
+  "sapmalar": [
+    {
+      "tik": 32040,
+      "parca": "Re5",
+      "neden": "Notadaki otuz ikilik Re5. Kaynağın MIDI'sinde ardından gelen üç süs notası bu notanın süresini neredeyse bitirdiği için süslerle birlikte ayıklandı"
+    }
+  ]
+}

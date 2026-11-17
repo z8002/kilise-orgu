@@ -1,0 +1,64 @@
+{
+  "no": 30,
+  "id": "the-entertainer",
+  "ad": "The Entertainer",
+  "baslik": "The Entertainer (Scott Joplin, 1902)",
+  "besteci": "Scott Joplin",
+  "yil": 1902,
+  "etiketler": ["caz"],
+  "zorluk": 3,
+  "ton": "Do majör",
+  "olcu": "2/4",
+  "tempo": 84,
+  "birim": "1/16",
+  "oktav": 4,
+  "piston": "4",
+  "sagAltSinir": "E5",
+  "aciklama": "Ragtime'ın en ünlü parçası; caz bu müzikten doğdu. Notada *Not fast* (aceleye getirmeden) yazar. Burada sağ el partisinin girişi ve ilk teması var; akorlarda üst ses alındı. Melodi iki oktavdan geniş olduğu için Mi5'e kadar olan notalar alt sıraya yazıldı.",
+  "bolumler": {
+    "giris": {
+      "ad": "giriş",
+      "sag": ["D6 E6 C6 A5:2 B5 G5:2 | D5 E5 C5 A4:2 B4 G4:2"]
+    },
+    "onvurus": {
+      "ad": "ön vuruş",
+      "sag": ["D4 D#4"]
+    },
+    "tema": {
+      "sag": [
+        "E4 C5:2 E4 C5:2 E4 C5 | ~:5 C6 D6 D#6",
+        "E6 C6 D6 E6:2 B5 D6:2 | C6:6 D4 D#4",
+        "E4 C5:2 E4 C5:2 E4 C5 | ~:6 A5 G5",
+        "F#5 A5 C6 E6:2 D6 C6 A5 | D6:6 D4 D#4",
+        "E4 C5:2 E4 C5:2 E4 C5 | ~:5 C6 D6 D#6",
+        "E6 C6 D6 E6:2 B5 D6:2 | C6:6 C6 D6",
+        "E6 C6 D6 E6:2 C6 D6 C6 | E6 C6 D6 E6:2 C6 D6 C6",
+        "E6 C6 D6 E6:2 B5 D6:2"
+      ]
+    },
+    "son1": {
+      "ad": "1. bitiş",
+      "sag": ["C6:6 D4 D#4"]
+    },
+    "son2": {
+      "ad": "2. bitiş",
+      "sag": ["C6:8"]
+    }
+  },
+  "sira": ["giris", "onvurus", "tema", "son1", "tema", "son2"],
+  "ipuclari": [
+    "Temanın başındaki aksak (senkoplu) ritim parçanın ruhudur: kısa–uzun, kısa–uzun.",
+    "`.` (Mi5) ve `0` (Re♯6) tuşları notadır.",
+    "Girişin notadaki 3. ve 4. ölçüsü (La3–Sol3'e inen pes notalar) bu konumda klavyeye sığmadığı için atlandı.",
+    "Ragtime'da sol el \"um-pa\" diye bas ve akor çalar; burada yalnızca sağ el var."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak",
+  "sapmalar": [
+    {"tik": 63840, "parca": "Do6", "kaynak": "Do6", "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci temaya geçilir"}
+  ]
+}

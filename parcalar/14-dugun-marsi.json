@@ -1,0 +1,74 @@
+{
+  "no": 14,
+  "id": "dugun-marsi",
+  "ad": "Düğün Marşı",
+  "baslik": "Düğün Marşı, *Bir Yaz Gecesi Rüyası* (Mendelssohn)",
+  "besteci": "Felix Mendelssohn",
+  "yil": 1842,
+  "etiketler": [
+    "klasik",
+    "dugun"
+  ],
+  "zorluk": 2,
+  "ton": "Do majör",
+  "olcu": "4/4",
+  "tempo": 130,
+  "birim": "1/4",
+  "oktav": 4,
+  "piston": "6",
+  "aciklama": "Kiliseden çıkışta çalınan düğün marşı. Burada Théodore Dubois'nın org düzenlemesinin üst sesi var (Durand, Paris): trompet çağrısı, ana tema, orta bölüm ve yine ana tema.",
+  "bolumler": {
+    "fanfar": {
+      "ad": "trompet çağrısı",
+      "sag": [
+        "C4:1/3 C4:1/3 C4:1/3 | C4:2 r C4:1/3 C4:1/3 C4:1/3 | C4:2 r C4:1/3 C4:1/3 C4:1/3",
+        "E4 E4:1/3 E4:1/3 E4:1/3 E4 E4:1/3 E4:1/3 E4:1/3 | G4 G4:1/3 G4:1/3 G4:1/3 G4 r"
+      ]
+    },
+    "A": {
+      "ad": "ana tema",
+      "sag": [
+        "C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5",
+        "C5:2 D5 G4:.75 D5:.25 | E5 r:1.5 C5:.25 r:.25 E5:.25 r:.25 G5:.25 r:.25",
+        "C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5",
+        "C5:2 E5 D5:.75 E5:.25 | D5:2 C5 r"
+      ]
+    },
+    "B": {
+      "ad": "orta bölüm",
+      "sag": [
+        "C5:2 C5:1.5 C5:.5 | E5 D5 B4:.5 r:.5 G4:.5 r:.5",
+        "G4:1.5 C5:.5 C5:1.5 E5:.5 | E5 D5 B4:.5 r:.5 G4:.5 r:.5",
+        "G4:1.5 E5:.5 E5:1.5 G5:.5 | G5:2 F5 E5",
+        "D5 C#5:.75 E5:.25 D5 A4:.75 C5:.25 | B4 G5 A5 B5"
+      ]
+    },
+    "A2": {
+      "ad": "ana tema (kapanış)",
+      "sag": [
+        "C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5",
+        "C5:2 D5 G4:.75 D5:.25 | E5 r:1.5 C5:.25 r:.25 E5:.25 r:.25 G5:.25 r:.25",
+        "C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 A5:.5 r:.5",
+        "C5:2 E5 D5:.75 E5:.25 | D5:2 C5"
+      ]
+    }
+  },
+  "sira": [
+    "fanfar",
+    "A",
+    "B",
+    "A2"
+  ],
+  "ipuclari": [
+    "Çağrıdaki `Z·Z·Z` üç hızlı notadır (üçleme).",
+    "Ana temanın üçüncü ölçüsünün başındaki uzun `Q` notada titremelidir; istersen `Q` ile `W`'yi hızla değiştirerek çal.",
+    "Bu konumda `B` Sol4, `N` La4, `M` Si4'tür; `2` (Do♯5) tuşu notadır.",
+    "Notada ana tema ilk seferinde iki kez çalınır."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2198",
+    "lisans": "CC BY-SA 4.0"
+  },
+  "dogrulama": "kaynak"
+}

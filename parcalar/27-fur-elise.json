@@ -1,0 +1,65 @@
+{
+  "no": 27,
+  "id": "fur-elise",
+  "ad": "Für Elise",
+  "baslik": "Für Elise, WoO 59 (Beethoven)",
+  "besteci": "Ludwig van Beethoven",
+  "yil": 1810,
+  "etiketler": ["klasik"],
+  "zorluk": 2,
+  "ton": "La minör",
+  "olcu": "3/8",
+  "tempo": 66,
+  "birim": "1/16",
+  "oktav": 3,
+  "piston": "3",
+  "aciklama": "Beethoven'ın en ünlü piyano parçası; burada bilinen ilk bölümü var. Sol eldeki bas notaları (La2, Mi2) klavyenin altında kaldığı için yalnızca sağ el yazıldı; melodi kendi başına tanınır.",
+  "bolumler": {
+    "giris": {
+      "ad": "ön vuruş",
+      "sag": ["E5 D#5"]
+    },
+    "A": {
+      "sag": [
+        "E5 D#5 E5 B4 D5 C5 | A4:2 r C4 E4 A4",
+        "B4:2 r E4 G#4 B4 | C5:2 r E4 E5 D#5",
+        "E5 D#5 E5 B4 D5 C5 | A4:2 r C4 E4 A4",
+        "B4:2 r E4 C5 B4"
+      ]
+    },
+    "A1": {
+      "ad": "1. bitiş",
+      "sag": ["A4:4 E5 D#5"]
+    },
+    "A2": {
+      "ad": "2. bitiş",
+      "sag": ["A4:2 r B4 C5 D5"]
+    },
+    "B": {
+      "sag": [
+        "E5:3 G4 F5 E5 | D5:3 F4 E5 D5",
+        "C5:3 E4 D5 C5 | B4:2 r E4 E5 r",
+        "r E5 E5 r:2 D#5 | E5:2 r D#5 E5 D#5"
+      ]
+    },
+    "son": {
+      "ad": "son bitiş",
+      "sag": ["A4:6"]
+    }
+  },
+  "sira": ["giris", "A", "A1", "A", "A2", "B", "A", "son"],
+  "ipuclari": [
+    "`0` (Re♯5) ve `6` (Sol♯4) tuşları notadır.",
+    "B'nin 5. ölçüsündeki ikinci `P`, notada bir oktav yukarıdadır (Mi6). Org klavyesine sığmadığı için Mi5 yazıldı."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931",
+    "lisans": "kamu malı"
+  },
+  "dogrulama": "kaynak",
+  "sapmalar": [
+    {"tik": 29760, "parca": "Mi5", "kaynak": "Mi6", "neden": "Mi6 org klavyesine sığmıyor; bir oktav aşağı yazıldı"},
+    {"tik": 42240, "parca": "La4", "kaynak": "La4", "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci bölümün tekrarına geçilir"}
+  ]
+}
