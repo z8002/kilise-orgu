@@ -1,0 +1,89 @@
+{
+  "no": 6,
+  "id": "kanon",
+  "ad": "Kanon",
+  "baslik": "Kanon Re majör (Pachelbel)",
+  "besteci": "Johann Pachelbel",
+  "yil": 1680,
+  "etiketler": [
+    "klasik",
+    "dugun"
+  ],
+  "zorluk": 2,
+  "ton": "Re majör",
+  "olcu": "4/4",
+  "tempo": 56,
+  "birim": "1/4",
+  "oktav": 3,
+  "piston": "2",
+  "aciklama": "İki elle çalınır. Sol el sekiz notalık bası hiç değiştirmeden yineler; sağ el birinci kemanın ilk iki cümlesini çalar. Bas, kaynaktakinden bir oktav yukarı yazıldı.",
+  "bolumler": {
+    "bas": {
+      "ad": "yalnız bas",
+      "sag": [
+        "r:4 | r:4"
+      ],
+      "sol": [
+        "D4 A3 B3 F#3 | G3 D3 G3 A3"
+      ]
+    },
+    "tur1": {
+      "ad": "1. tur",
+      "sag": [
+        "F#5 E5 D5 C#5 | B4 A4 B4 C#5"
+      ],
+      "sol": [
+        "D4 A3 B3 F#3 | G3 D3 G3 A3"
+      ]
+    },
+    "tur2": {
+      "ad": "2. tur",
+      "sag": [
+        "D5 C#5 B4 A4 | G4 F#4 G4 E4"
+      ],
+      "sol": [
+        "D4 A3 B3 F#3 | G3 D3 G3 A3"
+      ]
+    },
+    "son": {
+      "ad": "bitiş",
+      "sag": [
+        "D5:4"
+      ],
+      "sol": [
+        "D4:4"
+      ]
+    }
+  },
+  "sira": [
+    "bas",
+    "tur1",
+    "tur2",
+    "son"
+  ],
+  "ipuclari": [
+    "Notaları birbirine yapıştırarak çal; yeni tuşa bastıktan sonra eskisini bırak.",
+    "`-` tuşu notadır (Fa♯5), uzatma işareti değil; `9` Do♯5'tir.",
+    "Bitişteki Re'ler kaynakta yoktur; parça burada bitsin diye eklendi. Notada kanon sekizlik notalarla sürer."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2047",
+    "lisans": "CC BY 4.0"
+  },
+  "dogrulama": "kaynak",
+  "sapmalar": [
+    {
+      "tik": 23040,
+      "el": "sag",
+      "parca": "Re5",
+      "neden": "Bitiş notası; kaynakta yok"
+    },
+    {
+      "tik": 23040,
+      "el": "sol",
+      "parca": "Re4",
+      "neden": "Bitiş notası; kaynakta yok"
+    }
+  ]
+}

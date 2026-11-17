@@ -5,7 +5,9 @@
   "baslik": "The Entertainer (Scott Joplin, 1902)",
   "besteci": "Scott Joplin",
   "yil": 1902,
-  "etiketler": ["caz"],
+  "etiketler": [
+    "caz"
+  ],
   "zorluk": 3,
   "ton": "Do majör",
   "olcu": "2/4",
@@ -18,11 +20,15 @@
   "bolumler": {
     "giris": {
       "ad": "giriş",
-      "sag": ["D6 E6 C6 A5:2 B5 G5:2 | D5 E5 C5 A4:2 B4 G4:2"]
+      "sag": [
+        "D6 E6 C6 A5:2 B5 G5:2 | D5 E5 C5 A4:2 B4 G4:2"
+      ]
     },
     "onvurus": {
       "ad": "ön vuruş",
-      "sag": ["D4 D#4"]
+      "sag": [
+        "D4 D#4"
+      ]
     },
     "tema": {
       "sag": [
@@ -38,14 +44,25 @@
     },
     "son1": {
       "ad": "1. bitiş",
-      "sag": ["C6:6 D4 D#4"]
+      "sag": [
+        "C6:6 D4 D#4"
+      ]
     },
     "son2": {
       "ad": "2. bitiş",
-      "sag": ["C6:8"]
+      "sag": [
+        "C6:8"
+      ]
     }
   },
-  "sira": ["giris", "onvurus", "tema", "son1", "tema", "son2"],
+  "sira": [
+    "giris",
+    "onvurus",
+    "tema",
+    "son1",
+    "tema",
+    "son2"
+  ],
   "ipuclari": [
     "Temanın başındaki aksak (senkoplu) ritim parçanın ruhudur: kısa–uzun, kısa–uzun.",
     "`.` (Mi5) ve `0` (Re♯6) tuşları notadır.",
@@ -59,6 +76,11 @@
   },
   "dogrulama": "kaynak",
   "sapmalar": [
-    {"tik": 63840, "parca": "Do6", "kaynak": "Do6", "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci temaya geçilir"}
+    {
+      "tik": 63840,
+      "parca": "Do6",
+      "kaynak": "Do6",
+      "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci temaya geçilir"
+    }
   ]
 }

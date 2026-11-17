@@ -5,7 +5,9 @@
   "baslik": "Lobe den Herren, *Praise to the Lord, the Almighty* (1665)",
   "besteci": "Stralsund ilahi kitabı",
   "yil": 1665,
-  "etiketler": ["ilahi"],
+  "etiketler": [
+    "ilahi"
+  ],
   "zorluk": 1,
   "ton": "Fa majör",
   "olcu": "3/4",
@@ -13,7 +15,9 @@
   "birim": "1/4",
   "oktav": 3,
   "piston": "2",
-  "bolumPiston": {"B": "5"},
+  "bolumPiston": {
+    "B": "5"
+  },
   "aciklama": "Alman korali. Ezgi Stralsund ilahi kitabındandır (1665), düzenleme William S. Bennett'in (1864). Kaynaktaki nota Sol majörden Fa majöre aktarılmıştır.",
   "bolumler": {
     "A": {
@@ -21,7 +25,10 @@
         "F4 F4 C5 | A4:1.5 G4:.5 F4 | E4 D4 C4",
         "D4 E4 F4 | G4:3 | F4:3"
       ],
-      "not": ["Praise to the Lord, the Almighty,", "the King of creation!"]
+      "not": [
+        "Praise to the Lord, the Almighty,",
+        "the King of creation!"
+      ]
     },
     "B": {
       "sag": [
@@ -30,7 +37,11 @@
       ]
     }
   },
-  "sira": ["A", "A", "B"],
+  "sira": [
+    "A",
+    "A",
+    "B"
+  ],
   "ipuclari": [
     "`7` tuşu notadır (Si♭4).",
     "Son satır `Q`'dan (Do4) başlayıp adım adım yükselir."

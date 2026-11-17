@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""kaynak/ klasöründeki parçalardan tek dosyalık kilise-orgu.html'i üretir.
+"""Üretilen dosyaları yazar: kaynak/ → kilise-orgu.html, parcalar/ → README'nin parça bölümü.
 
 Kullanım:
     python3 araclar/derle.py            # çıktıyı yazar
@@ -11,6 +11,10 @@ içeriğiyle değiştirilir (yol, kaynak/ klasörüne göredir).
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from parca import ParcaHatasi, hepsini_yukle  # noqa: E402
+from readme_uret import kaynaklar_bolumu, parcalar_bolumu  # noqa: E402
 
 KOK = Path(__file__).resolve().parent.parent
 KAYNAK = KOK / 'kaynak'
@@ -30,9 +34,29 @@ def sayfayi_derle() -> str:
     return EKLE.sub(ekle, sablon)
 
 
+def isaretler_arasi(metin: str, ad: str, icerik: str) -> str:
+    """<!-- AD:BASLA --> ile <!-- AD:BITIR --> arasını icerik ile değiştirir."""
+    bas, bit = f'<!-- {ad}:BASLA -->', f'<!-- {ad}:BITIR -->'
+    if metin.count(bas) != 1 or metin.count(bit) != 1:
+        raise SystemExit(f'README.md içinde {bas} ve {bit} işaretleri birer kez bulunmalı')
+    a, b = metin.index(bas) + len(bas), metin.index(bit)
+    return metin[:a] + '\n' + icerik.rstrip('\n') + '\n' + metin[b:]
+
+
+def readme_uret(parcalar: list) -> str:
+    metin = (KOK / 'README.md').read_text(encoding='utf-8')
+    metin = isaretler_arasi(metin, 'PARCALAR', parcalar_bolumu(parcalar))
+    return isaretler_arasi(metin, 'KAYNAKLAR', kaynaklar_bolumu(parcalar))
+
+
 def main() -> int:
     denetle = '--denetle' in sys.argv[1:]
-    ciktilar = {KOK / 'kilise-orgu.html': sayfayi_derle()}
+    try:
+        parcalar = hepsini_yukle()
+    except ParcaHatasi as e:
+        print('HATA:', e, file=sys.stderr)
+        return 1
+    ciktilar = {KOK / 'kilise-orgu.html': sayfayi_derle(), KOK / 'README.md': readme_uret(parcalar)}
     eski = 0
     for yol, icerik in ciktilar.items():
         mevcut = yol.read_text(encoding='utf-8') if yol.exists() else None

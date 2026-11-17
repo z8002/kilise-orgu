@@ -5,7 +5,9 @@
   "baslik": "Türk Marşı, *Rondo alla Turca*, K. 331 (Mozart, 1783)",
   "besteci": "Wolfgang Amadeus Mozart",
   "yil": 1783,
-  "etiketler": ["klasik"],
+  "etiketler": [
+    "klasik"
+  ],
   "zorluk": 3,
   "ton": "La minör",
   "olcu": "2/4",
@@ -14,12 +16,16 @@
   "oktav": 4,
   "piston": "4",
   "sagAltSinir": "D5",
-  "bolumPiston": {"B": "6"},
+  "bolumPiston": {
+    "B": "6"
+  },
   "aciklama": "Mozart'ın La majör piyano sonatının son bölümü; Osmanlı mehter müziğinden esinlenir. Burada sağ el partisinin ilk bölümü var; akorlarda üst ses alındı. Re5'e kadar olan notalar alt sıraya yazıldı, böylece baştaki \"Do–Re–Do–Si–Do\" süsü yan yana tuşlara düşer.",
   "bolumler": {
     "giris": {
       "ad": "ön vuruş",
-      "sag": ["B4 A4 G#4 A4"]
+      "sag": [
+        "B4 A4 G#4 A4"
+      ]
     },
     "A": {
       "sag": [
@@ -31,11 +37,15 @@
     },
     "A1": {
       "ad": "1. bitiş",
-      "sag": ["E5:4 B4 A4 G#4 A4"]
+      "sag": [
+        "E5:4 B4 A4 G#4 A4"
+      ]
     },
     "A2": {
       "ad": "2. bitiş",
-      "sag": ["E5:4 E5 r F5 r"]
+      "sag": [
+        "E5:4 E5 r F5 r"
+      ]
     },
     "B": {
       "sag": [
@@ -55,7 +65,15 @@
       ]
     }
   },
-  "sira": ["giris", "A", "A1", "A", "A2", "B", "kapanis"],
+  "sira": [
+    "giris",
+    "A",
+    "A1",
+    "A",
+    "A2",
+    "B",
+    "kapanis"
+  ],
   "ipuclari": [
     "Sekizlik notaların çoğu notada kesik (staccato) yazılıdır; bu yüzden burada kısa bir nota ve ardından sus olarak görünürler.",
     "`3` (Re♯5) ve `6` (Sol♯5) tuşları notadır.",

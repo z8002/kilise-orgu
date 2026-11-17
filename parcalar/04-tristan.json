@@ -1,0 +1,55 @@
+{
+  "no": 4,
+  "id": "tristan",
+  "ad": "Tristan Prelüdü",
+  "baslik": "*Tristan und Isolde*, Prelüd (Wagner)",
+  "besteci": "Richard Wagner",
+  "yil": 1859,
+  "etiketler": [
+    "opera"
+  ],
+  "zorluk": 3,
+  "ton": "La minör",
+  "olcu": "6/8",
+  "tempo": 44,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "1",
+  "aciklama": "Operanın açılışındaki iki cümle ve ünlü \"Tristan akoru\". Çok yavaş çalınır; cümleler arasında sessizlik bırakılır. Sağ el ezgiyi (önce çello, sonra obua çizgisini), sol el akorları çalar.",
+  "bolumler": {
+    "c1": {
+      "ad": "1. cümle",
+      "sag": [
+        "A3 | F4:5 E4 | G#4:5 A4 | A#4 B4:3 r:2 | r:5"
+      ],
+      "sol": [
+        "r | r:6 | F3+B3+D#4:6 | E3+G#3+D4:4 r:2 | r:5"
+      ]
+    },
+    "c2": {
+      "ad": "2. cümle",
+      "sag": [
+        "B3 | G#4:5 G4 | B4:5 C5 | C#5 D5:3 r:2"
+      ],
+      "sol": [
+        "r | r:6 | G#3+D4+F#4:6 | G3+B3+F4:4 r:2"
+      ]
+    }
+  },
+  "sira": [
+    "c1",
+    "c2"
+  ],
+  "ipuclari": [
+    "Her cümlenin üçüncü ölçüsündeki sol el akoru Tristan akorudur; sonraki ölçüde çözülür.",
+    "Yalnızca ezgiyi çalmak istersen sağ el satırı yeterli.",
+    "Klavyen dört tuşu birden algılamazsa `Boşluk`'u basılı tutup akoru tuş tuş kur.",
+    "Özgün sürümde ikinci cümle Do4'ten başlıyordu; doğrusu Si3'tür ve burada düzeltildi."
+  ],
+  "kaynak": {
+    "ad": "Ezberden yazıldı; bir nota kaynağıyla karşılaştırılmadı",
+    "url": "",
+    "lisans": "beste kamu malı"
+  },
+  "dogrulama": "ezber"
+}

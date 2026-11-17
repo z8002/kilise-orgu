@@ -39,7 +39,7 @@ SOLFEJ = ['Do', 'Do♯', 'Re', 'Re♯', 'Mi', 'Fa', 'Fa♯', 'Sol', 'Sol♯', 'L
 PISTONLAR = {'1': 'Dua', '2': 'İlahi', '3': 'Flüt solo', '4': 'Kornet', '5': 'Plenum', '6': 'Tutti', '0': 'İptal'}
 MEKANLAR = {'sapel': 'Şapel', 'kilise': 'Kilise', 'katedral': 'Katedral'}
 ETIKETLER = {'ilahi', 'noel', 'klasik', 'opera', 'caz', 'dugun', 'ozgun'}
-DOGRULAMA = {'kaynak', 'ezber', 'ozgun'}
+DOGRULAMA = {'kaynak', 'kaynak-elle', 'ezber', 'ozgun'}
 ELLER = ('sag', 'sol')
 BIRIM_ADI = {F(1, 2): 'ikilik', F(1, 4): 'dörtlük', F(1, 8): 'sekizlik', F(1, 16): 'on altılık', F(3, 8): 'noktalı dörtlük'}
 
@@ -157,9 +157,11 @@ class Parca:
         pay, payda = self.veri['olcu'].split('/')
         return F(int(pay) * 4, int(payda))
 
-    @property
-    def taban(self) -> int:
-        return 12 * (self.veri['oktav'] + 1)
+    def oktav_of(self, bolum: str | None = None) -> int:
+        return self.veri.get('bolumOktav', {}).get(bolum, self.veri['oktav'])
+
+    def taban(self, bolum: str | None = None) -> int:
+        return 12 * (self.oktav_of(bolum) + 1)
 
     def eller(self) -> list:
         return [el for el in ELLER if any(el in b.satirlar for b in self.bolumler.values())]
@@ -178,20 +180,20 @@ class Parca:
         return {'eller': sonuc, 'toplam': tik(t)}
 
     # ---- tuşlar ----------------------------------------------------------
-    def tus(self, midi: int, el: str) -> str:
+    def tus(self, midi: int, el: str, bolum: str | None = None) -> str:
         """Bu notanın basılacağı klavye tuşunun kodu (KeyQ, Comma…)."""
-        fark = midi - self.taban
+        fark = midi - self.taban(bolum)
         altta, ustte = 0 <= fark < len(ALT_SIRA), 12 <= fark < 12 + len(UST_SIRA)
         if not (altta or ustte):
-            raise ParcaHatasi(f'{self.id}: {nota_adi(midi)} oktav {self.oktav} konumunda klavyede yok')
+            raise ParcaHatasi(f'{self.id}: {nota_adi(midi)} oktav {self.oktav_of(bolum)} konumunda klavyede yok')
         if altta and ustte:
             sinir = self.veri.get('sagAltSinir')
             alt_tercih = el == 'sol' or (sinir is not None and midi <= midi_no(sinir))
             return ALT_SIRA[fark] if alt_tercih else UST_SIRA[fark - 12]
         return ALT_SIRA[fark] if altta else UST_SIRA[fark - 12]
 
-    def etiket(self, midi: int, el: str) -> str:
-        return tus_etiketi(self.tus(midi, el))
+    def etiket(self, midi: int, el: str, bolum: str | None = None) -> str:
+        return tus_etiketi(self.tus(midi, el, bolum))
 
 
 def tus_etiketi(kod: str) -> str:
@@ -214,7 +216,7 @@ def tik(dortluk: F) -> int:
 # ---------------------------------------------------------------------------
 ZORUNLU = ['no', 'id', 'ad', 'baslik', 'besteci', 'etiketler', 'zorluk', 'ton', 'olcu', 'tempo', 'birim', 'oktav', 'piston',
            'aciklama', 'bolumler', 'sira', 'ipuclari', 'kaynak', 'dogrulama']
-SERBEST = ['swing', 'mekan', 'sagAltSinir', 'bolumPiston', 'bolumTempo', 'serbestOlcu', 'yil', 'sapmalar']
+SERBEST = ['swing', 'mekan', 'sagAltSinir', 'bolumPiston', 'bolumTempo', 'bolumOktav', 'serbestOlcu', 'yil', 'sapmalar']
 
 
 def parcayi_kur(veri: dict, yol: Path | None = None) -> Parca:
@@ -311,7 +313,7 @@ def parcayi_kur(veri: dict, yol: Path | None = None) -> Parca:
     for kimlik in parca.bolumler:
         if kimlik not in veri['sira']:
             hata(f'{kimlik} bölümü çalma sırasında yok')
-    for alan in ('bolumPiston', 'bolumTempo'):
+    for alan in ('bolumPiston', 'bolumTempo', 'bolumOktav'):
         for kimlik, deger in veri.get(alan, {}).items():
             if kimlik not in parca.bolumler:
                 hata(f'{alan} içinde tanımsız bölüm: {kimlik!r}')
@@ -319,13 +321,15 @@ def parcayi_kur(veri: dict, yol: Path | None = None) -> Parca:
                 hata(f'{alan}: bilinmeyen piston {deger!r}')
             if alan == 'bolumTempo' and not (0.25 <= deger <= 2):
                 hata(f'{alan}: çarpan 0.25–2 arasında olmalı')
+            if alan == 'bolumOktav' and deger not in (1, 2, 3, 4, 5):
+                hata(f'{alan}: oktav 1–5 arasında olmalı')
     # Bütün notalar seçilen oktav konumunda klavyede olmalı
     for b in parca.bolumler.values():
         for el in b.satirlar:
             for o in b.olaylar(el):
                 for m in o.notalar:
                     try:
-                        parca.tus(m, el)
+                        parca.tus(m, el, b.kimlik)
                     except ParcaHatasi as e:
                         hata(f'{b.kimlik}/{el}: {e}')
                 tik(o.bas), tik(o.sure)
@@ -398,7 +402,7 @@ def izgara(parca: Parca, bolum: Bolum) -> list:
                 raise ParcaHatasi(f'{parca.id}/{bolum.kimlik}: satır süresi birimin tam katı olmalı')
             olaylar = bolum.olaylar(el)
             adet = int(satir.sure / birim)
-            hucreler[el] = [_birim_hucresi(olaylar, satir.bas + k * birim, birim, lambda m, el=el: parca.etiket(m, el)) for k in range(adet)]
+            hucreler[el] = [_birim_hucresi(olaylar, satir.bas + k * birim, birim, lambda m, el=el: parca.etiket(m, el, bolum.kimlik)) for k in range(adet)]
             if not sinirlar:
                 t = F(0)
                 for o in satir.olculer[:-1]:
@@ -426,8 +430,10 @@ def tus_listesi(parca: Parca) -> dict:
     adimlar = []
     cizelge = parca.cizelge()['eller']
     for el, olaylar in cizelge.items():
-        for bas, sure, notalar, _ in olaylar:
-            adimlar.append({'el': el, 'tik': bas, 'tuslar': [parca.tus(m, el) for m in notalar], 'notalar': [nota_adi(m) for m in notalar]})
+        for bas, sure, notalar, sira in olaylar:
+            bolum = parca.sira[sira]
+            adimlar.append({'el': el, 'tik': bas, 'oktav': parca.oktav_of(bolum),
+                            'tuslar': [parca.tus(m, el, bolum) for m in notalar], 'notalar': [nota_adi(m) for m in notalar]})
     adimlar.sort(key=lambda a: (a['tik'], a['el']))
     return {'id': parca.id, 'no': parca.no, 'oktav': parca.oktav, 'adimlar': adimlar}
 

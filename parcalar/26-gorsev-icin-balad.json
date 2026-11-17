@@ -5,7 +5,10 @@
   "baslik": "Görsev İçin Balad (özgün parça, Kerem Görsev'e ithaf)",
   "besteci": "Claude",
   "yil": 2026,
-  "etiketler": ["caz", "ozgun"],
+  "etiketler": [
+    "caz",
+    "ozgun"
+  ],
   "zorluk": 2,
   "ton": "Re minör",
   "olcu": "4/4",
@@ -14,8 +17,12 @@
   "swing": 0.58,
   "oktav": 3,
   "piston": "3",
-  "bolumPiston": {"B": "4"},
-  "bolumTempo": {"bitis": 0.75},
+  "bolumPiston": {
+    "B": "4"
+  },
+  "bolumTempo": {
+    "bitis": 0.75
+  },
   "aciklama": "Bu parça Kerem Görsev'in bir eseri **değildir**: onun klasik müzikle cazı harmanlayan piyano üslubundan esinlenerek bu proje için yazılmış özgün bir caz baladıdır ve ona ithaf edilmiştir. Çalma sırası caz standartlarındaki gibi A – A – B – A'dır. Lead sheet'i ve piyano düzenlemesi [`notalar/gorsev-icin-balad/`](notalar/gorsev-icin-balad/) klasöründe.",
   "bolumler": {
     "A": {
@@ -31,7 +38,12 @@
         "G3+Bb3:2 C3+Bb3:2 | F3+A3:2 Bb3+D4:2",
         "E3+D4:2 A3+C#4:2 | D3+D4:4"
       ],
-      "not": ["Dm · Dm(maj7)", "Dm7 · Dm7 Dm6", "Gm7 C7 · Fmaj7 B♭maj7", "Em7♭5 A7 · Dm"]
+      "not": [
+        "Dm · Dm(maj7)",
+        "Dm7 · Dm7 Dm6",
+        "Gm7 C7 · Fmaj7 B♭maj7",
+        "Em7♭5 A7 · Dm"
+      ]
     },
     "B": {
       "ad": "B (köprü)",
@@ -47,16 +59,33 @@
         "E3+D4:4 | A3+C#4:4",
         "D3+D4:4 | A3+C#4:4"
       ],
-      "not": ["Cm7 · F7", "B♭maj7 · B♭/F", "Em7♭5 · A7", "Dm · A7"]
+      "not": [
+        "Cm7 · F7",
+        "B♭maj7 · B♭/F",
+        "Em7♭5 · A7",
+        "Dm · A7"
+      ]
     },
     "bitis": {
       "ad": "bitiş",
-      "sag": ["F5:4 | F#5:4"],
-      "sol": ["D3+B3:4 | D3+A3:4"],
-      "not": ["Dm6 · D"]
+      "sag": [
+        "F5:4 | F#5:4"
+      ],
+      "sol": [
+        "D3+B3:4 | D3+A3:4"
+      ],
+      "not": [
+        "Dm6 · D"
+      ]
     }
   },
-  "sira": ["A", "A", "B", "A", "bitis"],
+  "sira": [
+    "A",
+    "A",
+    "B",
+    "A",
+    "bitis"
+  ],
   "ipuclari": [
     "Yalnızca melodiyi çalmak istersen sağ el satırı yeterli.",
     "`·` ile bağlı ikilileri cazdaki gibi \"sallanarak\" çal: ilki biraz uzun, ikincisi kısa.",

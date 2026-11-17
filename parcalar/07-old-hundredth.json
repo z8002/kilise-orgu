@@ -1,0 +1,59 @@
+{
+  "no": 7,
+  "id": "old-hundredth",
+  "ad": "Old Hundredth",
+  "baslik": "Old Hundredth, \"Yüzüncü Mezmur\" ilahisi (1551)",
+  "besteci": "Cenevre Mezmurlar Kitabı (Loys Bourgeois)",
+  "yil": 1551,
+  "etiketler": [
+    "ilahi"
+  ],
+  "zorluk": 2,
+  "ton": "Sol majör",
+  "olcu": "4/2",
+  "tempo": 132,
+  "birim": "1/2",
+  "oktav": 3,
+  "piston": "5",
+  "bolumPiston": {
+    "B": "6"
+  },
+  "aciklama": "Plenumla çalınan klasik kapanış ilahisi. Sağ ve sol el aynı ezgiyi bir oktav arayla çalar. Ritim, John Dowland'ın düzenlemesindeki özgün ritimdir: her cümle uzun bir notayla başlar ve biter.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "G4:2 | G4 F#4 E4 D4 | G4:2 A4:2 | B4:2",
+        "B4:2 | B4 B4 A4 G4 | C5:2 B4:2 | A4:2",
+        "G4:2 | A4 B4 A4 G4 | E4:2 F#4:2 | G4:2"
+      ],
+      "sol": [
+        "G3:2 | G3 F#3 E3 D3 | G3:2 A3:2 | B3:2",
+        "B3:2 | B3 B3 A3 G3 | C4:2 B3:2 | A3:2",
+        "G3:2 | A3 B3 A3 G3 | E3:2 F#3:2 | G3:2"
+      ]
+    },
+    "B": {
+      "ad": "son cümle",
+      "sag": [
+        "D5:2 | B4 G4 A4 C5 | B4:2 A4:2 | G4:2"
+      ],
+      "sol": [
+        "D4:2 | B3 G3 A3 C4 | B3:2 A3:2 | G3:2"
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "B"
+  ],
+  "ipuclari": [
+    "Birim ikilik notadır: uzun notalar (`—` ile) bir birlik sürer.",
+    "Son cümlede programda **6 · Tutti**'ye geçilir; ilahi zirvede biter."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "lisans": "kamu malı",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=90"
+  },
+  "dogrulama": "kaynak"
+}

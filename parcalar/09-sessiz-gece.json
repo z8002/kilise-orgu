@@ -1,0 +1,63 @@
+{
+  "no": 9,
+  "id": "sessiz-gece",
+  "ad": "Sessiz Gece",
+  "baslik": "Sessiz Gece, *Stille Nacht* (Gruber, 1818)",
+  "besteci": "Franz Xaver Gruber",
+  "yil": 1818,
+  "etiketler": [
+    "noel",
+    "ilahi"
+  ],
+  "zorluk": 1,
+  "ton": "Do majör",
+  "olcu": "6/8",
+  "tempo": 63,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "1",
+  "bolumPiston": {
+    "B": "2"
+  },
+  "aciklama": "En bilinen Noel ilahisi. Sakin, sallanır gibi bir ritimle çalınır (kaynakta Si♭ majör, burada Do majöre aktarıldı).",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "G4:1.5 A4:.5 G4 E4:3 | G4:1.5 A4:.5 G4 E4:3",
+        "D5:2 D5 B4:3 | C5:2 C5 G4:3",
+        "A4:2 A4 C5:1.5 B4:.5 A4 | G4:1.5 A4:.5 G4 E4:3",
+        "A4:2 A4 C5:1.5 B4:.5 A4 | G4:1.5 A4:.5 G4 E4:3"
+      ],
+      "not": [
+        "Stille Nacht, heilige Nacht,",
+        "alles schläft, einsam wacht",
+        "nur das traute, hochheilige Paar.",
+        "Holder Knabe im lockigen Haar,"
+      ]
+    },
+    "B": {
+      "sag": [
+        "D5:2 D5 F5:1.5 D5:.5 B4 | C5:3 E5:3",
+        "C5:1.5 G4:.5 E4 G4:1.5 F4:.5 D4 | C4:6"
+      ],
+      "not": [
+        "schlaf in himmlischer Ruh,",
+        "schlaf in himmlischer Ruh."
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "B"
+  ],
+  "ipuclari": [
+    "Son `Q`'yu yankı sönene kadar tut.",
+    "Son iki satırda programda **2 · İlahi**'ye geçilir; kapanış daha dolgun duyulur."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "lisans": "kamu malı",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1295"
+  },
+  "dogrulama": "kaynak"
+}

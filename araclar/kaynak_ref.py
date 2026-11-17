@@ -35,7 +35,7 @@ def parca_cizgisi(parca, el: str, ses: str) -> list:
 
 def karsilastir(parca, el: str, ses: str, ref: list, sure_payi: int = TPQ // 8) -> list:
     """Farkların listesi (boşsa eşleşiyor). ref: [(bas_tik, sure_tik, midi)]."""
-    sapmalar = {s['tik']: s for s in parca.veri.get('sapmalar', [])}
+    sapmalar = {s['tik']: s for s in parca.veri.get('sapmalar', []) if s.get('el', 'sag') == el}
     bizim = {b: (s, m) for b, s, m in parca_cizgisi(parca, el, ses)}
     onlarin = {b: (s, m) for b, s, m in ref}
     farklar = []

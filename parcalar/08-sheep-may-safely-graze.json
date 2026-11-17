@@ -1,0 +1,56 @@
+{
+  "no": 8,
+  "id": "sheep-may-safely-graze",
+  "ad": "Sheep May Safely Graze",
+  "baslik": "Sheep May Safely Graze, BWV 208 (Bach)",
+  "besteci": "Johann Sebastian Bach",
+  "yil": 1713,
+  "etiketler": [
+    "klasik",
+    "dugun"
+  ],
+  "zorluk": 2,
+  "ton": "Si♭ majör",
+  "olcu": "4/4",
+  "tempo": 66,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "3",
+  "aciklama": "*Schafe können sicher weiden*; Av Kantatı'ndaki soprano aryasının ilk bölümü, orijinal tonunda. Kaynak: Breitkopf & Härtel baskısı (1881).",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "Bb4:2 D5 C5 C5:3 D5 | Eb5:2 G5 F5 D5:2 C5 Bb4",
+        "D5 Bb4 A4 G4 C5:3 D5 | A4:2 G4 F4 F4:4",
+        "F4:2 Ab4 G4 G4:3 A4 | Bb4:2 D5 C5 A4:2 G4 F4",
+        "F5:2 G5 F5 F5 D5 C5 Bb4 | F5:2 G5 F5 F5 D5 C5 Bb4",
+        "Eb5:3 F5 D5 C5 Bb4 C5 | A4:3 Bb4 Bb4:4",
+        "r:4 G5 Eb5 D5 C5 | F5:3 G5 D5:3 C5:.5 Bb4:.5",
+        "Bb4:2"
+      ],
+      "not": [
+        "Schafe können sicher weiden,",
+        "wo ein guter Hirte wacht,",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "sira": [
+    "A"
+  ],
+  "ipuclari": [
+    "İlk iki satır en tanınan bölümdür.",
+    "`7` (Si♭4), `0` (Mi♭5) ve `6` (La♭4) tuşları notadır.",
+    "Sondan bir önceki ölçünün sonundaki `I·7` çok hızlı bir süs gibi geçer."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "lisans": "kamu malı",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1794"
+  },
+  "dogrulama": "kaynak"
+}

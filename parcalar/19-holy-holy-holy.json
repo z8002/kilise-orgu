@@ -5,7 +5,9 @@
   "baslik": "Holy, Holy, Holy, *Nicaea* (Dykes, 1861)",
   "besteci": "John Bacchus Dykes",
   "yil": 1861,
-  "etiketler": ["ilahi"],
+  "etiketler": [
+    "ilahi"
+  ],
   "zorluk": 1,
   "ton": "Re majör",
   "olcu": "4/4",
@@ -22,7 +24,12 @@
         "A4:1.5 A4:.5 A4 A4 | D5:2 C#5 A4",
         "E4 A4 B4:1.5 A4:.5 | A4:4"
       ],
-      "not": ["Holy, holy, holy!", "Lord God Almighty!", "Early in the morning", "our song shall rise to Thee;"]
+      "not": [
+        "Holy, holy, holy!",
+        "Lord God Almighty!",
+        "Early in the morning",
+        "our song shall rise to Thee;"
+      ]
     },
     "B": {
       "sag": [
@@ -31,10 +38,18 @@
         "D5:2 A4 A4 | B4:2 F#4:2",
         "G4 E4 E4:1.5 D4:.5 | D4:4"
       ],
-      "not": ["Holy, holy, holy!", "merciful and mighty!", "God in three Persons,", "blessed Trinity!"]
+      "not": [
+        "Holy, holy, holy!",
+        "merciful and mighty!",
+        "God in three Persons,",
+        "blessed Trinity!"
+      ]
     }
   },
-  "sira": ["A", "B"],
+  "sira": [
+    "A",
+    "B"
+  ],
   "ipuclari": [
     "`9` tuşu notadır (Do♯5)."
   ],
@@ -45,7 +60,16 @@
   },
   "dogrulama": "kaynak",
   "sapmalar": [
-    {"tik": 26880, "parca": "La4", "kaynak": "La4", "neden": "Kaynakta bu nota üç vuruşluk La4 ile bir vuruşluk La4 olarak iki parça yazılmış; tek hece olduğu için burada dört vuruş tutuluyor"},
-    {"tik": 29760, "kaynak": "La4", "neden": "Yukarıdaki notanın ikinci parçası"}
+    {
+      "tik": 26880,
+      "parca": "La4",
+      "kaynak": "La4",
+      "neden": "Kaynakta bu nota üç vuruşluk La4 ile bir vuruşluk La4 olarak iki parça yazılmış; tek hece olduğu için burada dört vuruş tutuluyor"
+    },
+    {
+      "tik": 29760,
+      "kaynak": "La4",
+      "neden": "Yukarıdaki notanın ikinci parçası"
+    }
   ]
 }

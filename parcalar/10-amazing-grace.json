@@ -1,0 +1,69 @@
+{
+  "no": 10,
+  "id": "amazing-grace",
+  "ad": "Amazing Grace",
+  "baslik": "Amazing Grace (ilahi, 1835)",
+  "besteci": "Amerikan halk ezgisi (*New Britain*)",
+  "yil": 1835,
+  "etiketler": [
+    "ilahi"
+  ],
+  "zorluk": 1,
+  "ton": "Sol majör",
+  "olcu": "3/4",
+  "tempo": 84,
+  "birim": "1/4",
+  "oktav": 3,
+  "piston": "4",
+  "aciklama": "*New Britain* ezgisi. **4 · Kornet** ya da **2 · İlahi** ile çalınır.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | G4:2 E4 | D4:2",
+        "D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | D5:2"
+      ],
+      "not": [
+        "Amazing grace! how sweet the sound,",
+        "that saved a wretch like me!"
+      ]
+    },
+    "B": {
+      "sag": [
+        "B4 | D5:1.5 B4:.5 D5:.5 B4:.5 | G4:2 D4 | E4:1.5 G4:.5 G4:.5 E4:.5 | D4:2",
+        "D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | G4:3"
+      ],
+      "not": [
+        "I once was lost, but now am found,",
+        "was blind, but now I see."
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "B"
+  ],
+  "ipuclari": [
+    "Satır başlarındaki tek notalar ön vuruştur.",
+    "İkinci kıtada **5 · Plenum**'a geçersen ilahi daha görkemli duyulur.",
+    "Kaynakta ikinci satırın son notası (`O`) üç vuruş tutulur ve ölçü bir vuruş uzar; burada düzenli ölçüye uyması için iki vuruş yazıldı."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "lisans": "kamu malı",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1283"
+  },
+  "dogrulama": "kaynak",
+  "sapmalar": [
+    {
+      "tik": 38400,
+      "parca": "Sol4",
+      "kaynak": "Sol4",
+      "neden": "Kaynakta son hece ikişer vuruşluk iki Sol4 olarak yazılmış; burada tek nota üç vuruş tutuluyor"
+    },
+    {
+      "tik": 40320,
+      "kaynak": "Sol4",
+      "neden": "Yukarıdaki notanın ikinci parçası"
+    }
+  ]
+}

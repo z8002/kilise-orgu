@@ -5,7 +5,9 @@
   "baslik": "Für Elise, WoO 59 (Beethoven)",
   "besteci": "Ludwig van Beethoven",
   "yil": 1810,
-  "etiketler": ["klasik"],
+  "etiketler": [
+    "klasik"
+  ],
   "zorluk": 2,
   "ton": "La minör",
   "olcu": "3/8",
@@ -17,7 +19,9 @@
   "bolumler": {
     "giris": {
       "ad": "ön vuruş",
-      "sag": ["E5 D#5"]
+      "sag": [
+        "E5 D#5"
+      ]
     },
     "A": {
       "sag": [
@@ -29,11 +33,15 @@
     },
     "A1": {
       "ad": "1. bitiş",
-      "sag": ["A4:4 E5 D#5"]
+      "sag": [
+        "A4:4 E5 D#5"
+      ]
     },
     "A2": {
       "ad": "2. bitiş",
-      "sag": ["A4:2 r B4 C5 D5"]
+      "sag": [
+        "A4:2 r B4 C5 D5"
+      ]
     },
     "B": {
       "sag": [
@@ -44,10 +52,21 @@
     },
     "son": {
       "ad": "son bitiş",
-      "sag": ["A4:6"]
+      "sag": [
+        "A4:6"
+      ]
     }
   },
-  "sira": ["giris", "A", "A1", "A", "A2", "B", "A", "son"],
+  "sira": [
+    "giris",
+    "A",
+    "A1",
+    "A",
+    "A2",
+    "B",
+    "A",
+    "son"
+  ],
   "ipuclari": [
     "`0` (Re♯5) ve `6` (Sol♯4) tuşları notadır.",
     "B'nin 5. ölçüsündeki ikinci `P`, notada bir oktav yukarıdadır (Mi6). Org klavyesine sığmadığı için Mi5 yazıldı."
@@ -59,7 +78,17 @@
   },
   "dogrulama": "kaynak",
   "sapmalar": [
-    {"tik": 29760, "parca": "Mi5", "kaynak": "Mi6", "neden": "Mi6 org klavyesine sığmıyor; bir oktav aşağı yazıldı"},
-    {"tik": 42240, "parca": "La4", "kaynak": "La4", "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci bölümün tekrarına geçilir"}
+    {
+      "tik": 29760,
+      "parca": "Mi5",
+      "kaynak": "Mi6",
+      "neden": "Mi6 org klavyesine sığmıyor; bir oktav aşağı yazıldı"
+    },
+    {
+      "tik": 42240,
+      "parca": "La4",
+      "kaynak": "La4",
+      "neden": "Parça burada bitsin diye son nota ölçü boyunca tutuldu; kaynakta ikinci bölümün tekrarına geçilir"
+    }
   ]
 }

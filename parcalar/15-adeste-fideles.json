@@ -5,7 +5,10 @@
   "baslik": "Adeste Fideles, *O Come, All Ye Faithful* (Wade, 1751)",
   "besteci": "John Francis Wade",
   "yil": 1751,
-  "etiketler": ["noel", "ilahi"],
+  "etiketler": [
+    "noel",
+    "ilahi"
+  ],
   "zorluk": 1,
   "ton": "Sol majör",
   "olcu": "4/4",
@@ -13,7 +16,9 @@
   "birim": "1/4",
   "oktav": 3,
   "piston": "2",
-  "bolumPiston": {"nakarat": "5"},
+  "bolumPiston": {
+    "nakarat": "5"
+  },
   "aciklama": "En çok söylenen Noel ilahilerinden biri. Burada soprano partisinin tamamı var.",
   "bolumler": {
     "A": {
@@ -29,10 +34,16 @@
         "B4 A4 B4 C5 | B4:2 A4 B4 | B4 A4 B4 C5 | B4:2 A4 B4",
         "C5 B4 A4 G4 | F#4:2 G4 C5 | B4:2 A4:1.5 G4:.5 | G4:3"
       ],
-      "not": ["Venite adoremus, venite adoremus,", "venite adoremus Dominum."]
+      "not": [
+        "Venite adoremus, venite adoremus,",
+        "venite adoremus Dominum."
+      ]
     }
   },
-  "sira": ["A", "nakarat"],
+  "sira": [
+    "A",
+    "nakarat"
+  ],
   "ipuclari": [
     "İlk satırın başındaki tek `T` ön vuruştur.",
     "Kıtanın son notası (`U`), nakarata girişin ön vuruşudur.",

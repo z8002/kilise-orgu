@@ -1,0 +1,74 @@
+{
+  "no": 2,
+  "id": "toccata",
+  "ad": "Toccata ve Füg",
+  "baslik": "Toccata ve Füg Re minör, BWV 565 (Bach)",
+  "besteci": "Johann Sebastian Bach",
+  "yil": 1704,
+  "etiketler": [
+    "klasik"
+  ],
+  "zorluk": 2,
+  "ton": "Re minör",
+  "olcu": "4/4",
+  "tempo": 50,
+  "birim": "1/16",
+  "oktav": 3,
+  "piston": "6",
+  "bolumOktav": {
+    "c1": 4
+  },
+  "serbestOlcu": [
+    "c1",
+    "c2",
+    "c3",
+    "akor"
+  ],
+  "aciklama": "Kilise orgunun en ünlü açılışı: her biri bir oktav aşağıdan yinelenen üç cümle, ardından gerilimli bir akor ve Re majöre çözülüş. Ritim serbesttir; her cümlenin son notası uzun tutulur. Birinci cümle bir oktav yukarıda çalındığı için programda o cümlede oktav kendiliğinden değişir.",
+  "bolumler": {
+    "c1": {
+      "ad": "1. cümle (oktav ↑)",
+      "sag": [
+        "A5:.5 G5:.5 A5:6 r G5:.5 F5:.5 E5:.5 D5:.5 C#5 D5:8 r:4"
+      ]
+    },
+    "c2": {
+      "ad": "2. cümle",
+      "sag": [
+        "A4:.5 G4:.5 A4:6 r E4 F4 C#4 D4:8 r:4"
+      ]
+    },
+    "c3": {
+      "ad": "3. cümle",
+      "sag": [
+        "A3:.5 G3:.5 A3:6 r G3:.5 F3:.5 E3:.5 D3:.5 C#3 D3:8 r:4"
+      ]
+    },
+    "akor": {
+      "ad": "akor ve çözülüş",
+      "sag": [
+        "r:4 C#4+E4+G4+Bb4:12 | D4+F#4+A4:16"
+      ],
+      "sol": [
+        "D3:16 | D3:16"
+      ]
+    }
+  },
+  "sira": [
+    "c1",
+    "c2",
+    "c3",
+    "akor"
+  ],
+  "ipuclari": [
+    "Her cümlenin başındaki üç nota (`Y·T` ve uzun `Y` gibi) çok hızlı bir süstür (mordan).",
+    "Elle çalarken birinci cümleden önce `↑`, sonra `↓` bas; ya da üç cümleyi de birer oktav aşağıdan çal.",
+    "Akor dört notalıdır ve sol el Re'yi tutar. Klavyen bu kadar tuşu birden algılamazsa `Boşluk`'u basılı tutup akoru tuş tuş kur."
+  ],
+  "kaynak": {
+    "ad": "Mutopia Project",
+    "lisans": "kamu malı",
+    "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1780"
+  },
+  "dogrulama": "kaynak-elle"
+}

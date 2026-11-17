@@ -1,0 +1,48 @@
+{
+  "no": 3,
+  "id": "gelin-korosu",
+  "ad": "Gelin Korosu",
+  "baslik": "Gelin Korosu, *Lohengrin* (Wagner)",
+  "besteci": "Richard Wagner",
+  "yil": 1850,
+  "etiketler": [
+    "opera",
+    "dugun"
+  ],
+  "zorluk": 1,
+  "ton": "Do majör",
+  "olcu": "2/4",
+  "tempo": 66,
+  "birim": "1/8",
+  "oktav": 3,
+  "piston": "6",
+  "aciklama": "Düğünlerde gelin girerken çalınan marş (\"Treulich geführt\"). İlk iki satır ezginin en tanınan kısmıdır; son satır, parçayı Do'da bitirmek için eklenmiş bir tekrardır.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "G4:2 C5:1.5 C5:.5 | C5:4 | G4:2 D5:1.5 B4:.5 | C5:4",
+        "G4:2 C5:1.5 F5:.5 | F5:2 E5:1.5 D5:.5 | C5:2 B4:1.5 C5:.5 | D5:4"
+      ]
+    },
+    "son": {
+      "ad": "bitiş",
+      "sag": [
+        "G4:2 C5:1.5 C5:.5 | C5:4 | G4:2 D5:1.5 B4:.5 | C5:4"
+      ]
+    }
+  },
+  "sira": [
+    "A",
+    "son"
+  ],
+  "ipuclari": [
+    "Her ölçünün ritmi aynıdır: uzun, noktalı, kısa.",
+    "Programda oktavı bir basamak indirirsen (`↓`) daha dolgun duyulur; tuşlar aynı kalır."
+  ],
+  "kaynak": {
+    "ad": "Ezberden yazıldı; bir nota kaynağıyla karşılaştırılmadı",
+    "url": "",
+    "lisans": "beste kamu malı"
+  },
+  "dogrulama": "ezber"
+}

@@ -5,7 +5,9 @@
   "baslik": "Gymnopédie No. 1 (Satie, 1888)",
   "besteci": "Erik Satie",
   "yil": 1888,
-  "etiketler": ["klasik"],
+  "etiketler": [
+    "klasik"
+  ],
   "zorluk": 1,
   "ton": "Re majör",
   "olcu": "3/4",
@@ -42,7 +44,12 @@
       ]
     }
   },
-  "sira": ["A", "bitis1", "A", "bitis2"],
+  "sira": [
+    "A",
+    "bitis1",
+    "A",
+    "bitis2"
+  ],
   "ipuclari": [
     "Notada parça dört ölçülük eşlikle başlar ve melodi ikinci vuruşta girer; tekrardan önce de dört ölçülük bir eşlik arası vardır. Burada ikisi de atlandı.",
     "Ortadaki bölümde `Q` (Do5) ve `R` (Fa5) natüreldir; parçanın renk değiştirdiği yer orası.",

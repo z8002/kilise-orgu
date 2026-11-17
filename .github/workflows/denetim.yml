@@ -16,6 +16,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Parça dosyaları geçerli mi
+        run: python3 araclar/parca.py --denetle
+      - name: Parçalar kaynak notalarla aynı mı
+        run: python3 araclar/kaynak_denetle.py
       - name: Üretilen dosyalar güncel mi
         run: python3 araclar/derle.py --denetle
       - run: npm ci

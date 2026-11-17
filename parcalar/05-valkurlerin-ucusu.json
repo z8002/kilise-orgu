@@ -1,0 +1,42 @@
+{
+  "no": 5,
+  "id": "valkurlerin-ucusu",
+  "ad": "Valkürlerin Uçuşu",
+  "baslik": "Valkürlerin Uçuşu (Wagner)",
+  "besteci": "Richard Wagner",
+  "yil": 1856,
+  "etiketler": [
+    "opera"
+  ],
+  "zorluk": 2,
+  "ton": "Si minör",
+  "olcu": "9/8",
+  "tempo": 132,
+  "birim": "1/16",
+  "oktav": 3,
+  "piston": "6",
+  "aciklama": "*Die Walküre* operasının ünlü teması. Pes notalar alt sırada (sol el), tiz notalar üst sırada (sağ el) çalınır.",
+  "bolumler": {
+    "A": {
+      "sag": [
+        "F#3 | B3:3 F#3 B3:2 D4:6 B3:5 B3",
+        "D4:3 B3 D4:2 F#4:6 D4:5 D4",
+        "F#4:3 D4 F#4:2 A4:6 A3:5 A3",
+        "D4:3 A3 D4:2 F#4:12"
+      ]
+    }
+  },
+  "sira": [
+    "A"
+  ],
+  "ipuclari": [
+    "Ritim: \"ta | TAAM-ta-tam, TAAAM, TAAAM\". Her satır aynı kalıbı bir basamak yukarıdan yineler.",
+    "Programda oktavı bir basamak indirirsen (`↓`) daha karanlık ve heybetli duyulur."
+  ],
+  "kaynak": {
+    "ad": "Ezberden yazıldı; bir nota kaynağıyla karşılaştırılmadı",
+    "url": "",
+    "lisans": "beste kamu malı"
+  },
+  "dogrulama": "ezber"
+}

@@ -5,7 +5,9 @@
   "baslik": "Ein feste Burg ist unser Gott (Luther, 1529)",
   "besteci": "Martin Luther",
   "yil": 1529,
-  "etiketler": ["ilahi"],
+  "etiketler": [
+    "ilahi"
+  ],
   "zorluk": 1,
   "ton": "Do majör",
   "olcu": "4/4",
@@ -13,7 +15,9 @@
   "birim": "1/4",
   "oktav": 3,
   "piston": "5",
-  "bolumPiston": {"C": "6"},
+  "bolumPiston": {
+    "C": "6"
+  },
   "aciklama": "Reform kiliselerinin marşı sayılan Luther korali. Burada, bugün ilahi kitaplarında yaygın olan düz ritimli sürümün soprano partisi var.",
   "bolumler": {
     "A": {
@@ -34,7 +38,12 @@
       ]
     }
   },
-  "sira": ["A", "A", "B", "C"],
+  "sira": [
+    "A",
+    "A",
+    "B",
+    "C"
+  ],
   "ipuclari": [
     "A ve B bölümlerinin başındaki tek nota ön vuruştur.",
     "Koralin ilk cümlesi (A) iki kez çalınır."

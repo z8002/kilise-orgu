@@ -4,8 +4,8 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 
 | Aşama | Kazanım | Durum |
 |---|---|---|
-| 0. Temel | Araçlar depoda, her değişiklik kendiliğinden denetleniyor | Sürüyor |
-| 1. Parça verisi | 30 parça doğrulanmış ve programın okuyabildiği biçimde | Bekliyor |
+| 0. Temel | Araçlar depoda, her değişiklik kendiliğinden denetleniyor | Bitti |
+| 1. Parça verisi | 30 parça programın okuyabildiği biçimde; 25'i kaynağıyla doğrulandı | Bitti |
 | 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bekliyor |
 | 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bekliyor |
 | 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bekliyor |
@@ -18,14 +18,17 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 - [x] Otomatik testler: tuşlar, pistonlar, ayarlar, gerçek ses çıkışı, dokunmatik.
 - [x] Baladın nota dosyaları `notalar/` klasöründe.
 - [x] Lisans dosyası.
-- [ ] GitHub'da her gönderimde çalışan denetim.
+- [x] GitHub'da her gönderimde çalışan denetim.
 
 ## Aşama 1: Parçaları veriye çevir
 
-- [ ] Parça dosyasının biçimi.
-- [ ] 30 parçanın aktarımı ve kaynakla karşılaştırma.
-- [ ] README'nin parça bölümünün dosyalardan üretilmesi.
-- [ ] Her parçanın her tuşunun sayfada denetlenmesi.
+- [x] Parça dosyasının biçimi ([parcalar/README.md](parcalar/README.md)).
+- [x] 30 parçanın aktarımı. 24 parça kaynak notasıyla nota nota ve süre süre otomatik karşılaştırıldı; Toccata kaynağa bakılarak elle denetlendi.
+- [x] README'nin parça bölümü dosyalardan üretiliyor; yazım kuralı tek.
+- [x] Her parçanın her tuşu sayfada basılıp denetleniyor.
+- [ ] Dört parça hâlâ ezberden: Gelin Korosu, Tristan Prelüdü, Valkürlerin Uçuşu, Jesu Joy. Mutopia'da notaları yok; başka bir kaynağa ulaşılınca karşılaştırılacak.
+
+Aktarım sırasında bulunan hatalar: Amazing Grace'in üçüncü satırı yanlıştı; Tristan'ın ikinci cümlesi Do4 yerine Si3'ten başlamalıydı; Old Hundredth ve Gelin Korosu'nun ritmi düzeltildi.
 
 ## Aşama 2: Şarkı çalar
 
