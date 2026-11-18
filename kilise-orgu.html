@@ -163,6 +163,18 @@
   .piston:active .btn { transform: translateY(2px); box-shadow: 0 0 0 var(--ebony), inset 0 -1px 2px rgba(0,0,0,.3); }
   .piston[aria-current="true"] { color: var(--ivory); }
   .piston[aria-current="true"] .btn { box-shadow: 0 2px 0 var(--ebony), 0 0 0 2px var(--ivory), 0 0 14px rgba(240,205,120,.55); }
+  .kendi-sira { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 14px; }
+  .kendi-pistonlar { gap: 10px; }
+  .piston.kendi { width: 44px; }
+  .piston.kendi .btn { width: 38px; height: 38px; font-size: .78rem; background: radial-gradient(circle at 40% 35%, #fffaf0, var(--knob-ivory) 50%, var(--knob-shade)); color: var(--ink); }
+  .piston.kendi[data-dolu="false"] .btn { filter: brightness(.6) sepia(.2); }
+  .ayarla {
+    height: 34px; padding: 0 .9rem; border-radius: 999px; cursor: pointer; font-weight: 500;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge);
+  }
+  .ayarla:hover { border-color: var(--gilt-deep); }
+  .ayarla[aria-pressed="true"] { background: var(--reed); border-color: #d0573f; color: #fff4ec; }
+  .kombinasyon-durum { margin: 0; min-height: 1.3em; font-size: .85rem; color: var(--gilt-bright); max-width: 34ch; }
   .legend { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; font-size: .8rem; color: var(--ivory-mute); }
   .chip { background: var(--knob-ivory); color: var(--ink); font: 700 .8rem/1 var(--font-stop); padding: 4px 9px; border-radius: 999px; }
   .chip.mut { color: var(--mutation); }
@@ -492,6 +504,11 @@
         <div class="center">
           <h3>Kombinasyonlar</h3>
           <div class="pistons" id="pistons" role="group" aria-label="Kombinasyon pistonları"></div>
+          <div class="kendi-sira">
+            <div class="pistons kendi-pistonlar" id="kendiPistonlar" role="group" aria-label="Kendi kombinasyonların"></div>
+            <button type="button" id="ayarla" class="ayarla" aria-pressed="false" title="Önce buna, sonra K1–K4'ten birine bas: o anki registrasyon oraya kaydedilir">Ayarla</button>
+          </div>
+          <p class="kombinasyon-durum" id="kombinasyonDurum" aria-live="polite"></p>
           <div class="legend" aria-label="Register yazı renkleri">
             <span class="chip">Ağızlı boru</span>
             <span class="chip mut">Mutasyon</span>
@@ -656,7 +673,7 @@
       <li class="yalniz-klavye"><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
       <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
       <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
-      <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+      <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
       <li><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
@@ -844,6 +861,7 @@
   };
   const stopsOn = new Set(PISTONS[4].stops);
   const kuplorler = new Set();
+  const kendiKombinasyonlar = [null, null, null, null]; // K1–K4: { stops, kuplorler } ya da null
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
   try {
@@ -867,10 +885,17 @@
         if (!Array.isArray(saved.kuplorler)) for (const id of PISTONS[4].stops) if (STOP_BY_ID[id].bolum !== 'I') stopsOn.add(id);
       }
       if (Array.isArray(saved.kuplorler)) saved.kuplorler.forEach(id => KUPLORLER.some(k => k.id === id) && kuplorler.add(id));
+      if (Array.isArray(saved.kendi)) saved.kendi.slice(0, 4).forEach((k, i) => {
+        if (!k || !Array.isArray(k.stops) || !Array.isArray(k.kuplorler)) return;
+        kendiKombinasyonlar[i] = {
+          stops: k.stops.filter(id => kendi(STOP_BY_ID, id)),
+          kuplorler: k.kuplorler.filter(id => KUPLORLER.some(x => x.id === id)),
+        };
+      });
     }
   } catch (_) {}
   function save() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn], kuplorler: [...kuplorler] })); } catch (_) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn], kuplorler: [...kuplorler], kendi: kendiKombinasyonlar })); } catch (_) {}
   }
 
   const baseMidi = () => 12 * (settings.octave + 1);
@@ -1378,6 +1403,7 @@
     if (acik) kuplorler.add(id); else kuplorler.delete(id);
     kuplorEls[id].setAttribute('aria-pressed', String(acik));
     tumSesleriUygula();
+    updatePistons();
     save();
   }
 
@@ -1448,19 +1474,70 @@
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
       b.lastChild.textContent = p.name;
-      b.addEventListener('click', () => applyPiston(p.n));
+      b.addEventListener('click', () => { ayarlaKapat(); applyPiston(p.n); });
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
     }
+    // Kendi kombinasyonların: önce "Ayarla", sonra K1–K4'ten biri; o anki registrasyon oraya kaydedilir
+    const kHost = $('#kendiPistonlar');
+    kendiKombinasyonlar.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'piston kendi';
+      b.dataset.no = i + 1;
+      b.innerHTML = '<span class="btn"></span>';
+      b.firstChild.textContent = 'K' + (i + 1);
+      b.addEventListener('click', () => kendiBasildi(i));
+      kendiEls.push(b);
+      kHost.appendChild(b);
+    });
+    $('#ayarla').addEventListener('click', () => {
+      ayarlaniyor = !ayarlaniyor;
+      $('#ayarla').setAttribute('aria-pressed', String(ayarlaniyor));
+      kombinasyonDurumu(ayarlaniyor ? 'Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.' : '');
+    });
   }
+
+  const kendiEls = [];
+  let ayarlaniyor = false;
+  function ayarlaKapat() {
+    if (!ayarlaniyor) return;
+    ayarlaniyor = false;
+    $('#ayarla').setAttribute('aria-pressed', 'false');
+    kombinasyonDurumu('');
+  }
+  function kombinasyonDurumu(metin) { $('#kombinasyonDurum').textContent = metin; }
+
+  function kendiBasildi(i) {
+    const ad = 'K' + (i + 1), adA = ad + "'" + ['e', 'ye', 'e', 'e'][i]; // K1'e, K2'ye, K3'e, K4'e
+    if (ayarlaniyor) {
+      kendiKombinasyonlar[i] = { stops: [...stopsOn], kuplorler: [...kuplorler] };
+      ayarlaKapat();
+      kombinasyonDurumu(`O anki registrasyon ${adA} kaydedildi.`);
+      updatePistons();
+      save();
+      return;
+    }
+    const k = kendiKombinasyonlar[i];
+    if (!k) { kombinasyonDurumu(`${ad} boş. Kaydetmek için önce Ayarla'ya, sonra ${adA} bas.`); return; }
+    kombinasyonDurumu('');
+    const want = new Set(k.stops), kw = new Set(k.kuplorler);
+    STOPS.forEach(s => setStop(s.id, want.has(s.id)));
+    KUPLORLER.forEach(x => kuplorDegistir(x.id, kw.has(x.id)));
+    afterRegistration();
+  }
+
+  const ayniKume = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
 
   function updatePistons() {
-    for (const { el, set } of pistonEls) {
-      const same = set.size === stopsOn.size && [...set].every(id => stopsOn.has(id));
-      el.setAttribute('aria-current', String(same));
-    }
+    for (const { el, set } of pistonEls) el.setAttribute('aria-current', String(ayniKume(set, stopsOn)));
+    kendiEls.forEach((el, i) => {
+      const k = kendiKombinasyonlar[i];
+      el.dataset.dolu = String(!!k);
+      el.setAttribute('aria-label', `Kendi kombinasyonum ${i + 1}` + (k ? '' : ' (boş)'));
+      el.setAttribute('aria-current', String(!!k && ayniKume(new Set(k.stops), stopsOn) && ayniKume(new Set(k.kuplorler), kuplorler)));
+    });
   }
-
   /* ================= Manuel (ekran klavyesi) ================= */
   const manual = $('#manual'), manual2 = $('#manual2'), pedalEl = $('#pedal');
   const keyEls = [], keyEls2 = [], pedalEls = [];

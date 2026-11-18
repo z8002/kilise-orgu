@@ -30,6 +30,7 @@ Ya da bilgisayarına indir:
 - **Kuplörler ve panjur:** II → I, I → P, II → P kuplörleri; Sandık panjuru kapandıkça Sandık kısılır ve koyulaşır.
 - **Otomatik pedal:** I. manuelde basılı en kalın nota pedalda da çalar; şarkı çalar da bas çizgisini pedala verir.
 - **7 kombinasyon pistonu:** Hazır registrasyonlar; I. manueli, Sandık'ı ve pedalı birlikte ayarlar.
+- **Kendi kombinasyonların:** "Ayarla"ya, sonra K1–K4'ten birine basınca o anki registrasyon (üç bölüm ve kuplörler) oraya kaydedilir; o pistona basınca geri gelir. Tarayıcıda saklanır.
 - **Mekân:** Şapel (1,8 sn), Kilise (3,6 sn), Katedral (6,5 sn) yankı süresi.
 - **Akort ve yerleşim:** Eşit akordun yanında tarihsel akortlar (Werckmeister III, Kirnberger III, ortalama ton, Pisagor) ve diyapazon (La4 = 415, 430, 440, 442, 466 Hz). Akort değişince basılı notalar da yeni perdeye kayar. Borular stereo olarak iki yana dizilir: Do tarafı solda, Do♯ tarafı sağda.
 - **Boru cephesi:** Çalınan notaya göre ilgili borular parlar; kalın notalar uzun boruları yakar.

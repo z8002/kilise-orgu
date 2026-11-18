@@ -14,7 +14,8 @@ test('sayfa hatasız açılır ve org eksiksiz kurulur', async ({ page }) => {
   await expect(page.locator('#jamb-temel .knob, #jamb-parlak .knob')).toHaveCount(13); // I. manuel
   await expect(page.locator('#jamb-sandik .knob')).toHaveCount(9);
   await expect(page.locator('#jamb-pedal .knob')).toHaveCount(4);
-  await expect(page.locator('.piston')).toHaveCount(7);
+  await expect(page.locator('#pistons .piston')).toHaveCount(7);
+  await expect(page.locator('#kendiPistonlar .piston')).toHaveCount(4); // K1–K4
   expect(hatalar).toEqual([]);
 });
 

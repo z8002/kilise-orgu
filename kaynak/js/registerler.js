@@ -18,6 +18,7 @@
     if (acik) kuplorler.add(id); else kuplorler.delete(id);
     kuplorEls[id].setAttribute('aria-pressed', String(acik));
     tumSesleriUygula();
+    updatePistons();
     save();
   }
 
@@ -88,16 +89,67 @@
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
       b.lastChild.textContent = p.name;
-      b.addEventListener('click', () => applyPiston(p.n));
+      b.addEventListener('click', () => { ayarlaKapat(); applyPiston(p.n); });
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
     }
+    // Kendi kombinasyonların: önce "Ayarla", sonra K1–K4'ten biri; o anki registrasyon oraya kaydedilir
+    const kHost = $('#kendiPistonlar');
+    kendiKombinasyonlar.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'piston kendi';
+      b.dataset.no = i + 1;
+      b.innerHTML = '<span class="btn"></span>';
+      b.firstChild.textContent = 'K' + (i + 1);
+      b.addEventListener('click', () => kendiBasildi(i));
+      kendiEls.push(b);
+      kHost.appendChild(b);
+    });
+    $('#ayarla').addEventListener('click', () => {
+      ayarlaniyor = !ayarlaniyor;
+      $('#ayarla').setAttribute('aria-pressed', String(ayarlaniyor));
+      kombinasyonDurumu(ayarlaniyor ? 'Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.' : '');
+    });
   }
+
+  const kendiEls = [];
+  let ayarlaniyor = false;
+  function ayarlaKapat() {
+    if (!ayarlaniyor) return;
+    ayarlaniyor = false;
+    $('#ayarla').setAttribute('aria-pressed', 'false');
+    kombinasyonDurumu('');
+  }
+  function kombinasyonDurumu(metin) { $('#kombinasyonDurum').textContent = metin; }
+
+  function kendiBasildi(i) {
+    const ad = 'K' + (i + 1), adA = ad + "'" + ['e', 'ye', 'e', 'e'][i]; // K1'e, K2'ye, K3'e, K4'e
+    if (ayarlaniyor) {
+      kendiKombinasyonlar[i] = { stops: [...stopsOn], kuplorler: [...kuplorler] };
+      ayarlaKapat();
+      kombinasyonDurumu(`O anki registrasyon ${adA} kaydedildi.`);
+      updatePistons();
+      save();
+      return;
+    }
+    const k = kendiKombinasyonlar[i];
+    if (!k) { kombinasyonDurumu(`${ad} boş. Kaydetmek için önce Ayarla'ya, sonra ${adA} bas.`); return; }
+    kombinasyonDurumu('');
+    const want = new Set(k.stops), kw = new Set(k.kuplorler);
+    STOPS.forEach(s => setStop(s.id, want.has(s.id)));
+    KUPLORLER.forEach(x => kuplorDegistir(x.id, kw.has(x.id)));
+    afterRegistration();
+  }
+
+  const ayniKume = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
 
   function updatePistons() {
-    for (const { el, set } of pistonEls) {
-      const same = set.size === stopsOn.size && [...set].every(id => stopsOn.has(id));
-      el.setAttribute('aria-current', String(same));
-    }
+    for (const { el, set } of pistonEls) el.setAttribute('aria-current', String(ayniKume(set, stopsOn)));
+    kendiEls.forEach((el, i) => {
+      const k = kendiKombinasyonlar[i];
+      el.dataset.dolu = String(!!k);
+      el.setAttribute('aria-label', `Kendi kombinasyonum ${i + 1}` + (k ? '' : ' (boş)'));
+      el.setAttribute('aria-current', String(!!k && ayniKume(new Set(k.stops), stopsOn) && ayniKume(new Set(k.kuplorler), kuplorler)));
+    });
   }
-

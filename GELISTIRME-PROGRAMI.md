@@ -56,7 +56,7 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [x] İki klavye: I. manuel ve panjurlu Sandık (II. manuel). Bilgisayar klavyesinin üst sırası Sandık'ı çalar; ekranda iki manuel. Telefonda tek klavye, çaldığı bölüm seçilir.
 - [x] Pedal: ahşap pedal klavyesi (Do2 – Sol3), dört register. Otomatik pedal: I. manuelin en kalın notası pedalda da çalar; şarkı çalarda bas eli.
 - [x] Kuplörler (II → I, I → P, II → P) ve Sandık panjuru. Aynı nota iki bölümde birden basılınca her boru bir kez öter.
-- [ ] Kendi kombinasyonunu kaydetme.
+- [x] Kendi kombinasyonunu kaydetme: "Ayarla" ve K1–K4; üç bölümün registerleri ve kuplörler saklanır.
 - [x] Akort sistemleri (eşit, Werckmeister III, Kirnberger III, ¼ koma ortalama ton, Pisagor), beşliler zincirinden hesaplanır; diyapazon (415–466 Hz); stereo yerleşim (Do ve Do♯ tarafları).
 - [x] Yeni registerler: Sandık'ta Rohrflüt, Salisyonal, Unda maris, Travers flüt, Flajole, Seskialtera, Obua, Vox humana, Tremolo; pedalda Subbas, Oktavbas, Koralbas, Trombon. Obua ve Vox humana için yeni dalga biçimleri.
 - [ ] Caz orgu.

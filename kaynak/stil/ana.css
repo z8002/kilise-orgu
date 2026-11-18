@@ -145,6 +145,18 @@
   .piston:active .btn { transform: translateY(2px); box-shadow: 0 0 0 var(--ebony), inset 0 -1px 2px rgba(0,0,0,.3); }
   .piston[aria-current="true"] { color: var(--ivory); }
   .piston[aria-current="true"] .btn { box-shadow: 0 2px 0 var(--ebony), 0 0 0 2px var(--ivory), 0 0 14px rgba(240,205,120,.55); }
+  .kendi-sira { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 14px; }
+  .kendi-pistonlar { gap: 10px; }
+  .piston.kendi { width: 44px; }
+  .piston.kendi .btn { width: 38px; height: 38px; font-size: .78rem; background: radial-gradient(circle at 40% 35%, #fffaf0, var(--knob-ivory) 50%, var(--knob-shade)); color: var(--ink); }
+  .piston.kendi[data-dolu="false"] .btn { filter: brightness(.6) sepia(.2); }
+  .ayarla {
+    height: 34px; padding: 0 .9rem; border-radius: 999px; cursor: pointer; font-weight: 500;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge);
+  }
+  .ayarla:hover { border-color: var(--gilt-deep); }
+  .ayarla[aria-pressed="true"] { background: var(--reed); border-color: #d0573f; color: #fff4ec; }
+  .kombinasyon-durum { margin: 0; min-height: 1.3em; font-size: .85rem; color: var(--gilt-bright); max-width: 34ch; }
   .legend { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; font-size: .8rem; color: var(--ivory-mute); }
   .chip { background: var(--knob-ivory); color: var(--ink); font: 700 .8rem/1 var(--font-stop); padding: 4px 9px; border-radius: 999px; }
   .chip.mut { color: var(--mutation); }

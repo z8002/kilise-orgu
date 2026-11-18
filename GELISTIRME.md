@@ -48,6 +48,7 @@ npm test
 - Ana ekrana ekleme: manifest ve simgeler; sunucu kapatılınca sayfanın ve parça bağlantılarının saklanan kopyadan açılması.
 - Hafif mod: nota başına boru ve gürültü kaynağı sayısı, en çok ses sayısı.
 - İki manuel ve pedal: her bölümün hangi borularla öttüğü (sayfa, basılı notaların registerlerini bildirir); kuplörler, otomatik pedal, pistonların Sandık ve pedal registerleri, önceki sürümün kaydından geçiş; yeni registerlerin perdesi.
+- Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.
 

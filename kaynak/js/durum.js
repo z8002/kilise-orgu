@@ -14,6 +14,7 @@
   };
   const stopsOn = new Set(PISTONS[4].stops);
   const kuplorler = new Set();
+  const kendiKombinasyonlar = [null, null, null, null]; // K1–K4: { stops, kuplorler } ya da null
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
   try {
@@ -37,10 +38,17 @@
         if (!Array.isArray(saved.kuplorler)) for (const id of PISTONS[4].stops) if (STOP_BY_ID[id].bolum !== 'I') stopsOn.add(id);
       }
       if (Array.isArray(saved.kuplorler)) saved.kuplorler.forEach(id => KUPLORLER.some(k => k.id === id) && kuplorler.add(id));
+      if (Array.isArray(saved.kendi)) saved.kendi.slice(0, 4).forEach((k, i) => {
+        if (!k || !Array.isArray(k.stops) || !Array.isArray(k.kuplorler)) return;
+        kendiKombinasyonlar[i] = {
+          stops: k.stops.filter(id => kendi(STOP_BY_ID, id)),
+          kuplorler: k.kuplorler.filter(id => KUPLORLER.some(x => x.id === id)),
+        };
+      });
     }
   } catch (_) {}
   function save() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn], kuplorler: [...kuplorler] })); } catch (_) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn], kuplorler: [...kuplorler], kendi: kendiKombinasyonlar })); } catch (_) {}
   }
 
   const baseMidi = () => 12 * (settings.octave + 1);
