@@ -250,6 +250,16 @@
     background: var(--oak); border: 1px solid var(--oak-edge); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px;
   }
 
+  /* Akort ve yerleşim */
+  .ayarlar { border-top: 1px solid rgba(86,59,39,.7); padding-top: 14px; }
+  .ayarlar summary {
+    cursor: pointer; width: fit-content; list-style-position: outside;
+    font: 700 .72rem/1.2 var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--ivory-mute);
+  }
+  .ayarlar summary:hover { color: var(--ivory-dim); }
+  .ayarlar-icerik { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px; padding-top: 14px; }
+  .ayar-bilgi { flex-basis: 100%; margin: 0; color: var(--ivory-dim); font-size: .92rem; max-width: 72ch; }
+
   /* Nasıl çalınır */
   .howto { display: grid; gap: 12px; max-width: 72ch; }
   .howto h2 { margin: 0; font-family: var(--font-stop); font-weight: 700; font-size: 1.7rem; line-height: 1.1; text-wrap: balance; }
@@ -550,6 +560,25 @@
         <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
+
+      <details class="ayarlar" id="sesAyarlari">
+        <summary>Akort ve yerleşim</summary>
+        <div class="ayarlar-icerik">
+          <label class="ctl" for="akort">
+            <span class="ctl-label">Akort sistemi</span>
+            <select id="akort"></select>
+          </label>
+          <label class="ctl" for="diyapazon">
+            <span class="ctl-label">Diyapazon (La4, Hz)</span>
+            <select id="diyapazon"></select>
+          </label>
+          <label class="ctl" for="stereo">
+            <span class="ctl-label">Stereo genişlik <output id="stereoOut">50</output></span>
+            <input type="range" id="stereo" min="0" max="100" value="50">
+          </label>
+          <p class="ayar-bilgi" id="akortBilgi"></p>
+        </div>
+      </details>
     </section>
   </div>
 
@@ -646,30 +675,79 @@
   ];
 
   const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
+
+  // Akort sistemleri. Do'dan başlayan beşliler zinciri: Do Sol Re La Mi Si Fa♯ Do♯ Sol♯ Re♯ La♯ Fa (Do).
+  // Her sayı, zincirdeki o beşlinin pür beşliden (3/2, 701,955 sent) ne kadar dar akortlandığıdır (sent).
+  // On iki beşlinin daralmaları toplamı Pisagor koması eder; böylece zincir yedi oktav sonra Do'ya kapanır.
+  const PUR_BESLI = 1200 * Math.log2(3 / 2);
+  const PISAGOR_KOMASI = 12 * PUR_BESLI - 7 * 1200;  // 23,46 sent
+  const SINTONIK_KOMA = 1200 * Math.log2(81 / 80);   // 21,51 sent
+  const SKISMA = PISAGOR_KOMASI - SINTONIK_KOMA;     // 1,95 sent
+  const BESLI_ZINCIRI = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5];
+  const AKORTLAR = {
+    esit: {
+      ad: 'Eşit', besliler: Array(12).fill(PISAGOR_KOMASI / 12),
+      bilgi: 'Bugünün akordu: on iki yarım ses eşit, her tonda aynı renk. Hiçbir aralık tam pür değil.',
+    },
+    werckmeister: {
+      ad: 'Werckmeister III (1691)', besliler: [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0].map(x => x * PISAGOR_KOMASI / 4),
+      bilgi: 'Bach çağının "iyi akordu": her tonda çalınır; az diyezli tonlar temiz, çok diyezliler gergin ve renkli.',
+    },
+    kirnberger: {
+      ad: 'Kirnberger III (1779)', besliler: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0].map(x => x * SINTONIK_KOMA / 4).map((x, i) => (i === 6 ? SKISMA : x)),
+      bilgi: 'Do–Mi büyük üçlüsü pür; tondan tona renk farkı belirgin.',
+    },
+    ortalama: {
+      ad: 'Ortalama ton (¼ koma)', besliler: BESLI_ZINCIRI.map((_, i) => (i === 8 ? PISAGOR_KOMASI - 11 * SINTONIK_KOMA / 4 : SINTONIK_KOMA / 4)),
+      bilgi: 'Rönesans ve erken barok: büyük üçlüler pür ve tatlı. Sol♯–Mi♭ "kurt" beşlisi uluyarak çalar; az diyezli tonlarda kalın.',
+    },
+    pisagor: {
+      ad: 'Pisagor', besliler: BESLI_ZINCIRI.map((_, i) => (i === 8 ? PISAGOR_KOMASI : 0)),
+      bilgi: 'Beşliler pür, üçlüler sert; Orta Çağ ezgileri ve boş beşliler için.',
+    },
+  };
+  const DIYAPAZONLAR = [
+    [415, 'Barok · 415'], [430, 'Klasik · 430'], [440, 'Bugün · 440'], [442, 'Orkestra · 442'], [466, 'Barok kilise orgu · 466'],
+  ];
+
+  // Her perde sınıfının (Do = 0) eşit akorttan sapması, sent
+  function akortSapmalari(besliler) {
+    const sapma = new Array(12);
+    let konum = 0;
+    BESLI_ZINCIRI.forEach((pc, i) => {
+      sapma[pc] = (((konum - pc * 100) % 1200) + 1800) % 1200 - 600;
+      konum += PUR_BESLI - besliler[i];
+    });
+    return sapma;
+  }
   const MAX_VOICES = 24;
   const HAFIF_MAX_VOICES = 12;
 
   /* ================= Durum ================= */
   const $ = s => document.querySelector(s);
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const kendi = (nesne, anahtar) => typeof anahtar === 'string' && Object.prototype.hasOwnProperty.call(nesne, anahtar);
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const kalinIsaretci = window.matchMedia ? window.matchMedia('(pointer: coarse)') : { matches: false };
   const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
 
   // hafif: zayıf telefonlar için daha az boru ve kısa yankı
-  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false };
+  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50 };
   const stopsOn = new Set(PISTONS[4].stops);
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
   try {
     const saved = JSON.parse(localStorage.getItem(STORE_KEY) || localStorage.getItem('kilise-orgu-v1') || 'null');
     if (saved) {
-      if (ROOMS[saved.room]) settings.room = saved.room;
+      if (kendi(ROOMS, saved.room)) settings.room = saved.room;
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
       if (Number.isFinite(saved.volume)) settings.volume = clamp(saved.volume, 0, 100);
       if (Number.isFinite(saved.octave)) settings.octave = clamp(saved.octave, 1, 5);
       if (typeof saved.hafif === 'boolean') settings.hafif = saved.hafif;
-      if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => STOP_BY_ID[id] && stopsOn.add(id)); }
+      if (kendi(AKORTLAR, saved.akort)) settings.akort = saved.akort;
+      if (DIYAPAZONLAR.some(([hz]) => hz === saved.diyapazon)) settings.diyapazon = saved.diyapazon;
+      if (Number.isFinite(saved.stereo)) settings.stereo = clamp(saved.stereo, 0, 100);
+      if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => kendi(STOP_BY_ID, id) && stopsOn.add(id)); }
     }
   } catch (_) {}
   function save() {
@@ -683,6 +761,31 @@
   let ctx = null;
   let A = null;
   let windOn = false;
+
+  // Perde: diyapazon (La4) ve akort sistemi
+  let akortSapmasi = akortSapmalari(AKORTLAR[settings.akort].besliler);
+  function notaFrekansi(midi) {
+    const pc = ((midi % 12) + 12) % 12;
+    return settings.diyapazon * Math.pow(2, (midi - 69 + (akortSapmasi[pc] - akortSapmasi[9]) / 100) / 12);
+  }
+  // Akort ya da diyapazon değişince çalan sesler de yeni perdeye kayar
+  function akortuUygula() {
+    akortSapmasi = akortSapmalari(AKORTLAR[settings.akort].besliler);
+    if (!ctx) return;
+    for (const v of [...voices.values(), ...playerVoices]) v.akortla(ctx.currentTime);
+  }
+
+  // Stereo yerleşim: borular cephede iki yana dizilir. Do tarafı (Do Re Mi Fa♯ Sol♯ La♯) solda, Do♯ tarafı
+  // (Do♯ Re♯ Fa Sol La Si) sağda; kalın borular kenarda, ince borular ortaya yakın.
+  function notaYeri(midi) {
+    const yan = midi % 2 === 0 ? -1 : 1;
+    const u = clamp((midi - 36) / 60, 0, 1);
+    return yan * (settings.stereo / 100) * 0.9 * (0.25 + 0.75 * (1 - u));
+  }
+  function yerlesimiUygula() {
+    if (!ctx) return;
+    for (const v of [...voices.values(), ...playerVoices]) if (v.pan) v.pan.pan.setTargetAtTime(notaYeri(v.midi), ctx.currentTime, 0.05);
+  }
 
   function buildAudio() {
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -797,12 +900,17 @@
     constructor(midi, t0, stopIds) {
       this.midi = midi;
       this.t0 = t0;
-      this.freq = 440 * Math.pow(2, (midi - 69) / 12);
+      this.freq = notaFrekansi(midi);
       this.stops = new Map();
       this.released = false;
       this.breath = null;
       this.out = ctx.createGain();
-      this.out.connect(A.bus);
+      this.pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      if (this.pan) {
+        this.pan.pan.value = notaYeri(midi);
+        this.out.connect(this.pan);
+        this.pan.connect(A.bus);
+      } else this.out.connect(A.bus);
       for (const id of (stopIds || stopsOn)) this.addStop(STOP_BY_ID[id], t0);
       if (this.stops.size) this.articulate(t0);
     }
@@ -812,6 +920,7 @@
       if (this.released) return;
       this.released = true;
       try { this.out.disconnect(); } catch (_) {}
+      if (this.pan) try { this.pan.disconnect(); } catch (_) {}
       const t = ctx.currentTime;
       for (const s of this.stops.values()) s.oscs.forEach(o => { try { o.stop(t); } catch (_) {} });
       if (this.breath) { try { this.breath.src.stop(t); } catch (_) {} }
@@ -833,6 +942,7 @@
         const o = ctx.createOscillator();
         o.setPeriodicWave(A.waves[r.wave]);
         o.frequency.value = f;
+        o.carpan = mult; // akort değişince yeni perde: freq * carpan
         const cents = (r.cents || 0) + (Math.random() * 2 - 1) * 2.2; // borular asla tam aynı akortta değildir
         if (stop.family === 'reed') o.detune.value = cents;
         else { o.detune.setValueAtTime(cents - 8, t0); o.detune.setTargetAtTime(cents, t0, 0.04); }
@@ -852,6 +962,13 @@
       g.gain.setValueAtTime(0, t0);
       g.gain.linearRampToValueAtTime(1, t0 + speak);
       this.stops.set(stop.id, { g, oscs });
+    }
+
+    akortla(t) {
+      const f = notaFrekansi(this.midi);
+      if (f === this.freq || this.released) return;
+      this.freq = f;
+      for (const s of this.stops.values()) for (const o of s.oscs) o.frequency.setTargetAtTime(f * o.carpan, Math.max(t, this.t0), 0.03);
     }
 
     removeStop(id, t) {
@@ -899,8 +1016,11 @@
         this.breath.g.gain.setTargetAtTime(0, t, 0.03);
         try { this.breath.src.stop(t + 0.3); } catch (_) {}
       }
-      const out = this.out;
-      setTimeout(() => { try { out.disconnect(); } catch (_) {} }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
+      const out = this.out, pan = this.pan;
+      setTimeout(() => {
+        try { out.disconnect(); } catch (_) {}
+        if (pan) try { pan.disconnect(); } catch (_) {}
+      }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
     }
   }
 
@@ -1805,7 +1925,7 @@
 
   /* ---- Komutlar ---- */
   function calarYukle(id, mod) {
-    const parca = PARCA_BY_ID[id];
+    const parca = kendi(PARCA_BY_ID, id) ? PARCA_BY_ID[id] : null; // ?parca=constructor gibi adresler de bilinmeyen sayılır
     if (!parca) return false;
     if (calar.parca) calarDurdur();
     calar.parca = parca;
@@ -2166,6 +2286,8 @@
     calar,
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
+    frekans: notaFrekansi,
+    akortSapmasi: ad => akortSapmalari(AKORTLAR[ad].besliler),
   };
 
   /* ================= Olaylar ================= */
@@ -2189,8 +2311,12 @@
     }
   });
 
+  // Yazı yazılan alanlarda (parça arama kutusu gibi) tuşlar org çalmaz, alana gider
+  const YAZI_DISI = new Set(['range', 'checkbox', 'radio', 'button', 'submit', 'reset', 'color', 'file']);
+  const yaziAlani = h => !!h && (h.isContentEditable || h.tagName === 'TEXTAREA' || (h.tagName === 'INPUT' && !YAZI_DISI.has(h.type)));
+
   document.addEventListener('keydown', e => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.ctrlKey || e.metaKey || e.altKey || yaziAlani(e.target)) return;
     const tag = e.target && e.target.tagName;
     const inField = tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';
     if (e.code === 'Space') {
@@ -2219,7 +2345,12 @@
   });
 
   document.addEventListener('keyup', e => {
-    if (e.code === 'Space') { e.preventDefault(); sustainKey = false; updateSustain(); return; }
+    if (e.code === 'Space') {
+      if (!yaziAlani(e.target)) e.preventDefault();
+      sustainKey = false;
+      updateSustain();
+      return;
+    }
     const midi = codeHeld.get(e.code);
     if (midi === undefined) return;
     codeHeld.delete(e.code);
@@ -2291,6 +2422,19 @@
   volIn.addEventListener('input', () => { settings.volume = Number(volIn.value); $('#volOut').textContent = volIn.value; applyMix(); save(); });
 
   // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
+  // Akort sistemi, diyapazon, stereo genişlik
+  const akortSel = $('#akort'), diyapazonSel = $('#diyapazon'), stereoIn = $('#stereo');
+  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(a.ad, id));
+  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(ad, String(hz)));
+  const akortBilgisi = () => { $('#akortBilgi').textContent = AKORTLAR[settings.akort].bilgi; };
+  akortSel.value = settings.akort;
+  diyapazonSel.value = String(settings.diyapazon);
+  stereoIn.value = settings.stereo; $('#stereoOut').textContent = settings.stereo;
+  akortBilgisi();
+  akortSel.addEventListener('change', () => { settings.akort = akortSel.value; akortuUygula(); akortBilgisi(); save(); akortSel.blur(); });
+  diyapazonSel.addEventListener('change', () => { settings.diyapazon = Number(diyapazonSel.value); akortuUygula(); save(); diyapazonSel.blur(); });
+  stereoIn.addEventListener('input', () => { settings.stereo = Number(stereoIn.value); $('#stereoOut').textContent = stereoIn.value; yerlesimiUygula(); save(); });
+
   function updateFocusHint() { focusHint.hidden = !sesDesteklenmiyor && (dokunmatik || document.hasFocus()); }
   window.addEventListener('focus', updateFocusHint);
   window.addEventListener('blur', () => {

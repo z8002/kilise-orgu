@@ -19,8 +19,12 @@
     }
   });
 
+  // Yazı yazılan alanlarda (parça arama kutusu gibi) tuşlar org çalmaz, alana gider
+  const YAZI_DISI = new Set(['range', 'checkbox', 'radio', 'button', 'submit', 'reset', 'color', 'file']);
+  const yaziAlani = h => !!h && (h.isContentEditable || h.tagName === 'TEXTAREA' || (h.tagName === 'INPUT' && !YAZI_DISI.has(h.type)));
+
   document.addEventListener('keydown', e => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.ctrlKey || e.metaKey || e.altKey || yaziAlani(e.target)) return;
     const tag = e.target && e.target.tagName;
     const inField = tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';
     if (e.code === 'Space') {
@@ -49,7 +53,12 @@
   });
 
   document.addEventListener('keyup', e => {
-    if (e.code === 'Space') { e.preventDefault(); sustainKey = false; updateSustain(); return; }
+    if (e.code === 'Space') {
+      if (!yaziAlani(e.target)) e.preventDefault();
+      sustainKey = false;
+      updateSustain();
+      return;
+    }
     const midi = codeHeld.get(e.code);
     if (midi === undefined) return;
     codeHeld.delete(e.code);
@@ -121,6 +130,19 @@
   volIn.addEventListener('input', () => { settings.volume = Number(volIn.value); $('#volOut').textContent = volIn.value; applyMix(); save(); });
 
   // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
+  // Akort sistemi, diyapazon, stereo genişlik
+  const akortSel = $('#akort'), diyapazonSel = $('#diyapazon'), stereoIn = $('#stereo');
+  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(a.ad, id));
+  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(ad, String(hz)));
+  const akortBilgisi = () => { $('#akortBilgi').textContent = AKORTLAR[settings.akort].bilgi; };
+  akortSel.value = settings.akort;
+  diyapazonSel.value = String(settings.diyapazon);
+  stereoIn.value = settings.stereo; $('#stereoOut').textContent = settings.stereo;
+  akortBilgisi();
+  akortSel.addEventListener('change', () => { settings.akort = akortSel.value; akortuUygula(); akortBilgisi(); save(); akortSel.blur(); });
+  diyapazonSel.addEventListener('change', () => { settings.diyapazon = Number(diyapazonSel.value); akortuUygula(); save(); diyapazonSel.blur(); });
+  stereoIn.addEventListener('input', () => { settings.stereo = Number(stereoIn.value); $('#stereoOut').textContent = stereoIn.value; yerlesimiUygula(); save(); });
+
   function updateFocusHint() { focusHint.hidden = !sesDesteklenmiyor && (dokunmatik || document.hasFocus()); }
   window.addEventListener('focus', updateFocusHint);
   window.addEventListener('blur', () => {

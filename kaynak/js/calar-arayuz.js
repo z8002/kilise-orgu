@@ -224,5 +224,7 @@
     calar,
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
+    frekans: notaFrekansi,
+    akortSapmasi: ad => akortSapmalari(AKORTLAR[ad].besliler),
   };
 

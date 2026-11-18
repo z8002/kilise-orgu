@@ -57,7 +57,8 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [ ] Pedal ve otomatik pedal.
 - [ ] Kuplör ve swell.
 - [ ] Kendi kombinasyonunu kaydetme.
-- [ ] Stereo yerleşim, akort sistemleri, diyapazon, yeni registerler.
+- [x] Akort sistemleri (eşit, Werckmeister III, Kirnberger III, ¼ koma ortalama ton, Pisagor), beşliler zincirinden hesaplanır; diyapazon (415–466 Hz); stereo yerleşim (Do ve Do♯ tarafları).
+- [ ] Yeni registerler.
 - [ ] Caz orgu.
 
 ## Aşama 5: Dış dünya

@@ -3,6 +3,31 @@
   let A = null;
   let windOn = false;
 
+  // Perde: diyapazon (La4) ve akort sistemi
+  let akortSapmasi = akortSapmalari(AKORTLAR[settings.akort].besliler);
+  function notaFrekansi(midi) {
+    const pc = ((midi % 12) + 12) % 12;
+    return settings.diyapazon * Math.pow(2, (midi - 69 + (akortSapmasi[pc] - akortSapmasi[9]) / 100) / 12);
+  }
+  // Akort ya da diyapazon değişince çalan sesler de yeni perdeye kayar
+  function akortuUygula() {
+    akortSapmasi = akortSapmalari(AKORTLAR[settings.akort].besliler);
+    if (!ctx) return;
+    for (const v of [...voices.values(), ...playerVoices]) v.akortla(ctx.currentTime);
+  }
+
+  // Stereo yerleşim: borular cephede iki yana dizilir. Do tarafı (Do Re Mi Fa♯ Sol♯ La♯) solda, Do♯ tarafı
+  // (Do♯ Re♯ Fa Sol La Si) sağda; kalın borular kenarda, ince borular ortaya yakın.
+  function notaYeri(midi) {
+    const yan = midi % 2 === 0 ? -1 : 1;
+    const u = clamp((midi - 36) / 60, 0, 1);
+    return yan * (settings.stereo / 100) * 0.9 * (0.25 + 0.75 * (1 - u));
+  }
+  function yerlesimiUygula() {
+    if (!ctx) return;
+    for (const v of [...voices.values(), ...playerVoices]) if (v.pan) v.pan.pan.setTargetAtTime(notaYeri(v.midi), ctx.currentTime, 0.05);
+  }
+
   function buildAudio() {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
@@ -116,12 +141,17 @@
     constructor(midi, t0, stopIds) {
       this.midi = midi;
       this.t0 = t0;
-      this.freq = 440 * Math.pow(2, (midi - 69) / 12);
+      this.freq = notaFrekansi(midi);
       this.stops = new Map();
       this.released = false;
       this.breath = null;
       this.out = ctx.createGain();
-      this.out.connect(A.bus);
+      this.pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      if (this.pan) {
+        this.pan.pan.value = notaYeri(midi);
+        this.out.connect(this.pan);
+        this.pan.connect(A.bus);
+      } else this.out.connect(A.bus);
       for (const id of (stopIds || stopsOn)) this.addStop(STOP_BY_ID[id], t0);
       if (this.stops.size) this.articulate(t0);
     }
@@ -131,6 +161,7 @@
       if (this.released) return;
       this.released = true;
       try { this.out.disconnect(); } catch (_) {}
+      if (this.pan) try { this.pan.disconnect(); } catch (_) {}
       const t = ctx.currentTime;
       for (const s of this.stops.values()) s.oscs.forEach(o => { try { o.stop(t); } catch (_) {} });
       if (this.breath) { try { this.breath.src.stop(t); } catch (_) {} }
@@ -152,6 +183,7 @@
         const o = ctx.createOscillator();
         o.setPeriodicWave(A.waves[r.wave]);
         o.frequency.value = f;
+        o.carpan = mult; // akort değişince yeni perde: freq * carpan
         const cents = (r.cents || 0) + (Math.random() * 2 - 1) * 2.2; // borular asla tam aynı akortta değildir
         if (stop.family === 'reed') o.detune.value = cents;
         else { o.detune.setValueAtTime(cents - 8, t0); o.detune.setTargetAtTime(cents, t0, 0.04); }
@@ -171,6 +203,13 @@
       g.gain.setValueAtTime(0, t0);
       g.gain.linearRampToValueAtTime(1, t0 + speak);
       this.stops.set(stop.id, { g, oscs });
+    }
+
+    akortla(t) {
+      const f = notaFrekansi(this.midi);
+      if (f === this.freq || this.released) return;
+      this.freq = f;
+      for (const s of this.stops.values()) for (const o of s.oscs) o.frequency.setTargetAtTime(f * o.carpan, Math.max(t, this.t0), 0.03);
     }
 
     removeStop(id, t) {
@@ -218,8 +257,11 @@
         this.breath.g.gain.setTargetAtTime(0, t, 0.03);
         try { this.breath.src.stop(t + 0.3); } catch (_) {}
       }
-      const out = this.out;
-      setTimeout(() => { try { out.disconnect(); } catch (_) {} }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
+      const out = this.out, pan = this.pan;
+      setTimeout(() => {
+        try { out.disconnect(); } catch (_) {}
+        if (pan) try { pan.disconnect(); } catch (_) {}
+      }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
     }
   }
 

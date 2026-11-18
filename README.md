@@ -29,6 +29,7 @@ Ya da bilgisayarına indir:
 - **13 register:** Gerçek org registerleri, çalarken de açılıp kapatılabilir.
 - **7 kombinasyon pistonu:** Hazır registrasyonlar.
 - **Mekân:** Şapel (1,8 sn), Kilise (3,6 sn), Katedral (6,5 sn) yankı süresi.
+- **Akort ve yerleşim:** Eşit akordun yanında tarihsel akortlar (Werckmeister III, Kirnberger III, ortalama ton, Pisagor) ve diyapazon (La4 = 415, 430, 440, 442, 466 Hz). Akort değişince basılı notalar da yeni perdeye kayar. Borular stereo olarak iki yana dizilir: Do tarafı solda, Do♯ tarafı sağda.
 - **Boru cephesi:** Çalınan notaya göre ilgili borular parlar; kalın notalar uzun boruları yakar.
 - **Türkçe Q klavye:** Ö, Ç, Ş, Ğ, Ü tuşları da nota çalar; ekrandaki tuş etiketleri klavye düzenine göre gösterilir.
 - **Telefon ve tablet:** Ekrandaki klavyeye parmakla basılır; parmağı kaydırınca nota değişir, iki parmakla akor basılır. Dar ekranda klavye ekranın altına sabitlenir, tuşlar en az 44 piksel genişlikte kalır. Öğren'de klavye yanan tuşa kendiliğinden kayar. Çalarken ekran kararmaz.

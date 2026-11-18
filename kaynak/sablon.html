@@ -149,6 +149,25 @@
         <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
+
+      <details class="ayarlar" id="sesAyarlari">
+        <summary>Akort ve yerleşim</summary>
+        <div class="ayarlar-icerik">
+          <label class="ctl" for="akort">
+            <span class="ctl-label">Akort sistemi</span>
+            <select id="akort"></select>
+          </label>
+          <label class="ctl" for="diyapazon">
+            <span class="ctl-label">Diyapazon (La4, Hz)</span>
+            <select id="diyapazon"></select>
+          </label>
+          <label class="ctl" for="stereo">
+            <span class="ctl-label">Stereo genişlik <output id="stereoOut">50</output></span>
+            <input type="range" id="stereo" min="0" max="100" value="50">
+          </label>
+          <p class="ayar-bilgi" id="akortBilgi"></p>
+        </div>
+      </details>
     </section>
   </div>
 

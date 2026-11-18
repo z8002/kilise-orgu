@@ -47,6 +47,7 @@ npm test
 - Telefon görünümü: beyaz tuşlar en az 44 piksel, klavye açılışta ekranın altında, sayfa yana taşmıyor (320 piksellik ekranda da); `‹` `›` ve oktav geçişi; yan tutuş; Öğren'de klavyenin yanan tuşa kayması (Für Elise'nin ilk 40 adımı parmakla çalınır).
 - Ana ekrana ekleme: manifest ve simgeler; sunucu kapatılınca sayfanın ve parça bağlantılarının saklanan kopyadan açılması.
 - Hafif mod: nota başına boru ve gürültü kaynağı sayısı, en çok ses sayısı.
+- Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.
 
 Ayrıca `araclar/kaynak_denetle.py`, parçaların notalarını ve sürelerini kaynak notalardan çıkarılmış başvurularla karşılaştırır.

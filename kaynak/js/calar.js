@@ -245,7 +245,7 @@
 
   /* ---- Komutlar ---- */
   function calarYukle(id, mod) {
-    const parca = PARCA_BY_ID[id];
+    const parca = kendi(PARCA_BY_ID, id) ? PARCA_BY_ID[id] : null; // ?parca=constructor gibi adresler de bilinmeyen sayılır
     if (!parca) return false;
     if (calar.parca) calarDurdur();
     calar.parca = parca;

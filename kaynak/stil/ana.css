@@ -232,6 +232,16 @@
     background: var(--oak); border: 1px solid var(--oak-edge); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px;
   }
 
+  /* Akort ve yerleşim */
+  .ayarlar { border-top: 1px solid rgba(86,59,39,.7); padding-top: 14px; }
+  .ayarlar summary {
+    cursor: pointer; width: fit-content; list-style-position: outside;
+    font: 700 .72rem/1.2 var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--ivory-mute);
+  }
+  .ayarlar summary:hover { color: var(--ivory-dim); }
+  .ayarlar-icerik { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px; padding-top: 14px; }
+  .ayar-bilgi { flex-basis: 100%; margin: 0; color: var(--ivory-dim); font-size: .92rem; max-width: 72ch; }
+
   /* Nasıl çalınır */
   .howto { display: grid; gap: 12px; max-width: 72ch; }
   .howto h2 { margin: 0; font-family: var(--font-stop); font-weight: 700; font-size: 1.7rem; line-height: 1.1; text-wrap: balance; }

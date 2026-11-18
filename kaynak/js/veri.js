@@ -57,6 +57,51 @@
   ];
 
   const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
+
+  // Akort sistemleri. Do'dan başlayan beşliler zinciri: Do Sol Re La Mi Si Fa♯ Do♯ Sol♯ Re♯ La♯ Fa (Do).
+  // Her sayı, zincirdeki o beşlinin pür beşliden (3/2, 701,955 sent) ne kadar dar akortlandığıdır (sent).
+  // On iki beşlinin daralmaları toplamı Pisagor koması eder; böylece zincir yedi oktav sonra Do'ya kapanır.
+  const PUR_BESLI = 1200 * Math.log2(3 / 2);
+  const PISAGOR_KOMASI = 12 * PUR_BESLI - 7 * 1200;  // 23,46 sent
+  const SINTONIK_KOMA = 1200 * Math.log2(81 / 80);   // 21,51 sent
+  const SKISMA = PISAGOR_KOMASI - SINTONIK_KOMA;     // 1,95 sent
+  const BESLI_ZINCIRI = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5];
+  const AKORTLAR = {
+    esit: {
+      ad: 'Eşit', besliler: Array(12).fill(PISAGOR_KOMASI / 12),
+      bilgi: 'Bugünün akordu: on iki yarım ses eşit, her tonda aynı renk. Hiçbir aralık tam pür değil.',
+    },
+    werckmeister: {
+      ad: 'Werckmeister III (1691)', besliler: [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0].map(x => x * PISAGOR_KOMASI / 4),
+      bilgi: 'Bach çağının "iyi akordu": her tonda çalınır; az diyezli tonlar temiz, çok diyezliler gergin ve renkli.',
+    },
+    kirnberger: {
+      ad: 'Kirnberger III (1779)', besliler: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0].map(x => x * SINTONIK_KOMA / 4).map((x, i) => (i === 6 ? SKISMA : x)),
+      bilgi: 'Do–Mi büyük üçlüsü pür; tondan tona renk farkı belirgin.',
+    },
+    ortalama: {
+      ad: 'Ortalama ton (¼ koma)', besliler: BESLI_ZINCIRI.map((_, i) => (i === 8 ? PISAGOR_KOMASI - 11 * SINTONIK_KOMA / 4 : SINTONIK_KOMA / 4)),
+      bilgi: 'Rönesans ve erken barok: büyük üçlüler pür ve tatlı. Sol♯–Mi♭ "kurt" beşlisi uluyarak çalar; az diyezli tonlarda kalın.',
+    },
+    pisagor: {
+      ad: 'Pisagor', besliler: BESLI_ZINCIRI.map((_, i) => (i === 8 ? PISAGOR_KOMASI : 0)),
+      bilgi: 'Beşliler pür, üçlüler sert; Orta Çağ ezgileri ve boş beşliler için.',
+    },
+  };
+  const DIYAPAZONLAR = [
+    [415, 'Barok · 415'], [430, 'Klasik · 430'], [440, 'Bugün · 440'], [442, 'Orkestra · 442'], [466, 'Barok kilise orgu · 466'],
+  ];
+
+  // Her perde sınıfının (Do = 0) eşit akorttan sapması, sent
+  function akortSapmalari(besliler) {
+    const sapma = new Array(12);
+    let konum = 0;
+    BESLI_ZINCIRI.forEach((pc, i) => {
+      sapma[pc] = (((konum - pc * 100) % 1200) + 1800) % 1200 - 600;
+      konum += PUR_BESLI - besliler[i];
+    });
+    return sapma;
+  }
   const MAX_VOICES = 24;
   const HAFIF_MAX_VOICES = 12;
 

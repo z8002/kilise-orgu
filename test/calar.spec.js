@@ -204,8 +204,14 @@ test('parça listesi aranır ve türe göre süzülür', async ({ page }) => {
   await sayfayiAc(page);
   await page.locator('#parcalarBtn').click();
   await expect(page.locator('.parca-satiri')).toHaveCount(30);
-  await page.locator('#parcaAra').fill('bach');
+  // Klavyeyle yazılır: nota tuşu olan harfler (b, c, h) ve boşluk org çalmaz, kutuya yazılır
+  await page.locator('#parcaAra').pressSequentially('bach');
+  await expect(page.locator('#parcaAra')).toHaveValue('bach');
   await expect(page.locator('.parca-satiri')).toHaveCount(4);
+  expect(await calanlar(page)).toEqual([]);
+  await page.locator('#parcaAra').fill('');
+  await page.locator('#parcaAra').pressSequentially('sessiz gece');
+  await expect(page.locator('.parca-satiri .p-ad')).toHaveText(['Sessiz Gece']);
   await page.locator('#parcaAra').fill('');
   await page.locator('.etiket', { hasText: 'Caz' }).click();
   await expect(page.locator('.parca-satiri .p-ad')).toHaveText(['Görsev İçin Balad', 'The Entertainer']);
@@ -220,9 +226,23 @@ test('tek elli parçada yalnızca o elin seçimi görünür', async ({ page }) =
   await expect(page.locator('#elSolKutu')).toBeVisible();
 });
 
-test('bilinmeyen parça adresi sayfayı bozmaz', async ({ page }) => {
-  const hatalar = await sayfayiAc(page, 'kilise-orgu.html?parca=yok-boyle-bir-parca');
-  await expect(page.locator('#calar')).toBeHidden();
+for (const ad of ['yok-boyle-bir-parca', 'constructor', '__proto__']) {
+  test(`bilinmeyen parça adresi sayfayı bozmaz (${ad})`, async ({ page }) => {
+    const hatalar = await sayfayiAc(page, 'kilise-orgu.html?parca=' + ad);
+    await expect(page.locator('#calar')).toBeHidden();
+    expect(hatalar).toEqual([]);
+  });
+}
+
+test('bozuk ya da yabancı ayar kaydı sayfayı bozmaz', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('kilise-orgu-v2', JSON.stringify({
+    room: 'toString', akort: 'constructor', diyapazon: 1e9, stereo: 'çok', octave: 99, stops: ['constructor', 'prinsipal8', '__proto__'],
+  })));
+  const hatalar = await sayfayiAc(page);
+  await expect(page.locator('#room')).toHaveValue('kilise');
+  await expect(page.locator('#octOut')).toContainText('–');
+  await page.keyboard.down('KeyQ');
+  await page.keyboard.up('KeyQ');
   expect(hatalar).toEqual([]);
 });
 
