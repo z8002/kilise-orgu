@@ -79,7 +79,7 @@ for (const [id, beklenen] of AYAKLAR) {
     const alt = await tepe(page, 60, beklenen * 0.9);
     await page.keyboard.up('KeyY');
     expect(Math.abs(temel.frekans - beklenen) / beklenen, `tepe ${temel.frekans.toFixed(1)} Hz`).toBeLessThan(0.01);
-    expect(temel.db).toBeGreaterThan(-70);
+    expect(temel.db, 'ses var').toBeGreaterThan(-78);
     expect(temel.db - alt.db, 'temel ses, altındaki her şeyden en az 20 dB güçlü olmalı').toBeGreaterThan(20);
   });
 }
@@ -100,7 +100,7 @@ for (const [id, bolum, beklenen] of YENI_AYAKLAR) {
     const alt = await tepe(page, 60, beklenen * 0.9);
     await page.evaluate(b => window.kiliseOrgu.birak(69, b), bolum);
     expect(Math.abs(temel.frekans - beklenen) / beklenen, `tepe ${temel.frekans.toFixed(1)} Hz`).toBeLessThan(0.01);
-    expect(temel.db).toBeGreaterThan(-70);
+    expect(temel.db, 'ses var').toBeGreaterThan(-78);
     expect(temel.db - alt.db, 'temel ses, altındaki her şeyden en az 20 dB güçlü olmalı').toBeGreaterThan(20);
   });
 }

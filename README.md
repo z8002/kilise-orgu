@@ -41,6 +41,8 @@ Ya da bilgisayarına indir:
 - **Ana ekrana ekleme ve internetsiz çalışma:** Telefonda uygulama gibi kurulur; bir kez açıldıktan sonra internet olmadan da açılır.
 - **Hafif mod:** Zayıf telefonlar için daha az boru, en çok 12 ses ve daha kısa yankı.
 - Ekrandaki klavyeye fareyle de basılabilir.
+- **MIDI klavye:** USB ya da Bluetooth MIDI klavye bağlanır (Chrome, Edge; Safari desteklemez). İki manuelli konsolda kanal 1 I. manueli, kanal 2 Sandık'ı, kanal 3 pedalı çalar. Sürdürme pedalı (CC 64) "Tut" gibi çalışır, ifade pedalı (CC 11) Sandık panjurunu açıp kapar, program değişimi pistonları (0–5 → 1–6, 6 → İptal, 7–10 → K1–K4) çağırır. Caz orgunda modülasyon tekerleği dönen hoparlörü hızlandırır.
+- **Kayıt:** "● Kaydet" ile çaldıkların (otomatik pedal ve şarkı çalar da) kaydedilir. Kayıt sayfada geri çalınır, MIDI dosyası (bölüme göre kanal 1–3) ya da ses dosyası olarak indirilir.
 
 ### Caz orgu
 

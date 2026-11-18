@@ -240,6 +240,20 @@
         </label>
         <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd class="yalniz-klavye">Boşluk</kbd></button>
         <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
+        <div class="kayit-kutu">
+          <button id="kayitBtn" class="hold kayit-dugme" type="button" aria-pressed="false" title="Çaldıklarını kaydet: MIDI ve ses dosyası olarak indirebilirsin">● Kaydet</button>
+          <span class="kayit-durum" id="kayitDurum" aria-live="polite"></span>
+          <span class="kayit-paneli" id="kayitPaneli" hidden>
+            <span class="kayit-sure">Kayıt <b id="kayitSure">0:00</b></span>
+            <button id="kayitCal" class="hold" type="button">▶ Kaydı çal</button>
+            <button id="kayitMidiIndir" class="hold" type="button" title="Standart MIDI dosyası; bölüme göre kanal 1–3">MIDI indir</button>
+            <button id="kayitSesIndir" class="hold" type="button" title="Hoparlöre giden ses">Ses indir</button>
+          </span>
+        </div>
+        <div class="midi-kutu">
+          <button id="midiBagla" class="hold" type="button" aria-pressed="false" title="USB ya da Bluetooth MIDI klavyeyi bağla">MIDI klavye</button>
+          <span class="midi-durum" id="midiDurum" aria-live="polite"></span>
+        </div>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
 
@@ -281,6 +295,7 @@
       <li class="yalniz-caz"><strong>Dönen hoparlör</strong>: Yavaş'ta ses ağır ağır döner, Hızlı'da titrer; geçişte boru çabuk, tambur ağır hızlanır.<span class="yalniz-klavye"> <kbd>`</kbd> tuşu (1'in solundaki) Yavaş ile Hızlı arasında geçer.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki Hızlı düğmesi de aynı işi yapar.</span></li>
       <li class="yalniz-kilise"><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
       <li class="yalniz-kilise"><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
+      <li><strong>● Kaydet</strong> çaldıklarını kaydeder; bitince kaydı dinleyebilir, MIDI ya da ses dosyası olarak indirebilirsin. <strong>MIDI klavye</strong> düğmesi takılı bir MIDI klavyeyi bağlar (Chrome ve Edge).</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
@@ -315,6 +330,8 @@
 /*@ekle js/calar.js*/
 /*@ekle js/calar-arayuz.js*/
 /*@ekle js/olaylar.js*/
+/*@ekle js/midi.js*/
+/*@ekle js/kayit.js*/
 /*@ekle js/baslat.js*/
 })();
 </script>

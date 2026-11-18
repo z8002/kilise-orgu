@@ -49,6 +49,8 @@ npm test
 - Hafif mod: nota başına boru ve gürültü kaynağı sayısı, en çok ses sayısı.
 - İki manuel ve pedal: her bölümün hangi borularla öttüğü (sayfa, basılı notaların registerlerini bildirir); kuplörler, otomatik pedal, pistonların Sandık ve pedal registerleri, önceki sürümün kaydından geçiş; yeni registerlerin perdesi.
 - Caz orgu: sayfa ve bağlantılar, çekme çubuklarının klavyeyle, fareyle ve hazır seslerle ayarlanması; her çubuğun eşit akortlu perdesi gerçek sesten; perküsyonun ilk notada vurup sönmesi, legatoda susması; dönen hoparlörde borunun çabuk, tamburun ağır hızlanması; şarkı çalar.
+- MIDI klavye: tarayıcının MIDI arayüzü sahte bir klavyeyle değiştirilir; nota, sürdürme ve ifade pedalı, program değişimi, kanallar.
+- Kayıt: indirilen MIDI dosyası çözülür; notaların sırası, süresi ve kanalı denetlenir; ses dosyası iner; kayıt geri çalınır.
 - Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.
@@ -62,4 +64,5 @@ Testlerdeki tuş ve piston tabloları sayfanın kodundan kopyalanmadı; README'd
 - JavaScript parçaları iki boşluk girintilidir (tek bir sarmalayıcı işlevin içinde dururlar).
 - Arayüz metinleri ve açıklama satırları Türkçedir.
 - `araclar/olc.js`, sayfayı telefon boyutunda açıp tuş genişliğini ve klavyenin konumunu ölçer.
+- Playwright'ın tarayıcısı ortamda yoksa ya da sürümü uymuyorsa `KILISE_CHROMIUM=/yol/chrome npm test` ile başka bir Chrome kullanılır.
 - Testlerde hizmet çalışanı kapalıdır (`playwright.config.js`); internetsiz çalışma testi onu kendi bağlamında açar.

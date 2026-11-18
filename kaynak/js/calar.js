@@ -42,6 +42,7 @@
   function calarIsik(harita, o, yak) {
     for (const m of o.notalar) {
       if (harita === targets) { if (yak) targets.set(m, o.el); else targets.delete(m); continue; }
+      kayitOlay(yak ? 'on' : 'off', m, 'I', ctx.currentTime); // şarkı çaların notaları da kayda girer
       const e = playerDown.get(m) || { n: 0, el: o.el };
       e.n += yak ? 1 : -1;
       e.el = o.el;
@@ -145,6 +146,7 @@
     for (const id of calar.sayaclar) clearTimeout(id);
     calar.sayaclar.clear();
     const simdi = ctx ? ctx.currentTime : 0;
+    for (const m of playerDown.keys()) kayitOlay('off', m, 'I', simdi);
     for (const a of calar.acik) { if (a.v.t0 <= simdi) a.v.release(simdi); else a.v.cancel(); }
     calar.acik = [];
     playerVoices.clear();

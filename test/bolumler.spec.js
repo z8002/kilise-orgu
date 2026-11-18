@@ -165,12 +165,14 @@ test.describe('sandık panjuru', () => {
   test('panjur kapanınca Sandık kısılır ve koyulaşır, I. manuel değişmez', async ({ page }) => {
     await sayfayiAc(page);
     await konsolTam(page);
+    // Sandık'ta bir nota basılı kalır: içinden ses akmayan süzgecin değerini tarayıcı güncellemeyebilir
     await page.keyboard.down('KeyQ');
-    await page.keyboard.up('KeyQ'); // ses motoru kurulsun
+    await page.waitForTimeout(300);
     const acik = await page.evaluate(() => window.kiliseOrgu.sandik());
     await page.locator('#sandik').fill('0');
     await expect.poll(() => page.evaluate(() => window.kiliseOrgu.sandik().kesim)).toBeLessThan(800);
     const kapali = await page.evaluate(() => window.kiliseOrgu.sandik());
+    await page.keyboard.up('KeyQ');
     expect(kapali.kazanc).toBeLessThan(acik.kazanc * 0.5);
     expect(acik.kesim).toBeGreaterThan(15000);
   });

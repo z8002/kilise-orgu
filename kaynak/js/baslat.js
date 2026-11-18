@@ -15,6 +15,8 @@
   calarOlaylariBagla();
   calarArayuzGuncelle();
   calarAdrestenYukle();
+  midiKur();
+  kayitKur();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };

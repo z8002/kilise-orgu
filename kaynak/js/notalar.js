@@ -9,6 +9,7 @@
   const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   const kaynakBolumu = new Map();   // kaynak -> basıldığı bölüm (I, II, P)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
+  let midiSurdur = false;           // MIDI klavyenin sürdürme pedalı (CC 64)
   let otoPedalNotasi = null;        // otomatik pedalın o an çaldığı nota
 
   let sesDesteklenmiyor = false;
@@ -36,6 +37,7 @@
     const first = h.size === 0;
     h.add(src);
     kaynakBolumu.set(src, bolum);
+    if (!String(src).startsWith('kayit:')) kayitOlay('on', midi, bolum, ctx.currentTime);
     if (src !== 'oto' && typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
     if (first) {
       sustained.delete(midi);
@@ -53,6 +55,7 @@
   function noteOff(midi, src) {
     const h = holders.get(midi);
     if (!h || !h.delete(src)) return;
+    if (ctx && !String(src).startsWith('kayit:')) kayitOlay('off', midi, kaynakBolumu.get(src) || 'I', ctx.currentTime);
     kaynakBolumu.delete(src);
     if (h.size) sesBolumleriniGuncelle(midi); // başka bir bölümde hâlâ basılı
     else {
@@ -118,7 +121,7 @@
   }
 
   function updateSustain() {
-    const on = sustainKey || sustainLatch;
+    const on = sustainKey || sustainLatch || midiSurdur;
     holdBtn.setAttribute('aria-pressed', String(on));
     $('#dokTut').setAttribute('aria-pressed', String(on));
     if (on === sustainOn) return;

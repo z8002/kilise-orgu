@@ -280,6 +280,15 @@
   .hold { display: inline-flex; align-items: center; gap: .5rem; padding: 0 .8rem; font-weight: 500; }
   .hold[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
   .hold[aria-pressed="true"] kbd { background: transparent; border-color: var(--brass-ink); color: var(--brass-ink); }
+  .kayit-kutu, .kayit-paneli { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+  .kayit-dugme[aria-pressed="true"] { background: var(--reed); border-color: #d0573f; color: #fff4ec; }
+  .kayit-durum { font: 500 .9rem var(--font-mono); color: #f08a74; }
+  .kayit-durum:empty { display: none; }
+  .kayit-sure { color: var(--ivory-dim); font-size: .9rem; }
+  .kayit-sure b { color: var(--ivory); font: 500 .9rem var(--font-mono); }
+  .midi-kutu { display: flex; align-items: center; gap: 10px; min-height: 36px; }
+  .midi-durum { color: var(--ivory-dim); font-size: .9rem; max-width: 32ch; }
+  .midi-durum:empty { display: none; }
   .readout { margin: 0 0 0 auto; min-height: 36px; display: flex; align-items: center; color: var(--ivory-dim); font-size: .95rem; }
   .readout b { color: var(--ivory); font-weight: 500; margin-left: .4em; }
   kbd {
@@ -759,6 +768,20 @@
         </label>
         <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd class="yalniz-klavye">Boşluk</kbd></button>
         <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
+        <div class="kayit-kutu">
+          <button id="kayitBtn" class="hold kayit-dugme" type="button" aria-pressed="false" title="Çaldıklarını kaydet: MIDI ve ses dosyası olarak indirebilirsin">● Kaydet</button>
+          <span class="kayit-durum" id="kayitDurum" aria-live="polite"></span>
+          <span class="kayit-paneli" id="kayitPaneli" hidden>
+            <span class="kayit-sure">Kayıt <b id="kayitSure">0:00</b></span>
+            <button id="kayitCal" class="hold" type="button">▶ Kaydı çal</button>
+            <button id="kayitMidiIndir" class="hold" type="button" title="Standart MIDI dosyası; bölüme göre kanal 1–3">MIDI indir</button>
+            <button id="kayitSesIndir" class="hold" type="button" title="Hoparlöre giden ses">Ses indir</button>
+          </span>
+        </div>
+        <div class="midi-kutu">
+          <button id="midiBagla" class="hold" type="button" aria-pressed="false" title="USB ya da Bluetooth MIDI klavyeyi bağla">MIDI klavye</button>
+          <span class="midi-durum" id="midiDurum" aria-live="polite"></span>
+        </div>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
 
@@ -800,6 +823,7 @@
       <li class="yalniz-caz"><strong>Dönen hoparlör</strong>: Yavaş'ta ses ağır ağır döner, Hızlı'da titrer; geçişte boru çabuk, tambur ağır hızlanır.<span class="yalniz-klavye"> <kbd>`</kbd> tuşu (1'in solundaki) Yavaş ile Hızlı arasında geçer.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki Hızlı düğmesi de aynı işi yapar.</span></li>
       <li class="yalniz-kilise"><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
       <li class="yalniz-kilise"><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
+      <li><strong>● Kaydet</strong> çaldıklarını kaydeder; bitince kaydı dinleyebilir, MIDI ya da ses dosyası olarak indirebilirsin. <strong>MIDI klavye</strong> düğmesi takılı bir MIDI klavyeyi bağlar (Chrome ve Edge).</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
@@ -984,7 +1008,7 @@
   // konsol: 'tek' (bir manuel) ya da 'tam' (iki manuel ve pedal); sandik: Sandık panjurunun açıklığı (0–100)
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
-    konsol: 'tek', otoPedal: false, sandik: 100,
+    konsol: 'tek', otoPedal: false, sandik: 100, midi: false,
     // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
     caz: {
       cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
@@ -1010,6 +1034,7 @@
       if (Number.isFinite(saved.stereo)) settings.stereo = clamp(saved.stereo, 0, 100);
       if (saved.konsol === 'tek' || saved.konsol === 'tam') settings.konsol = saved.konsol;
       if (typeof saved.otoPedal === 'boolean') settings.otoPedal = saved.otoPedal;
+      if (typeof saved.midi === 'boolean') settings.midi = saved.midi;
       if (Number.isFinite(saved.sandik)) settings.sandik = clamp(saved.sandik, 0, 100);
       if (Array.isArray(saved.stops)) {
         stopsOn.clear();
@@ -1747,6 +1772,7 @@
   const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   const kaynakBolumu = new Map();   // kaynak -> basıldığı bölüm (I, II, P)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
+  let midiSurdur = false;           // MIDI klavyenin sürdürme pedalı (CC 64)
   let otoPedalNotasi = null;        // otomatik pedalın o an çaldığı nota
 
   let sesDesteklenmiyor = false;
@@ -1774,6 +1800,7 @@
     const first = h.size === 0;
     h.add(src);
     kaynakBolumu.set(src, bolum);
+    if (!String(src).startsWith('kayit:')) kayitOlay('on', midi, bolum, ctx.currentTime);
     if (src !== 'oto' && typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
     if (first) {
       sustained.delete(midi);
@@ -1791,6 +1818,7 @@
   function noteOff(midi, src) {
     const h = holders.get(midi);
     if (!h || !h.delete(src)) return;
+    if (ctx && !String(src).startsWith('kayit:')) kayitOlay('off', midi, kaynakBolumu.get(src) || 'I', ctx.currentTime);
     kaynakBolumu.delete(src);
     if (h.size) sesBolumleriniGuncelle(midi); // başka bir bölümde hâlâ basılı
     else {
@@ -1856,7 +1884,7 @@
   }
 
   function updateSustain() {
-    const on = sustainKey || sustainLatch;
+    const on = sustainKey || sustainLatch || midiSurdur;
     holdBtn.setAttribute('aria-pressed', String(on));
     $('#dokTut').setAttribute('aria-pressed', String(on));
     if (on === sustainOn) return;
@@ -2572,6 +2600,7 @@
   function calarIsik(harita, o, yak) {
     for (const m of o.notalar) {
       if (harita === targets) { if (yak) targets.set(m, o.el); else targets.delete(m); continue; }
+      kayitOlay(yak ? 'on' : 'off', m, 'I', ctx.currentTime); // şarkı çaların notaları da kayda girer
       const e = playerDown.get(m) || { n: 0, el: o.el };
       e.n += yak ? 1 : -1;
       e.el = o.el;
@@ -2675,6 +2704,7 @@
     for (const id of calar.sayaclar) clearTimeout(id);
     calar.sayaclar.clear();
     const simdi = ctx ? ctx.currentTime : 0;
+    for (const m of playerDown.keys()) kayitOlay('off', m, 'I', simdi);
     for (const a of calar.acik) { if (a.v.t0 <= simdi) a.v.release(simdi); else a.v.cancel(); }
     calar.acik = [];
     playerVoices.clear();
@@ -3361,6 +3391,238 @@
   });
   document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
 
+  /* ================= MIDI klavye ================= */
+  // Web MIDI ile bağlanan klavye (Chrome, Edge, Android'de Chrome; Safari desteklemez).
+  //  - Nota aç/kapa: hız (velocity) yok sayılır; org tuşu ya basılıdır ya değil.
+  //  - Kanal → bölüm (iki manuelli konsolda): 1 → I. manuel, 2 → Sandık, 3 → pedal.
+  //  - CC 64 sürdürme pedalı ("Tut" gibi), CC 11 ifade pedalı (kilise: Sandık panjuru, caz: ses düzeyi),
+  //    CC 1 modülasyon tekerleği (caz: dönen hoparlör Yavaş/Hızlı), CC 120/123 bütün sesleri sustur.
+  //  - Program değişimi: kilise orgunda 0–5 → piston 1–6, 6 → İptal, 7–10 → K1–K4; caz orgunda hazır sesler.
+  const midi = { erisim: null };
+
+  function midiDurumu(metin) { $('#midiDurum').textContent = metin; }
+
+  async function midiBagla(sessiz) {
+    if (!navigator.requestMIDIAccess) {
+      if (!sessiz) midiDurumu('Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.');
+      return;
+    }
+    try {
+      midi.erisim = await navigator.requestMIDIAccess();
+    } catch (_) {
+      settings.midi = false;
+      save();
+      if (!sessiz) midiDurumu('MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.');
+      return;
+    }
+    settings.midi = true;
+    save();
+    midi.erisim.onstatechange = midiGirisleri;
+    midiGirisleri();
+  }
+
+  function midiGirisleri() {
+    const adlar = [];
+    for (const g of midi.erisim.inputs.values()) {
+      if (g.state && g.state !== 'connected') continue;
+      g.onmidimessage = e => midiMesaji(g.id, e.data); // yeniden takılan klavye için her seferinde
+      adlar.push(g.name || 'MIDI klavye');
+    }
+    $('#midiBagla').setAttribute('aria-pressed', String(adlar.length > 0));
+    midiDurumu(adlar.length ? `MIDI: ${adlar.join(', ')}` : 'MIDI klavye bulunamadı; takıp yeniden dene.');
+  }
+
+  function midiMesaji(id, d) {
+    if (!d || d.length < 2) return;
+    const tur = d[0] & 0xf0, kanal = d[0] & 0x0f;
+    const bolum = ORG === 'kilise' && settings.konsol === 'tam' ? (['I', 'II', 'P'][kanal] || 'I') : 'I';
+    const kaynak = `m:${id}:${kanal}:${d[1]}`;
+    if (tur === 0x90 && d[2] > 0) noteOn(d[1], kaynak, bolum);
+    else if (tur === 0x80 || tur === 0x90) noteOff(d[1], kaynak);
+    else if (tur === 0xb0) midiKontrol(d[1], d[2]);
+    else if (tur === 0xc0) midiProgram(d[1]);
+  }
+
+  function midiKontrol(no, deger) {
+    if (no === 64) { midiSurdur = deger >= 64; updateSustain(); }
+    else if (no === 11) {
+      if (ORG === 'kilise') {
+        settings.sandik = Math.round(deger / 127 * 100);
+        $('#sandik').value = settings.sandik;
+        $('#sandikOut').textContent = settings.sandik;
+        sandigiUygula();
+      } else if (ctx && A.caz) A.caz.giris.gain.setTargetAtTime(0.12 + 0.88 * deger / 127, ctx.currentTime, 0.02);
+    } else if (no === 1 && ORG === 'caz') {
+      const h = deger >= 64 ? 'hizli' : 'yavas';
+      if (cazAyar.hoparlor !== h && cazAyar.hoparlor !== 'kapali') hoparlorSec(h);
+    } else if (no === 120 || no === 123) releaseAll();
+  }
+
+  function midiProgram(p) {
+    if (ORG === 'caz') { const b = document.querySelectorAll('.caz-hazir')[p]; if (b) b.click(); return; }
+    if (p <= 5) applyPiston(String(p + 1));
+    else if (p === 6) applyPiston('0');
+    else if (p <= 10) kendiBasildi(p - 7);
+  }
+
+  function midiKur() {
+    $('#midiBagla').addEventListener('click', () => midiBagla(false));
+    // Daha önce bağlanmışsa (izin verilmişse) kendiliğinden yeniden bağlan
+    if (settings.midi) midiBagla(true);
+  }
+  /* ================= Kayıt ================= */
+  // "Kaydet": çalınan notalar (senin, otomatik pedalın, şarkı çaların) ve hoparlöre giden ses kaydedilir.
+  // Bitince kayıt sayfada çalınabilir, MIDI dosyası (.mid) ya da ses dosyası olarak indirilebilir.
+  const kayit = { acik: false, bas: 0, olaylar: [], sure: 0, kaydedici: null, sesHedef: null, sesParcalari: [], ses: null, sayac: 0, calan: [] };
+
+  // noteOn/noteOff ve şarkı çalar çağırır. t: ses saati (ctx.currentTime)
+  function kayitOlay(tur, midi, bolum, t) {
+    if (!kayit.acik) return;
+    kayit.olaylar.push({ t: Math.max(0, t - kayit.bas), tur, midi, bolum });
+  }
+
+  const sureYaz = sn => `${Math.floor(sn / 60)}:${String(Math.floor(sn % 60)).padStart(2, '0')}`;
+
+  function kayitArayuzu() {
+    const b = $('#kayitBtn');
+    b.setAttribute('aria-pressed', String(kayit.acik));
+    b.textContent = kayit.acik ? '■ Durdur' : '● Kaydet';
+    $('#kayitPaneli').hidden = kayit.acik || (!kayit.olaylar.length && !kayit.ses);
+    $('#kayitSure').textContent = sureYaz(kayit.sure);
+    $('#kayitSesIndir').hidden = !kayit.ses;
+    $('#kayitCal').textContent = kayit.calan.length ? '■ Durdur' : '▶ Kaydı çal';
+  }
+
+  function kayitBasla() {
+    if (!ensureWind()) return;
+    kayitCalmayiDurdur();
+    kayit.olaylar = [];
+    kayit.ses = null;
+    kayit.sesParcalari = [];
+    kayit.sure = 0;
+    kayit.bas = ctx.currentTime;
+    kayit.acik = true;
+    // Kayıt başlarken basılı olan notalar da kayda girer
+    for (const [m, h] of holders) for (const k of h) if (!String(k).startsWith('kayit:')) kayitOlay('on', m, kaynakBolumu.get(k) || 'I', kayit.bas);
+    // Ses: hoparlöre giden sinyal aynı anda bir kaydediciye de gider
+    const tur = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg']
+      .find(x => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(x));
+    if (tur && ctx.createMediaStreamDestination) {
+      try {
+        const hedef = ctx.createMediaStreamDestination();
+        A.master.connect(hedef);
+        const kaydedici = new MediaRecorder(hedef.stream, { mimeType: tur });
+        kaydedici.ondataavailable = e => { if (e.data && e.data.size) kayit.sesParcalari.push(e.data); };
+        kaydedici.onstop = () => {
+          kayit.ses = new Blob(kayit.sesParcalari, { type: tur });
+          try { A.master.disconnect(hedef); } catch (_) {}
+          kayitArayuzu();
+        };
+        kaydedici.start();
+        kayit.kaydedici = kaydedici;
+      } catch (_) { kayit.kaydedici = null; }
+    }
+    clearInterval(kayit.sayac);
+    kayit.sayac = setInterval(() => { $('#kayitDurum').textContent = '● ' + sureYaz(ctx.currentTime - kayit.bas); }, 250);
+    $('#kayitDurum').textContent = '● 0:00';
+    kayitArayuzu();
+  }
+
+  function kayitBitir() {
+    if (!kayit.acik) return;
+    kayit.sure = ctx.currentTime - kayit.bas;
+    kayit.acik = false;
+    clearInterval(kayit.sayac);
+    $('#kayitDurum').textContent = '';
+    if (kayit.kaydedici && kayit.kaydedici.state !== 'inactive') kayit.kaydedici.stop();
+    kayit.kaydedici = null;
+    kayitArayuzu();
+  }
+
+  // Açma ve kapamaları dengeler: aynı bölümde aynı nota birden çok kaynaktan basılsa da bir kez açılır,
+  // bir kez kapanır; kayıt bittiğinde hâlâ basılı olanlar kaydın sonunda kapanır.
+  function kayitNotalari() {
+    const sayac = new Map(), sonuc = [];
+    for (const o of [...kayit.olaylar].sort((a, b) => a.t - b.t)) {
+      if (o.t > kayit.sure + 1e-6) continue;
+      const k = o.bolum + ':' + o.midi, n = sayac.get(k) || 0;
+      if (o.tur === 'on') { sayac.set(k, n + 1); if (n === 0) sonuc.push(o); }
+      else if (n > 0) { sayac.set(k, n - 1); if (n === 1) sonuc.push(o); }
+    }
+    for (const [k, n] of sayac) {
+      if (n <= 0) continue;
+      const [bolum, m] = k.split(':');
+      sonuc.push({ t: kayit.sure, tur: 'off', midi: Number(m), bolum });
+    }
+    return sonuc.sort((a, b) => a.t - b.t || (a.tur === 'off' ? -1 : 1));
+  }
+
+  // Standart MIDI dosyası, biçim 0. Dörtlük 480 tik, tempo 120: saniyede 960 tik.
+  // Kanallar bölümlere göre: 1 → I. manuel, 2 → Sandık, 3 → pedal.
+  function midiDosyasi() {
+    const vlq = n => { const b = [n & 0x7f]; while ((n >>= 7)) b.unshift((n & 0x7f) | 0x80); return b; };
+    const iz = [];
+    let onceki = 0;
+    const ekle = (tik, ...veri) => { iz.push(...vlq(tik - onceki), ...veri); onceki = tik; };
+    const ad = [...new TextEncoder().encode(ORG === 'caz' ? 'Caz Orgu' : 'Kilise Orgu')];
+    ekle(0, 0xff, 0x03, ad.length, ...ad);
+    ekle(0, 0xff, 0x51, 0x03, 0x07, 0xa1, 0x20); // 500 000 µs/dörtlük
+    const kanal = { I: 0, II: 1, P: 2 };
+    for (const o of kayitNotalari()) ekle(Math.round(o.t * 960), (o.tur === 'on' ? 0x90 : 0x80) | (kanal[o.bolum] || 0), o.midi, o.tur === 'on' ? 96 : 0);
+    ekle(Math.max(onceki, Math.round(kayit.sure * 960)), 0xff, 0x2f, 0x00);
+    const u32 = n => [(n >>> 24) & 0xff, (n >>> 16) & 0xff, (n >>> 8) & 0xff, n & 0xff];
+    return new Uint8Array([
+      0x4d, 0x54, 0x68, 0x64, 0, 0, 0, 6, 0, 0, 0, 1, 0x01, 0xe0, // MThd: biçim 0, bir iz, 480 tik
+      0x4d, 0x54, 0x72, 0x6b, ...u32(iz.length), ...iz,           // MTrk
+    ]);
+  }
+
+  function indir(veri, ad, tur) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(veri instanceof Blob ? veri : new Blob([veri], { type: tur }));
+    a.download = ad;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+
+  function dosyaAdi(uzanti) {
+    const d = new Date(), iki = n => String(n).padStart(2, '0');
+    return `${ORG}-orgu-kayit-${d.getFullYear()}${iki(d.getMonth() + 1)}${iki(d.getDate())}-${iki(d.getHours())}${iki(d.getMinutes())}.${uzanti}`;
+  }
+
+  // Kaydı sayfada çalar (o anki registrasyonla)
+  function kayitCal() {
+    if (kayit.calan.length) { kayitCalmayiDurdur(); return; }
+    if (!ensureWind()) return;
+    for (const o of kayitNotalari()) {
+      kayit.calan.push(setTimeout(() => {
+        const kaynak = `kayit:${o.bolum}:${o.midi}`;
+        if (o.tur === 'on') noteOn(o.midi, kaynak, o.bolum); else noteOff(o.midi, kaynak);
+      }, o.t * 1000 + 30));
+    }
+    kayit.calan.push(setTimeout(kayitCalmayiDurdur, kayit.sure * 1000 + 300));
+    kayitArayuzu();
+  }
+
+  function kayitCalmayiDurdur() {
+    for (const id of kayit.calan) clearTimeout(id);
+    kayit.calan = [];
+    for (const [m, h] of [...holders]) for (const k of [...h]) if (String(k).startsWith('kayit:')) noteOff(m, k);
+    kayitArayuzu();
+  }
+
+  function kayitKur() {
+    $('#kayitBtn').addEventListener('click', () => (kayit.acik ? kayitBitir() : kayitBasla()));
+    $('#kayitCal').addEventListener('click', kayitCal);
+    $('#kayitMidiIndir').addEventListener('click', () => indir(midiDosyasi(), dosyaAdi('mid'), 'audio/midi'));
+    $('#kayitSesIndir').addEventListener('click', () => {
+      if (!kayit.ses) return;
+      indir(kayit.ses, dosyaAdi(kayit.ses.type.includes('mp4') ? 'm4a' : kayit.ses.type.includes('ogg') ? 'ogg' : 'webm'));
+    });
+    kayitArayuzu();
+  }
   /* ================= Başlat ================= */
   buildStops();
   buildPistons();
@@ -3378,6 +3640,8 @@
   calarOlaylariBagla();
   calarArayuzGuncelle();
   calarAdrestenYukle();
+  midiKur();
+  kayitKur();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };

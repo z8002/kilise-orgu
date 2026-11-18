@@ -13,7 +13,8 @@ module.exports = defineConfig({
     // Hizmet çalışanı (sw.js) testlerde kapalı: yazı tipi isteklerini Playwright'ın yerine o karşılamasın.
     // İnternetsiz çalışma testi (test/uygulama.spec.js) onu kendi bağlamında açar.
     serviceWorkers: 'block',
-    launchOptions: { args: ['--autoplay-policy=no-user-gesture-required'] },
+    // KILISE_CHROMIUM: Playwright'ın kendi tarayıcısı yerine kullanılacak Chrome (sürümü uymayan ortamlar için)
+    launchOptions: { args: ['--autoplay-policy=no-user-gesture-required'], executablePath: process.env.KILISE_CHROMIUM || undefined },
   },
   webServer: {
     command: 'python3 -m http.server 4173 --bind 127.0.0.1',

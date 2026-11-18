@@ -12,7 +12,7 @@
   // konsol: 'tek' (bir manuel) ya da 'tam' (iki manuel ve pedal); sandik: Sandık panjurunun açıklığı (0–100)
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
-    konsol: 'tek', otoPedal: false, sandik: 100,
+    konsol: 'tek', otoPedal: false, sandik: 100, midi: false,
     // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
     caz: {
       cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
@@ -38,6 +38,7 @@
       if (Number.isFinite(saved.stereo)) settings.stereo = clamp(saved.stereo, 0, 100);
       if (saved.konsol === 'tek' || saved.konsol === 'tam') settings.konsol = saved.konsol;
       if (typeof saved.otoPedal === 'boolean') settings.otoPedal = saved.otoPedal;
+      if (typeof saved.midi === 'boolean') settings.midi = saved.midi;
       if (Number.isFinite(saved.sandik)) settings.sandik = clamp(saved.sandik, 0, 100);
       if (Array.isArray(saved.stops)) {
         stopsOn.clear();
