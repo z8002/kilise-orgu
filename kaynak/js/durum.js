@@ -2,8 +2,11 @@
   const $ = s => document.querySelector(s);
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const kalinIsaretci = window.matchMedia ? window.matchMedia('(pointer: coarse)') : { matches: false };
+  const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
 
-  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3 };
+  // hafif: zayıf telefonlar için daha az boru ve kısa yankı
+  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false };
   const stopsOn = new Set(PISTONS[4].stops);
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
@@ -14,6 +17,7 @@
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
       if (Number.isFinite(saved.volume)) settings.volume = clamp(saved.volume, 0, 100);
       if (Number.isFinite(saved.octave)) settings.octave = clamp(saved.octave, 1, 5);
+      if (typeof saved.hafif === 'boolean') settings.hafif = saved.hafif;
       if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => STOP_BY_ID[id] && stopsOn.add(id)); }
     }
   } catch (_) {}

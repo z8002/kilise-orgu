@@ -223,6 +223,26 @@
     } else calarAdimaGec(no);
   }
 
+  // Telefonda pencerenin önceden görmesi için: kullanıcının sıradaki birkaç adımda basacağı notalar.
+  function calarIleriNotalar() {
+    if (!calar.parca || calar.durum !== 'caliyor') return [];
+    if (calar.mod === 'ogren') return calar.adimlar.slice(calar.adim + 1, calar.adim + 9).map(a => a.notalar);
+    const sonuc = [];
+    for (const o of calar.cizelge.olaylar) {
+      if (o.t <= calar.konum || calar.eller[o.el] !== 'ben') continue;
+      sonuc.push(o.notalar);
+      if (sonuc.length >= 8) break;
+    }
+    return sonuc;
+  }
+
+  // Parça açılınca telefondaki klavye penceresi ezginin başına gelir.
+  function calarPencereyiYerlestir() {
+    const c = calar.cizelge;
+    const el = c.eller.find(e => calar.eller[e] === 'ben') || (c.eller.includes('sag') ? 'sag' : 'sol');
+    pencereNotalaraGetir(c.olaylar.filter(o => o.el === el).slice(0, 8).map(o => o.notalar), true);
+  }
+
   /* ---- Komutlar ---- */
   function calarYukle(id, mod) {
     const parca = PARCA_BY_ID[id];
@@ -242,6 +262,7 @@
     applyPiston(ilk.piston);
     if (settings.octave !== ilk.oktav) setOctave(ilk.oktav);
     if (parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
+    calarPencereyiYerlestir();
     calarArayuzKur();
     calarArayuzGuncelle();
     return true;

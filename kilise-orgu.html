@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kilise Orgu</title>
+<meta name="description" content="Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: on üç register, kilise yankısı ve otuz parçalık şarkı çalar.">
+<meta name="theme-color" content="#1a120c">
+<link rel="icon" href="simgeler/simge.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="simgeler/simge-180.png">
+<meta name="apple-mobile-web-app-title" content="Kilise Orgu">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cormorant+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IM+Fell+English+SC&display=swap">
@@ -55,9 +63,12 @@
     background: radial-gradient(ellipse 90% 40% at 50% 0%, var(--oak-glow) 0%, var(--oak-deep) 70%) no-repeat, var(--oak-deep);
   }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-  button { font: inherit; }
+  button { font: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
 
   .page { max-width: 1080px; margin-inline: auto; display: grid; gap: 22px; }
+  /* Izgara sütunu içeriğin en geniş satırına göre büyümesin: dar ekranda sayfa yana taşmasın */
+  .page, .organ, .console { grid-template-columns: minmax(0, 1fr); }
 
   /* ---------- Başlık ---------- */
   .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; }
@@ -176,7 +187,7 @@
   }
   .manual {
     position: relative; height: clamp(120px, 19vw, 184px);
-    touch-action: none; user-select: none; -webkit-user-select: none;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
   .key { position: absolute; top: 0; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
   .key.white {
@@ -202,6 +213,7 @@
   }
   .key.black .cap { color: var(--knob-shade); border-color: #4a3b2c; }
   .note { font: 700 .72rem/1 var(--font-ui); color: var(--gilt-deep); }
+  .note.ad { display: none; }
   @media (max-width: 560px) { .cap { display: none; } .note { font-size: .6rem; } }
 
   /* Kontroller */
@@ -273,7 +285,7 @@
   }
   .calar-kapat:hover { color: var(--ivory); border-color: var(--gilt-deep); }
   .calar-dugmeler { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px; }
-  .tasima { display: flex; align-items: center; gap: 10px; }
+  .tasima { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
   .segment { display: inline-flex; border: 1px solid var(--oak-edge); border-radius: 8px; overflow: hidden; }
   .segment button {
     height: 36px; padding: 0 .9rem; border: 0; background: var(--oak); color: var(--ivory-dim); font-weight: 500; cursor: pointer;
@@ -350,6 +362,64 @@
   .p-besteci { grid-column: 2; font-size: .85rem; color: var(--ivory-mute); }
   .p-ek { grid-column: 3; grid-row: 1 / span 2; font-size: .8rem; color: var(--ivory-mute); text-align: right; }
   #parcaYok { margin: 0; color: var(--ivory-mute); }
+
+  /* ---------- Telefon ve tablet ---------- */
+  /* Yardım metni işaretçiye göre: parmak mı, fare ve klavye mi */
+  @media (pointer: coarse) { .yalniz-klavye { display: none !important; } }
+  @media not all and (pointer: coarse) { .yalniz-dokunmatik { display: none !important; } }
+
+  /* Pencereli klavye: dar dokunmatik ekranda klavye ekranın altına sabitlenir ve bir bölümünü gösterir
+     (beyaz tuşlar en az 44 piksel). Genişlik ve kaydırma manuel.js'de pencereCiz() ile ayarlanır. */
+  .pencere-cubugu { display: none; }
+  .pencereli body { padding-bottom: calc(var(--dok-h, 260px) + 24px); }
+  .pencereli { scroll-padding-bottom: calc(var(--dok-h, 260px) + 12px); }
+  .pencereli .manual-wrap {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px;
+    padding: 6px max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left));
+    border-radius: 0; border-top: 2px solid var(--gilt-deep);
+    background: linear-gradient(180deg, var(--oak-2), var(--ebony) 52px);
+    box-shadow: 0 -10px 26px rgba(0,0,0,.6);
+  }
+  .pencereli .manual-kutu {
+    overflow: hidden; padding-top: 8px; border-radius: 4px;
+    background: var(--ebony); box-shadow: inset 0 8px 14px rgba(0,0,0,.7);
+  }
+  .pencereli .manual { height: clamp(140px, 27vh, 210px); }
+  /* Oktav ve Tut, telefonda klavyenin üstündeki çubukta: kontrollerdeki eşleri gizlenir */
+  .pencereli .oktav-ctl, .pencereli #hold { display: none; }
+  .pencereli .cap { display: none; }
+  .pencereli .note, .pencereli .note.ad { display: block; font-size: .78rem; }
+  .pencereli .key.white { padding-bottom: 14px; }
+
+  .pencereli .pencere-cubugu { display: flex; align-items: center; gap: 6px; min-height: 44px; }
+  .pencere-ok, .dok-dugme {
+    height: 44px; min-width: 48px; border-radius: 8px; border: 1px solid var(--oak-edge);
+    background: var(--oak); color: var(--ivory); cursor: pointer;
+  }
+  .pencere-ok { font-size: 1.6rem; line-height: 1; padding: 0 0 4px; }
+  .pencere-ok:disabled { opacity: .35; cursor: default; }
+  .dok-dugme { margin-left: auto; padding: 0 .9rem; font-weight: 500; }
+  .tam-ekran { display: none; } /* yalnızca yan tutuşta: ekran alçakken tarayıcı çubukları yer kaplamasın */
+  .dok-dugme[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  #pencereOut { min-width: 0; padding: 0 2px; text-align: center; font: 500 .9rem var(--font-mono); color: var(--ivory-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 340px) {
+    /* 320 piksellik telefonda da yedi beyaz tuş (bir oktav) 44 pikselden geniş kalsın */
+    .pencereli .manual-wrap { padding-left: max(4px, env(safe-area-inset-left)); padding-right: max(4px, env(safe-area-inset-right)); }
+    .pencere-ok { min-width: 44px; } .dok-dugme { padding: 0 .6rem; } #pencereOut { font-size: .8rem; }
+  }
+
+  /* Yan tutuş: ekran alçak, klavye ve çubuk daha ince */
+  @media (orientation: landscape) and (max-height: 540px) {
+    .pencereli .manual { height: clamp(96px, 33vh, 150px); }
+    .pencereli .manual-wrap { gap: 4px; padding-top: 4px; }
+    .pencereli .pencere-cubugu { min-height: 40px; }
+    .pencere-ok, .dok-dugme, .pencereli .pencere-cubugu .oynat { height: 40px; }
+    .pencereli .pencere-cubugu .oynat { width: 40px; }
+    .pencereli body { padding-top: 12px; }
+    .pencereli .tam-ekran { display: inline-block; }
+    .pencereli .tam-ekran:not([hidden]) + .dok-dugme { margin-left: 0; }
+  }
 </style>
 </head>
 <body>
@@ -357,9 +427,10 @@
   <header class="masthead">
     <div>
       <h1>Kilise Orgu</h1>
-      <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+      <p class="sub"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
     </div>
     <div class="eylemler">
+      <button id="yukleBtn" class="wind" type="button" hidden title="Orgu uygulama gibi ana ekrandan aç; internet olmadan da çalışır"><span aria-hidden="true">＋</span> Ana ekrana ekle</button>
       <button id="parcalarBtn" class="wind" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Parçalar</button>
       <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
         <span class="lamp" aria-hidden="true"></span>
@@ -392,7 +463,17 @@
       </div>
 
       <div class="manual-wrap">
-        <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        <div class="pencere-cubugu" role="group" aria-label="Klavye penceresi">
+          <button id="pencereSol" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav aşağı kaydır">‹</button>
+          <output id="pencereOut" aria-live="polite"></output>
+          <button id="pencereSag" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav yukarı kaydır">›</button>
+          <button id="tamEkran" class="dok-dugme tam-ekran" type="button" aria-pressed="false" hidden>Tam ekran</button>
+          <button id="dokTut" class="dok-dugme" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
+          <button id="dokOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false" hidden>▶</button>
+        </div>
+        <div class="manual-kutu" id="manualKutu">
+          <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        </div>
       </div>
 
       <button id="parcaSec" class="parca-sec" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Bir parça seç: program çalsın ya da sana öğretsin</button>
@@ -441,7 +522,7 @@
       </section>
 
       <div class="controls">
-        <div class="ctl">
+        <div class="ctl oktav-ctl">
           <span class="ctl-label">Oktav</span>
           <div class="stepper">
             <button id="octDown" type="button" aria-label="Bir oktav aşağı">−</button>
@@ -465,7 +546,8 @@
           <span class="ctl-label">Ses <output id="volOut">70</output></span>
           <input type="range" id="volume" min="0" max="100" value="70">
         </label>
-        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd>Boşluk</kbd></button>
+        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd class="yalniz-klavye">Boşluk</kbd></button>
+        <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
     </section>
@@ -474,13 +556,18 @@
   <section class="howto">
     <h2>Nasıl çalınır</h2>
     <ul>
-      <li><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
+      <li class="yalniz-dokunmatik"><strong>Parmağınla tuşa bas</strong>: basılı tuttuğun sürece ses sürer. Parmağını tuşların üstünde kaydırırsan nota değişir; iki parmakla akor basarsın.</li>
+      <li class="yalniz-dokunmatik"><strong>‹ ›</strong> klavyeyi bir oktav kaydırır. Telefonu <strong>yan çevirirsen</strong> iki oktavdan fazlası sığar.</li>
+      <li class="yalniz-dokunmatik"><strong>Tut</strong> açıkken parmağını kaldırdığın notalar çalmaya devam eder.</li>
+      <li class="yalniz-klavye"><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
         <br><span class="rowkeys" id="rowLower"></span>
         <br><span class="rowkeys" id="rowUpper"></span></li>
-      <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
-      <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
-      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.</li>
+      <li class="yalniz-klavye"><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
+      <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+      <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
+      <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
   </section>
 </div>
@@ -560,13 +647,17 @@
 
   const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
   const MAX_VOICES = 24;
+  const HAFIF_MAX_VOICES = 12;
 
   /* ================= Durum ================= */
   const $ = s => document.querySelector(s);
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const kalinIsaretci = window.matchMedia ? window.matchMedia('(pointer: coarse)') : { matches: false };
+  const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
 
-  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3 };
+  // hafif: zayıf telefonlar için daha az boru ve kısa yankı
+  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false };
   const stopsOn = new Set(PISTONS[4].stops);
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
@@ -577,6 +668,7 @@
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
       if (Number.isFinite(saved.volume)) settings.volume = clamp(saved.volume, 0, 100);
       if (Number.isFinite(saved.octave)) settings.octave = clamp(saved.octave, 1, 5);
+      if (typeof saved.hafif === 'boolean') settings.hafif = saved.hafif;
       if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => STOP_BY_ID[id] && stopsOn.add(id)); }
     }
   } catch (_) {}
@@ -596,6 +688,8 @@
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
     ctx = new AC({ latencyHint: 'interactive' });
+    // iPhone: sessiz anahtarı açıkken de çalsın (iOS 17 ve sonrası; varsayılan oturum türü sessizde susar)
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
 
     const bus = ctx.createGain(); bus.gain.value = 0.2;
     const trem = ctx.createGain(); trem.gain.value = 1;
@@ -663,7 +757,8 @@
     return buf;
   }
 
-  function applyRoom() { if (ctx) A.conv.buffer = buildImpulse(ROOMS[settings.room]); }
+  // Hafif modda yankı en çok 2,4 saniye sürer: uzun yankı telefonda en çok işlemciyi yoran kısımdır.
+  function applyRoom() { if (ctx) A.conv.buffer = buildImpulse(settings.hafif ? Math.min(ROOMS[settings.room], 2.4) : ROOMS[settings.room]); }
   function applyMix() {
     if (!ctx) return;
     const t = ctx.currentTime;
@@ -729,7 +824,8 @@
       g.connect(this.out);
       const oscs = [];
       let speak = 0.018;
-      for (const r of stop.ranks) {
+      // Hafif modda Mikstür'ün yalnızca ilk iki sırası öter
+      for (const r of (settings.hafif ? stop.ranks.slice(0, 2) : stop.ranks)) {
         let mult = r.mult;
         if (r.breaks) while (this.freq * mult > 5200 && mult >= 4) mult /= 2; // mikstür "geri kırılır"
         const f = this.freq * mult;
@@ -780,6 +876,7 @@
         src.start(t0, Math.random() * 1.5, 0.25);
         src.onended = () => { try { g.disconnect(); } catch (_) {} };
       }
+      if (settings.hafif) return; // hafif modda sürekli rüzgâr hışırtısı yok
       const br = ctx.createBufferSource(); br.buffer = A.noise; br.loop = true;
       const bf = ctx.createBiquadFilter(); bf.type = 'bandpass';
       bf.frequency.value = Math.min(this.freq * 2, 6000); bf.Q.value = 1.2;
@@ -834,8 +931,11 @@
   const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
 
+  let sesDesteklenmiyor = false;
+
   function ensureWind() {
     if (!ctx && !buildAudio()) {
+      sesDesteklenmiyor = true;
       focusHint.textContent = 'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.';
       focusHint.hidden = false;
       return false;
@@ -856,7 +956,7 @@
     if (!first) return;
     sustained.delete(midi);
     if (!voices.has(midi)) {
-      if (voices.size >= MAX_VOICES) killVoice(voices.keys().next().value);
+      if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
       voices.set(midi, new Voice(midi, ctx.currentTime));
     }
     refreshView();
@@ -890,6 +990,7 @@
   function updateSustain() {
     const on = sustainKey || sustainLatch;
     holdBtn.setAttribute('aria-pressed', String(on));
+    $('#dokTut').setAttribute('aria-pressed', String(on));
     if (on === sustainOn) return;
     sustainOn = on;
     if (!on) {
@@ -989,9 +1090,10 @@
       : code.startsWith('Digit') ? code.slice(5)
       : (isTurkish ? TRQ_LABELS : US_LABELS)[code];
   }
+  const BEYAZ_TUS = [...Array(SPAN).keys()].filter(o => !BLACK_PCS.has(o % 12)); // beyaz tuşların ofsetleri
+  const WN = BEYAZ_TUS.length;
 
   function buildManual() {
-    const WN = [...Array(SPAN).keys()].filter(o => !BLACK_PCS.has(o % 12)).length;
     let wi = 0;
     for (let off = 0; off < SPAN; off++) {
       const black = BLACK_PCS.has(off % 12);
@@ -1001,9 +1103,11 @@
       k.style.left = (wi / WN * 100) + '%';
       k.style.width = (100 / WN * (black ? 0.62 : 1)) + '%';
       if (!black) wi++;
-      if (off % 12 === 0) {
+      if (!black) {
+        // Do tuşlarında nota adı hep yazar; öbür beyaz tuşlarda yalnızca telefon görünümünde
         const n = document.createElement('span');
-        n.className = 'note';
+        n.className = off % 12 === 0 ? 'note' : 'note ad';
+        if (off % 12) n.textContent = SOLFEJ[off % 12];
         k.appendChild(n);
       }
       const lab = document.createElement('span');
@@ -1037,12 +1141,12 @@
   function renderOctave() {
     const base = baseMidi();
     keyEls.forEach((k, off) => {
-      const n = k.querySelector('.note');
-      if (n) n.textContent = noteName(base + off);
+      if (off % 12 === 0) k.querySelector('.note').textContent = noteName(base + off);
     });
     $('#octOut').textContent = `${noteName(base)} – ${noteName(base + SPAN - 1)}`;
     $('#octDown').disabled = settings.octave <= 1;
     $('#octUp').disabled = settings.octave >= 5;
+    pencereCiz();
   }
 
   async function readLayout() {
@@ -1068,9 +1172,102 @@
     save();
   }
 
+  /* ---- Telefon: pencereli klavye ----
+     Dar bir dokunmatik ekranda 32 tuş sığmaz, tuşlar parmaktan ince kalır. Bu durumda klavye ekranın
+     altına sabitlenir ve bir pencere gösterir: beyaz tuşlar en az TUS_EN_AZ piksel. ‹ › pencereyi bir
+     oktav kaydırır; manuelin kenarına gelince oktav ayarı değişir, böylece bütün oktavlar gezilebilir.
+     Konumlar "beyaz tuş" biriminde ve mutlaktır: Do(-1) = 0, Do4 = 35. */
+  const TUS_EN_AZ = 46;
+  const BEYAZ_PC = [0, null, 1, null, 2, 3, null, 4, null, 5, null, 6];
+  const KARA_MERKEZ = [null, 1, null, 2, null, null, 4, null, 5, null, 6, null];
+  const KARA_YARIM = 0.31; // kara tuş, beyaz tuş genişliğinin 0,62'si
+  const pencere = { acik: false, gorunen: WN, bas: 0, hedef: '' }; // bas: penceredeki ilk beyaz tuşun manueldeki sırası
+
+  function beyazAraligi(m) {
+    const o = Math.floor(m / 12) * 7, pc = ((m % 12) + 12) % 12;
+    if (BEYAZ_PC[pc] !== null) return [o + BEYAZ_PC[pc], o + BEYAZ_PC[pc] + 1];
+    return [o + KARA_MERKEZ[pc] - KARA_YARIM, o + KARA_MERKEZ[pc] + KARA_YARIM];
+  }
+  const pencereSolu = () => 7 * (settings.octave + 1) + pencere.bas;
+
+  function pencereCiz() {
+    if (!pencere.acik) { manual.style.width = ''; manual.style.transform = ''; return; }
+    const v = pencere.gorunen, b = pencere.bas, base = baseMidi();
+    manual.style.width = (WN / v * 100) + '%';
+    manual.style.transform = b ? `translateX(${(-b / WN * 100).toFixed(4)}%)` : '';
+    $('#pencereOut').textContent = `${noteName(base + BEYAZ_TUS[b])} – ${noteName(base + BEYAZ_TUS[b + v - 1])}`;
+    $('#pencereSol').disabled = settings.octave <= 1 && b === 0;
+    $('#pencereSag').disabled = settings.octave >= 5 && b === WN - v;
+  }
+
+  // Penceredeki ilk beyaz tuşu mutlak `sol` konumuna en yakın getirir; gerekirse oktav ayarını değiştirir.
+  function pencereyeYerles(sol) {
+    const v = pencere.gorunen;
+    let enIyi = null;
+    for (let o = 1; o <= 5; o++) {
+      const b = clamp(Math.round(sol) - 7 * (o + 1), 0, WN - v);
+      const bedel = Math.abs(7 * (o + 1) + b - sol) * 100 + Math.abs(o - settings.octave);
+      if (!enIyi || bedel < enIyi.bedel) enIyi = { o, b, bedel };
+    }
+    pencere.bas = enIyi.b;
+    if (enIyi.o !== settings.octave) setOctave(enIyi.o); // renderOctave pencereyi de çizer
+    else pencereCiz();
+  }
+
+  function pencereKaydir(yon) { if (pencere.acik) pencereyeYerles(pencereSolu() + 7 * yon); }
+
+  // Nota gruplarını (sırayla çalınacak akorlar) gösterir. İlk grup zaten görünüyorsa pencere kıpırdamaz
+  // (zorla değilse); görünmüyorsa pencere, ilk gruptan başlayarak sığabildiği kadar grubu ortalar.
+  function pencereNotalaraGetir(gruplar, zorla) {
+    if (!pencere.acik || !gruplar.length || !gruplar[0].length) return;
+    const v = pencere.gorunen;
+    let lo = Infinity, hi = -Infinity;
+    for (let i = 0; i < gruplar.length; i++) {
+      let a = lo, b = hi;
+      for (const m of gruplar[i]) { const [x, y] = beyazAraligi(m); a = Math.min(a, x); b = Math.max(b, y); }
+      if (i === 0) {
+        const sol = pencereSolu();
+        if (!zorla && a >= sol - 1e-6 && b <= sol + v + 1e-6) return;
+      } else if (b - a > v) break;
+      lo = a; hi = b;
+    }
+    pencereyeYerles((lo + hi) / 2 - v / 2);
+  }
+
+  // Öğren ve eşlikte yanan (çalınması beklenen) tuşlar pencerenin dışındaysa pencere onlara kayar.
+  function pencereHedefeGetir() {
+    if (!pencere.acik || !targets.size) { pencere.hedef = ''; return; }
+    const notalar = [...targets.keys()].sort((a, b) => a - b);
+    const anahtar = notalar.join(',');
+    if (anahtar === pencere.hedef) return;
+    pencere.hedef = anahtar;
+    pencereNotalaraGetir([notalar, ...calarIleriNotalar()]);
+  }
+
+  function dokYuksekligi() {
+    const h = pencere.acik ? Math.ceil($('.manual-wrap').getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--dok-h', h + 'px');
+  }
+
+  // Ekran boyutu ya da işaretçi değişince pencereli görünümü açar, kapatır ve yeniden ölçer.
+  function pencereKur() {
+    const ac = kalinIsaretci.matches && window.innerWidth < 1000;
+    // Pencere açılırken Do4'ten başlar (orta Do); açıkken ölçü değişirse kullanıcının yeri korunur
+    const sol = pencere.acik ? pencereSolu() : 35;
+    if (ac !== pencere.acik) {
+      pencere.acik = ac;
+      document.documentElement.classList.toggle('pencereli', ac);
+    }
+    if (ac) {
+      pencere.gorunen = clamp(Math.floor($('#manualKutu').clientWidth / TUS_EN_AZ), 7, WN);
+      pencereyeYerles(sol);
+    } else pencereCiz();
+    dokYuksekligi();
+  }
   /* ================= Görünüm ================= */
   const readout = $('#readout');
   function refreshView() {
+    pencereHedefeGetir(); // telefonda yanan tuşlar görünsün (oktavı değiştirebilir, önce gelmeli)
     const base = baseMidi();
     keyEls.forEach((k, off) => {
       const m = base + off;
@@ -1586,6 +1783,26 @@
     } else calarAdimaGec(no);
   }
 
+  // Telefonda pencerenin önceden görmesi için: kullanıcının sıradaki birkaç adımda basacağı notalar.
+  function calarIleriNotalar() {
+    if (!calar.parca || calar.durum !== 'caliyor') return [];
+    if (calar.mod === 'ogren') return calar.adimlar.slice(calar.adim + 1, calar.adim + 9).map(a => a.notalar);
+    const sonuc = [];
+    for (const o of calar.cizelge.olaylar) {
+      if (o.t <= calar.konum || calar.eller[o.el] !== 'ben') continue;
+      sonuc.push(o.notalar);
+      if (sonuc.length >= 8) break;
+    }
+    return sonuc;
+  }
+
+  // Parça açılınca telefondaki klavye penceresi ezginin başına gelir.
+  function calarPencereyiYerlestir() {
+    const c = calar.cizelge;
+    const el = c.eller.find(e => calar.eller[e] === 'ben') || (c.eller.includes('sag') ? 'sag' : 'sol');
+    pencereNotalaraGetir(c.olaylar.filter(o => o.el === el).slice(0, 8).map(o => o.notalar), true);
+  }
+
   /* ---- Komutlar ---- */
   function calarYukle(id, mod) {
     const parca = PARCA_BY_ID[id];
@@ -1605,6 +1822,7 @@
     applyPiston(ilk.piston);
     if (settings.octave !== ilk.oktav) setOctave(ilk.oktav);
     if (parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
+    calarPencereyiYerlestir();
     calarArayuzKur();
     calarArayuzGuncelle();
     return true;
@@ -1729,7 +1947,6 @@
   const DURUM_ADI = { hazir: 'Hazır', caliyor: 'Çalıyor', durakladi: 'Durakladı', bitti: 'Bitti' };
   const calarEl = $('#calar');
   const liste = { kutu: $('#parcaListesi'), ara: $('#parcaAra'), ul: $('#parcaSatirlari'), etiketler: $('#parcaEtiketleri'), secili: null };
-  const dokunmatik = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
   // Adresi yalnızca değiştiğinde yaz (Safari, replaceState'i 30 saniyede 100 kezle sınırlar)
   function adresiYaz(u) {
@@ -1800,16 +2017,32 @@
     if (calar.adim >= calar.adimlar.length) { const s = document.createElement('span'); s.textContent = ' —'; el.appendChild(s); }
   }
 
+  // Parça çalarken telefonun ekranı kararmasın (Screen Wake Lock; sayfa gizlenince tarayıcı kendisi bırakır)
+  let ekranKilidi = null;
+  function ekraniAcikTut(ac) {
+    if (!('wakeLock' in navigator)) return;
+    if (ac && !ekranKilidi) ekranKilidi = navigator.wakeLock.request('screen').catch(() => null);
+    else if (!ac && ekranKilidi) {
+      const k = ekranKilidi;
+      ekranKilidi = null;
+      k.then(kilit => kilit && kilit.release()).catch(() => {});
+    }
+  }
+
   function calarArayuzGuncelle() {
     const var_ = !!calar.parca;
+    ekraniAcikTut(calar.durum === 'caliyor');
     calarEl.hidden = !var_;
     $('#parcaSec').hidden = var_;
+    $('#dokOynat').hidden = !var_;
     if (!var_) return;
     const caliyor = calar.durum === 'caliyor';
-    const oynat = $('#calarOynat');
-    oynat.textContent = caliyor ? '❚❚' : '▶';
-    oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
-    oynat.setAttribute('aria-pressed', String(caliyor));
+    // Telefonda klavyenin üstündeki düğme, çalar panelindekinin eşi
+    for (const oynat of [$('#calarOynat'), $('#dokOynat')]) {
+      oynat.textContent = caliyor ? '❚❚' : '▶';
+      oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
+      oynat.setAttribute('aria-pressed', String(caliyor));
+    }
     $('#modDinle').setAttribute('aria-pressed', String(calar.mod === 'dinle'));
     $('#modOgren').setAttribute('aria-pressed', String(calar.mod === 'ogren'));
     $('#calarHiz').value = calar.hiz;
@@ -1863,8 +2096,8 @@
       d.addEventListener('click', () => {
         liste.kutu.close();
         calarYukle(p.id, 'dinle');
-        // Klavye ile çalar paneli birlikte görünsün
-        $('.manual-wrap').scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+        // Klavye ile çalar paneli birlikte görünsün (telefonda klavye zaten ekranın altında)
+        (pencere.acik ? calarEl : $('.manual-wrap')).scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
       });
       li.appendChild(d);
       liste.ul.appendChild(li);
@@ -1898,7 +2131,9 @@
   }
 
   function calarOlaylariBagla() {
-    $('#calarOynat').addEventListener('click', () => (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla()));
+    const oynatDuraklat = () => (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());
+    $('#calarOynat').addEventListener('click', oynatDuraklat);
+    $('#dokOynat').addEventListener('click', oynatDuraklat);
     $('#calarBas').addEventListener('click', calarDurdur);
     $('#calarKapat').addEventListener('click', calarKapat);
     $('#modDinle').addEventListener('click', () => calarModSec('dinle'));
@@ -2029,9 +2264,23 @@
   document.addEventListener('pointerup', resumeIfNeeded);
   document.addEventListener('touchend', resumeIfNeeded);
 
-  holdBtn.addEventListener('click', () => { sustainLatch = !sustainLatch; updateSustain(); });
+  const tutDegistir = () => { sustainLatch = !sustainLatch; updateSustain(); };
+  holdBtn.addEventListener('click', tutDegistir);
+  $('#dokTut').addEventListener('click', tutDegistir);
   $('#octDown').addEventListener('click', () => shiftOctave(-1));
   $('#octUp').addEventListener('click', () => shiftOctave(1));
+  $('#pencereSol').addEventListener('click', () => pencereKaydir(-1));
+  $('#pencereSag').addEventListener('click', () => pencereKaydir(1));
+
+  // Hafif mod: daha az boru, daha az ses, kısa yankı (zayıf telefonlar için)
+  const hafifBtn = $('#hafif');
+  hafifBtn.setAttribute('aria-pressed', String(settings.hafif));
+  hafifBtn.addEventListener('click', () => {
+    settings.hafif = !settings.hafif;
+    hafifBtn.setAttribute('aria-pressed', String(settings.hafif));
+    applyRoom();
+    save();
+  });
 
   const roomSel = $('#room'), revIn = $('#reverb'), volIn = $('#volume');
   roomSel.value = settings.room;
@@ -2041,7 +2290,8 @@
   revIn.addEventListener('input', () => { settings.reverb = Number(revIn.value); $('#revOut').textContent = revIn.value; applyMix(); save(); });
   volIn.addEventListener('input', () => { settings.volume = Number(volIn.value); $('#volOut').textContent = volIn.value; applyMix(); save(); });
 
-  function updateFocusHint() { focusHint.hidden = document.hasFocus(); }
+  // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
+  function updateFocusHint() { focusHint.hidden = !sesDesteklenmiyor && (dokunmatik || document.hasFocus()); }
   window.addEventListener('focus', updateFocusHint);
   window.addEventListener('blur', () => {
     releaseAll();
@@ -2057,6 +2307,7 @@
   buildManual();
   renderCaps();
   renderOctave();
+  pencereKur();
   updatePistons();
   refreshView();
   updateFocusHint();
@@ -2071,6 +2322,62 @@
   if (window.ResizeObserver) new ResizeObserver(relayout).observe(fac.el);
   else window.addEventListener('resize', relayout);
   layoutFacade();
+
+  // Telefon döndürülünce ya da pencere daralınca klavye penceresi yeniden ölçülür
+  let pencereRaf = 0;
+  const pencereyiYenile = () => { cancelAnimationFrame(pencereRaf); pencereRaf = requestAnimationFrame(pencereKur); };
+  window.addEventListener('resize', pencereyiYenile);
+  if (kalinIsaretci.addEventListener) kalinIsaretci.addEventListener('change', pencereyiYenile);
+  if (window.ResizeObserver) new ResizeObserver(dokYuksekligi).observe($('.manual-wrap'));
+
+  // Yan tutuşta tam ekran: tarayıcının çubukları klavyeden yer çalmasın (iPhone Safari desteklemez, düğme çıkmaz)
+  const tamEkranBtn = $('#tamEkran');
+  if (document.fullscreenEnabled && document.documentElement.requestFullscreen) {
+    tamEkranBtn.hidden = false;
+    tamEkranBtn.addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      else document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});
+    });
+    document.addEventListener('fullscreenchange', () => {
+      const acik = !!document.fullscreenElement;
+      tamEkranBtn.setAttribute('aria-pressed', String(acik));
+      tamEkranBtn.textContent = acik ? 'Küçült' : 'Tam ekran';
+    });
+  }
+
+  /* ---- Ana ekrana ekleme ve internetsiz çalışma ----
+     Yalnızca sayfa bir sunucudan açılınca: diskten (file://) açılan sayfada ikisi de olmaz. */
+  if (/^https?:$/.test(location.protocol)) {
+    const bag = document.createElement('link');
+    bag.rel = 'manifest';
+    bag.href = 'manifest.webmanifest';
+    document.head.appendChild(bag);
+    const guvenli = location.protocol === 'https:' || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+    if (guvenli && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(kayit => {
+        // İlk açılışta yazı tipleri hizmet çalışanından önce indi: internetsiz de görünsünler diye saklatılır
+        const yazilar = performance.getEntriesByType('resource').map(e => e.name).filter(u => /^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(u));
+        if (kayit.active && yazilar.length) kayit.active.postMessage({ tur: 'yazi-tipleri', adresler: yazilar });
+      }).catch(() => {});
+    }
+  }
+
+  // Tarayıcı uygulama olarak yüklemeyi önerirse "Ana ekrana ekle" düğmesi görünür (Android'de Chrome, masaüstünde Chrome ve Edge)
+  let yuklemeIstemi = null;
+  const yukleBtn = $('#yukleBtn');
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    yuklemeIstemi = e;
+    yukleBtn.hidden = false;
+  });
+  yukleBtn.addEventListener('click', async () => {
+    if (!yuklemeIstemi) return;
+    const istem = yuklemeIstemi;
+    yuklemeIstemi = null;
+    yukleBtn.hidden = true;
+    try { await istem.prompt(); } catch (_) {}
+  });
+  window.addEventListener('appinstalled', () => { yuklemeIstemi = null; yukleBtn.hidden = true; });
 })();
 </script>
 </body>

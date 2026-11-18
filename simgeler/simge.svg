@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="zemin" cx="50%" cy="8%" r="95%">
+      <stop offset="0" stop-color="#4a3322"/><stop offset=".55" stop-color="#241810"/><stop offset="1" stop-color="#140d08"/>
+    </radialGradient>
+    <linearGradient id="metal">
+      <stop offset="0" stop-color="#4d4840"/><stop offset=".18" stop-color="#a39c8c"/><stop offset=".36" stop-color="#eee8da"/>
+      <stop offset=".5" stop-color="#c4bdad"/><stop offset=".82" stop-color="#6f695e"/><stop offset="1" stop-color="#3e3a33"/>
+    </linearGradient>
+    <linearGradient id="yaldiz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6dc9a"/><stop offset=".55" stop-color="#cfa34b"/><stop offset="1" stop-color="#8a6a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="url(#zemin)"/>
+  <g>
+    <rect x="67" y="214" width="42" height="138" fill="url(#metal)"/><path d="M67 352H109L93.46 408H82.54Z" fill="url(#metal)"/><ellipse cx="88" cy="214" rx="21" ry="5" fill="#17110c"/><path d="M74.98 342Q74.98 322 88 316Q101.02 322 101.02 342Z" fill="url(#yaldiz)"/><rect x="74.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="123" y="170" width="42" height="182" fill="url(#metal)"/><path d="M123 352H165L149.46 408H138.54Z" fill="url(#metal)"/><ellipse cx="144" cy="170" rx="21" ry="5" fill="#17110c"/><path d="M130.98 342Q130.98 322 144 316Q157.02 322 157.02 342Z" fill="url(#yaldiz)"/><rect x="130.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="179" y="126" width="42" height="226" fill="url(#metal)"/><path d="M179 352H221L205.46 408H194.54Z" fill="url(#metal)"/><ellipse cx="200" cy="126" rx="21" ry="5" fill="#17110c"/><path d="M186.98 342Q186.98 322 200 316Q213.02 322 213.02 342Z" fill="url(#yaldiz)"/><rect x="186.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="235" y="86" width="42" height="266" fill="url(#metal)"/><path d="M235 352H277L261.46 408H250.54Z" fill="url(#metal)"/><ellipse cx="256" cy="86" rx="21" ry="5" fill="#17110c"/><path d="M242.98 342Q242.98 322 256 316Q269.02 322 269.02 342Z" fill="url(#yaldiz)"/><rect x="242.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="291" y="126" width="42" height="226" fill="url(#metal)"/><path d="M291 352H333L317.46 408H306.54Z" fill="url(#metal)"/><ellipse cx="312" cy="126" rx="21" ry="5" fill="#17110c"/><path d="M298.98 342Q298.98 322 312 316Q325.02 322 325.02 342Z" fill="url(#yaldiz)"/><rect x="298.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="347" y="170" width="42" height="182" fill="url(#metal)"/><path d="M347 352H389L373.46 408H362.54Z" fill="url(#metal)"/><ellipse cx="368" cy="170" rx="21" ry="5" fill="#17110c"/><path d="M354.98 342Q354.98 322 368 316Q381.02 322 381.02 342Z" fill="url(#yaldiz)"/><rect x="354.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="403" y="214" width="42" height="138" fill="url(#metal)"/><path d="M403 352H445L429.46 408H418.54Z" fill="url(#metal)"/><ellipse cx="424" cy="214" rx="21" ry="5" fill="#17110c"/><path d="M410.98 342Q410.98 322 424 316Q437.02 322 437.02 342Z" fill="url(#yaldiz)"/><rect x="410.98" y="342" width="26.04" height="10" fill="#120c08"/>
+    <rect x="62" y="408" width="388" height="26" rx="3" fill="url(#yaldiz)"/>
+    <rect x="62" y="434" width="388" height="6" fill="#2b1d13"/>
+  </g>
+</svg>

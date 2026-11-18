@@ -4,12 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kilise Orgu</title>
+<meta name="description" content="Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: on üç register, kilise yankısı ve otuz parçalık şarkı çalar.">
+<meta name="theme-color" content="#1a120c">
+<link rel="icon" href="simgeler/simge.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="simgeler/simge-180.png">
+<meta name="apple-mobile-web-app-title" content="Kilise Orgu">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cormorant+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IM+Fell+English+SC&display=swap">
 <style>
 /*@ekle stil/ana.css*/
 /*@ekle stil/calar.css*/
+/*@ekle stil/telefon.css*/
 </style>
 </head>
 <body>
@@ -17,9 +26,10 @@
   <header class="masthead">
     <div>
       <h1>Kilise Orgu</h1>
-      <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+      <p class="sub"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
     </div>
     <div class="eylemler">
+      <button id="yukleBtn" class="wind" type="button" hidden title="Orgu uygulama gibi ana ekrandan aç; internet olmadan da çalışır"><span aria-hidden="true">＋</span> Ana ekrana ekle</button>
       <button id="parcalarBtn" class="wind" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Parçalar</button>
       <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
         <span class="lamp" aria-hidden="true"></span>
@@ -52,7 +62,17 @@
       </div>
 
       <div class="manual-wrap">
-        <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        <div class="pencere-cubugu" role="group" aria-label="Klavye penceresi">
+          <button id="pencereSol" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav aşağı kaydır">‹</button>
+          <output id="pencereOut" aria-live="polite"></output>
+          <button id="pencereSag" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav yukarı kaydır">›</button>
+          <button id="tamEkran" class="dok-dugme tam-ekran" type="button" aria-pressed="false" hidden>Tam ekran</button>
+          <button id="dokTut" class="dok-dugme" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
+          <button id="dokOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false" hidden>▶</button>
+        </div>
+        <div class="manual-kutu" id="manualKutu">
+          <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        </div>
       </div>
 
       <button id="parcaSec" class="parca-sec" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Bir parça seç: program çalsın ya da sana öğretsin</button>
@@ -101,7 +121,7 @@
       </section>
 
       <div class="controls">
-        <div class="ctl">
+        <div class="ctl oktav-ctl">
           <span class="ctl-label">Oktav</span>
           <div class="stepper">
             <button id="octDown" type="button" aria-label="Bir oktav aşağı">−</button>
@@ -125,7 +145,8 @@
           <span class="ctl-label">Ses <output id="volOut">70</output></span>
           <input type="range" id="volume" min="0" max="100" value="70">
         </label>
-        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd>Boşluk</kbd></button>
+        <button id="hold" class="hold" type="button" aria-pressed="false" title="Açıkken bıraktığın notalar çalmaya devam eder">Tut <kbd class="yalniz-klavye">Boşluk</kbd></button>
+        <button id="hafif" class="hold" type="button" aria-pressed="false" title="Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye">Hafif mod</button>
         <p class="readout" id="readout">Çalan:<b>—</b></p>
       </div>
     </section>
@@ -134,13 +155,18 @@
   <section class="howto">
     <h2>Nasıl çalınır</h2>
     <ul>
-      <li><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
+      <li class="yalniz-dokunmatik"><strong>Parmağınla tuşa bas</strong>: basılı tuttuğun sürece ses sürer. Parmağını tuşların üstünde kaydırırsan nota değişir; iki parmakla akor basarsın.</li>
+      <li class="yalniz-dokunmatik"><strong>‹ ›</strong> klavyeyi bir oktav kaydırır. Telefonu <strong>yan çevirirsen</strong> iki oktavdan fazlası sığar.</li>
+      <li class="yalniz-dokunmatik"><strong>Tut</strong> açıkken parmağını kaldırdığın notalar çalmaya devam eder.</li>
+      <li class="yalniz-klavye"><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
         <br><span class="rowkeys" id="rowLower"></span>
         <br><span class="rowkeys" id="rowUpper"></span></li>
-      <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
-      <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
-      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.</li>
+      <li class="yalniz-klavye"><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
+      <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+      <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
+      <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
   </section>
 </div>

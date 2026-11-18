@@ -45,9 +45,12 @@
     background: radial-gradient(ellipse 90% 40% at 50% 0%, var(--oak-glow) 0%, var(--oak-deep) 70%) no-repeat, var(--oak-deep);
   }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-  button { font: inherit; }
+  button { font: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
 
   .page { max-width: 1080px; margin-inline: auto; display: grid; gap: 22px; }
+  /* Izgara sütunu içeriğin en geniş satırına göre büyümesin: dar ekranda sayfa yana taşmasın */
+  .page, .organ, .console { grid-template-columns: minmax(0, 1fr); }
 
   /* ---------- Başlık ---------- */
   .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; }
@@ -166,7 +169,7 @@
   }
   .manual {
     position: relative; height: clamp(120px, 19vw, 184px);
-    touch-action: none; user-select: none; -webkit-user-select: none;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
   .key { position: absolute; top: 0; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
   .key.white {
@@ -192,6 +195,7 @@
   }
   .key.black .cap { color: var(--knob-shade); border-color: #4a3b2c; }
   .note { font: 700 .72rem/1 var(--font-ui); color: var(--gilt-deep); }
+  .note.ad { display: none; }
   @media (max-width: 560px) { .cap { display: none; } .note { font-size: .6rem; } }
 
   /* Kontroller */

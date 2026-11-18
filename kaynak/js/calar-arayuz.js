@@ -5,7 +5,6 @@
   const DURUM_ADI = { hazir: 'Hazır', caliyor: 'Çalıyor', durakladi: 'Durakladı', bitti: 'Bitti' };
   const calarEl = $('#calar');
   const liste = { kutu: $('#parcaListesi'), ara: $('#parcaAra'), ul: $('#parcaSatirlari'), etiketler: $('#parcaEtiketleri'), secili: null };
-  const dokunmatik = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
   // Adresi yalnızca değiştiğinde yaz (Safari, replaceState'i 30 saniyede 100 kezle sınırlar)
   function adresiYaz(u) {
@@ -76,16 +75,32 @@
     if (calar.adim >= calar.adimlar.length) { const s = document.createElement('span'); s.textContent = ' —'; el.appendChild(s); }
   }
 
+  // Parça çalarken telefonun ekranı kararmasın (Screen Wake Lock; sayfa gizlenince tarayıcı kendisi bırakır)
+  let ekranKilidi = null;
+  function ekraniAcikTut(ac) {
+    if (!('wakeLock' in navigator)) return;
+    if (ac && !ekranKilidi) ekranKilidi = navigator.wakeLock.request('screen').catch(() => null);
+    else if (!ac && ekranKilidi) {
+      const k = ekranKilidi;
+      ekranKilidi = null;
+      k.then(kilit => kilit && kilit.release()).catch(() => {});
+    }
+  }
+
   function calarArayuzGuncelle() {
     const var_ = !!calar.parca;
+    ekraniAcikTut(calar.durum === 'caliyor');
     calarEl.hidden = !var_;
     $('#parcaSec').hidden = var_;
+    $('#dokOynat').hidden = !var_;
     if (!var_) return;
     const caliyor = calar.durum === 'caliyor';
-    const oynat = $('#calarOynat');
-    oynat.textContent = caliyor ? '❚❚' : '▶';
-    oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
-    oynat.setAttribute('aria-pressed', String(caliyor));
+    // Telefonda klavyenin üstündeki düğme, çalar panelindekinin eşi
+    for (const oynat of [$('#calarOynat'), $('#dokOynat')]) {
+      oynat.textContent = caliyor ? '❚❚' : '▶';
+      oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
+      oynat.setAttribute('aria-pressed', String(caliyor));
+    }
     $('#modDinle').setAttribute('aria-pressed', String(calar.mod === 'dinle'));
     $('#modOgren').setAttribute('aria-pressed', String(calar.mod === 'ogren'));
     $('#calarHiz').value = calar.hiz;
@@ -139,8 +154,8 @@
       d.addEventListener('click', () => {
         liste.kutu.close();
         calarYukle(p.id, 'dinle');
-        // Klavye ile çalar paneli birlikte görünsün
-        $('.manual-wrap').scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+        // Klavye ile çalar paneli birlikte görünsün (telefonda klavye zaten ekranın altında)
+        (pencere.acik ? calarEl : $('.manual-wrap')).scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
       });
       li.appendChild(d);
       liste.ul.appendChild(li);
@@ -174,7 +189,9 @@
   }
 
   function calarOlaylariBagla() {
-    $('#calarOynat').addEventListener('click', () => (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla()));
+    const oynatDuraklat = () => (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());
+    $('#calarOynat').addEventListener('click', oynatDuraklat);
+    $('#dokOynat').addEventListener('click', oynatDuraklat);
     $('#calarBas').addEventListener('click', calarDurdur);
     $('#calarKapat').addEventListener('click', calarKapat);
     $('#modDinle').addEventListener('click', () => calarModSec('dinle'));

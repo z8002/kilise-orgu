@@ -9,8 +9,11 @@
   const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
 
+  let sesDesteklenmiyor = false;
+
   function ensureWind() {
     if (!ctx && !buildAudio()) {
+      sesDesteklenmiyor = true;
       focusHint.textContent = 'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.';
       focusHint.hidden = false;
       return false;
@@ -31,7 +34,7 @@
     if (!first) return;
     sustained.delete(midi);
     if (!voices.has(midi)) {
-      if (voices.size >= MAX_VOICES) killVoice(voices.keys().next().value);
+      if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
       voices.set(midi, new Voice(midi, ctx.currentTime));
     }
     refreshView();
@@ -65,6 +68,7 @@
   function updateSustain() {
     const on = sustainKey || sustainLatch;
     holdBtn.setAttribute('aria-pressed', String(on));
+    $('#dokTut').setAttribute('aria-pressed', String(on));
     if (on === sustainOn) return;
     sustainOn = on;
     if (!on) {

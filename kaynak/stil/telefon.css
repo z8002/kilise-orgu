@@ -1,0 +1,58 @@
+
+  /* ---------- Telefon ve tablet ---------- */
+  /* Yardım metni işaretçiye göre: parmak mı, fare ve klavye mi */
+  @media (pointer: coarse) { .yalniz-klavye { display: none !important; } }
+  @media not all and (pointer: coarse) { .yalniz-dokunmatik { display: none !important; } }
+
+  /* Pencereli klavye: dar dokunmatik ekranda klavye ekranın altına sabitlenir ve bir bölümünü gösterir
+     (beyaz tuşlar en az 44 piksel). Genişlik ve kaydırma manuel.js'de pencereCiz() ile ayarlanır. */
+  .pencere-cubugu { display: none; }
+  .pencereli body { padding-bottom: calc(var(--dok-h, 260px) + 24px); }
+  .pencereli { scroll-padding-bottom: calc(var(--dok-h, 260px) + 12px); }
+  .pencereli .manual-wrap {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px;
+    padding: 6px max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left));
+    border-radius: 0; border-top: 2px solid var(--gilt-deep);
+    background: linear-gradient(180deg, var(--oak-2), var(--ebony) 52px);
+    box-shadow: 0 -10px 26px rgba(0,0,0,.6);
+  }
+  .pencereli .manual-kutu {
+    overflow: hidden; padding-top: 8px; border-radius: 4px;
+    background: var(--ebony); box-shadow: inset 0 8px 14px rgba(0,0,0,.7);
+  }
+  .pencereli .manual { height: clamp(140px, 27vh, 210px); }
+  /* Oktav ve Tut, telefonda klavyenin üstündeki çubukta: kontrollerdeki eşleri gizlenir */
+  .pencereli .oktav-ctl, .pencereli #hold { display: none; }
+  .pencereli .cap { display: none; }
+  .pencereli .note, .pencereli .note.ad { display: block; font-size: .78rem; }
+  .pencereli .key.white { padding-bottom: 14px; }
+
+  .pencereli .pencere-cubugu { display: flex; align-items: center; gap: 6px; min-height: 44px; }
+  .pencere-ok, .dok-dugme {
+    height: 44px; min-width: 48px; border-radius: 8px; border: 1px solid var(--oak-edge);
+    background: var(--oak); color: var(--ivory); cursor: pointer;
+  }
+  .pencere-ok { font-size: 1.6rem; line-height: 1; padding: 0 0 4px; }
+  .pencere-ok:disabled { opacity: .35; cursor: default; }
+  .dok-dugme { margin-left: auto; padding: 0 .9rem; font-weight: 500; }
+  .tam-ekran { display: none; } /* yalnızca yan tutuşta: ekran alçakken tarayıcı çubukları yer kaplamasın */
+  .dok-dugme[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  #pencereOut { min-width: 0; padding: 0 2px; text-align: center; font: 500 .9rem var(--font-mono); color: var(--ivory-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 340px) {
+    /* 320 piksellik telefonda da yedi beyaz tuş (bir oktav) 44 pikselden geniş kalsın */
+    .pencereli .manual-wrap { padding-left: max(4px, env(safe-area-inset-left)); padding-right: max(4px, env(safe-area-inset-right)); }
+    .pencere-ok { min-width: 44px; } .dok-dugme { padding: 0 .6rem; } #pencereOut { font-size: .8rem; }
+  }
+
+  /* Yan tutuş: ekran alçak, klavye ve çubuk daha ince */
+  @media (orientation: landscape) and (max-height: 540px) {
+    .pencereli .manual { height: clamp(96px, 33vh, 150px); }
+    .pencereli .manual-wrap { gap: 4px; padding-top: 4px; }
+    .pencereli .pencere-cubugu { min-height: 40px; }
+    .pencere-ok, .dok-dugme, .pencereli .pencere-cubugu .oynat { height: 40px; }
+    .pencereli .pencere-cubugu .oynat { width: 40px; }
+    .pencereli body { padding-top: 12px; }
+    .pencereli .tam-ekran { display: inline-block; }
+    .pencereli .tam-ekran:not([hidden]) + .dok-dugme { margin-left: 0; }
+  }

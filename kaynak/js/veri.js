@@ -58,4 +58,5 @@
 
   const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
   const MAX_VOICES = 24;
+  const HAFIF_MAX_VOICES = 12;
 

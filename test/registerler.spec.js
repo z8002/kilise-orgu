@@ -27,9 +27,10 @@ test('register düğmeleri tek tek açılıp kapanır', async ({ page }) => {
   }
 });
 
-test('ayarlar sayfa yenilenince korunur', async ({ page }) => {
+test('ayarlar sayfa yenilenince korunur', async ({ page, isMobile }) => {
   await piston(page, 3).click();
-  await page.locator('#octUp').click();
+  // Telefonda oktavı klavyenin üstündeki › değiştirir (Do4 – Do5 penceresi bir oktav yukarı kayınca manuel de kayar)
+  await page.locator(isMobile ? '#pencereSag' : '#octUp').click();
   await page.locator('#room').selectOption('katedral');
   await page.reload();
   await expect(page.locator('#octOut')).toHaveText('Do4 – Sol6');

@@ -7,6 +7,8 @@
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
     ctx = new AC({ latencyHint: 'interactive' });
+    // iPhone: sessiz anahtarı açıkken de çalsın (iOS 17 ve sonrası; varsayılan oturum türü sessizde susar)
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
 
     const bus = ctx.createGain(); bus.gain.value = 0.2;
     const trem = ctx.createGain(); trem.gain.value = 1;
@@ -74,7 +76,8 @@
     return buf;
   }
 
-  function applyRoom() { if (ctx) A.conv.buffer = buildImpulse(ROOMS[settings.room]); }
+  // Hafif modda yankı en çok 2,4 saniye sürer: uzun yankı telefonda en çok işlemciyi yoran kısımdır.
+  function applyRoom() { if (ctx) A.conv.buffer = buildImpulse(settings.hafif ? Math.min(ROOMS[settings.room], 2.4) : ROOMS[settings.room]); }
   function applyMix() {
     if (!ctx) return;
     const t = ctx.currentTime;
@@ -140,7 +143,8 @@
       g.connect(this.out);
       const oscs = [];
       let speak = 0.018;
-      for (const r of stop.ranks) {
+      // Hafif modda Mikstür'ün yalnızca ilk iki sırası öter
+      for (const r of (settings.hafif ? stop.ranks.slice(0, 2) : stop.ranks)) {
         let mult = r.mult;
         if (r.breaks) while (this.freq * mult > 5200 && mult >= 4) mult /= 2; // mikstür "geri kırılır"
         const f = this.freq * mult;
@@ -191,6 +195,7 @@
         src.start(t0, Math.random() * 1.5, 0.25);
         src.onended = () => { try { g.disconnect(); } catch (_) {} };
       }
+      if (settings.hafif) return; // hafif modda sürekli rüzgâr hışırtısı yok
       const br = ctx.createBufferSource(); br.buffer = A.noise; br.loop = true;
       const bf = ctx.createBiquadFilter(); bf.type = 'bandpass';
       bf.frequency.value = Math.min(this.freq * 2, 6000); bf.Q.value = 1.2;

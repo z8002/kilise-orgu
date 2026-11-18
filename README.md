@@ -1,8 +1,8 @@
 # Kilise Orgu
 
-Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.
+Bilgisayar klavyesiyle ya da telefonda parmakla çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.
 
-Tek bir HTML dosyası: kurulum yok, internet bağlantısı gerekmez (yalnızca yazı tipleri internetten gelir).
+Tek bir HTML dosyası: kurulum yok, internet bağlantısı gerekmez (yalnızca yazı tipleri internetten gelir). Telefonda ana ekrana eklenebilir; bir kez açıldıktan sonra internetsiz de çalışır.
 
 ## Çalıştırma
 
@@ -13,6 +13,12 @@ Ya da bilgisayarına indir:
 1. `kilise-orgu.html` dosyasını indir.
 2. Çift tıkla; Chrome, Edge ya da Firefox'ta açılır.
 3. Bir tuşa bas. Org "rüzgârı" ilk tuşta kendiliğinden açılır.
+
+**Telefonda ya da tablette:** Adresi aç. Klavye ekranın altına yerleşir ve bir oktav gösterir. `‹` `›` düğmeleri klavyeyi bir oktav kaydırır. Telefonu yan çevirirsen iki oktavdan fazlası sığar.
+
+- **Ana ekrana ekle:** Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle"; iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Org bir uygulama gibi açılır ve internet olmadan da çalışır.
+- **Ses cızırdıyorsa** "Hafif mod"u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar.
+- iPhone'da sessiz anahtarı açıkken de ses gelir (iOS 17 ve sonrası).
 
 **Özgün sürüm (v1):** Programın ilk hâli [`v1/`](v1/) klasöründe değiştirilmeden duruyor ve https://z8002.github.io/kilise-orgu/v1/ adresinden çalınabiliyor.
 
@@ -25,7 +31,10 @@ Ya da bilgisayarına indir:
 - **Mekân:** Şapel (1,8 sn), Kilise (3,6 sn), Katedral (6,5 sn) yankı süresi.
 - **Boru cephesi:** Çalınan notaya göre ilgili borular parlar; kalın notalar uzun boruları yakar.
 - **Türkçe Q klavye:** Ö, Ç, Ş, Ğ, Ü tuşları da nota çalar; ekrandaki tuş etiketleri klavye düzenine göre gösterilir.
-- Ekrandaki klavyeye fareyle ya da dokunarak da basılabilir.
+- **Telefon ve tablet:** Ekrandaki klavyeye parmakla basılır; parmağı kaydırınca nota değişir, iki parmakla akor basılır. Dar ekranda klavye ekranın altına sabitlenir, tuşlar en az 44 piksel genişlikte kalır. Öğren'de klavye yanan tuşa kendiliğinden kayar. Çalarken ekran kararmaz.
+- **Ana ekrana ekleme ve internetsiz çalışma:** Telefonda uygulama gibi kurulur; bir kez açıldıktan sonra internet olmadan da açılır.
+- **Hafif mod:** Zayıf telefonlar için daha az boru, en çok 12 ses ve daha kısa yankı.
+- Ekrandaki klavyeye fareyle de basılabilir.
 
 ### Registerler
 

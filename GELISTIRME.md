@@ -7,7 +7,7 @@
 | Yer | İçerik |
 |---|---|
 | `kaynak/sablon.html` | Sayfanın iskeleti. `/*@ekle yol*/` yazan satırlar o dosyanın içeriğiyle değişir |
-| `kaynak/stil/` | CSS |
+| `kaynak/stil/` | CSS (`telefon.css`: ekranın altına sabitlenen pencereli klavye, dokunmatik yardım) |
 | `kaynak/js/` | JavaScript parçaları. Şablondaki sırayla tek bir `<script>` içine eklenir ve aynı kapsamı paylaşır |
 | `parcalar/` | Parça dosyaları; biçimi [parcalar/README.md](parcalar/README.md) dosyasında |
 | `kaynaklar/ref/` | Parçaların kaynak notalarından çıkarılmış başvuru notaları |
@@ -15,6 +15,8 @@
 | `test/` | Otomatik testler (Playwright) |
 | `notalar/` | Nota dosyaları (LilyPond, PDF) |
 | `v1/` | Özgün sürüm. Değiştirilmez; bir test dosyanın özetini denetler |
+| `sw.js` | Hizmet çalışanı: internetsiz açılış. Uygulama dosyaları önce ağdan, ağ yoksa saklanan kopyadan gelir |
+| `manifest.webmanifest`, `simgeler/` | Ana ekrana ekleme. Simgeler `node araclar/simgeler.js` ile çizilir |
 
 ## Değişiklik yapmak
 
@@ -22,6 +24,8 @@
 2. `python3 araclar/derle.py` ile `kilise-orgu.html` ve README'yi yeniden üret.
 3. `npm test` ile testleri çalıştır.
 4. Kaynağı ve üretilen dosyayı birlikte gönder. GitHub'daki denetim, üretilen dosya güncel değilse hata verir.
+
+Uygulamaya yeni bir dosya eklenirse (örneğin yeni bir simge), internetsiz de açılması için `sw.js`'deki `UYGULAMA` listesine yazılır ve `SURUM` bir artırılır. Listede olup sunucuda bulunmayan bir dosya kurulumu bütünüyle bozar; bunu bir test denetler.
 
 ## Kurulum
 
@@ -40,6 +44,9 @@ npm test
 - Her piston tam olarak kendi registerlerini açıyor mu; ayarlar saklanıyor mu.
 - Gerçek ses çıkışı: her register kendi ayak yüksekliğinde ötüyor mu (La4 için 8′ = 440 Hz, 16′ = 220 Hz, 4′ = 880 Hz…).
 - Telefonda parmakla basma, kaydırma ve akor.
+- Telefon görünümü: beyaz tuşlar en az 44 piksel, klavye açılışta ekranın altında, sayfa yana taşmıyor (320 piksellik ekranda da); `‹` `›` ve oktav geçişi; yan tutuş; Öğren'de klavyenin yanan tuşa kayması (Für Elise'nin ilk 40 adımı parmakla çalınır).
+- Ana ekrana ekleme: manifest ve simgeler; sunucu kapatılınca sayfanın ve parça bağlantılarının saklanan kopyadan açılması.
+- Hafif mod: nota başına boru ve gürültü kaynağı sayısı, en çok ses sayısı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.
 
 Ayrıca `araclar/kaynak_denetle.py`, parçaların notalarını ve sürelerini kaynak notalardan çıkarılmış başvurularla karşılaştırır.
@@ -51,3 +58,4 @@ Testlerdeki tuş ve piston tabloları sayfanın kodundan kopyalanmadı; README'd
 - JavaScript parçaları iki boşluk girintilidir (tek bir sarmalayıcı işlevin içinde dururlar).
 - Arayüz metinleri ve açıklama satırları Türkçedir.
 - `araclar/olc.js`, sayfayı telefon boyutunda açıp tuş genişliğini ve klavyenin konumunu ölçer.
+- Testlerde hizmet çalışanı kapalıdır (`playwright.config.js`); internetsiz çalışma testi onu kendi bağlamında açar.

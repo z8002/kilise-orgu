@@ -1,6 +1,7 @@
   /* ================= Görünüm ================= */
   const readout = $('#readout');
   function refreshView() {
+    pencereHedefeGetir(); // telefonda yanan tuşlar görünsün (oktavı değiştirebilir, önce gelmeli)
     const base = baseMidi();
     keyEls.forEach((k, off) => {
       const m = base + off;

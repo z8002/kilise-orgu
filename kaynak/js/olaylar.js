@@ -94,9 +94,23 @@
   document.addEventListener('pointerup', resumeIfNeeded);
   document.addEventListener('touchend', resumeIfNeeded);
 
-  holdBtn.addEventListener('click', () => { sustainLatch = !sustainLatch; updateSustain(); });
+  const tutDegistir = () => { sustainLatch = !sustainLatch; updateSustain(); };
+  holdBtn.addEventListener('click', tutDegistir);
+  $('#dokTut').addEventListener('click', tutDegistir);
   $('#octDown').addEventListener('click', () => shiftOctave(-1));
   $('#octUp').addEventListener('click', () => shiftOctave(1));
+  $('#pencereSol').addEventListener('click', () => pencereKaydir(-1));
+  $('#pencereSag').addEventListener('click', () => pencereKaydir(1));
+
+  // Hafif mod: daha az boru, daha az ses, kısa yankı (zayıf telefonlar için)
+  const hafifBtn = $('#hafif');
+  hafifBtn.setAttribute('aria-pressed', String(settings.hafif));
+  hafifBtn.addEventListener('click', () => {
+    settings.hafif = !settings.hafif;
+    hafifBtn.setAttribute('aria-pressed', String(settings.hafif));
+    applyRoom();
+    save();
+  });
 
   const roomSel = $('#room'), revIn = $('#reverb'), volIn = $('#volume');
   roomSel.value = settings.room;
@@ -106,7 +120,8 @@
   revIn.addEventListener('input', () => { settings.reverb = Number(revIn.value); $('#revOut').textContent = revIn.value; applyMix(); save(); });
   volIn.addEventListener('input', () => { settings.volume = Number(volIn.value); $('#volOut').textContent = volIn.value; applyMix(); save(); });
 
-  function updateFocusHint() { focusHint.hidden = document.hasFocus(); }
+  // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
+  function updateFocusHint() { focusHint.hidden = !sesDesteklenmiyor && (dokunmatik || document.hasFocus()); }
   window.addEventListener('focus', updateFocusHint);
   window.addEventListener('blur', () => {
     releaseAll();

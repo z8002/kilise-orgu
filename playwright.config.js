@@ -10,6 +10,9 @@ module.exports = defineConfig({
   reporter: process.env.CI ? [['github'], ['list']] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:4173/',
+    // Hizmet çalışanı (sw.js) testlerde kapalı: yazı tipi isteklerini Playwright'ın yerine o karşılamasın.
+    // İnternetsiz çalışma testi (test/uygulama.spec.js) onu kendi bağlamında açar.
+    serviceWorkers: 'block',
     launchOptions: { args: ['--autoplay-policy=no-user-gesture-required'] },
   },
   webServer: {

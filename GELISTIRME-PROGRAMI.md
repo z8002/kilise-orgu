@@ -7,7 +7,7 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 | 0. Temel | Araçlar depoda, her değişiklik kendiliğinden denetleniyor | Bitti |
 | 1. Parça verisi | 30 parça programın okuyabildiği biçimde; 25'i kaynağıyla doğrulandı | Bitti |
 | 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bitti |
-| 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bekliyor |
+| 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bitti |
 | 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bekliyor |
 | 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bekliyor |
 
@@ -42,11 +42,14 @@ Aktarım sırasında bulunan hatalar: Amazing Grace'in üçüncü satırı yanl�
 
 ## Aşama 3: Telefon
 
-- [ ] Çalma görünümü (tuşlar en az 44 piksel).
-- [ ] Yatay tutuş.
-- [ ] Telefona göre yardım.
-- [ ] Ana ekrana ekleme ve internetsiz çalışma.
-- [ ] Performans ve hafif mod.
+- [x] Çalma görünümü: dar dokunmatik ekranda klavye ekranın altına sabitlenir ve bir pencere gösterir; beyaz tuşlar en az 44 piksel (320 piksellik telefonda da). `‹` `›` pencereyi bir oktav kaydırır, kenarda oktav ayarı kendiliğinden değişir. Klavyenin üstünde Tut ve çal düğmeleri.
+- [x] Öğren ve eşlikte pencere, yanan tuşa ve sıradaki birkaç adıma kendiliğinden kayar. Parça açılınca pencere ezginin başına gelir.
+- [x] Yatay tutuş: daha çok tuş (863 pikselde 18 beyaz tuş), daha ince klavye; "Tam ekran" düğmesi.
+- [x] Telefona göre yardım: dokunmatik ekranda parmakla çalma, kaydırma, ana ekrana ekleme ve hafif mod anlatılır; klavye tuşu tabloları gizlenir.
+- [x] Ana ekrana ekleme (manifest, simgeler) ve internetsiz çalışma (`sw.js`). İlk açılışta inen yazı tipleri de saklanır.
+- [x] Hafif mod: Mikstür iki sıra, rüzgâr hışırtısı yok, en çok 12 ses, yankı en çok 2,4 saniye. Çalarken ekran kararmaz; iPhone'da sessiz anahtarı sesi kesmez.
+
+Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıyor, bütün sayfa yana taşıyordu (Aşama 2'den). Izgara sütunları içeriğe göre büyümeyecek biçimde düzeltildi; bunu bir test denetliyor.
 
 ## Aşama 4: Daha gerçek bir org
 
