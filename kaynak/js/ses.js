@@ -19,6 +19,7 @@
   // Stereo yerleşim: borular cephede iki yana dizilir. Do tarafı (Do Re Mi Fa♯ Sol♯ La♯) solda, Do♯ tarafı
   // (Do♯ Re♯ Fa Sol La Si) sağda; kalın borular kenarda, ince borular ortaya yakın.
   function notaYeri(midi) {
+    if (ORG === 'caz') return 0; // caz orgunda yerleşimi dönen hoparlör yapar
     const yan = midi % 2 === 0 ? -1 : 1;
     const u = clamp((midi - 36) / 60, 0, 1);
     return yan * (settings.stereo / 100) * 0.9 * (0.25 + 0.75 * (1 - u));
@@ -108,6 +109,12 @@
     }
 
     A = { bus, giris, sandik, dry, wet, conv, master, lfoAmp, lfoPitch, noise, waves };
+    if (ORG === 'caz') {
+      // Caz orgu: bölüm yok; bütün sesler vibrato, sürüş ve dönen hoparlörden geçer
+      A.caz = cazYoluKur(bus);
+      A.giris = { I: A.caz.giris, II: A.caz.giris, P: A.caz.giris };
+      cazYoluAyarla(true);
+    }
     applyRoom();
     applyMix();
     applyTremolo();
@@ -331,6 +338,12 @@
       }
       setTimeout(() => this.cikislariKes(), Math.max(0, end - ctx.currentTime) * 1000 + 500);
     }
+  }
+
+  // Sayfanın orguna göre ses: kilise orgunda borular (Voice), caz orgunda ton tekerlekleri (CazSesi).
+  // perkusyon: caz orgunda bu notada perküsyon vuruşu olsun mu (bütün tuşlar bırakılmışken basılan ilk nota)
+  function sesYarat(midi, t0, bolumler, acik, perkusyon) {
+    return ORG === 'caz' ? new CazSesi(midi, t0, perkusyon) : new Voice(midi, t0, bolumler, acik);
   }
 
   function whoosh() {

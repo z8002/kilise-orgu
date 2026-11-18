@@ -1,0 +1,67 @@
+
+  /* ---------- Caz orgu (caz-orgu.html) ---------- */
+  [data-org="caz"] .yalniz-kilise, [data-org="kilise"] .yalniz-caz { display: none !important; }
+  .org-gecis { margin: .5rem 0 0; font-size: .95rem; }
+  .org-gecis a { color: var(--gilt-bright); text-underline-offset: 3px; }
+
+  /* Kasa: ahşap üst kapak, adı ve dönen hoparlörün göstergesi */
+  .caz-kasa {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px;
+    border: 1px solid var(--oak-edge); border-bottom: 3px solid var(--gilt-deep); border-radius: 12px 12px 0 0;
+    background: repeating-linear-gradient(90deg, rgba(255,235,200,.03) 0 2px, transparent 2px 14px), linear-gradient(180deg, #4a2f1c, #2a1a0f);
+  }
+  .caz-kasa-ad { font: 400 clamp(1.4rem, 4vw, 2rem)/1 var(--font-display); color: var(--gilt-bright); letter-spacing: .04em; }
+  .donen-gosterge {
+    width: 38px; height: 38px; border-radius: 50%; flex: none;
+    background: conic-gradient(var(--gilt) 0 25%, #1a120c 0 50%, var(--gilt) 0 75%, #1a120c 0);
+    box-shadow: 0 0 0 3px #1a120c, 0 0 0 4px var(--oak-edge);
+    animation: donen 1.2s linear infinite;
+  }
+  .donen-gosterge[data-hiz="hizli"] { animation-duration: .15s; }
+  .donen-gosterge[data-hiz="kapali"] { animation: none; opacity: .5; }
+  @keyframes donen { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .donen-gosterge { animation: none; } }
+
+  .cekmece-paneli { display: grid; gap: 22px; }
+  .cekmece-paneli h3 { display: flex; justify-content: center; gap: .8em; }
+  .cekme-kodu { font: 500 .8rem var(--font-mono); letter-spacing: .2em; color: var(--gilt-bright); }
+  .cekmeceler-kutu { display: grid; gap: 12px; }
+  .cekmeceler { display: flex; justify-content: center; gap: clamp(4px, 1.4vw, 14px); }
+  .cekme { display: grid; justify-items: center; gap: 6px; width: clamp(32px, 8.2vw, 50px); --deger: 0; --renk: #f2e9d3; --yazi: #2a1c12; }
+  .cekme.kahve { --renk: #7a4a28; --yazi: #f2e9d3; }
+  .cekme.siyah { --renk: #171210; --yazi: #f2e9d3; }
+  .cekme-yuva {
+    position: relative; width: 100%; height: 190px; cursor: ns-resize; touch-action: none;
+    border-radius: 6px; background: linear-gradient(90deg, #0b0806, #1d1510 50%, #0b0806);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,.8);
+  }
+  /* Sap: 0'da yalnızca kulp görünür; çekildikçe numaralı sap uzar */
+  .cekme-sap {
+    position: absolute; left: 50%; top: 0; width: 30%; transform: translateX(-50%);
+    height: calc(var(--deger) / 8 * (100% - 40px) + 4px);
+    background: repeating-linear-gradient(180deg, #d9d2c2 0 2px, #a9a090 2px calc((190px - 40px) / 8));
+    border-radius: 0 0 3px 3px;
+  }
+  .cekme-kulp {
+    position: absolute; left: 0; right: 0; top: calc(var(--deger) / 8 * (100% - 40px));
+    height: 40px; display: grid; place-content: center;
+    background: linear-gradient(var(--renk), color-mix(in srgb, var(--renk) 70%, #000));
+    color: var(--yazi); font: 700 .78rem/1 var(--font-stop);
+    border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.25);
+    transition: top .08s ease;
+  }
+  .cekme-yuva:focus-visible { outline-offset: 4px; }
+  .cekme output { font: 500 .9rem var(--font-mono); color: var(--ivory-dim); }
+
+  .caz-ayarlar { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 16px 26px; }
+  .caz-hazir-kutu { flex-basis: 100%; justify-items: center; }
+  .caz-hazirlar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .caz-hazir {
+    height: 36px; padding: 0 .9rem; border-radius: 999px; cursor: pointer; font-weight: 500;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge);
+  }
+  .caz-hazir:hover { border-color: var(--gilt-deep); }
+  .caz-hazir[aria-current="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .caz-dugmeler { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .hold[aria-pressed="false"] + .hold, .caz-dugmeler .hold { min-width: 0; }
+  @media (max-width: 480px) { .cekme-yuva { height: 150px; } .cekme-sap { background: repeating-linear-gradient(180deg, #d9d2c2 0 2px, #a9a090 2px calc((150px - 40px) / 8)); } }

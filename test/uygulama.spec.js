@@ -16,12 +16,12 @@ test('yardım, telefonda parmakla, bilgisayarda klavyeyle çalmayı anlatır', a
   if (isMobile) {
     await expect(parmak).toBeVisible();
     await expect(klavyeSirasi).toBeHidden();
-    await expect(page.locator('.sub')).toContainText('Parmakla çalınan', { useInnerText: true });
+    await expect(page.locator('.sub.yalniz-kilise')).toContainText('Parmakla çalınan', { useInnerText: true });
     await expect(page.locator('#focusHint')).toBeHidden(); // "önce sayfaya tıkla" telefonda anlamsız
   } else {
     await expect(parmak).toBeHidden();
     await expect(klavyeSirasi).toBeVisible();
-    await expect(page.locator('.sub')).toContainText('Bilgisayar klavyesiyle çalınan', { useInnerText: true });
+    await expect(page.locator('.sub.yalniz-kilise')).toContainText('Bilgisayar klavyesiyle çalınan', { useInnerText: true });
   }
 });
 

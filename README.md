@@ -20,6 +20,8 @@ Ya da bilgisayarına indir:
 - **Ses cızırdıyorsa** "Hafif mod"u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar.
 - iPhone'da sessiz anahtarı açıkken de ses gelir (iOS 17 ve sonrası).
 
+**Caz orgu:** https://z8002.github.io/kilise-orgu/caz-orgu.html — ton tekerlekli caz orgu: dokuz çekme çubuğu, perküsyon, vibrato ve koro, dönen hoparlör, sürüş. Klavye, telefon görünümü ve şarkı çalar kilise orgusuyla aynı.
+
 **Özgün sürüm (v1):** Programın ilk hâli [`v1/`](v1/) klasöründe değiştirilmeden duruyor ve https://z8002.github.io/kilise-orgu/v1/ adresinden çalınabiliyor.
 
 ## Özellikler
@@ -39,6 +41,17 @@ Ya da bilgisayarına indir:
 - **Ana ekrana ekleme ve internetsiz çalışma:** Telefonda uygulama gibi kurulur; bir kez açıldıktan sonra internet olmadan da açılır.
 - **Hafif mod:** Zayıf telefonlar için daha az boru, en çok 12 ses ve daha kısa yankı.
 - Ekrandaki klavyeye fareyle de basılabilir.
+
+### Caz orgu
+
+[`caz-orgu.html`](https://z8002.github.io/kilise-orgu/caz-orgu.html) aynı koddan üretilen ikinci sayfadır: borular yerine ton tekerlekleri.
+
+- **Dokuz çekme çubuğu:** 16′, 5⅓′, 8′, 4′, 2⅔′, 2′, 1⅗′, 1⅓′, 1′; her biri 0–8 arası (her kademe 3 dB). Aşağı çektikçe güçlenir; fareyle, parmakla ya da ok tuşlarıyla ayarlanır. Tekerlekler eşit akortlu olduğundan 5⅓′ ile 2⅔′ pür beşli değil, eşit akortlu beşli öter.
+- **Hazır sesler:** Klasik caz (888000000), Balad, Gospel, Flüt, Blues, Tam.
+- **Perküsyon:** 2. ya da 3. harmonikte kısa vuruş, hızlı ya da yavaş sönen, yumuşak ya da normal. Yalnızca bütün tuşlar bırakılmışken basılan notada vurur.
+- **Vibrato ve koro:** V1–V3, C1–C3.
+- **Dönen hoparlör:** Kapalı, Yavaş, Hızlı. Tiz boru çabuk, pes tambur ağır hızlanır. Bilgisayarda `` ` `` tuşu (1'in solundaki), telefonda klavyenin üstündeki Hızlı düğmesi geçiş yapar.
+- **Sürüş** (lamba amfisinin kırpması) ve **tuş tıkırtısı**.
 
 ### Registerler
 

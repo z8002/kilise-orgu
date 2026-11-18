@@ -33,6 +33,7 @@
       return;
     }
     if (e.code === 'Escape') { calarDuraklat(); releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (cazTusu(e)) { e.preventDefault(); return; }
     if (e.code === 'Enter' && !inField && calar.parca && tag !== 'BUTTON') {
       e.preventDefault();
       if (!e.repeat) (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());

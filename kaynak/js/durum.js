@@ -5,20 +5,28 @@
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const kalinIsaretci = window.matchMedia ? window.matchMedia('(pointer: coarse)') : { matches: false };
   const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
+  // İki sayfa aynı koddan üretilir: kilise-orgu.html (borulu org) ve caz-orgu.html (ton tekerlekli caz orgu)
+  const ORG = document.documentElement.dataset.org === 'caz' ? 'caz' : 'kilise';
 
   // hafif: zayıf telefonlar için daha az boru ve kısa yankı
   // konsol: 'tek' (bir manuel) ya da 'tam' (iki manuel ve pedal); sandik: Sandık panjurunun açıklığı (0–100)
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
     konsol: 'tek', otoPedal: false, sandik: 100,
+    // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
+    caz: {
+      cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
+      vibrato: 'C3', hoparlor: 'yavas', surus: 15, tikirti: true,
+    },
   };
+  if (ORG === 'caz') { settings.room = 'kulup'; settings.reverb = 25; }
   const stopsOn = new Set(PISTONS[4].stops);
   const kuplorler = new Set();
   const kendiKombinasyonlar = [null, null, null, null]; // K1–K4: { stops, kuplorler } ya da null
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
-  const STORE_KEY = 'kilise-orgu-v2';
+  const STORE_KEY = ORG === 'caz' ? 'caz-orgu-v1' : 'kilise-orgu-v2';
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || localStorage.getItem('kilise-orgu-v1') || 'null');
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || (ORG === 'kilise' && localStorage.getItem('kilise-orgu-v1')) || 'null');
     if (saved) {
       if (kendi(ROOMS, saved.room)) settings.room = saved.room;
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
@@ -38,6 +46,15 @@
         if (!Array.isArray(saved.kuplorler)) for (const id of PISTONS[4].stops) if (STOP_BY_ID[id].bolum !== 'I') stopsOn.add(id);
       }
       if (Array.isArray(saved.kuplorler)) saved.kuplorler.forEach(id => KUPLORLER.some(k => k.id === id) && kuplorler.add(id));
+      const c = saved.caz, cv = settings.caz;
+      if (c && typeof c === 'object') {
+        if (Array.isArray(c.cekme) && c.cekme.length === 9 && c.cekme.every(x => Number.isInteger(x) && x >= 0 && x <= 8)) cv.cekme = c.cekme;
+        for (const k of ['perkusyon', 'hizli', 'yumusak', 'tikirti']) if (typeof c[k] === 'boolean') cv[k] = c[k];
+        if (c.harmonik === 2 || c.harmonik === 3) cv.harmonik = c.harmonik;
+        if (['kapali', 'V1', 'V2', 'V3', 'C1', 'C2', 'C3'].includes(c.vibrato)) cv.vibrato = c.vibrato;
+        if (['kapali', 'yavas', 'hizli'].includes(c.hoparlor)) cv.hoparlor = c.hoparlor;
+        if (Number.isFinite(c.surus)) cv.surus = clamp(c.surus, 0, 100);
+      }
       if (Array.isArray(saved.kendi)) saved.kendi.slice(0, 4).forEach((k, i) => {
         if (!k || !Array.isArray(k.stops) || !Array.isArray(k.kuplorler)) return;
         kendiKombinasyonlar[i] = {

@@ -1,6 +1,7 @@
   /* ================= Başlat ================= */
   buildStops();
   buildPistons();
+  cazKur();
   buildManual();
   renderCaps();
   renderOctave();

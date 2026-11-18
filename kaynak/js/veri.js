@@ -98,7 +98,7 @@
     { n: '0', name: 'İptal', stops: [] },
   ];
 
-  const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
+  const ROOMS = { kulup: 0.9, sapel: 1.8, kilise: 3.6, katedral: 6.5 };
 
   // Akort sistemleri. Do'dan başlayan beşliler zinciri: Do Sol Re La Mi Si Fa♯ Do♯ Sol♯ Re♯ La♯ Fa (Do).
   // Her sayı, zincirdeki o beşlinin pür beşliden (3/2, 701,955 sent) ne kadar dar akortlandığıdır (sent).

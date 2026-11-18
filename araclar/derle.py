@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Üretilen dosyaları yazar: kaynak/ → kilise-orgu.html, parcalar/ → README'nin parça bölümü.
+"""Üretilen dosyaları yazar: kaynak/ → kilise-orgu.html ve caz-orgu.html, parcalar/ → README'nin parça bölümü.
 
 Kullanım:
     python3 araclar/derle.py            # çıktıyı yazar
     python3 araclar/derle.py --denetle  # yazmaz; çıktı güncel değilse 1 ile çıkar
 
 kaynak/sablon.html içinde yalnızca `/*@ekle yol*/` yazan bir satır, o dosyanın
-içeriğiyle değiştirilir (yol, kaynak/ klasörüne göredir).
+içeriğiyle değiştirilir (yol, kaynak/ klasörüne göredir). İki sayfa aynı şablondan
+üretilir; aralarındaki fark __ORG__, __BASLIK__ ve __ACIKLAMA__ yer tutucularıdır,
+gerisini sayfa kendisi data-org özniteliğine bakarak seçer.
 """
 import json
 import re
@@ -23,6 +25,20 @@ EKLE = re.compile(r'^[ \t]*/\*@ekle ([\w./-]+)\*/[ \t]*\n', re.M)
 
 
 PARCA_ISARETI = '/*@parcalar*/'
+SAYFALAR = {
+    'kilise-orgu.html': {
+        '__ORG__': 'kilise',
+        '__BASLIK__': 'Kilise Orgu',
+        '__ACIKLAMA__': 'Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: iki manuel ve pedal, '
+                        'yirmi altı register, kilise yankısı ve otuz parçalık şarkı çalar.',
+    },
+    'caz-orgu.html': {
+        '__ORG__': 'caz',
+        '__BASLIK__': 'Caz Orgu',
+        '__ACIKLAMA__': 'Parmakla ya da bilgisayar klavyesiyle çalınan elektromekanik caz orgu: dokuz çekme çubuğu, '
+                        'perküsyon, vibrato, dönen hoparlör ve otuz parçalık şarkı çalar.',
+    },
+}
 GOMULEN = ['id', 'no', 'ad', 'besteci', 'etiketler', 'zorluk', 'ton', 'olcu', 'tempo', 'swing', 'birim', 'oktav', 'piston', 'mekan',
            'sagAltSinir', 'bolumPiston', 'bolumTempo', 'bolumOktav', 'sira', 'dogrulama']
 
@@ -37,8 +53,12 @@ def gomulu_parcalar(parcalar: list) -> str:
     return '  [\n' + ',\n'.join(satirlar) + '\n  ]'
 
 
-def sayfayi_derle(parcalar: list) -> str:
+def sayfayi_derle(parcalar: list, degerler: dict) -> str:
     sablon = (KAYNAK / 'sablon.html').read_text(encoding='utf-8')
+    for ad, deger in degerler.items():
+        if ad not in sablon:
+            raise SystemExit(f'şablonda {ad} yer tutucusu yok')
+        sablon = sablon.replace(ad, deger)
 
     def ekle(m: re.Match) -> str:
         yol = (KAYNAK / m.group(1)).resolve()
@@ -75,7 +95,8 @@ def main() -> int:
     except ParcaHatasi as e:
         print('HATA:', e, file=sys.stderr)
         return 1
-    ciktilar = {KOK / 'kilise-orgu.html': sayfayi_derle(parcalar), KOK / 'README.md': readme_uret(parcalar)}
+    ciktilar = {KOK / ad: sayfayi_derle(parcalar, degerler) for ad, degerler in SAYFALAR.items()}
+    ciktilar[KOK / 'README.md'] = readme_uret(parcalar)
     eski = 0
     for yol, icerik in ciktilar.items():
         mevcut = yol.read_text(encoding='utf-8') if yol.exists() else None

@@ -229,6 +229,7 @@
     borular: () => Object.fromEntries([...voices].filter(([, v]) => !v.released).map(([m, v]) => [noteName(m), [...v.stops.keys()].sort()])),
     sandik: () => (A ? { kazanc: A.sandik.kazanc.gain.value, kesim: A.sandik.suzgec.frequency.value } : null),
     pedalSesleri: () => calar.pedalSayisi,
+    donenHoparlor: () => (A && A.caz ? { boru: A.caz.boru.sin.frequency.value, tambur: A.caz.tambur.sin.frequency.value } : null),
     // Bir bölümde nota basıp bırakmak (testler ve ileride MIDI için)
     cal: (midi, bolum = 'I') => noteOn(midi, `api:${bolum}:${midi}`, bolum),
     birak: (midi, bolum = 'I') => noteOff(midi, `api:${bolum}:${midi}`),

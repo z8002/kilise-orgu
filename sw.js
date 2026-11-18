@@ -4,10 +4,10 @@
 //  - Google yazı tipleri saklanan kopyadan verilir; yoksa ağdan alınıp saklanır. İnternet yoksa ve
 //    kopya da yoksa sayfa yedek yazı tipleriyle açılır.
 //  - Başka her şey (v1/, notalar/ ...) dokunulmadan ağa gider.
-const SURUM = 'kilise-orgu-uygulama-1';
+const SURUM = 'kilise-orgu-uygulama-2';
 const YAZI = 'kilise-orgu-yazi-1';
 const UYGULAMA = [
-  './', 'index.html', 'kilise-orgu.html', 'manifest.webmanifest',
+  './', 'index.html', 'kilise-orgu.html', 'caz-orgu.html', 'manifest.webmanifest',
   'simgeler/simge.svg', 'simgeler/simge-180.png', 'simgeler/simge-192.png', 'simgeler/simge-512.png', 'simgeler/simge-maskeli-512.png',
 ];
 const KAPSAM = new URL('./', self.location).href;

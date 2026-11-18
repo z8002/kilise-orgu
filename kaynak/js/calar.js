@@ -64,12 +64,13 @@
     const kayit = calar.bekleyenKayit && tBas >= calar.bekleyenKayit.t - 1e-4 ? calar.bekleyenKayit.stops : undefined;
     const acik = () => (kayit ? new Set(kayit) : stopsOn);
     for (const m of o.notalar) {
-      const v = new Voice(m, tBas, new Set(['I']), acik());
+      // Caz orgunda perküsyon ezgi elinin notalarında vurur
+      const v = sesYarat(m, tBas, new Set(['I']), acik(), o.el !== calar.basEli || calar.cizelge.eller.length === 1);
       playerVoices.add(v);
       calar.acik.push({ v, bit });
     }
     // Otomatik pedal: bas çizgisini çalan elin en kalın notası pedalda da çalar
-    if (settings.otoPedal && o.el === calar.basEli) {
+    if (ORG === 'kilise' && settings.otoPedal && o.el === calar.basEli) {
       const v = new Voice(pedalNotasi(Math.min(...o.notalar), null), tBas, new Set(['P']), acik());
       playerVoices.add(v);
       calar.acik.push({ v, bit });
@@ -96,7 +97,8 @@
     calar.yeniBaslangic = false;
     if (pistonDegisti) calar.bekleyenKayit = { t: zaman, stops: PISTONS.find(p => p.n === b.piston).stops };
     calarSayac(zaman, () => {
-      if (pistonDegisti) { applyPiston(b.piston); calar.bekleyenKayit = null; }
+      if (pistonDegisti && ORG === 'kilise') applyPiston(b.piston);
+      if (pistonDegisti) calar.bekleyenKayit = null;
       if (settings.octave !== b.oktav) setOctave(b.oktav);
       calar.gorunenBolum = no;
       calarArayuzGuncelle();
@@ -194,7 +196,7 @@
     const b = c.bolumler[a.sira];
     if (calar.gorunenBolum !== a.sira) {
       const onceki = c.bolumler[calar.gorunenBolum];
-      if (!onceki || onceki.piston !== b.piston) applyPiston(b.piston);
+      if (ORG === 'kilise' && (!onceki || onceki.piston !== b.piston)) applyPiston(b.piston);
       if (settings.octave !== b.oktav) setOctave(b.oktav);
       calar.gorunenBolum = a.sira;
     }
@@ -269,9 +271,10 @@
     calar.durum = 'hazir';
     // Parçanın önerdiği ayarlar
     const ilk = calar.cizelge.bolumler[0];
-    applyPiston(ilk.piston);
+    // Caz orgunda registrasyon ve mekân kullanıcının çekme çubuklarında kalır
+    if (ORG === 'kilise') applyPiston(ilk.piston);
     if (settings.octave !== ilk.oktav) setOctave(ilk.oktav);
-    if (parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
+    if (ORG === 'kilise' && parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
     calarPencereyiYerlestir();
     calarArayuzKur();
     calarArayuzGuncelle();

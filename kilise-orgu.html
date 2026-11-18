@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-org="kilise">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kilise Orgu</title>
-<meta name="description" content="Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: on üç register, kilise yankısı ve otuz parçalık şarkı çalar.">
+<meta name="description" content="Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: iki manuel ve pedal, yirmi altı register, kilise yankısı ve otuz parçalık şarkı çalar.">
 <meta name="theme-color" content="#1a120c">
 <link rel="icon" href="simgeler/simge.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="simgeler/simge-180.png">
@@ -472,6 +472,73 @@
     .pencereli .tam-ekran { display: inline-block; }
     .pencereli .tam-ekran:not([hidden]) + .dok-dugme { margin-left: 0; }
   }
+
+  /* ---------- Caz orgu (caz-orgu.html) ---------- */
+  [data-org="caz"] .yalniz-kilise, [data-org="kilise"] .yalniz-caz { display: none !important; }
+  .org-gecis { margin: .5rem 0 0; font-size: .95rem; }
+  .org-gecis a { color: var(--gilt-bright); text-underline-offset: 3px; }
+
+  /* Kasa: ahşap üst kapak, adı ve dönen hoparlörün göstergesi */
+  .caz-kasa {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px;
+    border: 1px solid var(--oak-edge); border-bottom: 3px solid var(--gilt-deep); border-radius: 12px 12px 0 0;
+    background: repeating-linear-gradient(90deg, rgba(255,235,200,.03) 0 2px, transparent 2px 14px), linear-gradient(180deg, #4a2f1c, #2a1a0f);
+  }
+  .caz-kasa-ad { font: 400 clamp(1.4rem, 4vw, 2rem)/1 var(--font-display); color: var(--gilt-bright); letter-spacing: .04em; }
+  .donen-gosterge {
+    width: 38px; height: 38px; border-radius: 50%; flex: none;
+    background: conic-gradient(var(--gilt) 0 25%, #1a120c 0 50%, var(--gilt) 0 75%, #1a120c 0);
+    box-shadow: 0 0 0 3px #1a120c, 0 0 0 4px var(--oak-edge);
+    animation: donen 1.2s linear infinite;
+  }
+  .donen-gosterge[data-hiz="hizli"] { animation-duration: .15s; }
+  .donen-gosterge[data-hiz="kapali"] { animation: none; opacity: .5; }
+  @keyframes donen { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .donen-gosterge { animation: none; } }
+
+  .cekmece-paneli { display: grid; gap: 22px; }
+  .cekmece-paneli h3 { display: flex; justify-content: center; gap: .8em; }
+  .cekme-kodu { font: 500 .8rem var(--font-mono); letter-spacing: .2em; color: var(--gilt-bright); }
+  .cekmeceler-kutu { display: grid; gap: 12px; }
+  .cekmeceler { display: flex; justify-content: center; gap: clamp(4px, 1.4vw, 14px); }
+  .cekme { display: grid; justify-items: center; gap: 6px; width: clamp(32px, 8.2vw, 50px); --deger: 0; --renk: #f2e9d3; --yazi: #2a1c12; }
+  .cekme.kahve { --renk: #7a4a28; --yazi: #f2e9d3; }
+  .cekme.siyah { --renk: #171210; --yazi: #f2e9d3; }
+  .cekme-yuva {
+    position: relative; width: 100%; height: 190px; cursor: ns-resize; touch-action: none;
+    border-radius: 6px; background: linear-gradient(90deg, #0b0806, #1d1510 50%, #0b0806);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,.8);
+  }
+  /* Sap: 0'da yalnızca kulp görünür; çekildikçe numaralı sap uzar */
+  .cekme-sap {
+    position: absolute; left: 50%; top: 0; width: 30%; transform: translateX(-50%);
+    height: calc(var(--deger) / 8 * (100% - 40px) + 4px);
+    background: repeating-linear-gradient(180deg, #d9d2c2 0 2px, #a9a090 2px calc((190px - 40px) / 8));
+    border-radius: 0 0 3px 3px;
+  }
+  .cekme-kulp {
+    position: absolute; left: 0; right: 0; top: calc(var(--deger) / 8 * (100% - 40px));
+    height: 40px; display: grid; place-content: center;
+    background: linear-gradient(var(--renk), color-mix(in srgb, var(--renk) 70%, #000));
+    color: var(--yazi); font: 700 .78rem/1 var(--font-stop);
+    border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.25);
+    transition: top .08s ease;
+  }
+  .cekme-yuva:focus-visible { outline-offset: 4px; }
+  .cekme output { font: 500 .9rem var(--font-mono); color: var(--ivory-dim); }
+
+  .caz-ayarlar { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 16px 26px; }
+  .caz-hazir-kutu { flex-basis: 100%; justify-items: center; }
+  .caz-hazirlar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .caz-hazir {
+    height: 36px; padding: 0 .9rem; border-radius: 999px; cursor: pointer; font-weight: 500;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge);
+  }
+  .caz-hazir:hover { border-color: var(--gilt-deep); }
+  .caz-hazir[aria-current="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .caz-dugmeler { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .hold[aria-pressed="false"] + .hold, .caz-dugmeler .hold { min-width: 0; }
+  @media (max-width: 480px) { .cekme-yuva { height: 150px; } .cekme-sap { background: repeating-linear-gradient(180deg, #d9d2c2 0 2px, #a9a090 2px calc((150px - 40px) / 8)); } }
 </style>
 </head>
 <body>
@@ -479,7 +546,9 @@
   <header class="masthead">
     <div>
       <h1>Kilise Orgu</h1>
-      <p class="sub"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+      <p class="sub yalniz-kilise"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+      <p class="sub yalniz-caz"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan elektromekanik caz orgu. Dokuz çekme çubuğuyla sesini karıştır; perküsyon ve dönen hoparlörle caz kulübünün o tanıdık sesine ulaş.</p>
+      <p class="org-gecis"><a class="yalniz-kilise" href="caz-orgu.html">Caz orguna geç →</a><a class="yalniz-caz" href="kilise-orgu.html">← Kilise orguna dön</a></p>
     </div>
     <div class="eylemler">
       <button id="yukleBtn" class="wind" type="button" hidden title="Orgu uygulama gibi ana ekrandan aç; internet olmadan da çalışır"><span aria-hidden="true">＋</span> Ana ekrana ekle</button>
@@ -494,12 +563,63 @@
   <p id="focusHint" class="focus-hint" hidden>Klavyeden çalmak için önce sayfaya bir kez tıkla.</p>
 
   <div class="organ">
-    <div class="case">
+    <div class="case yalniz-kilise">
       <canvas id="facade" aria-hidden="true"></canvas>
     </div>
+    <div class="caz-kasa yalniz-caz" aria-hidden="true"><span class="caz-kasa-ad">Ton tekerlekli org</span><span class="donen-gosterge" id="donenGosterge"></span></div>
 
     <section class="console" aria-label="Org konsolu">
-      <div class="jambs">
+      <div class="cekmece-paneli yalniz-caz" id="cazPaneli">
+        <div class="cekmeceler-kutu">
+          <h3>Çekme çubukları <span class="cekme-kodu" id="cekmeKodu"></span></h3>
+          <div class="cekmeceler" id="cekmeceler" role="group" aria-label="Çekme çubukları: aşağı çektikçe o tekerleğin sesi güçlenir"></div>
+        </div>
+        <div class="caz-ayarlar">
+          <div class="ctl caz-hazir-kutu">
+            <span class="ctl-label">Hazır sesler</span>
+            <div class="caz-hazirlar" id="cazHazirlar" role="group" aria-label="Hazır sesler"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label">Perküsyon</span>
+            <div class="caz-dugmeler">
+              <button type="button" class="hold" id="perkusyon" aria-pressed="false">Perküsyon</button>
+              <div class="segment" role="group" aria-label="Perküsyon harmoniği">
+                <button type="button" id="perkIkinci" aria-pressed="false" title="İkinci harmonik (4′)">2.</button>
+                <button type="button" id="perkUcuncu" aria-pressed="true" title="Üçüncü harmonik (2⅔′)">3.</button>
+              </div>
+              <button type="button" class="hold" id="perkHizli" aria-pressed="true" title="Açıkken vuruş çabuk söner">Hızlı</button>
+              <button type="button" class="hold" id="perkYumusak" aria-pressed="false" title="Açıkken vuruş daha kısık">Yumuşak</button>
+            </div>
+          </div>
+          <label class="ctl" for="vibrato">
+            <span class="ctl-label">Vibrato ve koro</span>
+            <select id="vibrato">
+              <option value="kapali">Kapalı</option>
+              <option value="V1">V1 · hafif vibrato</option>
+              <option value="V2">V2 · vibrato</option>
+              <option value="V3">V3 · derin vibrato</option>
+              <option value="C1">C1 · hafif koro</option>
+              <option value="C2">C2 · koro</option>
+              <option value="C3">C3 · derin koro</option>
+            </select>
+          </label>
+          <div class="ctl">
+            <span class="ctl-label">Dönen hoparlör</span>
+            <div class="segment" role="group" aria-label="Dönen hoparlör">
+              <button type="button" data-hoparlor="kapali" aria-pressed="false">Kapalı</button>
+              <button type="button" data-hoparlor="yavas" aria-pressed="true">Yavaş</button>
+              <button type="button" data-hoparlor="hizli" aria-pressed="false">Hızlı</button>
+            </div>
+          </div>
+          <label class="ctl" for="surus">
+            <span class="ctl-label">Sürüş <output id="surusOut">15</output></span>
+            <input type="range" id="surus" min="0" max="100" value="15">
+          </label>
+          <button type="button" class="hold" id="tikirti" aria-pressed="true" title="Tuşa basınca ve bırakınca kontakların kısa tıkırtısı">Tuş tıkırtısı</button>
+        </div>
+      </div>
+
+      <div class="jambs yalniz-kilise">
         <div class="division" id="jamb-temel"></div>
         <div class="center">
           <h3>Kombinasyonlar</h3>
@@ -527,7 +647,7 @@
         <div class="division" id="jamb-parlak"></div>
       </div>
 
-      <div class="jambs jambs-ikinci" id="ikinciSira">
+      <div class="jambs jambs-ikinci yalniz-kilise" id="ikinciSira">
         <div class="division" id="jamb-sandik"></div>
         <div class="center">
           <h3>Kuplörler</h3>
@@ -551,7 +671,8 @@
             <button type="button" data-bolum="P" aria-pressed="false" title="Pedal">P</button>
           </div>
           <button id="tamEkran" class="dok-dugme tam-ekran" type="button" aria-pressed="false" hidden>Tam ekran</button>
-          <button id="dokTut" class="dok-dugme" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
+          <button id="dokTut" class="dok-dugme yalniz-kilise" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
+          <button id="dokHoparlor" class="dok-dugme yalniz-caz" type="button" aria-pressed="false" title="Dönen hoparlör: Yavaş ya da Hızlı">Hızlı</button>
           <button id="dokOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false" hidden>▶</button>
         </div>
         <div class="manual-kutu manual-kutu-2" id="manualKutu2">
@@ -622,6 +743,7 @@
         <label class="ctl" for="room">
           <span class="ctl-label">Mekân</span>
           <select id="room">
+            <option value="kulup">Kulüp · 0,9 sn</option>
             <option value="sapel">Şapel · 1,8 sn</option>
             <option value="kilise">Kilise · 3,6 sn</option>
             <option value="katedral">Katedral · 6,5 sn</option>
@@ -651,7 +773,7 @@
             <span class="ctl-label">Diyapazon (La4, Hz)</span>
             <select id="diyapazon"></select>
           </label>
-          <label class="ctl" for="stereo">
+          <label class="ctl yalniz-kilise" for="stereo">
             <span class="ctl-label">Stereo genişlik <output id="stereoOut">50</output></span>
             <input type="range" id="stereo" min="0" max="100" value="50">
           </label>
@@ -673,8 +795,11 @@
       <li class="yalniz-klavye"><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
       <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
       <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
-      <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
-      <li><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
+      <li class="yalniz-caz"><strong>Çekme çubukları</strong> sesi karıştırır: her biri bir ton tekerleğinin ne kadar duyulacağını belirler (16′ en pes, 1′ en tiz); aşağı çektikçe güçlenir. Üstteki rakamlar (örneğin 888000000) bu karışımın kısa yazılışıdır. Hazır seslerden biriyle başla.</li>
+      <li class="yalniz-caz"><strong>Perküsyon</strong> tuşa basınca ikinci ya da üçüncü harmonikte kısa bir vuruş ekler; yalnızca bütün tuşlar bırakılmışken basılan notada vurur, legato çalınca susar.</li>
+      <li class="yalniz-caz"><strong>Dönen hoparlör</strong>: Yavaş'ta ses ağır ağır döner, Hızlı'da titrer; geçişte boru çabuk, tambur ağır hızlanır.<span class="yalniz-klavye"> <kbd>`</kbd> tuşu (1'in solundaki) Yavaş ile Hızlı arasında geçer.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki Hızlı düğmesi de aynı işi yapar.</span></li>
+      <li class="yalniz-kilise"><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
+      <li class="yalniz-kilise"><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
@@ -796,7 +921,7 @@
     { n: '0', name: 'İptal', stops: [] },
   ];
 
-  const ROOMS = { sapel: 1.8, kilise: 3.6, katedral: 6.5 };
+  const ROOMS = { kulup: 0.9, sapel: 1.8, kilise: 3.6, katedral: 6.5 };
 
   // Akort sistemleri. Do'dan başlayan beşliler zinciri: Do Sol Re La Mi Si Fa♯ Do♯ Sol♯ Re♯ La♯ Fa (Do).
   // Her sayı, zincirdeki o beşlinin pür beşliden (3/2, 701,955 sent) ne kadar dar akortlandığıdır (sent).
@@ -852,20 +977,28 @@
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const kalinIsaretci = window.matchMedia ? window.matchMedia('(pointer: coarse)') : { matches: false };
   const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
+  // İki sayfa aynı koddan üretilir: kilise-orgu.html (borulu org) ve caz-orgu.html (ton tekerlekli caz orgu)
+  const ORG = document.documentElement.dataset.org === 'caz' ? 'caz' : 'kilise';
 
   // hafif: zayıf telefonlar için daha az boru ve kısa yankı
   // konsol: 'tek' (bir manuel) ya da 'tam' (iki manuel ve pedal); sandik: Sandık panjurunun açıklığı (0–100)
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
     konsol: 'tek', otoPedal: false, sandik: 100,
+    // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
+    caz: {
+      cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
+      vibrato: 'C3', hoparlor: 'yavas', surus: 15, tikirti: true,
+    },
   };
+  if (ORG === 'caz') { settings.room = 'kulup'; settings.reverb = 25; }
   const stopsOn = new Set(PISTONS[4].stops);
   const kuplorler = new Set();
   const kendiKombinasyonlar = [null, null, null, null]; // K1–K4: { stops, kuplorler } ya da null
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
-  const STORE_KEY = 'kilise-orgu-v2';
+  const STORE_KEY = ORG === 'caz' ? 'caz-orgu-v1' : 'kilise-orgu-v2';
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || localStorage.getItem('kilise-orgu-v1') || 'null');
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || (ORG === 'kilise' && localStorage.getItem('kilise-orgu-v1')) || 'null');
     if (saved) {
       if (kendi(ROOMS, saved.room)) settings.room = saved.room;
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
@@ -885,6 +1018,15 @@
         if (!Array.isArray(saved.kuplorler)) for (const id of PISTONS[4].stops) if (STOP_BY_ID[id].bolum !== 'I') stopsOn.add(id);
       }
       if (Array.isArray(saved.kuplorler)) saved.kuplorler.forEach(id => KUPLORLER.some(k => k.id === id) && kuplorler.add(id));
+      const c = saved.caz, cv = settings.caz;
+      if (c && typeof c === 'object') {
+        if (Array.isArray(c.cekme) && c.cekme.length === 9 && c.cekme.every(x => Number.isInteger(x) && x >= 0 && x <= 8)) cv.cekme = c.cekme;
+        for (const k of ['perkusyon', 'hizli', 'yumusak', 'tikirti']) if (typeof c[k] === 'boolean') cv[k] = c[k];
+        if (c.harmonik === 2 || c.harmonik === 3) cv.harmonik = c.harmonik;
+        if (['kapali', 'V1', 'V2', 'V3', 'C1', 'C2', 'C3'].includes(c.vibrato)) cv.vibrato = c.vibrato;
+        if (['kapali', 'yavas', 'hizli'].includes(c.hoparlor)) cv.hoparlor = c.hoparlor;
+        if (Number.isFinite(c.surus)) cv.surus = clamp(c.surus, 0, 100);
+      }
       if (Array.isArray(saved.kendi)) saved.kendi.slice(0, 4).forEach((k, i) => {
         if (!k || !Array.isArray(k.stops) || !Array.isArray(k.kuplorler)) return;
         kendiKombinasyonlar[i] = {
@@ -922,6 +1064,7 @@
   // Stereo yerleşim: borular cephede iki yana dizilir. Do tarafı (Do Re Mi Fa♯ Sol♯ La♯) solda, Do♯ tarafı
   // (Do♯ Re♯ Fa Sol La Si) sağda; kalın borular kenarda, ince borular ortaya yakın.
   function notaYeri(midi) {
+    if (ORG === 'caz') return 0; // caz orgunda yerleşimi dönen hoparlör yapar
     const yan = midi % 2 === 0 ? -1 : 1;
     const u = clamp((midi - 36) / 60, 0, 1);
     return yan * (settings.stereo / 100) * 0.9 * (0.25 + 0.75 * (1 - u));
@@ -1011,6 +1154,12 @@
     }
 
     A = { bus, giris, sandik, dry, wet, conv, master, lfoAmp, lfoPitch, noise, waves };
+    if (ORG === 'caz') {
+      // Caz orgu: bölüm yok; bütün sesler vibrato, sürüş ve dönen hoparlörden geçer
+      A.caz = cazYoluKur(bus);
+      A.giris = { I: A.caz.giris, II: A.caz.giris, P: A.caz.giris };
+      cazYoluAyarla(true);
+    }
     applyRoom();
     applyMix();
     applyTremolo();
@@ -1236,6 +1385,12 @@
     }
   }
 
+  // Sayfanın orguna göre ses: kilise orgunda borular (Voice), caz orgunda ton tekerlekleri (CazSesi).
+  // perkusyon: caz orgunda bu notada perküsyon vuruşu olsun mu (bütün tuşlar bırakılmışken basılan ilk nota)
+  function sesYarat(midi, t0, bolumler, acik, perkusyon) {
+    return ORG === 'caz' ? new CazSesi(midi, t0, perkusyon) : new Voice(midi, t0, bolumler, acik);
+  }
+
   function whoosh() {
     const t = ctx.currentTime;
     const src = ctx.createBufferSource(); src.buffer = A.noise; src.loop = true;
@@ -1252,6 +1407,335 @@
     src.onended = () => { try { g.disconnect(); } catch (_) {} };
   }
 
+  /* ================= Caz orgu ================= */
+  // Ton tekerlekli (elektromekanik) org. Her tuş dokuz tekerleğin sinüs sesini, dokuz çekme çubuğunun
+  // ayarladığı oranda karıştırır. Tekerlekler eşit akortlu olduğundan 5⅓′, 2⅔′, 1⅗′, 1⅓′ çubukları pür beşli
+  // ve üçlü değil, eşit akortlu aralıklarda öter: caz orgunun hafifçe dalgalanan sesi buradan gelir.
+  const CEKMELER = [
+    { ayak: '16′', yarim: -12, renk: 'kahve' },
+    { ayak: '5⅓′', yarim: 7, renk: 'kahve' },
+    { ayak: '8′', yarim: 0, renk: 'beyaz' },
+    { ayak: '4′', yarim: 12, renk: 'beyaz' },
+    { ayak: '2⅔′', yarim: 19, renk: 'siyah' },
+    { ayak: '2′', yarim: 24, renk: 'beyaz' },
+    { ayak: '1⅗′', yarim: 28, renk: 'siyah' },
+    { ayak: '1⅓′', yarim: 31, renk: 'siyah' },
+    { ayak: '1′', yarim: 36, renk: 'beyaz' },
+  ];
+  const CAZ_HAZIR = [
+    { ad: 'Klasik caz', cekme: '888000000', perkusyon: true, harmonik: 3, vibrato: 'C3', hoparlor: 'yavas' },
+    { ad: 'Balad', cekme: '838000000', perkusyon: false, harmonik: 3, vibrato: 'C3', hoparlor: 'yavas' },
+    { ad: 'Gospel', cekme: '888800000', perkusyon: false, harmonik: 3, vibrato: 'C3', hoparlor: 'hizli' },
+    { ad: 'Flüt', cekme: '008000000', perkusyon: false, harmonik: 3, vibrato: 'V2', hoparlor: 'yavas' },
+    { ad: 'Blues', cekme: '888000008', perkusyon: true, harmonik: 2, vibrato: 'kapali', hoparlor: 'hizli' },
+    { ad: 'Tam', cekme: '888888888', perkusyon: false, harmonik: 3, vibrato: 'kapali', hoparlor: 'hizli' },
+  ];
+  // Vibrato (V) perdeyi titretir; koro (C) titreyen sesi titremeyenle karıştırır. Değer: gecikme salınımı (sn)
+  const VIBRATO = { kapali: 0, V1: 0.00015, V2: 0.00025, V3: 0.00035, C1: 0.00015, C2: 0.00025, C3: 0.00035 };
+  // Dönen hoparlör: tiz boru ve pes tambur ayrı hızlarda döner; tambur ağır olduğundan geç hızlanır
+  const HOPARLOR = { yavas: { boru: 0.83, tambur: 0.67 }, hizli: { boru: 6.75, tambur: 5.9 } };
+  const cazAyar = settings.caz;
+
+  const cekmeSeviyesi = n => (n ? Math.pow(10, (n - 8) * 3 / 20) : 0); // her kademe 3 dB
+  // Ton tekerlekleri Do1 (32,7 Hz) ile Fa♯8 (5,9 kHz) arasında: dışına düşen ses bir oktav katlanır
+  function tekerlek(m) {
+    while (m > 114) m -= 12;
+    while (m < 24) m += 12;
+    return notaFrekansi(m);
+  }
+
+  class CazSesi {
+    // Kilise orgunun sesiyle aynı arayüz: release, cancel, uygula, akortla (bölüm ve register kavramı yok)
+    constructor(midi, t0, perkusyon) {
+      this.midi = midi;
+      this.t0 = t0;
+      this.bolumler = new Set(['I']);
+      this.acik = stopsOn;
+      this.stops = new Map();
+      this.cikislar = new Map();
+      this.released = false;
+      this.out = ctx.createGain();
+      this.out.gain.setValueAtTime(0, t0);
+      this.out.gain.linearRampToValueAtTime(1, t0 + 0.004);
+      this.out.connect(A.caz.giris);
+      this.oscs = [];
+      this.kazanclar = [];
+      CEKMELER.forEach((c, i) => {
+        const o = ctx.createOscillator();
+        o.frequency.value = tekerlek(midi + c.yarim);
+        const g = ctx.createGain();
+        g.gain.value = cekmeSeviyesi(cazAyar.cekme[i]) * 0.2;
+        o.connect(g); g.connect(this.out);
+        o.start(t0);
+        this.oscs.push(o);
+        this.kazanclar.push(g);
+      });
+      if (perkusyon && cazAyar.perkusyon) {
+        // Perküsyon: 2. ya da 3. harmonikte kısa, sönen bir vuruş
+        const o = ctx.createOscillator();
+        o.frequency.value = tekerlek(midi + (cazAyar.harmonik === 2 ? 12 : 19));
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime((cazAyar.yumusak ? 0.18 : 0.36), t0 + 0.002);
+        g.gain.setTargetAtTime(0, t0 + 0.002, cazAyar.hizli ? 0.12 : 0.42);
+        o.connect(g); g.connect(this.out);
+        o.start(t0);
+        o.stop(t0 + (cazAyar.hizli ? 1.2 : 3.5));
+        this.perkusyon = o;
+      }
+      if (cazAyar.tikirti) this.tikirti(t0, 0.22);
+    }
+
+    // Tuş kontaklarının kısa tıkırtısı
+    tikirti(t, guc) {
+      const src = ctx.createBufferSource(); src.buffer = A.noise;
+      const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 2400; f.Q.value = 0.7;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(guc, t);
+      g.gain.setTargetAtTime(0, t, 0.003);
+      src.connect(f); f.connect(g); g.connect(this.out);
+      src.start(t, Math.random(), 0.03);
+      src.onended = () => { try { g.disconnect(); } catch (_) {} };
+    }
+
+    uygula(t) {
+      if (this.released) return;
+      this.kazanclar.forEach((g, i) => g.gain.setTargetAtTime(cekmeSeviyesi(cazAyar.cekme[i]) * 0.2, Math.max(t, this.t0), 0.012));
+    }
+
+    akortla(t) {
+      if (this.released) return;
+      this.oscs.forEach((o, i) => o.frequency.setTargetAtTime(tekerlek(this.midi + CEKMELER[i].yarim), Math.max(t, this.t0), 0.02));
+    }
+
+    durdur(t) {
+      for (const o of this.oscs) { try { o.stop(t); } catch (_) {} }
+      if (this.perkusyon) try { this.perkusyon.stop(t); } catch (_) {}
+      const out = this.out;
+      setTimeout(() => { try { out.disconnect(); } catch (_) {} }, Math.max(0, t - ctx.currentTime) * 1000 + 300);
+    }
+
+    release(t) {
+      if (this.released) return;
+      this.released = true;
+      freeze(this.out.gain, t);
+      this.out.gain.setTargetAtTime(0, t, 0.005);
+      if (cazAyar.tikirti) this.tikirti(t, 0.08);
+      this.durdur(t + 0.06);
+    }
+
+    cancel() {
+      if (this.released) return;
+      this.released = true;
+      try { this.out.disconnect(); } catch (_) {}
+      this.durdur(ctx.currentTime);
+    }
+  }
+
+  // Caz orgunun ses yolu: vibrato/koro → sürüş (overdrive) → dönen hoparlör → ana yol (yankı, ses düzeyi)
+  function cazYoluKur(cikis) {
+    const giris = ctx.createGain();
+    // Vibrato: modüle edilen gecikme hattı; koroda titremeyen ses de eklenir
+    const gecikme = ctx.createDelay(0.02); gecikme.delayTime.value = 0.004;
+    const vibLfo = ctx.createOscillator(); vibLfo.frequency.value = 6.9;
+    const vibDerinlik = ctx.createGain(); vibDerinlik.gain.value = 0;
+    vibLfo.connect(vibDerinlik); vibDerinlik.connect(gecikme.delayTime); vibLfo.start();
+    const kuru = ctx.createGain(), islak = ctx.createGain(), karisim = ctx.createGain();
+    giris.connect(kuru); giris.connect(gecikme); gecikme.connect(islak);
+    kuru.connect(karisim); islak.connect(karisim);
+    // Sürüş: lamba amfisinin yumuşak kırpması
+    const onKazanc = ctx.createGain(), sekil = ctx.createWaveShaper(), sonKazanc = ctx.createGain();
+    sekil.oversample = '2x';
+    karisim.connect(onKazanc); onKazanc.connect(sekil); sekil.connect(sonKazanc);
+    // Dönen hoparlör: 800 Hz'te ikiye ayrılır. Dönen kaynak: önündeyken yüksek ve ortada (kosinüs),
+    // yandayken bir kanalda ve yaklaşıp uzaklaşırken perdesi kayar (sinüs).
+    const dogrudan = ctx.createGain(), donen = ctx.createGain();
+    sonKazanc.connect(dogrudan); dogrudan.connect(cikis);
+    donen.connect(cikis);
+    const kosinus = ctx.createPeriodicWave(new Float32Array([0, 1]), new Float32Array([0, 0]));
+    const rotor = (suzgec, genlik, yan, doppler) => {
+      sonKazanc.connect(suzgec);
+      const sin = ctx.createOscillator(), cos = ctx.createOscillator();
+      cos.setPeriodicWave(kosinus);
+      const gec = ctx.createDelay(0.01); gec.delayTime.value = 0.002;
+      const gecD = ctx.createGain(); gecD.gain.value = doppler;
+      const am = ctx.createGain(); am.gain.value = 1 - genlik;
+      const amD = ctx.createGain(); amD.gain.value = genlik;
+      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
+      if (pan.pan) { const panD = ctx.createGain(); panD.gain.value = yan; sin.connect(panD); panD.connect(pan.pan); }
+      sin.connect(gecD); gecD.connect(gec.delayTime);
+      cos.connect(amD); amD.connect(am.gain);
+      suzgec.connect(gec); gec.connect(am); am.connect(pan); pan.connect(donen);
+      const t = ctx.currentTime;
+      sin.start(t); cos.start(t);
+      return { sin, cos };
+    };
+    const altSuzgec = ctx.createBiquadFilter(); altSuzgec.type = 'lowpass'; altSuzgec.frequency.value = 800;
+    const ustSuzgec = ctx.createBiquadFilter(); ustSuzgec.type = 'highpass'; ustSuzgec.frequency.value = 800;
+    const tambur = rotor(altSuzgec, 0.12, 0.35, 0.0002);
+    const boru = rotor(ustSuzgec, 0.2, 0.75, 0.0004);
+    return { giris, gecikme, vibDerinlik, kuru, islak, onKazanc, sekil, sonKazanc, dogrudan, donen, tambur, boru };
+  }
+
+  function cazYoluAyarla(ilk) {
+    if (!ctx || !A.caz) return;
+    const t = ctx.currentTime, C = A.caz;
+    // Vibrato ve koro
+    const d = VIBRATO[cazAyar.vibrato] || 0, koro = cazAyar.vibrato[0] === 'C';
+    C.vibDerinlik.gain.setTargetAtTime(d, t, 0.02);
+    C.kuru.gain.setTargetAtTime(d === 0 ? 1 : (koro ? 0.6 : 0), t, 0.02);
+    C.islak.gain.setTargetAtTime(d === 0 ? 0 : (koro ? 0.6 : 1), t, 0.02);
+    // Sürüş: kırpma eğrisi ve kazanç dengesi
+    const k = 0.05 + cazAyar.surus / 100 * 7; // sıfırda neredeyse doğrusal
+    const egri = new Float32Array(1025);
+    for (let i = 0; i < egri.length; i++) { const x = i / 512 - 1; egri[i] = Math.tanh(k * x) / Math.tanh(k); }
+    C.sekil.curve = egri;
+    C.onKazanc.gain.setTargetAtTime(0.6 + cazAyar.surus / 60, t, 0.02);
+    C.sonKazanc.gain.setTargetAtTime(1 / (1 + cazAyar.surus / 80), t, 0.02);
+    // Dönen hoparlör: kapalıyken ses doğrudan; hız değişince boru çabuk, tambur ağır hızlanır
+    const kapali = cazAyar.hoparlor === 'kapali';
+    C.dogrudan.gain.setTargetAtTime(kapali ? 1 : 0, t, 0.03);
+    C.donen.gain.setTargetAtTime(kapali ? 0 : 1, t, 0.03);
+    const hiz = HOPARLOR[kapali ? 'yavas' : cazAyar.hoparlor];
+    for (const [rotor, hz, tau] of [[C.boru, hiz.boru, 0.35], [C.tambur, hiz.tambur, 1.4]]) {
+      for (const o of [rotor.sin, rotor.cos]) {
+        if (ilk) o.frequency.setValueAtTime(hz, t);
+        else o.frequency.setTargetAtTime(hz, t, tau);
+      }
+    }
+    const gosterge = $('#donenGosterge');
+    if (gosterge) gosterge.dataset.hiz = cazAyar.hoparlor;
+  }
+
+  // Çekme çubukları değişince çalan sesler de değişir
+  function cazSesleriUygula() {
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    for (const v of [...voices.values(), ...playerVoices]) v.uygula(Math.max(t, v.t0));
+  }
+
+  /* ---- Arayüz ---- */
+  // Çekme çubuğu: aşağı çekildikçe (0–8) o tekerleğin sesi güçlenir. Sürüklenir ya da ok tuşlarıyla ayarlanır.
+  const cekmeEls = [];
+  function cekmeYap(c, i) {
+    const kutu = document.createElement('div');
+    kutu.className = 'cekme ' + c.renk;
+    const yuva = document.createElement('div');
+    yuva.className = 'cekme-yuva';
+    yuva.tabIndex = 0;
+    yuva.setAttribute('role', 'slider');
+    yuva.setAttribute('aria-label', `Çekme çubuğu ${c.ayak}`);
+    yuva.setAttribute('aria-orientation', 'vertical');
+    yuva.setAttribute('aria-valuemin', '0');
+    yuva.setAttribute('aria-valuemax', '8');
+    yuva.innerHTML = '<span class="cekme-sap"></span><span class="cekme-kulp"></span>';
+    yuva.lastChild.textContent = c.ayak;
+    const deger = document.createElement('output');
+    kutu.append(yuva, deger);
+    const ayarla = n => {
+      n = clamp(Math.round(n), 0, 8);
+      if (n === cazAyar.cekme[i]) return;
+      cazAyar.cekme[i] = n;
+      cazDegisti(true);
+    };
+    const noktadan = e => {
+      const r = yuva.getBoundingClientRect(), kulp = yuva.lastChild.offsetHeight;
+      ayarla((e.clientY - r.top - kulp / 2) / Math.max(1, r.height - kulp) * 8);
+    };
+    yuva.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      yuva.focus();
+      try { yuva.setPointerCapture(e.pointerId); } catch (_) {}
+      noktadan(e);
+    });
+    yuva.addEventListener('pointermove', e => { if (yuva.hasPointerCapture && yuva.hasPointerCapture(e.pointerId)) noktadan(e); });
+    yuva.addEventListener('keydown', e => {
+      const fark = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1, PageDown: 2, PageUp: -2 }[e.code];
+      if (fark === undefined && e.code !== 'Home' && e.code !== 'End') return;
+      e.preventDefault();
+      e.stopPropagation(); // oklar burada oktav değiştirmesin
+      ayarla(e.code === 'Home' ? 0 : e.code === 'End' ? 8 : cazAyar.cekme[i] + fark);
+    });
+    cekmeEls.push(kutu);
+    return kutu;
+  }
+
+  function cazArayuzGuncelle() {
+    cekmeEls.forEach((kutu, i) => {
+      const n = cazAyar.cekme[i];
+      kutu.style.setProperty('--deger', n);
+      kutu.firstChild.setAttribute('aria-valuenow', String(n));
+      kutu.lastChild.textContent = n;
+    });
+    $('#cekmeKodu').textContent = cazAyar.cekme.join('');
+    $('#perkusyon').setAttribute('aria-pressed', String(cazAyar.perkusyon));
+    $('#perkIkinci').setAttribute('aria-pressed', String(cazAyar.harmonik === 2));
+    $('#perkUcuncu').setAttribute('aria-pressed', String(cazAyar.harmonik === 3));
+    $('#perkHizli').setAttribute('aria-pressed', String(cazAyar.hizli));
+    $('#perkYumusak').setAttribute('aria-pressed', String(cazAyar.yumusak));
+    $('#vibrato').value = cazAyar.vibrato;
+    document.querySelectorAll('[data-hoparlor]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.hoparlor === cazAyar.hoparlor)));
+    $('#dokHoparlor').setAttribute('aria-pressed', String(cazAyar.hoparlor === 'hizli'));
+    $('#surus').value = cazAyar.surus;
+    $('#surusOut').textContent = cazAyar.surus;
+    $('#tikirti').setAttribute('aria-pressed', String(cazAyar.tikirti));
+    const kod = cazAyar.cekme.join('');
+    document.querySelectorAll('.caz-hazir').forEach((b, i) => {
+      const h = CAZ_HAZIR[i];
+      b.setAttribute('aria-current', String(h.cekme === kod && h.perkusyon === cazAyar.perkusyon && h.vibrato === cazAyar.vibrato));
+    });
+  }
+
+  function cazDegisti(sesler) {
+    if (sesler) cazSesleriUygula();
+    cazYoluAyarla();
+    cazArayuzGuncelle();
+    save();
+  }
+
+  function hoparlorSec(h) { cazAyar.hoparlor = h; cazDegisti(false); }
+
+  function cazKur() {
+    if (ORG !== 'caz') return;
+    const host = $('#cekmeceler');
+    CEKMELER.forEach((c, i) => host.appendChild(cekmeYap(c, i)));
+    const hHost = $('#cazHazirlar');
+    for (const h of CAZ_HAZIR) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'caz-hazir';
+      b.textContent = h.ad;
+      b.title = h.cekme;
+      b.addEventListener('click', () => {
+        cazAyar.cekme = [...h.cekme].map(Number);
+        cazAyar.perkusyon = h.perkusyon;
+        cazAyar.harmonik = h.harmonik;
+        cazAyar.vibrato = h.vibrato;
+        cazAyar.hoparlor = h.hoparlor;
+        cazDegisti(true);
+      });
+      hHost.appendChild(b);
+    }
+    const dugme = (id, is) => $(id).addEventListener('click', () => { is(); cazDegisti(false); });
+    dugme('#perkusyon', () => { cazAyar.perkusyon = !cazAyar.perkusyon; });
+    dugme('#perkIkinci', () => { cazAyar.harmonik = 2; });
+    dugme('#perkUcuncu', () => { cazAyar.harmonik = 3; });
+    dugme('#perkHizli', () => { cazAyar.hizli = !cazAyar.hizli; });
+    dugme('#perkYumusak', () => { cazAyar.yumusak = !cazAyar.yumusak; });
+    dugme('#tikirti', () => { cazAyar.tikirti = !cazAyar.tikirti; });
+    $('#vibrato').addEventListener('change', e => { cazAyar.vibrato = e.target.value; cazDegisti(false); e.target.blur(); });
+    document.querySelectorAll('[data-hoparlor]').forEach(b => b.addEventListener('click', () => hoparlorSec(b.dataset.hoparlor)));
+    $('#dokHoparlor').addEventListener('click', () => hoparlorSec(cazAyar.hoparlor === 'hizli' ? 'yavas' : 'hizli'));
+    $('#surus').addEventListener('input', e => { cazAyar.surus = Number(e.target.value); cazDegisti(false); });
+    cazArayuzGuncelle();
+  }
+
+  // ` tuşu (1'in solundaki): dönen hoparlör Yavaş ile Hızlı arasında
+  function cazTusu(e) {
+    if (ORG !== 'caz' || e.code !== 'Backquote') return false;
+    if (!e.repeat) hoparlorSec(cazAyar.hoparlor === 'hizli' ? 'yavas' : 'hizli');
+    return true;
+  }
   /* ================= Nota yönetimi ================= */
   const holders = new Map();   // midi -> Set(kaynak)
   const voices = new Map();    // midi -> Voice
@@ -1284,6 +1768,7 @@
   function noteOn(midi, src, bolum = 'I') {
     if (midi < 12 || midi > 115) return;
     if (!ensureWind()) return;
+    const ilkTus = holders.size === 0; // caz orgunun perküsyonu yalnızca bütün tuşlar bırakılmışken basılan notada
     let h = holders.get(midi);
     if (!h) { h = new Set(); holders.set(midi, h); }
     const first = h.size === 0;
@@ -1296,7 +1781,7 @@
       if (v) { v.bolumler.add(bolum); v.uygula(ctx.currentTime); } // "Tut" ile süren nota yeniden basıldı
       else {
         if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
-        voices.set(midi, new Voice(midi, ctx.currentTime, new Set([bolum])));
+        voices.set(midi, sesYarat(midi, ctx.currentTime, new Set([bolum]), stopsOn, ilkTus));
       }
     } else sesBolumleriniGuncelle(midi);
     otoPedalGuncelle();
@@ -2109,12 +2594,13 @@
     const kayit = calar.bekleyenKayit && tBas >= calar.bekleyenKayit.t - 1e-4 ? calar.bekleyenKayit.stops : undefined;
     const acik = () => (kayit ? new Set(kayit) : stopsOn);
     for (const m of o.notalar) {
-      const v = new Voice(m, tBas, new Set(['I']), acik());
+      // Caz orgunda perküsyon ezgi elinin notalarında vurur
+      const v = sesYarat(m, tBas, new Set(['I']), acik(), o.el !== calar.basEli || calar.cizelge.eller.length === 1);
       playerVoices.add(v);
       calar.acik.push({ v, bit });
     }
     // Otomatik pedal: bas çizgisini çalan elin en kalın notası pedalda da çalar
-    if (settings.otoPedal && o.el === calar.basEli) {
+    if (ORG === 'kilise' && settings.otoPedal && o.el === calar.basEli) {
       const v = new Voice(pedalNotasi(Math.min(...o.notalar), null), tBas, new Set(['P']), acik());
       playerVoices.add(v);
       calar.acik.push({ v, bit });
@@ -2141,7 +2627,8 @@
     calar.yeniBaslangic = false;
     if (pistonDegisti) calar.bekleyenKayit = { t: zaman, stops: PISTONS.find(p => p.n === b.piston).stops };
     calarSayac(zaman, () => {
-      if (pistonDegisti) { applyPiston(b.piston); calar.bekleyenKayit = null; }
+      if (pistonDegisti && ORG === 'kilise') applyPiston(b.piston);
+      if (pistonDegisti) calar.bekleyenKayit = null;
       if (settings.octave !== b.oktav) setOctave(b.oktav);
       calar.gorunenBolum = no;
       calarArayuzGuncelle();
@@ -2239,7 +2726,7 @@
     const b = c.bolumler[a.sira];
     if (calar.gorunenBolum !== a.sira) {
       const onceki = c.bolumler[calar.gorunenBolum];
-      if (!onceki || onceki.piston !== b.piston) applyPiston(b.piston);
+      if (ORG === 'kilise' && (!onceki || onceki.piston !== b.piston)) applyPiston(b.piston);
       if (settings.octave !== b.oktav) setOctave(b.oktav);
       calar.gorunenBolum = a.sira;
     }
@@ -2314,9 +2801,10 @@
     calar.durum = 'hazir';
     // Parçanın önerdiği ayarlar
     const ilk = calar.cizelge.bolumler[0];
-    applyPiston(ilk.piston);
+    // Caz orgunda registrasyon ve mekân kullanıcının çekme çubuklarında kalır
+    if (ORG === 'kilise') applyPiston(ilk.piston);
     if (settings.octave !== ilk.oktav) setOctave(ilk.oktav);
-    if (parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
+    if (ORG === 'kilise' && parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
     calarPencereyiYerlestir();
     calarArayuzKur();
     calarArayuzGuncelle();
@@ -2666,6 +3154,7 @@
     borular: () => Object.fromEntries([...voices].filter(([, v]) => !v.released).map(([m, v]) => [noteName(m), [...v.stops.keys()].sort()])),
     sandik: () => (A ? { kazanc: A.sandik.kazanc.gain.value, kesim: A.sandik.suzgec.frequency.value } : null),
     pedalSesleri: () => calar.pedalSayisi,
+    donenHoparlor: () => (A && A.caz ? { boru: A.caz.boru.sin.frequency.value, tambur: A.caz.tambur.sin.frequency.value } : null),
     // Bir bölümde nota basıp bırakmak (testler ve ileride MIDI için)
     cal: (midi, bolum = 'I') => noteOn(midi, `api:${bolum}:${midi}`, bolum),
     birak: (midi, bolum = 'I') => noteOff(midi, `api:${bolum}:${midi}`),
@@ -2707,6 +3196,7 @@
       return;
     }
     if (e.code === 'Escape') { calarDuraklat(); releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (cazTusu(e)) { e.preventDefault(); return; }
     if (e.code === 'Enter' && !inField && calar.parca && tag !== 'BUTTON') {
       e.preventDefault();
       if (!e.repeat) (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());
@@ -2874,6 +3364,7 @@
   /* ================= Başlat ================= */
   buildStops();
   buildPistons();
+  cazKur();
   buildManual();
   renderCaps();
   renderOctave();

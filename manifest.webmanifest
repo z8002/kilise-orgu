@@ -1,7 +1,7 @@
 {
   "name": "Kilise Orgu",
   "short_name": "Kilise Orgu",
-  "description": "Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: on üç register, kilise yankısı ve otuz parçalık şarkı çalar.",
+  "description": "Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu (iki manuel, pedal, yirmi altı register) ve ton tekerlekli caz orgu; otuz parçalık şarkı çalar.",
   "lang": "tr",
   "dir": "ltr",
   "start_url": "./kilise-orgu.html",
@@ -10,11 +10,50 @@
   "orientation": "any",
   "background_color": "#1a120c",
   "theme_color": "#1a120c",
-  "categories": ["music", "education", "entertainment"],
+  "categories": [
+    "music",
+    "education",
+    "entertainment"
+  ],
   "icons": [
-    { "src": "simgeler/simge-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "simgeler/simge-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "simgeler/simge-maskeli-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "simgeler/simge.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    {
+      "src": "simgeler/simge-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "simgeler/simge-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "simgeler/simge-maskeli-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "simgeler/simge.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Caz Orgu",
+      "short_name": "Caz Orgu",
+      "description": "Çekme çubuklu, dönen hoparlörlü caz orgu",
+      "url": "./caz-orgu.html",
+      "icons": [
+        {
+          "src": "simgeler/simge-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

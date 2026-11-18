@@ -8,7 +8,7 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 | 1. Parça verisi | 30 parça programın okuyabildiği biçimde; 25'i kaynağıyla doğrulandı | Bitti |
 | 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bitti |
 | 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bitti |
-| 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bekliyor |
+| 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bitti |
 | 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bekliyor |
 
 ## Aşama 0: Temeli sağlamlaştır
@@ -59,7 +59,7 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [x] Kendi kombinasyonunu kaydetme: "Ayarla" ve K1–K4; üç bölümün registerleri ve kuplörler saklanır.
 - [x] Akort sistemleri (eşit, Werckmeister III, Kirnberger III, ¼ koma ortalama ton, Pisagor), beşliler zincirinden hesaplanır; diyapazon (415–466 Hz); stereo yerleşim (Do ve Do♯ tarafları).
 - [x] Yeni registerler: Sandık'ta Rohrflüt, Salisyonal, Unda maris, Travers flüt, Flajole, Seskialtera, Obua, Vox humana, Tremolo; pedalda Subbas, Oktavbas, Koralbas, Trombon. Obua ve Vox humana için yeni dalga biçimleri.
-- [ ] Caz orgu.
+- [x] Caz orgu (`caz-orgu.html`): dokuz çekme çubuğu, hazır sesler, perküsyon, vibrato ve koro, dönen hoparlör, sürüş, tuş tıkırtısı. Kilise orgusuyla aynı şablondan üretilir; klavye, telefon görünümü, şarkı çalar ve internetsiz çalışma ortak.
 
 ## Aşama 5: Dış dünya
 

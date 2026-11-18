@@ -30,6 +30,7 @@
   function noteOn(midi, src, bolum = 'I') {
     if (midi < 12 || midi > 115) return;
     if (!ensureWind()) return;
+    const ilkTus = holders.size === 0; // caz orgunun perküsyonu yalnızca bütün tuşlar bırakılmışken basılan notada
     let h = holders.get(midi);
     if (!h) { h = new Set(); holders.set(midi, h); }
     const first = h.size === 0;
@@ -42,7 +43,7 @@
       if (v) { v.bolumler.add(bolum); v.uygula(ctx.currentTime); } // "Tut" ile süren nota yeniden basıldı
       else {
         if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
-        voices.set(midi, new Voice(midi, ctx.currentTime, new Set([bolum])));
+        voices.set(midi, sesYarat(midi, ctx.currentTime, new Set([bolum]), stopsOn, ilkTus));
       }
     } else sesBolumleriniGuncelle(midi);
     otoPedalGuncelle();

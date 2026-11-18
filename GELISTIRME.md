@@ -1,6 +1,6 @@
 # Geliştirme
 
-`kilise-orgu.html` elle düzenlenmez: `kaynak/` klasöründeki parçalardan üretilir. Dağıtılan şey yine tek bir HTML dosyasıdır. README'nin "Örnek parçalar" ve "Kaynaklar" bölümleri de elle düzenlenmez: `parcalar/` klasöründen üretilir.
+`kilise-orgu.html` ve `caz-orgu.html` elle düzenlenmez: `kaynak/` klasöründeki parçalardan, aynı şablondan üretilir. İkisi arasındaki fark `__ORG__`, `__BASLIK__`, `__ACIKLAMA__` yer tutucularıdır (`araclar/derle.py`); sayfa gerisini `<html data-org>` özniteliğine bakarak seçer (`yalniz-kilise`, `yalniz-caz` sınıfları, JavaScript'te `ORG`). Dağıtılan her sayfa yine tek bir HTML dosyasıdır. README'nin "Örnek parçalar" ve "Kaynaklar" bölümleri de elle düzenlenmez: `parcalar/` klasöründen üretilir.
 
 ## Klasörler
 
@@ -21,7 +21,7 @@
 ## Değişiklik yapmak
 
 1. `kaynak/` ya da `parcalar/` altındaki dosyayı düzenle.
-2. `python3 araclar/derle.py` ile `kilise-orgu.html` ve README'yi yeniden üret.
+2. `python3 araclar/derle.py` ile `kilise-orgu.html`, `caz-orgu.html` ve README'yi yeniden üret.
 3. `npm test` ile testleri çalıştır.
 4. Kaynağı ve üretilen dosyayı birlikte gönder. GitHub'daki denetim, üretilen dosya güncel değilse hata verir.
 
@@ -48,6 +48,7 @@ npm test
 - Ana ekrana ekleme: manifest ve simgeler; sunucu kapatılınca sayfanın ve parça bağlantılarının saklanan kopyadan açılması.
 - Hafif mod: nota başına boru ve gürültü kaynağı sayısı, en çok ses sayısı.
 - İki manuel ve pedal: her bölümün hangi borularla öttüğü (sayfa, basılı notaların registerlerini bildirir); kuplörler, otomatik pedal, pistonların Sandık ve pedal registerleri, önceki sürümün kaydından geçiş; yeni registerlerin perdesi.
+- Caz orgu: sayfa ve bağlantılar, çekme çubuklarının klavyeyle, fareyle ve hazır seslerle ayarlanması; her çubuğun eşit akortlu perdesi gerçek sesten; perküsyonun ilk notada vurup sönmesi, legatoda susması; dönen hoparlörde borunun çabuk, tamburun ağır hızlanması; şarkı çalar.
 - Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.
