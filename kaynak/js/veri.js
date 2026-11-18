@@ -21,6 +21,18 @@
       const n = i + 1;
       return n === 1 ? 0.6 : Math.min(1, 1.25 / Math.pow(n, 0.45)) * (n % 2 ? 1 : 0.88);
     }),
+    // Bacalı flüt: kapalı borunun tek harmoniklerine bacadan gelen biraz çift harmonik
+    rohr: [1, 0.12, 0.3, 0.06, 0.12, 0.02, 0.05, 0.01],
+    // Obua: temel görece zayıf, 3.–6. harmonikler güçlü; ince, genizden
+    oboe: Array.from({ length: 30 }, (_, i) => {
+      const n = i + 1;
+      return n === 1 ? 0.7 : Math.min(1, 0.75 * Math.exp(-Math.pow((n - 4) / 4, 2)) + 0.25 / n);
+    }),
+    // Vox humana: kısa rezonatör; tek harmonikler baskın, 3.–5. harmonikte "ünlü" tınısı
+    vox: Array.from({ length: 24 }, (_, i) => {
+      const n = i + 1;
+      return (n === 1 ? 0.5 : 0.7 / Math.pow(n, 0.6)) * (n % 2 ? 1 : 0.35) * (n >= 3 && n <= 5 ? 1.6 : 1);
+    }),
   };
 
   // mult: 8′ ayağa göre frekans çarpanı (16′ = 0.5, 4′ = 2, 2⅔′ = 3 …)
@@ -43,16 +55,46 @@
     ] },
     { id: 'trompet8', name: 'Trompet', foot: '8′', family: 'reed', jamb: 'parlak', desc: 'Dilli boru; parlak, buyurgan bir tören sesi.', ranks: [{ mult: 1, wave: 'reed', level: 0.24 }] },
     { id: 'tremolo', name: 'Tremolo', foot: '', family: 'trem', jamb: 'parlak', effect: true, desc: 'Rüzgâr basıncını titreştirir; ses dalgalanır.', ranks: [] },
-  ];
-  const STOP_BY_ID = Object.fromEntries(STOPS.map(s => [s.id, s]));
 
+    // II. manuel: Sandık. Boruları panjurlu bir sandığın içinde; panjur kapanınca ses kısılır ve koyulaşır.
+    { id: 'rohrflut8', name: 'Rohrflüt', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Bacalı kapalı flüt; Gedakt\'tan biraz parlak, şarkı söyler gibi.', ranks: [{ mult: 1, wave: 'rohr', level: 0.45 }] },
+    { id: 'salisyonal8', name: 'Salisyonal', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'İnce yaylı ses; Gamba\'dan yumuşak.', ranks: [{ mult: 1, wave: 'string', level: 0.22 }] },
+    { id: 'undamaris8', name: 'Unda maris', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Hafif pes akortlanmış flüt; Rohrflüt\'le birlikte deniz dalgası gibi dalgalanır.', ranks: [{ mult: 1, wave: 'flute', level: 0.3, cents: -6 }] },
+    { id: 'traversflut4', name: 'Travers flüt', foot: '4′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Yan flüt gibi açık, berrak ses; bir oktav yukarıda.', ranks: [{ mult: 2, wave: 'flute', level: 0.3 }] },
+    { id: 'flajole2', name: 'Flajole', foot: '2′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'İki oktav yukarıda ince, ıslıklı flüt.', ranks: [{ mult: 4, wave: 'flute', level: 0.18 }] },
+    { id: 'seskialtera', name: 'Seskialtera', foot: 'II', family: 'mutation', jamb: 'sandik', bolum: 'II', desc: 'Nazard ile Terz bir arada: kornet renginde solo sesi.', ranks: [{ mult: 3, wave: 'flute', level: 0.17 }, { mult: 5, wave: 'flute', level: 0.12 }] },
+    { id: 'obua8', name: 'Obua', foot: '8′', family: 'reed', jamb: 'sandik', bolum: 'II', desc: 'İnce, genizden dilli boru; tatlı bir solo sesi.', ranks: [{ mult: 1, wave: 'oboe', level: 0.22 }] },
+    { id: 'voxhumana8', name: 'Vox humana', foot: '8′', family: 'reed', jamb: 'sandik', bolum: 'II', desc: '"İnsan sesi": kısa rezonatörlü dilli boru; tremoloyla şarkı söyler.', ranks: [{ mult: 1, wave: 'vox', level: 0.18 }] },
+    { id: 'tremolo2', name: 'Tremolo', foot: '', family: 'trem', jamb: 'sandik', bolum: 'II', effect: true, desc: 'Sandığın rüzgârını titreştirir; I. manuelin tremolosundan biraz hızlı.', ranks: [] },
+
+    // Pedal: ayakla çalınan bas bölümü
+    { id: 'subbas16', name: 'Subbas', foot: '16′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Kapalı ahşap pedal borusu; yumuşak, derin temel.', ranks: [{ mult: 0.5, wave: 'stopped', level: 0.7 }] },
+    { id: 'oktavbas8', name: 'Oktavbas', foot: '8′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Pedalın prinsipali; bas çizgisini belirginleştirir.', ranks: [{ mult: 1, wave: 'principal', level: 0.45 }] },
+    { id: 'koralbas4', name: 'Koralbas', foot: '4′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Pedalda koral ezgisi çalmak için 4′ prinsipal.', ranks: [{ mult: 2, wave: 'principal', level: 0.3 }] },
+    { id: 'trombon16', name: 'Trombon', foot: '16′', family: 'reed', jamb: 'pedal', bolum: 'P', desc: 'Pedalın güçlü dilli borusu; plenumun temeli.', ranks: [{ mult: 0.5, wave: 'reed', level: 0.3 }] },
+  ];
+  for (const s of STOPS) if (!s.bolum) s.bolum = 'I';
+  const STOP_BY_ID = Object.fromEntries(STOPS.map(s => [s.id, s]));
+  const BOLUM_ADI = { I: 'I. manuel', II: 'Sandık', P: 'Pedal' };
+  const UST_SIRA = new Set(UPPER_ROW);
+
+  // Kuplörler: bir bölümün registerlerini başka bir bölümün tuşlarından da çaldırır
+  const KUPLORLER = [
+    { id: 'II/I', ad: 'II → I', desc: 'Sandık, I. manuelden de çalar.' },
+    { id: 'I/P', ad: 'I → P', desc: 'I. manuel, pedaldan da çalar.' },
+    { id: 'II/P', ad: 'II → P', desc: 'Sandık, pedaldan da çalar.' },
+  ];
+  const PEDAL_ILK = 36;  // pedal klavyesi Do2'den başlar
+  const PEDAL_SAYI = 20; // Do2 – Sol3
+
+  // Kombinasyon pistonları bütün bölümleri ayarlar (I. manuel, Sandık, pedal); kuplörlere dokunmaz.
   const PISTONS = [
-    { n: '1', name: 'Dua', stops: ['gedakt8', 'gamba8', 'celeste8'] },
-    { n: '2', name: 'İlahi', stops: ['prinsipal8', 'gedakt8', 'oktav4', 'flut4'] },
-    { n: '3', name: 'Flüt solo', stops: ['gedakt8', 'flut4', 'tremolo'] },
-    { n: '4', name: 'Kornet', stops: ['gedakt8', 'flut4', 'nazard', 'superoktav2', 'terz'] },
-    { n: '5', name: 'Plenum', stops: ['burdon16', 'prinsipal8', 'oktav4', 'superoktav2', 'mikstur'] },
-    { n: '6', name: 'Tutti', stops: ['burdon16', 'prinsipal8', 'gedakt8', 'gamba8', 'oktav4', 'flut4', 'nazard', 'superoktav2', 'terz', 'mikstur', 'trompet8'] },
+    { n: '1', name: 'Dua', stops: ['gedakt8', 'gamba8', 'celeste8', 'rohrflut8', 'undamaris8', 'subbas16'] },
+    { n: '2', name: 'İlahi', stops: ['prinsipal8', 'gedakt8', 'oktav4', 'flut4', 'rohrflut8', 'salisyonal8', 'traversflut4', 'subbas16', 'oktavbas8'] },
+    { n: '3', name: 'Flüt solo', stops: ['gedakt8', 'flut4', 'tremolo', 'rohrflut8', 'salisyonal8', 'subbas16'] },
+    { n: '4', name: 'Kornet', stops: ['gedakt8', 'flut4', 'nazard', 'superoktav2', 'terz', 'rohrflut8', 'traversflut4', 'subbas16', 'oktavbas8'] },
+    { n: '5', name: 'Plenum', stops: ['burdon16', 'prinsipal8', 'oktav4', 'superoktav2', 'mikstur', 'rohrflut8', 'salisyonal8', 'traversflut4', 'flajole2', 'obua8', 'subbas16', 'oktavbas8', 'koralbas4', 'trombon16'] },
+    { n: '6', name: 'Tutti', stops: ['burdon16', 'prinsipal8', 'gedakt8', 'gamba8', 'oktav4', 'flut4', 'nazard', 'superoktav2', 'terz', 'mikstur', 'trompet8', 'rohrflut8', 'salisyonal8', 'traversflut4', 'flajole2', 'seskialtera', 'obua8', 'subbas16', 'oktavbas8', 'koralbas4', 'trombon16'] },
     { n: '0', name: 'İptal', stops: [] },
   ];
 

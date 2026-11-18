@@ -14,6 +14,7 @@
     acik: [], sayaclar: new Set(), dongu_id: 0,
     adimlar: [], adim: 0, taze: new Set(), yanlis: 0, bitisSayaci: 0,
     gunluk: null,                              // testler için: zamanlanan program notaları
+    basEli: 'sol', pedalSayisi: 0,             // otomatik pedal: bas çizgisini çalan el, zamanlanan pedal notası sayısı
   };
   const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
   const ARALIK_MS = 25;
@@ -61,10 +62,18 @@
     const yinelenen = sonraki && sonraki.t === o.t + o.d && sonraki.notalar.some(m => o.notalar.includes(m));
     const bit = yinelenen ? Math.max(tBas + (tBit - tBas) * 0.6, tBit - 0.045) : tBit;
     const kayit = calar.bekleyenKayit && tBas >= calar.bekleyenKayit.t - 1e-4 ? calar.bekleyenKayit.stops : undefined;
+    const acik = () => (kayit ? new Set(kayit) : stopsOn);
     for (const m of o.notalar) {
-      const v = new Voice(m, tBas, kayit);
+      const v = new Voice(m, tBas, new Set(['I']), acik());
       playerVoices.add(v);
       calar.acik.push({ v, bit });
+    }
+    // Otomatik pedal: bas çizgisini çalan elin en kalın notası pedalda da çalar
+    if (settings.otoPedal && o.el === calar.basEli) {
+      const v = new Voice(pedalNotasi(Math.min(...o.notalar), null), tBas, new Set(['P']), acik());
+      playerVoices.add(v);
+      calar.acik.push({ v, bit });
+      calar.pedalSayisi++;
     }
     if (calar.gunluk) calar.gunluk.push({ tik: o.t, el: o.el, notalar: o.notalar, bas: tBas, bit });
     calarSayac(tBas, () => calarIsik(playerDown, o, true));
@@ -250,6 +259,7 @@
     if (calar.parca) calarDurdur();
     calar.parca = parca;
     calar.cizelge = parcaCizelgesi(parca);
+    calar.basEli = calar.cizelge.eller.includes('sol') ? 'sol' : 'sag';
     calar.hiz = 100;
     calar.dongu = false;
     calar.konum = 0;

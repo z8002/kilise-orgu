@@ -26,8 +26,10 @@ Ya da bilgisayarına indir:
 
 - **Şarkı çalar:** 30 parçayı program kendisi çalar (Dinle) ya da sana adım adım öğretir (Öğren): sıradaki tuş yanar, doğru tuşa basınca ilerler. Bir eli programa bırakıp öbürünü kendin çalabilir, hızı düşürebilir, bir bölümü yineletebilirsin. Registrasyon ve oktav parçaya göre kendiliğinden ayarlanır.
 - **Sürekli ses:** Tuş basılı kaldıkça nota çalar, bırakınca yankıyla söner. `Boşluk` basılıyken bıraktığın notalar da çalmaya devam eder.
-- **13 register:** Gerçek org registerleri, çalarken de açılıp kapatılabilir.
-- **7 kombinasyon pistonu:** Hazır registrasyonlar.
+- **26 register, iki manuel ve pedal:** I. manuelin 13 registerine ek olarak panjurlu Sandık'ta (II. manuel) 9, pedalda 4 register. "İki manuel ve pedal" konsolunda bilgisayar klavyesinin üst sırası Sandık'ı çalar; ekranda iki manuel ve ahşap pedal klavyesi görünür. Registerler çalarken de açılıp kapatılabilir.
+- **Kuplörler ve panjur:** II → I, I → P, II → P kuplörleri; Sandık panjuru kapandıkça Sandık kısılır ve koyulaşır.
+- **Otomatik pedal:** I. manuelde basılı en kalın nota pedalda da çalar; şarkı çalar da bas çizgisini pedala verir.
+- **7 kombinasyon pistonu:** Hazır registrasyonlar; I. manueli, Sandık'ı ve pedalı birlikte ayarlar.
 - **Mekân:** Şapel (1,8 sn), Kilise (3,6 sn), Katedral (6,5 sn) yankı süresi.
 - **Akort ve yerleşim:** Eşit akordun yanında tarihsel akortlar (Werckmeister III, Kirnberger III, ortalama ton, Pisagor) ve diyapazon (La4 = 415, 430, 440, 442, 466 Hz). Akort değişince basılı notalar da yeni perdeye kayar. Borular stereo olarak iki yana dizilir: Do tarafı solda, Do♯ tarafı sağda.
 - **Boru cephesi:** Çalınan notaya göre ilgili borular parlar; kalın notalar uzun boruları yakar.
@@ -38,6 +40,8 @@ Ya da bilgisayarına indir:
 - Ekrandaki klavyeye fareyle de basılabilir.
 
 ### Registerler
+
+**I. manuel**
 
 | Register | Ayak | Ses |
 |---|---|---|
@@ -55,17 +59,44 @@ Ya da bilgisayarına indir:
 | Trompet | 8′ | Dilli boru; parlak tören sesi |
 | Tremolo | – | Rüzgâr basıncını titreştirir |
 
+**Sandık (II. manuel).** Boruları panjurlu bir sandığın içindedir; panjur kapandıkça ses kısılır ve koyulaşır.
+
+| Register | Ayak | Ses |
+|---|---|---|
+| Rohrflüt | 8′ | Bacalı kapalı flüt; Gedakt'tan biraz parlak |
+| Salisyonal | 8′ | İnce yaylı ses; Gamba'dan yumuşak |
+| Unda maris | 8′ | Hafif pes akortlu flüt; Rohrflüt'le dalgalanır |
+| Travers flüt | 4′ | Yan flüt gibi açık, berrak ses |
+| Flajole | 2′ | İki oktav yukarıda ince, ıslıklı flüt |
+| Seskialtera | II | Nazard ile Terz bir arada; kornet renginde solo |
+| Obua | 8′ | İnce, genizden dilli boru |
+| Vox humana | 8′ | "İnsan sesi"; tremoloyla şarkı söyler |
+| Tremolo | – | Sandığın rüzgârını titreştirir |
+
+**Pedal**
+
+| Register | Ayak | Ses |
+|---|---|---|
+| Subbas | 16′ | Kapalı ahşap pedal borusu; derin temel |
+| Oktavbas | 8′ | Pedalın prinsipali |
+| Koralbas | 4′ | Pedalda koral ezgisi için |
+| Trombon | 16′ | Pedalın güçlü dilli borusu |
+
+**Kuplörler:** II → I (Sandık, I. manuelden de çalar), I → P ve II → P (manuel, pedaldan da çalar). Kuplörler zincirlenmez: pedalın Sandık'ı çalması için II → P gerekir.
+
 ### Kombinasyonlar
 
-| Piston | Ad | Registerler |
-|---|---|---|
-| 1 | Dua | Gedakt 8′, Gamba 8′, Voix Céleste 8′ |
-| 2 | İlahi | Prinsipal 8′, Gedakt 8′, Oktav 4′, Flüt 4′ |
-| 3 | Flüt solo | Gedakt 8′, Flüt 4′, Tremolo |
-| 4 | Kornet | Gedakt 8′, Flüt 4′, Nazard 2⅔′, Süperoktav 2′, Terz 1⅗′ |
-| 5 | Plenum | Burdon 16′, Prinsipal 8′, Oktav 4′, Süperoktav 2′, Mikstür IV |
-| 6 | Tutti | Tremolo ve Voix Céleste dışında hepsi |
-| 0 | İptal | Bütün registerleri kapatır |
+Pistonlar üç bölümü birlikte ayarlar; kuplörlere dokunmaz.
+
+| Piston | Ad | I. manuel | Sandık | Pedal |
+|---|---|---|---|---|
+| 1 | Dua | Gedakt 8′, Gamba 8′, Voix Céleste 8′ | Rohrflüt 8′, Unda maris 8′ | Subbas 16′ |
+| 2 | İlahi | Prinsipal 8′, Gedakt 8′, Oktav 4′, Flüt 4′ | Rohrflüt 8′, Salisyonal 8′, Travers flüt 4′ | Subbas 16′, Oktavbas 8′ |
+| 3 | Flüt solo | Gedakt 8′, Flüt 4′, Tremolo | Rohrflüt 8′, Salisyonal 8′ | Subbas 16′ |
+| 4 | Kornet | Gedakt 8′, Flüt 4′, Nazard 2⅔′, Süperoktav 2′, Terz 1⅗′ | Rohrflüt 8′, Travers flüt 4′ | Subbas 16′, Oktavbas 8′ |
+| 5 | Plenum | Burdon 16′, Prinsipal 8′, Oktav 4′, Süperoktav 2′, Mikstür IV | Rohrflüt 8′, Salisyonal 8′, Travers flüt 4′, Flajole 2′, Obua 8′ | Subbas 16′, Oktavbas 8′, Koralbas 4′, Trombon 16′ |
+| 6 | Tutti | Tremolo ve Voix Céleste dışında hepsi | Unda maris, Vox humana ve Tremolo dışında hepsi | Hepsi |
+| 0 | İptal | Bütün registerleri kapatır | | |
 
 ## Tuşlar
 
@@ -90,6 +121,8 @@ Sayfa açıldığında Oktav kutusunda **Do3 – Sol5** yazar. Aşağıdaki eşl
 | `Esc` | Bütün sesleri sustur |
 
 İngilizce (US) klavyede Ö, Ç, Ş, Ğ, Ü, `-` yerine sırasıyla `,` `.` `;` `[` `]` `=` tuşları kullanılır.
+
+**İki manuel ve pedal** konsolunda alt sıra I. manueli, üst sıra Sandık'ı (II. manuel) çalar; notalar aynıdır. Pedal fareyle ya da dokunarak çalınır, ya da Otomatik pedal açılır.
 
 <!-- PARCALAR:BASLA -->
 ## Örnek parçalar

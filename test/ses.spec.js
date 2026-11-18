@@ -83,3 +83,33 @@ for (const [id, beklenen] of AYAKLAR) {
     expect(temel.db - alt.db, 'temel ses, altındaki her şeyden en az 20 dB güçlü olmalı').toBeGreaterThan(20);
   });
 }
+
+// Sandık ve pedalın registerleri: La4 her bölümde kendi registerinin ayağında öter
+const YENI_AYAKLAR = [
+  ['rohrflut8', 'II', 440], ['salisyonal8', 'II', 440], ['undamaris8', 'II', 438.5], ['traversflut4', 'II', 880], ['flajole2', 'II', 1760],
+  ['seskialtera', 'II', 1320], ['obua8', 'II', 440], ['voxhumana8', 'II', 440],
+  ['subbas16', 'P', 220], ['oktavbas8', 'P', 440], ['koralbas4', 'P', 880], ['trombon16', 'P', 220],
+];
+for (const [id, bolum, beklenen] of YENI_AYAKLAR) {
+  test(`${id} (${bolum}) doğru perdede öter (La4 → ${beklenen} Hz)`, async ({ page }) => {
+    await piston(page, 0).click();
+    await page.locator(`.knob[data-id="${id}"]`).evaluate(k => k.click()); // tek manuelde görünmez; doğrudan
+    await page.evaluate(b => window.kiliseOrgu.cal(69, b), bolum);
+    await page.waitForTimeout(1500);
+    const temel = await tepe(page, beklenen * 0.94, beklenen * 1.06);
+    const alt = await tepe(page, 60, beklenen * 0.9);
+    await page.evaluate(b => window.kiliseOrgu.birak(69, b), bolum);
+    expect(Math.abs(temel.frekans - beklenen) / beklenen, `tepe ${temel.frekans.toFixed(1)} Hz`).toBeLessThan(0.01);
+    expect(temel.db).toBeGreaterThan(-70);
+    expect(temel.db - alt.db, 'temel ses, altındaki her şeyden en az 20 dB güçlü olmalı').toBeGreaterThan(20);
+  });
+}
+
+test('I. manuelde basılan nota, Sandık\'ın registerini kuplör olmadan çalmaz', async ({ page }) => {
+  await piston(page, 0).click();
+  await page.locator('.knob[data-id="rohrflut8"]').evaluate(k => k.click());
+  await page.keyboard.down('KeyY');
+  await page.waitForTimeout(800);
+  expect(await rms(page)).toBeLessThan(0.0005);
+  await page.keyboard.up('KeyY');
+});

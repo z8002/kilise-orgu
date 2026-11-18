@@ -216,6 +216,31 @@
   .note.ad { display: none; }
   @media (max-width: 560px) { .cap { display: none; } .note { font-size: .6rem; } }
 
+  /* İki manuel ve pedal (konsol: tam) */
+  .jambs-ikinci, .manual-kutu-2, .pedal-kutu { display: none; }
+  .konsol-tam .jambs-ikinci { display: grid; }
+  .konsol-tam:not(.pencereli) .manual-kutu-2, .konsol-tam:not(.pencereli) .pedal-kutu { display: block; }
+  .konsol-tam:not(.pencereli) .manual-kutu-2 { margin-bottom: 14px; }
+  .konsol-tam:not(.pencereli) #manual .cap.ust { display: none; } /* üst sıra Sandık'ı çalar */
+  .konsol-secim { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .kuplorler { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .kuplor {
+    min-width: 66px; height: 40px; padding: 0 .8rem; border-radius: 6px; border: 1px solid var(--knob-collar); cursor: pointer;
+    font: 700 .95rem/1 var(--font-stop); color: var(--ink);
+    background: linear-gradient(var(--knob-ivory), var(--knob-shade));
+    filter: brightness(.66) sepia(.2); transform: scale(.94); transition: transform .14s ease, filter .14s ease;
+  }
+  .kuplor[aria-pressed="true"] { filter: none; transform: none; box-shadow: 0 0 0 2px var(--gilt), 0 6px 12px rgba(0,0,0,.5); }
+  .sandik-ctl { justify-items: center; }
+  .pedal-kutu { margin: 14px -10px 0; padding: 10px 7% 12px; background: linear-gradient(#1a120c, #2b1d13); border-radius: 0 0 6px 6px; }
+  .pedal { position: relative; height: 74px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  /* Pedal tuşları ahşap ve aralıklı: tuşun ortasındaki şerit boyanır, basılabilen alan tuşun tamamı */
+  .pedal .key.white { padding-bottom: 6px; border: 0; box-shadow: none; background: linear-gradient(#dcc092, #a8835a 70%, #7d5c3a) center / 64% 100% no-repeat; }
+  .pedal .key.black { height: 58%; padding-bottom: 6px; box-shadow: none; background: linear-gradient(#3b2a1c, #120c08) center / 80% 100% no-repeat; }
+  .pedal .key.white.down { background: linear-gradient(#f7e6b8, var(--key-lit) 70%, #d8b86a) center / 64% 100% no-repeat; }
+  .pedal .key.black.down { background: linear-gradient(#6a4e26, #33240f) center / 80% 100% no-repeat; }
+  .pedal .note { color: #3a2a1a; }
+
   /* Kontroller */
   .controls {
     display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px;
@@ -411,6 +436,11 @@
   .pencere-ok:disabled { opacity: .35; cursor: default; }
   .dok-dugme { margin-left: auto; padding: 0 .9rem; font-weight: 500; }
   .tam-ekran { display: none; } /* yalnızca yan tutuşta: ekran alçakken tarayıcı çubukları yer kaplamasın */
+  /* İki manuelli konsolda ekrandaki tek klavyenin hangi bölümü çaldığı seçilir */
+  .bolum-secim { display: none; }
+  .konsol-tam.pencereli .bolum-secim { display: inline-flex; flex: none; }
+  .bolum-secim button { height: 44px; min-width: 34px; padding: 0 .5rem; }
+  @media (max-width: 440px) { .konsol-tam.pencereli #pencereOut { display: none; } }
   .dok-dugme[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
   #pencereOut { min-width: 0; padding: 0 2px; text-align: center; font: 500 .9rem var(--font-mono); color: var(--ivory-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   @media (max-width: 340px) {
@@ -468,8 +498,29 @@
             <span class="chip reed">Dilli boru</span>
             <span class="chip trem">Tremolo</span>
           </div>
+          <h3>Konsol</h3>
+          <div class="konsol-secim">
+            <div class="segment" role="group" aria-label="Konsol">
+              <button type="button" id="konsolTek" aria-pressed="true" title="Tek klavye: bilgisayar klavyesinin iki sırası da I. manueli çalar">Tek manuel</button>
+              <button type="button" id="konsolTam" aria-pressed="false" title="Sandık (II. manuel) ve pedal da açılır; bilgisayar klavyesinin üst sırası Sandık'ı çalar">İki manuel ve pedal</button>
+            </div>
+            <button type="button" id="otoPedal" class="hold" aria-pressed="false" title="I. manuelde basılı en kalın nota pedalda da çalar">Otomatik pedal</button>
+          </div>
         </div>
         <div class="division" id="jamb-parlak"></div>
+      </div>
+
+      <div class="jambs jambs-ikinci" id="ikinciSira">
+        <div class="division" id="jamb-sandik"></div>
+        <div class="center">
+          <h3>Kuplörler</h3>
+          <div class="kuplorler" id="kuplorler" role="group" aria-label="Kuplörler"></div>
+          <label class="ctl sandik-ctl" for="sandik">
+            <span class="ctl-label">Sandık panjuru <output id="sandikOut">100</output></span>
+            <input type="range" id="sandik" min="0" max="100" value="100">
+          </label>
+        </div>
+        <div class="division" id="jamb-pedal"></div>
       </div>
 
       <div class="manual-wrap">
@@ -477,12 +528,23 @@
           <button id="pencereSol" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav aşağı kaydır">‹</button>
           <output id="pencereOut" aria-live="polite"></output>
           <button id="pencereSag" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav yukarı kaydır">›</button>
+          <div class="segment bolum-secim" role="group" aria-label="Ekrandaki klavyenin çaldığı bölüm">
+            <button type="button" data-bolum="I" aria-pressed="true" title="I. manuel">I</button>
+            <button type="button" data-bolum="II" aria-pressed="false" title="Sandık (II. manuel)">II</button>
+            <button type="button" data-bolum="P" aria-pressed="false" title="Pedal">P</button>
+          </div>
           <button id="tamEkran" class="dok-dugme tam-ekran" type="button" aria-pressed="false" hidden>Tam ekran</button>
           <button id="dokTut" class="dok-dugme" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
           <button id="dokOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false" hidden>▶</button>
         </div>
+        <div class="manual-kutu manual-kutu-2" id="manualKutu2">
+          <div class="manual" id="manual2" role="group" aria-label="II. manuel (Sandık): fareyle veya dokunarak da çalınabilir"></div>
+        </div>
         <div class="manual-kutu" id="manualKutu">
           <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        </div>
+        <div class="pedal-kutu" id="pedalKutu">
+          <div class="pedal" id="pedal" role="group" aria-label="Pedal: fareyle veya dokunarak da çalınabilir"></div>
         </div>
       </div>
 
@@ -595,6 +657,7 @@
       <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
       <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+      <li><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
@@ -639,6 +702,18 @@
       const n = i + 1;
       return n === 1 ? 0.6 : Math.min(1, 1.25 / Math.pow(n, 0.45)) * (n % 2 ? 1 : 0.88);
     }),
+    // Bacalı flüt: kapalı borunun tek harmoniklerine bacadan gelen biraz çift harmonik
+    rohr: [1, 0.12, 0.3, 0.06, 0.12, 0.02, 0.05, 0.01],
+    // Obua: temel görece zayıf, 3.–6. harmonikler güçlü; ince, genizden
+    oboe: Array.from({ length: 30 }, (_, i) => {
+      const n = i + 1;
+      return n === 1 ? 0.7 : Math.min(1, 0.75 * Math.exp(-Math.pow((n - 4) / 4, 2)) + 0.25 / n);
+    }),
+    // Vox humana: kısa rezonatör; tek harmonikler baskın, 3.–5. harmonikte "ünlü" tınısı
+    vox: Array.from({ length: 24 }, (_, i) => {
+      const n = i + 1;
+      return (n === 1 ? 0.5 : 0.7 / Math.pow(n, 0.6)) * (n % 2 ? 1 : 0.35) * (n >= 3 && n <= 5 ? 1.6 : 1);
+    }),
   };
 
   // mult: 8′ ayağa göre frekans çarpanı (16′ = 0.5, 4′ = 2, 2⅔′ = 3 …)
@@ -661,16 +736,46 @@
     ] },
     { id: 'trompet8', name: 'Trompet', foot: '8′', family: 'reed', jamb: 'parlak', desc: 'Dilli boru; parlak, buyurgan bir tören sesi.', ranks: [{ mult: 1, wave: 'reed', level: 0.24 }] },
     { id: 'tremolo', name: 'Tremolo', foot: '', family: 'trem', jamb: 'parlak', effect: true, desc: 'Rüzgâr basıncını titreştirir; ses dalgalanır.', ranks: [] },
-  ];
-  const STOP_BY_ID = Object.fromEntries(STOPS.map(s => [s.id, s]));
 
+    // II. manuel: Sandık. Boruları panjurlu bir sandığın içinde; panjur kapanınca ses kısılır ve koyulaşır.
+    { id: 'rohrflut8', name: 'Rohrflüt', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Bacalı kapalı flüt; Gedakt\'tan biraz parlak, şarkı söyler gibi.', ranks: [{ mult: 1, wave: 'rohr', level: 0.45 }] },
+    { id: 'salisyonal8', name: 'Salisyonal', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'İnce yaylı ses; Gamba\'dan yumuşak.', ranks: [{ mult: 1, wave: 'string', level: 0.22 }] },
+    { id: 'undamaris8', name: 'Unda maris', foot: '8′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Hafif pes akortlanmış flüt; Rohrflüt\'le birlikte deniz dalgası gibi dalgalanır.', ranks: [{ mult: 1, wave: 'flute', level: 0.3, cents: -6 }] },
+    { id: 'traversflut4', name: 'Travers flüt', foot: '4′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'Yan flüt gibi açık, berrak ses; bir oktav yukarıda.', ranks: [{ mult: 2, wave: 'flute', level: 0.3 }] },
+    { id: 'flajole2', name: 'Flajole', foot: '2′', family: 'flue', jamb: 'sandik', bolum: 'II', desc: 'İki oktav yukarıda ince, ıslıklı flüt.', ranks: [{ mult: 4, wave: 'flute', level: 0.18 }] },
+    { id: 'seskialtera', name: 'Seskialtera', foot: 'II', family: 'mutation', jamb: 'sandik', bolum: 'II', desc: 'Nazard ile Terz bir arada: kornet renginde solo sesi.', ranks: [{ mult: 3, wave: 'flute', level: 0.17 }, { mult: 5, wave: 'flute', level: 0.12 }] },
+    { id: 'obua8', name: 'Obua', foot: '8′', family: 'reed', jamb: 'sandik', bolum: 'II', desc: 'İnce, genizden dilli boru; tatlı bir solo sesi.', ranks: [{ mult: 1, wave: 'oboe', level: 0.22 }] },
+    { id: 'voxhumana8', name: 'Vox humana', foot: '8′', family: 'reed', jamb: 'sandik', bolum: 'II', desc: '"İnsan sesi": kısa rezonatörlü dilli boru; tremoloyla şarkı söyler.', ranks: [{ mult: 1, wave: 'vox', level: 0.18 }] },
+    { id: 'tremolo2', name: 'Tremolo', foot: '', family: 'trem', jamb: 'sandik', bolum: 'II', effect: true, desc: 'Sandığın rüzgârını titreştirir; I. manuelin tremolosundan biraz hızlı.', ranks: [] },
+
+    // Pedal: ayakla çalınan bas bölümü
+    { id: 'subbas16', name: 'Subbas', foot: '16′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Kapalı ahşap pedal borusu; yumuşak, derin temel.', ranks: [{ mult: 0.5, wave: 'stopped', level: 0.7 }] },
+    { id: 'oktavbas8', name: 'Oktavbas', foot: '8′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Pedalın prinsipali; bas çizgisini belirginleştirir.', ranks: [{ mult: 1, wave: 'principal', level: 0.45 }] },
+    { id: 'koralbas4', name: 'Koralbas', foot: '4′', family: 'flue', jamb: 'pedal', bolum: 'P', desc: 'Pedalda koral ezgisi çalmak için 4′ prinsipal.', ranks: [{ mult: 2, wave: 'principal', level: 0.3 }] },
+    { id: 'trombon16', name: 'Trombon', foot: '16′', family: 'reed', jamb: 'pedal', bolum: 'P', desc: 'Pedalın güçlü dilli borusu; plenumun temeli.', ranks: [{ mult: 0.5, wave: 'reed', level: 0.3 }] },
+  ];
+  for (const s of STOPS) if (!s.bolum) s.bolum = 'I';
+  const STOP_BY_ID = Object.fromEntries(STOPS.map(s => [s.id, s]));
+  const BOLUM_ADI = { I: 'I. manuel', II: 'Sandık', P: 'Pedal' };
+  const UST_SIRA = new Set(UPPER_ROW);
+
+  // Kuplörler: bir bölümün registerlerini başka bir bölümün tuşlarından da çaldırır
+  const KUPLORLER = [
+    { id: 'II/I', ad: 'II → I', desc: 'Sandık, I. manuelden de çalar.' },
+    { id: 'I/P', ad: 'I → P', desc: 'I. manuel, pedaldan da çalar.' },
+    { id: 'II/P', ad: 'II → P', desc: 'Sandık, pedaldan da çalar.' },
+  ];
+  const PEDAL_ILK = 36;  // pedal klavyesi Do2'den başlar
+  const PEDAL_SAYI = 20; // Do2 – Sol3
+
+  // Kombinasyon pistonları bütün bölümleri ayarlar (I. manuel, Sandık, pedal); kuplörlere dokunmaz.
   const PISTONS = [
-    { n: '1', name: 'Dua', stops: ['gedakt8', 'gamba8', 'celeste8'] },
-    { n: '2', name: 'İlahi', stops: ['prinsipal8', 'gedakt8', 'oktav4', 'flut4'] },
-    { n: '3', name: 'Flüt solo', stops: ['gedakt8', 'flut4', 'tremolo'] },
-    { n: '4', name: 'Kornet', stops: ['gedakt8', 'flut4', 'nazard', 'superoktav2', 'terz'] },
-    { n: '5', name: 'Plenum', stops: ['burdon16', 'prinsipal8', 'oktav4', 'superoktav2', 'mikstur'] },
-    { n: '6', name: 'Tutti', stops: ['burdon16', 'prinsipal8', 'gedakt8', 'gamba8', 'oktav4', 'flut4', 'nazard', 'superoktav2', 'terz', 'mikstur', 'trompet8'] },
+    { n: '1', name: 'Dua', stops: ['gedakt8', 'gamba8', 'celeste8', 'rohrflut8', 'undamaris8', 'subbas16'] },
+    { n: '2', name: 'İlahi', stops: ['prinsipal8', 'gedakt8', 'oktav4', 'flut4', 'rohrflut8', 'salisyonal8', 'traversflut4', 'subbas16', 'oktavbas8'] },
+    { n: '3', name: 'Flüt solo', stops: ['gedakt8', 'flut4', 'tremolo', 'rohrflut8', 'salisyonal8', 'subbas16'] },
+    { n: '4', name: 'Kornet', stops: ['gedakt8', 'flut4', 'nazard', 'superoktav2', 'terz', 'rohrflut8', 'traversflut4', 'subbas16', 'oktavbas8'] },
+    { n: '5', name: 'Plenum', stops: ['burdon16', 'prinsipal8', 'oktav4', 'superoktav2', 'mikstur', 'rohrflut8', 'salisyonal8', 'traversflut4', 'flajole2', 'obua8', 'subbas16', 'oktavbas8', 'koralbas4', 'trombon16'] },
+    { n: '6', name: 'Tutti', stops: ['burdon16', 'prinsipal8', 'gedakt8', 'gamba8', 'oktav4', 'flut4', 'nazard', 'superoktav2', 'terz', 'mikstur', 'trompet8', 'rohrflut8', 'salisyonal8', 'traversflut4', 'flajole2', 'seskialtera', 'obua8', 'subbas16', 'oktavbas8', 'koralbas4', 'trombon16'] },
     { n: '0', name: 'İptal', stops: [] },
   ];
 
@@ -732,8 +837,13 @@
   const dokunmatik = kalinIsaretci.matches; // telefon, tablet: ana işaretçi parmak
 
   // hafif: zayıf telefonlar için daha az boru ve kısa yankı
-  const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50 };
+  // konsol: 'tek' (bir manuel) ya da 'tam' (iki manuel ve pedal); sandik: Sandık panjurunun açıklığı (0–100)
+  const settings = {
+    room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
+    konsol: 'tek', otoPedal: false, sandik: 100,
+  };
   const stopsOn = new Set(PISTONS[4].stops);
+  const kuplorler = new Set();
   // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
   const STORE_KEY = 'kilise-orgu-v2';
   try {
@@ -747,11 +857,20 @@
       if (kendi(AKORTLAR, saved.akort)) settings.akort = saved.akort;
       if (DIYAPAZONLAR.some(([hz]) => hz === saved.diyapazon)) settings.diyapazon = saved.diyapazon;
       if (Number.isFinite(saved.stereo)) settings.stereo = clamp(saved.stereo, 0, 100);
-      if (Array.isArray(saved.stops)) { stopsOn.clear(); saved.stops.forEach(id => kendi(STOP_BY_ID, id) && stopsOn.add(id)); }
+      if (saved.konsol === 'tek' || saved.konsol === 'tam') settings.konsol = saved.konsol;
+      if (typeof saved.otoPedal === 'boolean') settings.otoPedal = saved.otoPedal;
+      if (Number.isFinite(saved.sandik)) settings.sandik = clamp(saved.sandik, 0, 100);
+      if (Array.isArray(saved.stops)) {
+        stopsOn.clear();
+        saved.stops.forEach(id => kendi(STOP_BY_ID, id) && stopsOn.add(id));
+        // Önceki sürümlerin kaydında yalnızca I. manuel vardı: Sandık ve pedal Plenum'la başlar
+        if (!Array.isArray(saved.kuplorler)) for (const id of PISTONS[4].stops) if (STOP_BY_ID[id].bolum !== 'I') stopsOn.add(id);
+      }
+      if (Array.isArray(saved.kuplorler)) saved.kuplorler.forEach(id => KUPLORLER.some(k => k.id === id) && kuplorler.add(id));
     }
   } catch (_) {}
   function save() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn] })); } catch (_) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...settings, stops: [...stopsOn], kuplorler: [...kuplorler] })); } catch (_) {}
   }
 
   const baseMidi = () => 12 * (settings.octave + 1);
@@ -784,7 +903,34 @@
   }
   function yerlesimiUygula() {
     if (!ctx) return;
-    for (const v of [...voices.values(), ...playerVoices]) if (v.pan) v.pan.pan.setTargetAtTime(notaYeri(v.midi), ctx.currentTime, 0.05);
+    for (const v of [...voices.values(), ...playerVoices]) {
+      for (const c of v.cikislar.values()) if (c.pan) c.pan.pan.setTargetAtTime(notaYeri(v.midi), ctx.currentTime, 0.05);
+    }
+  }
+
+  // Bir notayı çalan bölümler (I, II, P) için ötecek registerler; kuplörler başka bölümleri de katar.
+  // Kuplörler zincirlenmez: II→I ile I→P birlikteyken pedal, Sandık'ı çalmaz (bunun için II→P gerekir).
+  function bolumSesleri(bolumler, acik = stopsOn) {
+    const dahil = new Set(bolumler);
+    if (bolumler.has('I') && kuplorler.has('II/I')) dahil.add('II');
+    if (bolumler.has('P')) {
+      if (kuplorler.has('I/P')) dahil.add('I');
+      if (kuplorler.has('II/P')) dahil.add('II');
+    }
+    const sonuc = [];
+    for (const id of acik) {
+      const s = STOP_BY_ID[id];
+      if (s && !s.effect && dahil.has(s.bolum)) sonuc.push(id);
+    }
+    return sonuc;
+  }
+
+  // Sandık panjuru: kapandıkça ses kısılır ve tizleri kesilir (600 Hz – 18 kHz)
+  function sandigiUygula() {
+    if (!ctx) return;
+    const x = settings.sandik / 100, t = ctx.currentTime;
+    A.sandik.kazanc.gain.setTargetAtTime(0.28 + 0.72 * x, t, 0.06);
+    A.sandik.suzgec.frequency.setTargetAtTime(600 * Math.pow(30, x), t, 0.06);
   }
 
   function buildAudio() {
@@ -795,7 +941,14 @@
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
 
     const bus = ctx.createGain(); bus.gain.value = 0.2;
-    const trem = ctx.createGain(); trem.gain.value = 1;
+    // Bölümler: her birinin girişi ve (manuellerde) tremolosu. Sandık, panjurdan geçerek ana yola katılır.
+    const giris = { I: ctx.createGain(), II: ctx.createGain(), P: ctx.createGain() };
+    const trem = { I: ctx.createGain(), II: ctx.createGain() };
+    const sandik = { kazanc: ctx.createGain(), suzgec: ctx.createBiquadFilter() };
+    sandik.suzgec.type = 'lowpass'; sandik.suzgec.Q.value = 0.5; sandik.suzgec.frequency.value = 18000;
+    giris.I.connect(trem.I); trem.I.connect(bus);
+    giris.II.connect(trem.II); trem.II.connect(sandik.kazanc); sandik.kazanc.connect(sandik.suzgec); sandik.suzgec.connect(bus);
+    giris.P.connect(bus);
     const tone = ctx.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 9000; tone.Q.value = 0.4;
     const dry = ctx.createGain();
     const wet = ctx.createGain();
@@ -804,18 +957,21 @@
     comp.threshold.value = -18; comp.knee.value = 14; comp.ratio.value = 5; comp.attack.value = 0.004; comp.release.value = 0.3;
     const master = ctx.createGain();
 
-    bus.connect(trem); trem.connect(tone);
+    bus.connect(tone);
     tone.connect(dry); tone.connect(conv); conv.connect(wet);
     dry.connect(comp); wet.connect(comp);
     comp.connect(master); master.connect(ctx.destination);
 
-    // Tremolo: genlik ve perdeyi titreten tek bir LFO
-    const lfo = ctx.createOscillator(); lfo.frequency.value = 5.4;
-    const lfoAmp = ctx.createGain(); lfoAmp.gain.value = 0;
-    const lfoPitch = ctx.createGain(); lfoPitch.gain.value = 0;
-    lfo.connect(lfoAmp); lfoAmp.connect(trem.gain);
-    lfo.connect(lfoPitch);
-    lfo.start();
+    // Tremolo: her manuelde genliği ve perdeyi titreten bir LFO (Sandık'ınki biraz hızlı)
+    const lfoAmp = {}, lfoPitch = {};
+    for (const [b, hz] of [['I', 5.4], ['II', 6.1]]) {
+      const lfo = ctx.createOscillator(); lfo.frequency.value = hz;
+      lfoAmp[b] = ctx.createGain(); lfoAmp[b].gain.value = 0;
+      lfoPitch[b] = ctx.createGain(); lfoPitch[b].gain.value = 0;
+      lfo.connect(lfoAmp[b]); lfoAmp[b].connect(trem[b].gain);
+      lfo.connect(lfoPitch[b]);
+      lfo.start();
+    }
 
     const noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
     const nd = noise.getChannelData(0);
@@ -829,10 +985,11 @@
       waves[k] = ctx.createPeriodicWave(real, imag);
     }
 
-    A = { bus, dry, wet, conv, master, lfoAmp, lfoPitch, noise, waves };
+    A = { bus, giris, sandik, dry, wet, conv, master, lfoAmp, lfoPitch, noise, waves };
     applyRoom();
     applyMix();
     applyTremolo();
+    sandigiUygula();
     return true;
   }
 
@@ -872,9 +1029,12 @@
   }
   function applyTremolo() {
     if (!ctx) return;
-    const on = stopsOn.has('tremolo'), t = ctx.currentTime;
-    A.lfoAmp.gain.setTargetAtTime(on ? 0.13 : 0, t, 0.08);
-    A.lfoPitch.gain.setTargetAtTime(on ? 6 : 0, t, 0.08);
+    const t = ctx.currentTime;
+    for (const [b, id, genlik, perde] of [['I', 'tremolo', 0.13, 6], ['II', 'tremolo2', 0.16, 8]]) {
+      const on = stopsOn.has(id);
+      A.lfoAmp[b].gain.setTargetAtTime(on ? genlik : 0, t, 0.08);
+      A.lfoPitch[b].gain.setTargetAtTime(on ? perde : 0, t, 0.08);
+    }
   }
 
   function freeze(param, t) {
@@ -896,41 +1056,70 @@
   const keyScale = f => (f > 1800 ? Math.pow(1800 / f, 0.5) : 1);
 
   class Voice {
-    // t0 ileri bir an olabilir (şarkı çalar notaları önceden zamanlar); stopIds verilmezse açık registerler kullanılır.
-    constructor(midi, t0, stopIds) {
+    // t0 ileri bir an olabilir (şarkı çalar notaları önceden zamanlar).
+    // bolumler: notayı çalan bölümler (I, II, P). acik: açık registerler; çoğunlukla stopsOn'un kendisi,
+    // şarkı çalarda henüz gelmemiş bir bölümün registrasyonu için onun kopyası.
+    constructor(midi, t0, bolumler = new Set(['I']), acik = stopsOn) {
       this.midi = midi;
       this.t0 = t0;
       this.freq = notaFrekansi(midi);
+      this.bolumler = bolumler;
+      this.acik = acik;
       this.stops = new Map();
+      this.cikislar = new Map(); // bölüm → { g, pan }: her bölüm kendi yolundan (Sandık panjurdan) geçer
       this.released = false;
       this.breath = null;
-      this.out = ctx.createGain();
-      this.pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
-      if (this.pan) {
-        this.pan.pan.value = notaYeri(midi);
-        this.out.connect(this.pan);
-        this.pan.connect(A.bus);
-      } else this.out.connect(A.bus);
-      for (const id of (stopIds || stopsOn)) this.addStop(STOP_BY_ID[id], t0);
+      for (const id of bolumSesleri(bolumler, acik)) this.addStop(STOP_BY_ID[id], t0);
       if (this.stops.size) this.articulate(t0);
+    }
+
+    cikis(bolum) {
+      let c = this.cikislar.get(bolum);
+      if (!c) {
+        const g = ctx.createGain();
+        const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+        if (pan) {
+          pan.pan.value = notaYeri(this.midi);
+          g.connect(pan);
+          pan.connect(A.giris[bolum]);
+        } else g.connect(A.giris[bolum]);
+        c = { g, pan };
+        this.cikislar.set(bolum, c);
+      }
+      return c.g;
+    }
+
+    cikislariKes() {
+      for (const c of this.cikislar.values()) {
+        try { c.g.disconnect(); } catch (_) {}
+        if (c.pan) try { c.pan.disconnect(); } catch (_) {}
+      }
     }
 
     // Henüz başlamamış (ya da hemen susması gereken) sesi iz bırakmadan keser.
     cancel() {
       if (this.released) return;
       this.released = true;
-      try { this.out.disconnect(); } catch (_) {}
-      if (this.pan) try { this.pan.disconnect(); } catch (_) {}
+      this.cikislariKes();
       const t = ctx.currentTime;
       for (const s of this.stops.values()) s.oscs.forEach(o => { try { o.stop(t); } catch (_) {} });
       if (this.breath) { try { this.breath.src.stop(t); } catch (_) {} }
+    }
+
+    // Ötmesi gereken registerleri (bölümler, kuplörler, açık registerler) çalan sese uygular.
+    uygula(t) {
+      if (this.released) return;
+      const istenen = new Set(bolumSesleri(this.bolumler, this.acik));
+      for (const id of [...this.stops.keys()]) if (!istenen.has(id)) this.removeStop(id, t);
+      for (const id of istenen) if (!this.stops.has(id)) this.addStop(STOP_BY_ID[id], t);
     }
 
     addStop(stop, t0) {
       if (stop.effect || this.released || this.stops.has(stop.id)) return;
       const g = ctx.createGain();
       g.gain.value = 0;
-      g.connect(this.out);
+      g.connect(this.cikis(stop.bolum));
+      const lfoPitch = A.lfoPitch[stop.bolum]; // pedalda tremolo yok
       const oscs = [];
       let speak = 0.018;
       // Hafif modda Mikstür'ün yalnızca ilk iki sırası öter
@@ -946,13 +1135,13 @@
         const cents = (r.cents || 0) + (Math.random() * 2 - 1) * 2.2; // borular asla tam aynı akortta değildir
         if (stop.family === 'reed') o.detune.value = cents;
         else { o.detune.setValueAtTime(cents - 8, t0); o.detune.setTargetAtTime(cents, t0, 0.04); }
-        A.lfoPitch.connect(o.detune);
+        if (lfoPitch) lfoPitch.connect(o.detune);
         const rg = ctx.createGain();
         rg.gain.value = r.level * keyScale(f);
         o.connect(rg); rg.connect(g);
         o.start(t0);
         o.onended = () => {
-          try { A.lfoPitch.disconnect(o.detune); } catch (_) {}
+          if (lfoPitch) try { lfoPitch.disconnect(o.detune); } catch (_) {}
           o.disconnect(); rg.disconnect();
         };
         oscs.push(o);
@@ -978,8 +1167,10 @@
       fadeOut(s, t, 0.035, t + 0.3);
     }
 
-    // Borunun ağzındaki hava: kısa "chiff" ve çok hafif rüzgâr hışırtısı
+    // Borunun ağzındaki hava: kısa "chiff" ve çok hafif rüzgâr hışırtısı (ilk registerin bölümünden)
     articulate(t0) {
+      const ilk = STOP_BY_ID[this.stops.keys().next().value];
+      const cikis = this.cikis(ilk.bolum);
       const flue = [...this.stops.keys()].some(id => STOP_BY_ID[id].family !== 'reed');
       if (flue) {
         const src = ctx.createBufferSource(); src.buffer = A.noise;
@@ -989,7 +1180,7 @@
         g.gain.setValueAtTime(0, t0);
         g.gain.linearRampToValueAtTime(0.9, t0 + 0.006);
         g.gain.setTargetAtTime(0, t0 + 0.012, 0.03);
-        src.connect(bp); bp.connect(g); g.connect(this.out);
+        src.connect(bp); bp.connect(g); g.connect(cikis);
         src.start(t0, Math.random() * 1.5, 0.25);
         src.onended = () => { try { g.disconnect(); } catch (_) {} };
       }
@@ -1000,7 +1191,7 @@
       const bg = ctx.createGain();
       bg.gain.setValueAtTime(0, t0);
       bg.gain.linearRampToValueAtTime(0.06, t0 + 0.05);
-      br.connect(bf); bf.connect(bg); bg.connect(this.out);
+      br.connect(bf); bf.connect(bg); bg.connect(cikis);
       br.start(t0, Math.random() * 1.5);
       this.breath = { src: br, g: bg };
     }
@@ -1016,11 +1207,7 @@
         this.breath.g.gain.setTargetAtTime(0, t, 0.03);
         try { this.breath.src.stop(t + 0.3); } catch (_) {}
       }
-      const out = this.out, pan = this.pan;
-      setTimeout(() => {
-        try { out.disconnect(); } catch (_) {}
-        if (pan) try { pan.disconnect(); } catch (_) {}
-      }, Math.max(0, end - ctx.currentTime) * 1000 + 500);
+      setTimeout(() => this.cikislariKes(), Math.max(0, end - ctx.currentTime) * 1000 + 500);
     }
   }
 
@@ -1049,7 +1236,9 @@
   const playerVoices = new Set();   // şarkı çaların zamanladığı, henüz bırakılmamış sesler
   const playerDown = new Map();     // midi -> { n, el }: şarkı çaların o an çaldığı notalar (görünüm için)
   const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
+  const kaynakBolumu = new Map();   // kaynak -> basıldığı bölüm (I, II, P)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
+  let otoPedalNotasi = null;        // otomatik pedalın o an çaldığı nota
 
   let sesDesteklenmiyor = false;
 
@@ -1065,31 +1254,79 @@
     return true;
   }
 
-  function noteOn(midi, src) {
+  // bolum: notanın basıldığı bölüm. Aynı nota birden çok bölümde basılıysa tek ses, bölümlerin
+  // registerlerinin birleşimiyle öter (gerçek orgda da her boru bir kez öter).
+  function noteOn(midi, src, bolum = 'I') {
     if (midi < 12 || midi > 115) return;
     if (!ensureWind()) return;
     let h = holders.get(midi);
     if (!h) { h = new Set(); holders.set(midi, h); }
     const first = h.size === 0;
     h.add(src);
-    if (typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
-    if (!first) return;
-    sustained.delete(midi);
-    if (!voices.has(midi)) {
-      if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
-      voices.set(midi, new Voice(midi, ctx.currentTime));
-    }
+    kaynakBolumu.set(src, bolum);
+    if (src !== 'oto' && typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
+    if (first) {
+      sustained.delete(midi);
+      const v = voices.get(midi);
+      if (v) { v.bolumler.add(bolum); v.uygula(ctx.currentTime); } // "Tut" ile süren nota yeniden basıldı
+      else {
+        if (voices.size >= (settings.hafif ? HAFIF_MAX_VOICES : MAX_VOICES)) killVoice(voices.keys().next().value);
+        voices.set(midi, new Voice(midi, ctx.currentTime, new Set([bolum])));
+      }
+    } else sesBolumleriniGuncelle(midi);
+    otoPedalGuncelle();
     refreshView();
   }
 
   function noteOff(midi, src) {
     const h = holders.get(midi);
     if (!h || !h.delete(src)) return;
-    if (h.size) return;
-    holders.delete(midi);
-    if (sustainOn && voices.has(midi)) sustained.add(midi);
-    else killVoice(midi);
+    kaynakBolumu.delete(src);
+    if (h.size) sesBolumleriniGuncelle(midi); // başka bir bölümde hâlâ basılı
+    else {
+      holders.delete(midi);
+      if (sustainOn && voices.has(midi)) sustained.add(midi);
+      else killVoice(midi);
+    }
+    otoPedalGuncelle();
     refreshView();
+  }
+
+  function sesBolumleriniGuncelle(midi) {
+    const v = voices.get(midi), h = holders.get(midi);
+    if (!v || !h || !h.size) return;
+    v.bolumler = new Set([...h].map(k => kaynakBolumu.get(k) || 'I'));
+    v.uygula(ctx.currentTime);
+  }
+
+  // Register, kuplör ya da panjur değişince çalan ve zamanlanmış bütün seslere uygular.
+  function tumSesleriUygula() {
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    for (const v of [...voices.values(), ...playerVoices]) v.uygula(Math.max(t, v.t0));
+  }
+
+  // Otomatik pedal: I. manuelde basılı en kalın nota pedalda da çalar (Do2–Sol3 arasına, bir öncekine
+  // en yakın oktava katlanarak; ilk nota Do2–Si2 arasına düşer).
+  function pedalNotasi(m, onceki) {
+    const pc = ((m % 12) + 12) % 12, hedef = onceki == null ? 40 : onceki;
+    const adaylar = [PEDAL_ILK + pc, PEDAL_ILK + 12 + pc].filter(x => x < PEDAL_ILK + PEDAL_SAYI);
+    return adaylar.reduce((a, b) => (Math.abs(b - hedef) < Math.abs(a - hedef) ? b : a));
+  }
+  function otoPedalGuncelle() {
+    let enKalin = null;
+    if (settings.otoPedal) {
+      for (const [m, h] of holders) {
+        if (enKalin !== null && m >= enKalin) continue;
+        for (const k of h) if (k !== 'oto' && kaynakBolumu.get(k) === 'I') { enKalin = m; break; }
+      }
+    }
+    const yeni = enKalin === null ? null : (otoPedalNotasi !== null && ((otoPedalNotasi - enKalin) % 12 + 12) % 12 === 0 ? otoPedalNotasi : pedalNotasi(enKalin, otoPedalNotasi));
+    if (yeni === otoPedalNotasi) return;
+    const eski = otoPedalNotasi;
+    otoPedalNotasi = yeni; // önce yaz: noteOff/noteOn buraya yeniden girer
+    if (eski !== null) noteOff(eski, 'oto');
+    if (yeni !== null) noteOn(yeni, 'oto', 'P');
   }
 
   function killVoice(midi) {
@@ -1101,7 +1338,8 @@
   }
 
   function releaseAll() {
-    codeHeld.clear(); ptr.clear(); holders.clear(); sustained.clear();
+    codeHeld.clear(); ptr.clear(); holders.clear(); sustained.clear(); kaynakBolumu.clear();
+    otoPedalNotasi = null;
     if (ctx) for (const v of voices.values()) v.release(ctx.currentTime);
     voices.clear();
     refreshView();
@@ -1123,36 +1361,49 @@
   /* ================= Registerler ================= */
   const knobEls = {};
   const pistonEls = [];
+  const kuplorEls = {};
 
   function setStop(id, on) {
     const stop = STOP_BY_ID[id];
     if (!stop || on === stopsOn.has(id)) return;
     if (on) stopsOn.add(id); else stopsOn.delete(id);
-    if (ctx) {
-      const t = ctx.currentTime;
-      if (stop.effect) applyTremolo();
-      else for (const v of [...voices.values(), ...playerVoices]) (on ? v.addStop(stop, Math.max(t, v.t0)) : v.removeStop(id, Math.max(t, v.t0)));
-    }
+    // Şarkı çaların, gelecek bir bölümün registrasyonuyla zamanladığı sesler de değişikliği alır
+    for (const v of playerVoices) if (v.acik !== stopsOn) { if (on) v.acik.add(id); else v.acik.delete(id); }
+    if (ctx) { if (stop.effect) applyTremolo(); else tumSesleriUygula(); }
     knobEls[id].setAttribute('aria-pressed', String(on));
+  }
+
+  function kuplorDegistir(id, acik) {
+    if (acik === kuplorler.has(id)) return;
+    if (acik) kuplorler.add(id); else kuplorler.delete(id);
+    kuplorEls[id].setAttribute('aria-pressed', String(acik));
+    tumSesleriUygula();
+    save();
   }
 
   function afterRegistration() { updatePistons(); refreshView(); save(); }
 
+  const JAMBLAR = [
+    ['temel', 'Temel sesler', 4], ['parlak', 'Parlak sesler', 3], ['sandik', 'Sandık · II. manuel', 3], ['pedal', 'Pedal', 2],
+  ];
+
   function buildStops() {
-    for (const jamb of ['temel', 'parlak']) {
+    for (const [jamb, baslik, sutun] of JAMBLAR) {
       const host = document.getElementById('jamb-' + jamb);
       const list = STOPS.filter(s => s.jamb === jamb);
       const h = document.createElement('h3');
-      h.textContent = jamb === 'temel' ? 'Temel sesler' : 'Parlak sesler';
+      h.textContent = baslik;
       const grid = document.createElement('div');
       grid.className = 'knobs';
-      grid.style.setProperty('--cols', jamb === 'temel' ? 4 : 3);
+      grid.style.setProperty('--cols', sutun);
       for (const s of list) {
         const b = document.createElement('button');
         b.type = 'button';
         b.className = 'knob';
         b.dataset.family = s.family;
-        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim();
+        b.dataset.id = s.id;
+        // Sandık ve pedal registerlerinin adına bölüm eklenir (iki manuelde de Tremolo var)
+        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${BOLUM_ADI[s.bolum]}`);
         b.title = `${label} — ${s.desc}`;
         b.setAttribute('aria-label', label);
         b.setAttribute('aria-pressed', String(stopsOn.has(s.id)));
@@ -1164,6 +1415,18 @@
         grid.appendChild(b);
       }
       host.append(h, grid);
+    }
+    const kHost = $('#kuplorler');
+    for (const k of KUPLORLER) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'kuplor';
+      b.textContent = k.ad;
+      b.title = k.desc;
+      b.setAttribute('aria-pressed', String(kuplorler.has(k.id)));
+      b.addEventListener('click', () => kuplorDegistir(k.id, !kuplorler.has(k.id)));
+      kuplorEls[k.id] = b;
+      kHost.appendChild(b);
     }
   }
 
@@ -1199,8 +1462,8 @@
   }
 
   /* ================= Manuel (ekran klavyesi) ================= */
-  const manual = $('#manual');
-  const keyEls = [];
+  const manual = $('#manual'), manual2 = $('#manual2'), pedalEl = $('#pedal');
+  const keyEls = [], keyEls2 = [], pedalEls = [];
   const US_LABELS = { Comma: ',', Period: '.', Semicolon: ';', Slash: '/', BracketLeft: '[', BracketRight: ']', Equal: '=' };
   const TRQ_LABELS = { Comma: 'Ö', Period: 'Ç', Semicolon: 'Ş', Slash: '.', BracketLeft: 'Ğ', BracketRight: 'Ü', Equal: '-' };
   const isTurkish = (navigator.languages || [navigator.language || '']).some(l => /^tr\b/i.test(l));
@@ -1213,15 +1476,17 @@
   const BEYAZ_TUS = [...Array(SPAN).keys()].filter(o => !BLACK_PCS.has(o % 12)); // beyaz tuşların ofsetleri
   const WN = BEYAZ_TUS.length;
 
-  function buildManual() {
+  // Bir klavyenin tuşlarını kurar. kodlar(off): o tuşun üstüne yazılacak bilgisayar klavyesi tuşları.
+  function klavyeKur(host, sayi, dizi, kodlar) {
+    const wn = [...Array(sayi).keys()].filter(o => !BLACK_PCS.has(o % 12)).length;
     let wi = 0;
-    for (let off = 0; off < SPAN; off++) {
+    for (let off = 0; off < sayi; off++) {
       const black = BLACK_PCS.has(off % 12);
       const k = document.createElement('div');
       k.className = 'key ' + (black ? 'black' : 'white');
       k.dataset.off = off;
-      k.style.left = (wi / WN * 100) + '%';
-      k.style.width = (100 / WN * (black ? 0.62 : 1)) + '%';
+      k.style.left = (wi / wn * 100) + '%';
+      k.style.width = (100 / wn * (black ? 0.62 : 1)) + '%';
       if (!black) wi++;
       if (!black) {
         // Do tuşlarında nota adı hep yazar; öbür beyaz tuşlarda yalnızca telefon görünümünde
@@ -1232,20 +1497,29 @@
       }
       const lab = document.createElement('span');
       lab.className = 'labels';
-      for (const code of OFFSET_CODES[off]) {
+      for (const code of kodlar(off)) {
         const c = document.createElement('span');
-        c.className = 'cap';
+        c.className = 'cap ' + (UST_SIRA.has(code) ? 'ust' : 'alt');
         c.dataset.code = code;
         lab.appendChild(c);
       }
       k.appendChild(lab);
-      manual.appendChild(k);
-      keyEls[off] = k;
+      host.appendChild(k);
+      dizi[off] = k;
     }
   }
 
+  function buildManual() {
+    klavyeKur(manual, SPAN, keyEls, off => OFFSET_CODES[off]);
+    // II. manuel: iki manuelli konsolda bilgisayar klavyesinin üst sırası bunu çalar
+    klavyeKur(manual2, SPAN, keyEls2, off => OFFSET_CODES[off].filter(c => UST_SIRA.has(c)));
+    // Pedal oktav ayarına bağlı değil: hep Do2'den başlar
+    klavyeKur(pedalEl, PEDAL_SAYI, pedalEls, () => []);
+    pedalEls.forEach((k, off) => { if (off % 12 === 0) k.querySelector('.note').textContent = noteName(PEDAL_ILK + off); });
+  }
+
   function renderCaps() {
-    manual.querySelectorAll('.cap').forEach(c => { c.textContent = labels[c.dataset.code]; });
+    document.querySelectorAll('#manual .cap, #manual2 .cap').forEach(c => { c.textContent = labels[c.dataset.code]; });
     const fill = (host, row) => {
       host.textContent = '';
       row.forEach(code => {
@@ -1260,7 +1534,7 @@
 
   function renderOctave() {
     const base = baseMidi();
-    keyEls.forEach((k, off) => {
+    for (const dizi of [keyEls, keyEls2]) dizi.forEach((k, off) => {
       if (off % 12 === 0) k.querySelector('.note').textContent = noteName(base + off);
     });
     $('#octOut').textContent = `${noteName(base)} – ${noteName(base + SPAN - 1)}`;
@@ -1301,7 +1575,8 @@
   const BEYAZ_PC = [0, null, 1, null, 2, 3, null, 4, null, 5, null, 6];
   const KARA_MERKEZ = [null, 1, null, 2, null, null, 4, null, 5, null, 6, null];
   const KARA_YARIM = 0.31; // kara tuş, beyaz tuş genişliğinin 0,62'si
-  const pencere = { acik: false, gorunen: WN, bas: 0, hedef: '' }; // bas: penceredeki ilk beyaz tuşun manueldeki sırası
+  // bas: penceredeki ilk beyaz tuşun manueldeki sırası; bolum: iki manuelli konsolda ekrandaki klavyenin çaldığı bölüm
+  const pencere = { acik: false, gorunen: WN, bas: 0, hedef: '', bolum: 'I' };
 
   function beyazAraligi(m) {
     const o = Math.floor(m / 12) * 7, pc = ((m % 12) + 12) % 12;
@@ -1386,12 +1661,22 @@
   }
   /* ================= Görünüm ================= */
   const readout = $('#readout');
+
+  // Nota bu bölümde basılı mı (kuplörle çalan bölümler sayılmaz; tuş, basıldığı klavyede iner)
+  function bolumdeBasili(m, bolum) {
+    const h = holders.get(m);
+    if (h) for (const k of h) if ((kaynakBolumu.get(k) || 'I') === bolum) return true;
+    return false;
+  }
+
   function refreshView() {
     pencereHedefeGetir(); // telefonda yanan tuşlar görünsün (oktavı değiştirebilir, önce gelmeli)
     const base = baseMidi();
+    // Telefonda tek klavye var; iki manuelli konsolda seçilen bölümü çalar
+    const anaBolum = pencere.acik ? pencere.bolum : 'I';
     keyEls.forEach((k, off) => {
       const m = base + off;
-      const down = holders.has(m);
+      const down = bolumdeBasili(m, anaBolum);
       k.classList.toggle('down', down);
       k.classList.toggle('held', !down && sustained.has(m));
       const prog = playerDown.get(m);
@@ -1401,12 +1686,15 @@
       k.classList.toggle('hedef', !!hedef && !down);
       k.classList.toggle('hedef-sol', hedef === 'sol' && !down);
     });
+    if (settings.konsol === 'tam') {
+      keyEls2.forEach((k, off) => k.classList.toggle('down', bolumdeBasili(base + off, 'II')));
+      pedalEls.forEach((k, off) => k.classList.toggle('down', bolumdeBasili(PEDAL_ILK + off, 'P')));
+    }
     const playing = [...new Set([...voices.keys(), ...playerDown.keys()])].sort((a, b) => a - b);
     readout.innerHTML = 'Çalan:<b></b>';
     readout.lastChild.textContent = playing.length ? playing.map(noteName).join(' · ') : '—';
     updateFacadeTargets();
   }
-
   /* ================= Boru cephesi ================= */
   const fac = { el: $('#facade'), g: null, W: 0, H: 0, pipes: [], pairOrder: [], glow: new Float32Array(1), target: new Float32Array(1), raf: 0 };
 
@@ -1694,6 +1982,7 @@
     acik: [], sayaclar: new Set(), dongu_id: 0,
     adimlar: [], adim: 0, taze: new Set(), yanlis: 0, bitisSayaci: 0,
     gunluk: null,                              // testler için: zamanlanan program notaları
+    basEli: 'sol', pedalSayisi: 0,             // otomatik pedal: bas çizgisini çalan el, zamanlanan pedal notası sayısı
   };
   const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
   const ARALIK_MS = 25;
@@ -1741,10 +2030,18 @@
     const yinelenen = sonraki && sonraki.t === o.t + o.d && sonraki.notalar.some(m => o.notalar.includes(m));
     const bit = yinelenen ? Math.max(tBas + (tBit - tBas) * 0.6, tBit - 0.045) : tBit;
     const kayit = calar.bekleyenKayit && tBas >= calar.bekleyenKayit.t - 1e-4 ? calar.bekleyenKayit.stops : undefined;
+    const acik = () => (kayit ? new Set(kayit) : stopsOn);
     for (const m of o.notalar) {
-      const v = new Voice(m, tBas, kayit);
+      const v = new Voice(m, tBas, new Set(['I']), acik());
       playerVoices.add(v);
       calar.acik.push({ v, bit });
+    }
+    // Otomatik pedal: bas çizgisini çalan elin en kalın notası pedalda da çalar
+    if (settings.otoPedal && o.el === calar.basEli) {
+      const v = new Voice(pedalNotasi(Math.min(...o.notalar), null), tBas, new Set(['P']), acik());
+      playerVoices.add(v);
+      calar.acik.push({ v, bit });
+      calar.pedalSayisi++;
     }
     if (calar.gunluk) calar.gunluk.push({ tik: o.t, el: o.el, notalar: o.notalar, bas: tBas, bit });
     calarSayac(tBas, () => calarIsik(playerDown, o, true));
@@ -1930,6 +2227,7 @@
     if (calar.parca) calarDurdur();
     calar.parca = parca;
     calar.cizelge = parcaCizelgesi(parca);
+    calar.basEli = calar.cizelge.eller.includes('sol') ? 'sol' : 'sag';
     calar.hiz = 100;
     calar.dongu = false;
     calar.konum = 0;
@@ -2287,6 +2585,13 @@
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
     frekans: notaFrekansi,
+    // Basılı notaların hangi registerlerle öttüğü: { 'Do4': ['oktav4', …] }
+    borular: () => Object.fromEntries([...voices].filter(([, v]) => !v.released).map(([m, v]) => [noteName(m), [...v.stops.keys()].sort()])),
+    sandik: () => (A ? { kazanc: A.sandik.kazanc.gain.value, kesim: A.sandik.suzgec.frequency.value } : null),
+    pedalSesleri: () => calar.pedalSayisi,
+    // Bir bölümde nota basıp bırakmak (testler ve ileride MIDI için)
+    cal: (midi, bolum = 'I') => noteOn(midi, `api:${bolum}:${midi}`, bolum),
+    birak: (midi, bolum = 'I') => noteOff(midi, `api:${bolum}:${midi}`),
     akortSapmasi: ad => akortSapmalari(AKORTLAR[ad].besliler),
   };
 
@@ -2341,7 +2646,8 @@
     if (e.repeat || codeHeld.has(e.code)) return;
     const midi = baseMidi() + off;
     codeHeld.set(e.code, midi);
-    noteOn(midi, 'k:' + e.code);
+    // İki manuelli konsolda üst sıra Sandık'ı (II), alt sıra I. manueli çalar
+    noteOn(midi, 'k:' + e.code, settings.konsol === 'tam' && UST_SIRA.has(e.code) ? 'II' : 'I');
   });
 
   document.addEventListener('keyup', e => {
@@ -2357,38 +2663,47 @@
     noteOff(midi, 'k:' + e.code);
   });
 
-  function keyAt(x, y) {
-    const el = document.elementFromPoint(x, y);
-    const k = el && el.closest ? el.closest('.key') : null;
-    return k && manual.contains(k) ? baseMidi() + Number(k.dataset.off) : null;
+  // Ekrandaki klavyeler: fare ve parmak. Parmak kaydırılınca nota değişir (aynı klavyenin içinde).
+  // Telefonda tek klavye var; iki manuelli konsolda çubuktaki seçim hangi bölümü çaldığını belirler.
+  const KLAVYELER = [
+    { el: manual, ilk: baseMidi, bolum: () => (pencere.acik ? pencere.bolum : 'I') },
+    { el: manual2, ilk: baseMidi, bolum: () => 'II' },
+    { el: pedalEl, ilk: () => PEDAL_ILK, bolum: () => 'P' },
+  ];
+  for (const kl of KLAVYELER) {
+    const keyAt = (x, y) => {
+      const el = document.elementFromPoint(x, y);
+      const k = el && el.closest ? el.closest('.key') : null;
+      return k && kl.el.contains(k) ? kl.ilk() + Number(k.dataset.off) : null;
+    };
+    kl.el.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      e.preventDefault();
+      window.focus();
+      try { kl.el.setPointerCapture(e.pointerId); } catch (_) {}
+      const m = keyAt(e.clientX, e.clientY);
+      ptr.set(e.pointerId, m);
+      if (m != null) noteOn(m, 'p:' + e.pointerId, kl.bolum());
+    });
+    kl.el.addEventListener('pointermove', e => {
+      if (!ptr.has(e.pointerId)) return;
+      const m = keyAt(e.clientX, e.clientY);
+      const prev = ptr.get(e.pointerId);
+      if (m === prev) return;
+      if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+      ptr.set(e.pointerId, m);
+      if (m != null) noteOn(m, 'p:' + e.pointerId, kl.bolum());
+    });
+    const endPointer = e => {
+      if (!ptr.has(e.pointerId)) return;
+      const prev = ptr.get(e.pointerId);
+      ptr.delete(e.pointerId);
+      if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+    };
+    kl.el.addEventListener('pointerup', endPointer);
+    kl.el.addEventListener('pointercancel', endPointer);
+    kl.el.addEventListener('lostpointercapture', endPointer);
   }
-  manual.addEventListener('pointerdown', e => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    e.preventDefault();
-    window.focus();
-    try { manual.setPointerCapture(e.pointerId); } catch (_) {}
-    const m = keyAt(e.clientX, e.clientY);
-    ptr.set(e.pointerId, m);
-    if (m != null) noteOn(m, 'p:' + e.pointerId);
-  });
-  manual.addEventListener('pointermove', e => {
-    if (!ptr.has(e.pointerId)) return;
-    const m = keyAt(e.clientX, e.clientY);
-    const prev = ptr.get(e.pointerId);
-    if (m === prev) return;
-    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
-    ptr.set(e.pointerId, m);
-    if (m != null) noteOn(m, 'p:' + e.pointerId);
-  });
-  const endPointer = e => {
-    if (!ptr.has(e.pointerId)) return;
-    const prev = ptr.get(e.pointerId);
-    ptr.delete(e.pointerId);
-    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
-  };
-  manual.addEventListener('pointerup', endPointer);
-  manual.addEventListener('pointercancel', endPointer);
-  manual.addEventListener('lostpointercapture', endPointer);
 
   // Dokunmatik ekranlarda ses bağlamı ancak parmak kalkınca açılabiliyor
   const resumeIfNeeded = () => { if (ctx && windOn && ctx.state === 'suspended') ctx.resume().catch(() => {}); };
@@ -2402,6 +2717,40 @@
   $('#octUp').addEventListener('click', () => shiftOctave(1));
   $('#pencereSol').addEventListener('click', () => pencereKaydir(-1));
   $('#pencereSag').addEventListener('click', () => pencereKaydir(1));
+
+  // Konsol: tek manuel ya da iki manuel ve pedal
+  function konsolKur(tur) {
+    settings.konsol = tur;
+    document.documentElement.classList.toggle('konsol-tam', tur === 'tam');
+    $('#konsolTek').setAttribute('aria-pressed', String(tur === 'tek'));
+    $('#konsolTam').setAttribute('aria-pressed', String(tur === 'tam'));
+    if (tur === 'tek') bolumSec('I');
+    refreshView();
+  }
+  $('#konsolTek').addEventListener('click', () => { releaseAll(); konsolKur('tek'); save(); dokYuksekligi(); });
+  $('#konsolTam').addEventListener('click', () => { releaseAll(); konsolKur('tam'); save(); dokYuksekligi(); });
+
+  // Telefon: ekrandaki klavyenin çaldığı bölüm (iki manuelli konsolda)
+  function bolumSec(b) {
+    pencere.bolum = b;
+    document.querySelectorAll('.bolum-secim [data-bolum]').forEach(d => d.setAttribute('aria-pressed', String(d.dataset.bolum === b)));
+    if (b === 'P') pencereNotalaraGetir([[PEDAL_ILK, PEDAL_ILK + 7]], true); // pencere pedalın aralığına gelir
+  }
+  document.querySelectorAll('.bolum-secim [data-bolum]').forEach(d => d.addEventListener('click', () => { releaseAll(); bolumSec(d.dataset.bolum); refreshView(); }));
+
+  const otoPedalBtn = $('#otoPedal');
+  otoPedalBtn.setAttribute('aria-pressed', String(settings.otoPedal));
+  otoPedalBtn.addEventListener('click', () => {
+    settings.otoPedal = !settings.otoPedal;
+    otoPedalBtn.setAttribute('aria-pressed', String(settings.otoPedal));
+    otoPedalGuncelle();
+    refreshView();
+    save();
+  });
+
+  const sandikIn = $('#sandik');
+  sandikIn.value = settings.sandik; $('#sandikOut').textContent = settings.sandik;
+  sandikIn.addEventListener('input', () => { settings.sandik = Number(sandikIn.value); $('#sandikOut').textContent = sandikIn.value; sandigiUygula(); save(); });
 
   // Hafif mod: daha az boru, daha az ses, kısa yankı (zayıf telefonlar için)
   const hafifBtn = $('#hafif');
@@ -2451,6 +2800,7 @@
   buildManual();
   renderCaps();
   renderOctave();
+  konsolKur(settings.konsol);
   pencereKur();
   updatePistons();
   refreshView();

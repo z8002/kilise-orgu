@@ -57,8 +57,29 @@
             <span class="chip reed">Dilli boru</span>
             <span class="chip trem">Tremolo</span>
           </div>
+          <h3>Konsol</h3>
+          <div class="konsol-secim">
+            <div class="segment" role="group" aria-label="Konsol">
+              <button type="button" id="konsolTek" aria-pressed="true" title="Tek klavye: bilgisayar klavyesinin iki sırası da I. manueli çalar">Tek manuel</button>
+              <button type="button" id="konsolTam" aria-pressed="false" title="Sandık (II. manuel) ve pedal da açılır; bilgisayar klavyesinin üst sırası Sandık'ı çalar">İki manuel ve pedal</button>
+            </div>
+            <button type="button" id="otoPedal" class="hold" aria-pressed="false" title="I. manuelde basılı en kalın nota pedalda da çalar">Otomatik pedal</button>
+          </div>
         </div>
         <div class="division" id="jamb-parlak"></div>
+      </div>
+
+      <div class="jambs jambs-ikinci" id="ikinciSira">
+        <div class="division" id="jamb-sandik"></div>
+        <div class="center">
+          <h3>Kuplörler</h3>
+          <div class="kuplorler" id="kuplorler" role="group" aria-label="Kuplörler"></div>
+          <label class="ctl sandik-ctl" for="sandik">
+            <span class="ctl-label">Sandık panjuru <output id="sandikOut">100</output></span>
+            <input type="range" id="sandik" min="0" max="100" value="100">
+          </label>
+        </div>
+        <div class="division" id="jamb-pedal"></div>
       </div>
 
       <div class="manual-wrap">
@@ -66,12 +87,23 @@
           <button id="pencereSol" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav aşağı kaydır">‹</button>
           <output id="pencereOut" aria-live="polite"></output>
           <button id="pencereSag" class="pencere-ok" type="button" aria-label="Klavyeyi bir oktav yukarı kaydır">›</button>
+          <div class="segment bolum-secim" role="group" aria-label="Ekrandaki klavyenin çaldığı bölüm">
+            <button type="button" data-bolum="I" aria-pressed="true" title="I. manuel">I</button>
+            <button type="button" data-bolum="II" aria-pressed="false" title="Sandık (II. manuel)">II</button>
+            <button type="button" data-bolum="P" aria-pressed="false" title="Pedal">P</button>
+          </div>
           <button id="tamEkran" class="dok-dugme tam-ekran" type="button" aria-pressed="false" hidden>Tam ekran</button>
           <button id="dokTut" class="dok-dugme" type="button" aria-pressed="false" title="Açıkken parmağını kaldırdığın notalar çalmaya devam eder">Tut</button>
           <button id="dokOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false" hidden>▶</button>
         </div>
+        <div class="manual-kutu manual-kutu-2" id="manualKutu2">
+          <div class="manual" id="manual2" role="group" aria-label="II. manuel (Sandık): fareyle veya dokunarak da çalınabilir"></div>
+        </div>
         <div class="manual-kutu" id="manualKutu">
           <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
+        </div>
+        <div class="pedal-kutu" id="pedalKutu">
+          <div class="pedal" id="pedal" role="group" aria-label="Pedal: fareyle veya dokunarak da çalınabilir"></div>
         </div>
       </div>
 
@@ -184,6 +216,7 @@
       <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
       <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
+      <li><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
       <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
       <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>

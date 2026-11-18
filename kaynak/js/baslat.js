@@ -4,6 +4,7 @@
   buildManual();
   renderCaps();
   renderOctave();
+  konsolKur(settings.konsol);
   pencereKur();
   updatePistons();
   refreshView();

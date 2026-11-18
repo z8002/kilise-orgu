@@ -225,6 +225,13 @@
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
     frekans: notaFrekansi,
+    // Basılı notaların hangi registerlerle öttüğü: { 'Do4': ['oktav4', …] }
+    borular: () => Object.fromEntries([...voices].filter(([, v]) => !v.released).map(([m, v]) => [noteName(m), [...v.stops.keys()].sort()])),
+    sandik: () => (A ? { kazanc: A.sandik.kazanc.gain.value, kesim: A.sandik.suzgec.frequency.value } : null),
+    pedalSesleri: () => calar.pedalSayisi,
+    // Bir bölümde nota basıp bırakmak (testler ve ileride MIDI için)
+    cal: (midi, bolum = 'I') => noteOn(midi, `api:${bolum}:${midi}`, bolum),
+    birak: (midi, bolum = 'I') => noteOff(midi, `api:${bolum}:${midi}`),
     akortSapmasi: ad => akortSapmalari(AKORTLAR[ad].besliler),
   };
 

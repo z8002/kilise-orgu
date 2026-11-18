@@ -1,6 +1,6 @@
   /* ================= Manuel (ekran klavyesi) ================= */
-  const manual = $('#manual');
-  const keyEls = [];
+  const manual = $('#manual'), manual2 = $('#manual2'), pedalEl = $('#pedal');
+  const keyEls = [], keyEls2 = [], pedalEls = [];
   const US_LABELS = { Comma: ',', Period: '.', Semicolon: ';', Slash: '/', BracketLeft: '[', BracketRight: ']', Equal: '=' };
   const TRQ_LABELS = { Comma: 'Ö', Period: 'Ç', Semicolon: 'Ş', Slash: '.', BracketLeft: 'Ğ', BracketRight: 'Ü', Equal: '-' };
   const isTurkish = (navigator.languages || [navigator.language || '']).some(l => /^tr\b/i.test(l));
@@ -13,15 +13,17 @@
   const BEYAZ_TUS = [...Array(SPAN).keys()].filter(o => !BLACK_PCS.has(o % 12)); // beyaz tuşların ofsetleri
   const WN = BEYAZ_TUS.length;
 
-  function buildManual() {
+  // Bir klavyenin tuşlarını kurar. kodlar(off): o tuşun üstüne yazılacak bilgisayar klavyesi tuşları.
+  function klavyeKur(host, sayi, dizi, kodlar) {
+    const wn = [...Array(sayi).keys()].filter(o => !BLACK_PCS.has(o % 12)).length;
     let wi = 0;
-    for (let off = 0; off < SPAN; off++) {
+    for (let off = 0; off < sayi; off++) {
       const black = BLACK_PCS.has(off % 12);
       const k = document.createElement('div');
       k.className = 'key ' + (black ? 'black' : 'white');
       k.dataset.off = off;
-      k.style.left = (wi / WN * 100) + '%';
-      k.style.width = (100 / WN * (black ? 0.62 : 1)) + '%';
+      k.style.left = (wi / wn * 100) + '%';
+      k.style.width = (100 / wn * (black ? 0.62 : 1)) + '%';
       if (!black) wi++;
       if (!black) {
         // Do tuşlarında nota adı hep yazar; öbür beyaz tuşlarda yalnızca telefon görünümünde
@@ -32,20 +34,29 @@
       }
       const lab = document.createElement('span');
       lab.className = 'labels';
-      for (const code of OFFSET_CODES[off]) {
+      for (const code of kodlar(off)) {
         const c = document.createElement('span');
-        c.className = 'cap';
+        c.className = 'cap ' + (UST_SIRA.has(code) ? 'ust' : 'alt');
         c.dataset.code = code;
         lab.appendChild(c);
       }
       k.appendChild(lab);
-      manual.appendChild(k);
-      keyEls[off] = k;
+      host.appendChild(k);
+      dizi[off] = k;
     }
   }
 
+  function buildManual() {
+    klavyeKur(manual, SPAN, keyEls, off => OFFSET_CODES[off]);
+    // II. manuel: iki manuelli konsolda bilgisayar klavyesinin üst sırası bunu çalar
+    klavyeKur(manual2, SPAN, keyEls2, off => OFFSET_CODES[off].filter(c => UST_SIRA.has(c)));
+    // Pedal oktav ayarına bağlı değil: hep Do2'den başlar
+    klavyeKur(pedalEl, PEDAL_SAYI, pedalEls, () => []);
+    pedalEls.forEach((k, off) => { if (off % 12 === 0) k.querySelector('.note').textContent = noteName(PEDAL_ILK + off); });
+  }
+
   function renderCaps() {
-    manual.querySelectorAll('.cap').forEach(c => { c.textContent = labels[c.dataset.code]; });
+    document.querySelectorAll('#manual .cap, #manual2 .cap').forEach(c => { c.textContent = labels[c.dataset.code]; });
     const fill = (host, row) => {
       host.textContent = '';
       row.forEach(code => {
@@ -60,7 +71,7 @@
 
   function renderOctave() {
     const base = baseMidi();
-    keyEls.forEach((k, off) => {
+    for (const dizi of [keyEls, keyEls2]) dizi.forEach((k, off) => {
       if (off % 12 === 0) k.querySelector('.note').textContent = noteName(base + off);
     });
     $('#octOut').textContent = `${noteName(base)} – ${noteName(base + SPAN - 1)}`;
@@ -101,7 +112,8 @@
   const BEYAZ_PC = [0, null, 1, null, 2, 3, null, 4, null, 5, null, 6];
   const KARA_MERKEZ = [null, 1, null, 2, null, null, 4, null, 5, null, 6, null];
   const KARA_YARIM = 0.31; // kara tuş, beyaz tuş genişliğinin 0,62'si
-  const pencere = { acik: false, gorunen: WN, bas: 0, hedef: '' }; // bas: penceredeki ilk beyaz tuşun manueldeki sırası
+  // bas: penceredeki ilk beyaz tuşun manueldeki sırası; bolum: iki manuelli konsolda ekrandaki klavyenin çaldığı bölüm
+  const pencere = { acik: false, gorunen: WN, bas: 0, hedef: '', bolum: 'I' };
 
   function beyazAraligi(m) {
     const o = Math.floor(m / 12) * 7, pc = ((m % 12) + 12) % 12;

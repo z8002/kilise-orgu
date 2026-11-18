@@ -37,6 +37,11 @@
   .pencere-ok:disabled { opacity: .35; cursor: default; }
   .dok-dugme { margin-left: auto; padding: 0 .9rem; font-weight: 500; }
   .tam-ekran { display: none; } /* yalnızca yan tutuşta: ekran alçakken tarayıcı çubukları yer kaplamasın */
+  /* İki manuelli konsolda ekrandaki tek klavyenin hangi bölümü çaldığı seçilir */
+  .bolum-secim { display: none; }
+  .konsol-tam.pencereli .bolum-secim { display: inline-flex; flex: none; }
+  .bolum-secim button { height: 44px; min-width: 34px; padding: 0 .5rem; }
+  @media (max-width: 440px) { .konsol-tam.pencereli #pencereOut { display: none; } }
   .dok-dugme[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
   #pencereOut { min-width: 0; padding: 0 2px; text-align: center; font: 500 .9rem var(--font-mono); color: var(--ivory-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   @media (max-width: 340px) {

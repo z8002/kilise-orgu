@@ -49,7 +49,8 @@
     if (e.repeat || codeHeld.has(e.code)) return;
     const midi = baseMidi() + off;
     codeHeld.set(e.code, midi);
-    noteOn(midi, 'k:' + e.code);
+    // İki manuelli konsolda üst sıra Sandık'ı (II), alt sıra I. manueli çalar
+    noteOn(midi, 'k:' + e.code, settings.konsol === 'tam' && UST_SIRA.has(e.code) ? 'II' : 'I');
   });
 
   document.addEventListener('keyup', e => {
@@ -65,38 +66,47 @@
     noteOff(midi, 'k:' + e.code);
   });
 
-  function keyAt(x, y) {
-    const el = document.elementFromPoint(x, y);
-    const k = el && el.closest ? el.closest('.key') : null;
-    return k && manual.contains(k) ? baseMidi() + Number(k.dataset.off) : null;
+  // Ekrandaki klavyeler: fare ve parmak. Parmak kaydırılınca nota değişir (aynı klavyenin içinde).
+  // Telefonda tek klavye var; iki manuelli konsolda çubuktaki seçim hangi bölümü çaldığını belirler.
+  const KLAVYELER = [
+    { el: manual, ilk: baseMidi, bolum: () => (pencere.acik ? pencere.bolum : 'I') },
+    { el: manual2, ilk: baseMidi, bolum: () => 'II' },
+    { el: pedalEl, ilk: () => PEDAL_ILK, bolum: () => 'P' },
+  ];
+  for (const kl of KLAVYELER) {
+    const keyAt = (x, y) => {
+      const el = document.elementFromPoint(x, y);
+      const k = el && el.closest ? el.closest('.key') : null;
+      return k && kl.el.contains(k) ? kl.ilk() + Number(k.dataset.off) : null;
+    };
+    kl.el.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      e.preventDefault();
+      window.focus();
+      try { kl.el.setPointerCapture(e.pointerId); } catch (_) {}
+      const m = keyAt(e.clientX, e.clientY);
+      ptr.set(e.pointerId, m);
+      if (m != null) noteOn(m, 'p:' + e.pointerId, kl.bolum());
+    });
+    kl.el.addEventListener('pointermove', e => {
+      if (!ptr.has(e.pointerId)) return;
+      const m = keyAt(e.clientX, e.clientY);
+      const prev = ptr.get(e.pointerId);
+      if (m === prev) return;
+      if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+      ptr.set(e.pointerId, m);
+      if (m != null) noteOn(m, 'p:' + e.pointerId, kl.bolum());
+    });
+    const endPointer = e => {
+      if (!ptr.has(e.pointerId)) return;
+      const prev = ptr.get(e.pointerId);
+      ptr.delete(e.pointerId);
+      if (prev != null) noteOff(prev, 'p:' + e.pointerId);
+    };
+    kl.el.addEventListener('pointerup', endPointer);
+    kl.el.addEventListener('pointercancel', endPointer);
+    kl.el.addEventListener('lostpointercapture', endPointer);
   }
-  manual.addEventListener('pointerdown', e => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    e.preventDefault();
-    window.focus();
-    try { manual.setPointerCapture(e.pointerId); } catch (_) {}
-    const m = keyAt(e.clientX, e.clientY);
-    ptr.set(e.pointerId, m);
-    if (m != null) noteOn(m, 'p:' + e.pointerId);
-  });
-  manual.addEventListener('pointermove', e => {
-    if (!ptr.has(e.pointerId)) return;
-    const m = keyAt(e.clientX, e.clientY);
-    const prev = ptr.get(e.pointerId);
-    if (m === prev) return;
-    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
-    ptr.set(e.pointerId, m);
-    if (m != null) noteOn(m, 'p:' + e.pointerId);
-  });
-  const endPointer = e => {
-    if (!ptr.has(e.pointerId)) return;
-    const prev = ptr.get(e.pointerId);
-    ptr.delete(e.pointerId);
-    if (prev != null) noteOff(prev, 'p:' + e.pointerId);
-  };
-  manual.addEventListener('pointerup', endPointer);
-  manual.addEventListener('pointercancel', endPointer);
-  manual.addEventListener('lostpointercapture', endPointer);
 
   // Dokunmatik ekranlarda ses bağlamı ancak parmak kalkınca açılabiliyor
   const resumeIfNeeded = () => { if (ctx && windOn && ctx.state === 'suspended') ctx.resume().catch(() => {}); };
@@ -110,6 +120,40 @@
   $('#octUp').addEventListener('click', () => shiftOctave(1));
   $('#pencereSol').addEventListener('click', () => pencereKaydir(-1));
   $('#pencereSag').addEventListener('click', () => pencereKaydir(1));
+
+  // Konsol: tek manuel ya da iki manuel ve pedal
+  function konsolKur(tur) {
+    settings.konsol = tur;
+    document.documentElement.classList.toggle('konsol-tam', tur === 'tam');
+    $('#konsolTek').setAttribute('aria-pressed', String(tur === 'tek'));
+    $('#konsolTam').setAttribute('aria-pressed', String(tur === 'tam'));
+    if (tur === 'tek') bolumSec('I');
+    refreshView();
+  }
+  $('#konsolTek').addEventListener('click', () => { releaseAll(); konsolKur('tek'); save(); dokYuksekligi(); });
+  $('#konsolTam').addEventListener('click', () => { releaseAll(); konsolKur('tam'); save(); dokYuksekligi(); });
+
+  // Telefon: ekrandaki klavyenin çaldığı bölüm (iki manuelli konsolda)
+  function bolumSec(b) {
+    pencere.bolum = b;
+    document.querySelectorAll('.bolum-secim [data-bolum]').forEach(d => d.setAttribute('aria-pressed', String(d.dataset.bolum === b)));
+    if (b === 'P') pencereNotalaraGetir([[PEDAL_ILK, PEDAL_ILK + 7]], true); // pencere pedalın aralığına gelir
+  }
+  document.querySelectorAll('.bolum-secim [data-bolum]').forEach(d => d.addEventListener('click', () => { releaseAll(); bolumSec(d.dataset.bolum); refreshView(); }));
+
+  const otoPedalBtn = $('#otoPedal');
+  otoPedalBtn.setAttribute('aria-pressed', String(settings.otoPedal));
+  otoPedalBtn.addEventListener('click', () => {
+    settings.otoPedal = !settings.otoPedal;
+    otoPedalBtn.setAttribute('aria-pressed', String(settings.otoPedal));
+    otoPedalGuncelle();
+    refreshView();
+    save();
+  });
+
+  const sandikIn = $('#sandik');
+  sandikIn.value = settings.sandik; $('#sandikOut').textContent = settings.sandik;
+  sandikIn.addEventListener('input', () => { settings.sandik = Number(sandikIn.value); $('#sandikOut').textContent = sandikIn.value; sandigiUygula(); save(); });
 
   // Hafif mod: daha az boru, daha az ses, kısa yankı (zayıf telefonlar için)
   const hafifBtn = $('#hafif');

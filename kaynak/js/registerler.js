@@ -1,36 +1,49 @@
   /* ================= Registerler ================= */
   const knobEls = {};
   const pistonEls = [];
+  const kuplorEls = {};
 
   function setStop(id, on) {
     const stop = STOP_BY_ID[id];
     if (!stop || on === stopsOn.has(id)) return;
     if (on) stopsOn.add(id); else stopsOn.delete(id);
-    if (ctx) {
-      const t = ctx.currentTime;
-      if (stop.effect) applyTremolo();
-      else for (const v of [...voices.values(), ...playerVoices]) (on ? v.addStop(stop, Math.max(t, v.t0)) : v.removeStop(id, Math.max(t, v.t0)));
-    }
+    // Şarkı çaların, gelecek bir bölümün registrasyonuyla zamanladığı sesler de değişikliği alır
+    for (const v of playerVoices) if (v.acik !== stopsOn) { if (on) v.acik.add(id); else v.acik.delete(id); }
+    if (ctx) { if (stop.effect) applyTremolo(); else tumSesleriUygula(); }
     knobEls[id].setAttribute('aria-pressed', String(on));
+  }
+
+  function kuplorDegistir(id, acik) {
+    if (acik === kuplorler.has(id)) return;
+    if (acik) kuplorler.add(id); else kuplorler.delete(id);
+    kuplorEls[id].setAttribute('aria-pressed', String(acik));
+    tumSesleriUygula();
+    save();
   }
 
   function afterRegistration() { updatePistons(); refreshView(); save(); }
 
+  const JAMBLAR = [
+    ['temel', 'Temel sesler', 4], ['parlak', 'Parlak sesler', 3], ['sandik', 'Sandık · II. manuel', 3], ['pedal', 'Pedal', 2],
+  ];
+
   function buildStops() {
-    for (const jamb of ['temel', 'parlak']) {
+    for (const [jamb, baslik, sutun] of JAMBLAR) {
       const host = document.getElementById('jamb-' + jamb);
       const list = STOPS.filter(s => s.jamb === jamb);
       const h = document.createElement('h3');
-      h.textContent = jamb === 'temel' ? 'Temel sesler' : 'Parlak sesler';
+      h.textContent = baslik;
       const grid = document.createElement('div');
       grid.className = 'knobs';
-      grid.style.setProperty('--cols', jamb === 'temel' ? 4 : 3);
+      grid.style.setProperty('--cols', sutun);
       for (const s of list) {
         const b = document.createElement('button');
         b.type = 'button';
         b.className = 'knob';
         b.dataset.family = s.family;
-        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim();
+        b.dataset.id = s.id;
+        // Sandık ve pedal registerlerinin adına bölüm eklenir (iki manuelde de Tremolo var)
+        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${BOLUM_ADI[s.bolum]}`);
         b.title = `${label} — ${s.desc}`;
         b.setAttribute('aria-label', label);
         b.setAttribute('aria-pressed', String(stopsOn.has(s.id)));
@@ -42,6 +55,18 @@
         grid.appendChild(b);
       }
       host.append(h, grid);
+    }
+    const kHost = $('#kuplorler');
+    for (const k of KUPLORLER) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'kuplor';
+      b.textContent = k.ad;
+      b.title = k.desc;
+      b.setAttribute('aria-pressed', String(kuplorler.has(k.id)));
+      b.addEventListener('click', () => kuplorDegistir(k.id, !kuplorler.has(k.id)));
+      kuplorEls[k.id] = b;
+      kHost.appendChild(b);
     }
   }
 

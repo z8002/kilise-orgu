@@ -11,7 +11,9 @@ test('sayfa hatasız açılır ve org eksiksiz kurulur', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText('Kilise Orgu');
   await expect(page.locator('#manual .key.white')).toHaveCount(19);
   await expect(page.locator('#manual .key.black')).toHaveCount(13);
-  await expect(page.locator('.knob')).toHaveCount(13);
+  await expect(page.locator('#jamb-temel .knob, #jamb-parlak .knob')).toHaveCount(13); // I. manuel
+  await expect(page.locator('#jamb-sandik .knob')).toHaveCount(9);
+  await expect(page.locator('#jamb-pedal .knob')).toHaveCount(4);
   await expect(page.locator('.piston')).toHaveCount(7);
   expect(hatalar).toEqual([]);
 });
