@@ -67,3 +67,4 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [x] Kayıt: notalar ve ses. MIDI dosyası (biçim 0, bölüme göre kanal), ses dosyası (webm/ogg/m4a), sayfada geri çalma.
 - [x] Kendi parçanı ekleme: Türkçe ya da İngilizce nota adlarıyla yazılır, yanlış yazım yeri gösterilerek reddedilir; tarayıcıda saklanır, iki sayfada da listede; Dinle, Öğren ve eşlik çalışır. Oktav, sağ el bilgisayar klavyesinin üst sırasına düşecek biçimde kendiliğinden seçilir.
 - [ ] İngilizce arayüz.
+- [x] Paylaşım önizlemesi: bağlantı paylaşılınca her sayfa kendi başlığını, açıklamasını ve 1200 × 630 görselini gösterir (Open Graph, Twitter kartı). Görseller `node araclar/simgeler.js` ile çizilir.

@@ -25,15 +25,20 @@ EKLE = re.compile(r'^[ \t]*/\*@ekle ([\w./-]+)\*/[ \t]*\n', re.M)
 
 
 PARCA_ISARETI = '/*@parcalar*/'
+SITE = 'https://z8002.github.io/kilise-orgu/'
 SAYFALAR = {
     'kilise-orgu.html': {
         '__ORG__': 'kilise',
+        '__ADRES__': SITE + 'kilise-orgu.html',
+        '__PAYLASIM__': SITE + 'simgeler/paylasim-kilise.png',
         '__BASLIK__': 'Kilise Orgu',
         '__ACIKLAMA__': 'Parmakla ya da bilgisayar klavyesiyle çalınan borulu kilise orgu: iki manuel ve pedal, '
                         'yirmi altı register, kilise yankısı ve otuz parçalık şarkı çalar.',
     },
     'caz-orgu.html': {
         '__ORG__': 'caz',
+        '__ADRES__': SITE + 'caz-orgu.html',
+        '__PAYLASIM__': SITE + 'simgeler/paylasim-caz.png',
         '__BASLIK__': 'Caz Orgu',
         '__ACIKLAMA__': 'Parmakla ya da bilgisayar klavyesiyle çalınan elektromekanik caz orgu: dokuz çekme çubuğu, '
                         'perküsyon, vibrato, dönen hoparlör ve otuz parçalık şarkı çalar.',

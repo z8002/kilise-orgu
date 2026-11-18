@@ -16,7 +16,7 @@
 | `notalar/` | Nota dosyaları (LilyPond, PDF) |
 | `v1/` | Özgün sürüm. Değiştirilmez; bir test dosyanın özetini denetler |
 | `sw.js` | Hizmet çalışanı: internetsiz açılış. Uygulama dosyaları önce ağdan, ağ yoksa saklanan kopyadan gelir |
-| `manifest.webmanifest`, `simgeler/` | Ana ekrana ekleme. Simgeler `node araclar/simgeler.js` ile çizilir |
+| `manifest.webmanifest`, `simgeler/` | Ana ekrana ekleme ve paylaşım kartları. Simgeler ve kartlar `node araclar/simgeler.js` ile çizilir |
 
 ## Değişiklik yapmak
 

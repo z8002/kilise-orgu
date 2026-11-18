@@ -157,3 +157,18 @@ test.describe('internetsiz', () => {
     }
   });
 });
+
+for (const [sayfa, gorsel] of [['kilise-orgu.html', 'simgeler/paylasim-kilise.png'], ['caz-orgu.html', 'simgeler/paylasim-caz.png']]) {
+  test(`paylaşım önizlemesi: ${sayfa} kendi başlığını, açıklamasını ve 1200 × 630 görselini verir`, async ({ page, request, isMobile }) => {
+    test.skip(isMobile, 'bir kez koşması yeter');
+    await sayfayiAc(page, sayfa);
+    const meta = ad => page.locator(`meta[property="${ad}"]`).getAttribute('content');
+    expect(await meta('og:title')).toBe(await page.title());
+    expect(await meta('og:description')).toBe(await page.locator('meta[name="description"]').getAttribute('content'));
+    expect(await meta('og:url')).toBe('https://z8002.github.io/kilise-orgu/' + sayfa);
+    expect(await meta('og:image')).toBe('https://z8002.github.io/kilise-orgu/' + gorsel);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    const b = await (await request.get(gorsel)).body();
+    expect(`${b.readUInt32BE(16)}x${b.readUInt32BE(20)}`).toBe('1200x630');
+  });
+}
