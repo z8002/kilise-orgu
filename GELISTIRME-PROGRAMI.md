@@ -65,5 +65,5 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 
 - [x] MIDI klavye: nota, sürdürme pedalı, ifade pedalı (panjur), program değişimi (pistonlar, K1–K4, caz hazır sesleri), kanala göre bölüm; caz orgunda modülasyon tekerleği dönen hoparlörü hızlandırır. Bir kez bağlanınca sonraki açılışlarda kendiliğinden bağlanır.
 - [x] Kayıt: notalar ve ses. MIDI dosyası (biçim 0, bölüme göre kanal), ses dosyası (webm/ogg/m4a), sayfada geri çalma.
-- [ ] Kendi parçanı ekleme.
+- [x] Kendi parçanı ekleme: Türkçe ya da İngilizce nota adlarıyla yazılır, yanlış yazım yeri gösterilerek reddedilir; tarayıcıda saklanır, iki sayfada da listede; Dinle, Öğren ve eşlik çalışır. Oktav, sağ el bilgisayar klavyesinin üst sırasına düşecek biçimde kendiliğinden seçilir.
 - [ ] İngilizce arayüz.

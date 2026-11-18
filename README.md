@@ -42,6 +42,7 @@ Ya da bilgisayarına indir:
 - **Hafif mod:** Zayıf telefonlar için daha az boru, en çok 12 ses ve daha kısa yankı.
 - Ekrandaki klavyeye fareyle de basılabilir.
 - **MIDI klavye:** USB ya da Bluetooth MIDI klavye bağlanır (Chrome, Edge; Safari desteklemez). İki manuelli konsolda kanal 1 I. manueli, kanal 2 Sandık'ı, kanal 3 pedalı çalar. Sürdürme pedalı (CC 64) "Tut" gibi çalışır, ifade pedalı (CC 11) Sandık panjurunu açıp kapar, program değişimi pistonları (0–5 → 1–6, 6 → İptal, 7–10 → K1–K4) çağırır. Caz orgunda modülasyon tekerleği dönen hoparlörü hızlandırır.
+- **Kendi parçan:** Parçalar listesinden "+ Kendi parçanı ekle". Notalar Türkçe (`Do4 Re4 Mi4:2 Sib3`) ya da İngilizce (`C4 D4 E4:2 Bb3`) yazılır; süre dörtlük cinsinden (`:2` ikilik, `:1/2` sekizlik), sus `r`, akor `Do4+Mi4`. Parça tarayıcıda saklanır, iki org sayfasında da listede çıkar ve otuz parça gibi Dinle, Öğren ve eşlikle çalınır.
 - **Kayıt:** "● Kaydet" ile çaldıkların (otomatik pedal ve şarkı çalar da) kaydedilir. Kayıt sayfada geri çalınır, MIDI dosyası (bölüme göre kanal 1–3) ya da ses dosyası olarak indirilir.
 
 ### Caz orgu

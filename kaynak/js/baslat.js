@@ -11,7 +11,9 @@
   refreshView();
   updateFocusHint();
   readLayout();
+  kendiParcalariYukle();
   listeKur();
+  kendiParcaFormuKur();
   calarOlaylariBagla();
   calarArayuzGuncelle();
   calarAdrestenYukle();

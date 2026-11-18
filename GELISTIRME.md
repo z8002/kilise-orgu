@@ -50,6 +50,7 @@ npm test
 - İki manuel ve pedal: her bölümün hangi borularla öttüğü (sayfa, basılı notaların registerlerini bildirir); kuplörler, otomatik pedal, pistonların Sandık ve pedal registerleri, önceki sürümün kaydından geçiş; yeni registerlerin perdesi.
 - Caz orgu: sayfa ve bağlantılar, çekme çubuklarının klavyeyle, fareyle ve hazır seslerle ayarlanması; her çubuğun eşit akortlu perdesi gerçek sesten; perküsyonun ilk notada vurup sönmesi, legatoda susması; dönen hoparlörde borunun çabuk, tamburun ağır hızlanması; şarkı çalar.
 - MIDI klavye: tarayıcının MIDI arayüzü sahte bir klavyeyle değiştirilir; nota, sürdürme ve ifade pedalı, program değişimi, kanallar.
+- Kendi parçan: Türkçe ve İngilizce yazımın çizelgeye çevrilmesi (kısa kalan elin susla tamamlanması), çalınması, Öğren, saklanıp silinmesi, yanlış yazımın reddi.
 - Kayıt: indirilen MIDI dosyası çözülür; notaların sırası, süresi ve kanalı denetlenir; ses dosyası iner; kayıt geri çalınır.
 - Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.

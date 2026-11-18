@@ -311,6 +311,37 @@
   <div class="etiketler" id="parcaEtiketleri" role="group" aria-label="Türe göre süz"></div>
   <ul id="parcaSatirlari"></ul>
   <p id="parcaYok" hidden>Aramaya uyan parça yok.</p>
+  <button id="kendiParcaBtn" class="kendi-ekle" type="button">+ Kendi parçanı ekle</button>
+</dialog>
+
+<dialog id="parcaEkle" class="liste parca-ekle" aria-labelledby="parcaEkleBaslik">
+  <form id="parcaEkleForm" novalidate>
+    <div class="liste-ust">
+      <h2 id="parcaEkleBaslik">Kendi parçan</h2>
+      <button id="parcaEkleKapat" class="calar-kapat" type="button" aria-label="Kapat">×</button>
+    </div>
+    <label class="alan">Ad <input id="kpAd" maxlength="60" autocomplete="off" required></label>
+    <label class="alan">Besteci <input id="kpBesteci" maxlength="60" autocomplete="off" placeholder="İstersen boş bırak"></label>
+    <div class="alan-sira">
+      <label class="alan">Ölçü
+        <select id="kpOlcu"><option>2/4</option><option>3/4</option><option selected>4/4</option><option>6/8</option></select>
+      </label>
+      <label class="alan">Tempo (dörtlük/dk) <input id="kpTempo" type="number" min="30" max="240" value="90"></label>
+    </div>
+    <label class="alan">Sağ el <textarea id="kpSag" rows="4" spellcheck="false" autocapitalize="off" placeholder="Mi4 Mi4 Fa4 Sol4 | Sol4 Fa4 Mi4 Re4 | Do4:2 r:2"></textarea></label>
+    <label class="alan">Sol el <textarea id="kpSol" rows="3" spellcheck="false" autocapitalize="off" placeholder="Do3:4 | Sol2:4   (istersen boş bırak)"></textarea></label>
+    <details class="yazim">
+      <summary>Nasıl yazılır?</summary>
+      <ul>
+        <li>Notalar boşlukla ayrılır: <code>Do4 Re4 Mi4</code> ya da <code>C4 D4 E4</code>. Diyez <code>#</code> (<code>Fa#4</code>), bemol <code>b</code> (<code>Sib3</code>). Do4 orta Do'dur.</li>
+        <li>Süre iki noktadan sonra, dörtlük cinsinden: <code>Do4:2</code> ikilik, <code>Do4:1/2</code> sekizlik, <code>Do4:3/2</code> noktalı dörtlük. Yazılmazsa dörtlük.</li>
+        <li>Sus <code>r</code> (<code>r:2</code> iki vuruş), bağ <code>~</code> (öncekini uzatır), akor <code>Do4+Mi4+Sol4</code>. <code>|</code> ölçü çizgisidir; yalnızca okumayı kolaylaştırır.</li>
+        <li>Parça bu tarayıcıda saklanır; iki org sayfası da görür.</li>
+      </ul>
+    </details>
+    <p class="kp-hata" id="kpHata" role="alert"></p>
+    <button type="submit" class="kendi-ekle kp-kaydet" id="kpKaydet">Kaydet ve aç</button>
+  </form>
 </dialog>
 
 <script>
@@ -329,6 +360,7 @@
 /*@ekle js/parca.js*/
 /*@ekle js/calar.js*/
 /*@ekle js/calar-arayuz.js*/
+/*@ekle js/kendi-parca.js*/
 /*@ekle js/olaylar.js*/
 /*@ekle js/midi.js*/
 /*@ekle js/kayit.js*/

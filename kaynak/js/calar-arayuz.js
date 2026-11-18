@@ -1,7 +1,7 @@
   /* ================= Şarkı çalar: arayüz ================= */
-  const ETIKET_ADI = { ilahi: 'İlahi', noel: 'Noel', klasik: 'Klasik', opera: 'Opera', caz: 'Caz', dugun: 'Düğün', ozgun: 'Özgün' };
+  const ETIKET_ADI = { ilahi: 'İlahi', noel: 'Noel', klasik: 'Klasik', opera: 'Opera', caz: 'Caz', dugun: 'Düğün', ozgun: 'Özgün', kendi: 'Kendi parçaların' };
   const ZORLUK_ADI = { 1: 'Kolay', 2: 'Orta', 3: 'Zor' };
-  const DOGRULAMA_ADI = { kaynak: 'Kaynakla karşılaştırıldı', 'kaynak-elle': 'Kaynağa bakılarak denetlendi', ezber: 'Ezberden; doğrulanmadı', ozgun: 'Özgün parça' };
+  const DOGRULAMA_ADI = { kaynak: 'Kaynakla karşılaştırıldı', 'kaynak-elle': 'Kaynağa bakılarak denetlendi', ezber: 'Ezberden; doğrulanmadı', ozgun: 'Özgün parça', kendi: 'Senin yazdığın parça' };
   const DURUM_ADI = { hazir: 'Hazır', caliyor: 'Çalıyor', durakladi: 'Durakladı', bitti: 'Bitti' };
   const calarEl = $('#calar');
   const liste = { kutu: $('#parcaListesi'), ara: $('#parcaAra'), ul: $('#parcaSatirlari'), etiketler: $('#parcaEtiketleri'), secili: null };
@@ -23,10 +23,10 @@
   // Bölüm düğmelerini ve el seçimlerini parçaya göre kurar (parça yüklenince bir kez).
   function calarArayuzKur() {
     const p = calar.parca, c = calar.cizelge;
-    $('#calarNo').textContent = p.no + '.';
+    $('#calarNo').textContent = typeof p.no === 'number' ? p.no + '.' : p.no;
     $('#calarAd').textContent = p.ad;
     $('#calarBesteci').textContent = p.besteci;
-    $('#calarBilgi').textContent = `${p.ton} · ${p.olcu} · ${ZORLUK_ADI[p.zorluk]} · ${DOGRULAMA_ADI[p.dogrulama]}`;
+    $('#calarBilgi').textContent = [p.ton, p.olcu, ZORLUK_ADI[p.zorluk], DOGRULAMA_ADI[p.dogrulama]].filter(Boolean).join(' · ');
     const host = $('#calarBolumler');
     host.textContent = '';
     c.bolumler.forEach((b, i) => {
@@ -158,13 +158,26 @@
         (pencere.acik ? calarEl : $('.manual-wrap')).scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
       });
       li.appendChild(d);
+      if (p.dogrulama === 'kendi') {
+        const sil = document.createElement('button');
+        sil.type = 'button';
+        sil.className = 'parca-sil';
+        sil.textContent = 'Sil';
+        sil.setAttribute('aria-label', `${p.ad} parçasını sil`);
+        sil.addEventListener('click', () => kendiParcaSil(p.id));
+        li.appendChild(sil);
+        li.className = 'kendi-satir';
+      }
       liste.ul.appendChild(li);
     }
     $('#parcaYok').hidden = adet > 0;
   }
 
-  function listeKur() {
+  // Tür süzgeçleri; kendi parçan eklenince ya da silinince yeniden kurulur
+  function etiketleriYaz() {
     const etiketler = [...new Set(PARCALAR.flatMap(p => p.etiketler))];
+    if (liste.secili && !etiketler.includes(liste.secili)) liste.secili = null;
+    liste.etiketler.textContent = '';
     const ekle = (deger, ad) => {
       const d = document.createElement('button');
       d.type = 'button';
@@ -180,6 +193,10 @@
     };
     ekle(null, 'Hepsi');
     for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, ETIKET_ADI[e]);
+  }
+
+  function listeKur() {
+    etiketleriYaz();
     liste.ara.addEventListener('input', listeYaz);
     const ac = () => { listeYaz(); if (liste.kutu.showModal) liste.kutu.showModal(); else liste.kutu.setAttribute('open', ''); };
     $('#parcalarBtn').addEventListener('click', ac);
