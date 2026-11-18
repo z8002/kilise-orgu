@@ -33,7 +33,7 @@
       const host = document.getElementById('jamb-' + jamb);
       const list = STOPS.filter(s => s.jamb === jamb);
       const h = document.createElement('h3');
-      h.textContent = baslik;
+      h.textContent = t(baslik);
       const grid = document.createElement('div');
       grid.className = 'knobs';
       grid.style.setProperty('--cols', sutun);
@@ -44,12 +44,12 @@
         b.dataset.family = s.family;
         b.dataset.id = s.id;
         // Sandık ve pedal registerlerinin adına bölüm eklenir (iki manuelde de Tremolo var)
-        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${BOLUM_ADI[s.bolum]}`);
-        b.title = `${label} — ${s.desc}`;
+        const label = `${registerAdi(s).replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${t(BOLUM_ADI[s.bolum])}`);
+        b.title = `${label} — ${registerAciklamasi(s)}`;
         b.setAttribute('aria-label', label);
         b.setAttribute('aria-pressed', String(stopsOn.has(s.id)));
         b.innerHTML = '<span class="nm"></span><span class="ft"></span>';
-        b.firstChild.textContent = s.name;
+        b.firstChild.textContent = registerAdi(s);
         b.lastChild.textContent = s.foot;
         b.addEventListener('click', () => { setStop(s.id, !stopsOn.has(s.id)); afterRegistration(); });
         knobEls[s.id] = b;
@@ -63,7 +63,7 @@
       b.type = 'button';
       b.className = 'kuplor';
       b.textContent = k.ad;
-      b.title = k.desc;
+      b.title = t(k.desc);
       b.setAttribute('aria-pressed', String(kuplorler.has(k.id)));
       b.addEventListener('click', () => kuplorDegistir(k.id, !kuplorler.has(k.id)));
       kuplorEls[k.id] = b;
@@ -85,10 +85,10 @@
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'piston';
-      b.setAttribute('aria-label', `Kombinasyon ${p.n}: ${p.name}`);
+      b.setAttribute('aria-label', t('Kombinasyon {n}: {ad}', { n: p.n, ad: t(p.name) }));
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
-      b.lastChild.textContent = p.name;
+      b.lastChild.textContent = t(p.name);
       b.addEventListener('click', () => { ayarlaKapat(); applyPiston(p.n); });
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
@@ -109,7 +109,7 @@
     $('#ayarla').addEventListener('click', () => {
       ayarlaniyor = !ayarlaniyor;
       $('#ayarla').setAttribute('aria-pressed', String(ayarlaniyor));
-      kombinasyonDurumu(ayarlaniyor ? 'Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.' : '');
+      kombinasyonDurumu(ayarlaniyor ? t('Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.') : '');
     });
   }
 
@@ -128,13 +128,13 @@
     if (ayarlaniyor) {
       kendiKombinasyonlar[i] = { stops: [...stopsOn], kuplorler: [...kuplorler] };
       ayarlaKapat();
-      kombinasyonDurumu(`O anki registrasyon ${adA} kaydedildi.`);
+      kombinasyonDurumu(t('O anki registrasyon {ad} kaydedildi.', { ad: DIL === 'en' ? ad : adA }));
       updatePistons();
       save();
       return;
     }
     const k = kendiKombinasyonlar[i];
-    if (!k) { kombinasyonDurumu(`${ad} boş. Kaydetmek için önce Ayarla'ya, sonra ${adA} bas.`); return; }
+    if (!k) { kombinasyonDurumu(t("{ad} boş. Kaydetmek için önce Ayarla'ya, sonra {adA} bas.", { ad, adA })); return; }
     kombinasyonDurumu('');
     const want = new Set(k.stops), kw = new Set(k.kuplorler);
     STOPS.forEach(s => setStop(s.id, want.has(s.id)));
@@ -149,7 +149,7 @@
     kendiEls.forEach((el, i) => {
       const k = kendiKombinasyonlar[i];
       el.dataset.dolu = String(!!k);
-      el.setAttribute('aria-label', `Kendi kombinasyonum ${i + 1}` + (k ? '' : ' (boş)'));
+      el.setAttribute('aria-label', t(k ? 'Kendi kombinasyonum {n}' : 'Kendi kombinasyonum {n} (boş)', { n: i + 1 }));
       el.setAttribute('aria-current', String(!!k && ayniKume(new Set(k.stops), stopsOn) && ayniKume(new Set(k.kuplorler), kuplorler)));
     });
   }

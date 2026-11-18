@@ -20,6 +20,8 @@ Ya da bilgisayarına indir:
 - **Ses cızırdıyorsa** "Hafif mod"u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar.
 - iPhone'da sessiz anahtarı açıkken de ses gelir (iOS 17 ve sonrası).
 
+**In English:** https://z8002.github.io/kilise-orgu/kilise-orgu.html?dil=en — a pipe organ (two manuals, pedals, 26 stops, 30-piece song player with Listen and Learn modes) and a [tonewheel jazz organ](https://z8002.github.io/kilise-orgu/caz-orgu.html?dil=en), played with the computer keyboard, by touch or with a MIDI keyboard. Browsers set to a language other than Turkish open the English interface by themselves; the button at the top switches languages.
+
 **Caz orgu:** https://z8002.github.io/kilise-orgu/caz-orgu.html — ton tekerlekli caz orgu: dokuz çekme çubuğu, perküsyon, vibrato ve koro, dönen hoparlör, sürüş. Klavye, telefon görünümü ve şarkı çalar kilise orgusuyla aynı.
 
 **Özgün sürüm (v1):** Programın ilk hâli [`v1/`](v1/) klasöründe değiştirilmeden duruyor ve https://z8002.github.io/kilise-orgu/v1/ adresinden çalınabiliyor.
@@ -43,6 +45,7 @@ Ya da bilgisayarına indir:
 - Ekrandaki klavyeye fareyle de basılabilir.
 - **MIDI klavye:** USB ya da Bluetooth MIDI klavye bağlanır (Chrome, Edge; Safari desteklemez). İki manuelli konsolda kanal 1 I. manueli, kanal 2 Sandık'ı, kanal 3 pedalı çalar. Sürdürme pedalı (CC 64) "Tut" gibi çalışır, ifade pedalı (CC 11) Sandık panjurunu açıp kapar, program değişimi pistonları (0–5 → 1–6, 6 → İptal, 7–10 → K1–K4) çağırır. Caz orgunda modülasyon tekerleği dönen hoparlörü hızlandırır.
 - **Kendi parçan:** Parçalar listesinden "+ Kendi parçanı ekle". Notalar Türkçe (`Do4 Re4 Mi4:2 Sib3`) ya da İngilizce (`C4 D4 E4:2 Bb3`) yazılır; süre dörtlük cinsinden (`:2` ikilik, `:1/2` sekizlik), sus `r`, akor `Do4+Mi4`. Parça tarayıcıda saklanır, iki org sayfasında da listede çıkar ve otuz parça gibi Dinle, Öğren ve eşlikle çalınır.
+- **Türkçe ve İngilizce arayüz:** Tarayıcı Türkçe değilse sayfa İngilizce açılır; üstteki düğme dili değiştirir (`?dil=en` ya da `?dil=tr` ile bağlantı da verilebilir). İngilizcede nota adları C D E, registerler uluslararası adlarıyla.
 - **Kayıt:** "● Kaydet" ile çaldıkların (otomatik pedal ve şarkı çalar da) kaydedilir. Kayıt sayfada geri çalınır, MIDI dosyası (bölüme göre kanal 1–3) ya da ses dosyası olarak indirilir.
 
 ### Caz orgu

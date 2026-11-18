@@ -215,7 +215,7 @@
     yuva.className = 'cekme-yuva';
     yuva.tabIndex = 0;
     yuva.setAttribute('role', 'slider');
-    yuva.setAttribute('aria-label', `Çekme çubuğu ${c.ayak}`);
+    yuva.setAttribute('aria-label', t('Çekme çubuğu {ayak}', { ayak: c.ayak }));
     yuva.setAttribute('aria-orientation', 'vertical');
     yuva.setAttribute('aria-valuemin', '0');
     yuva.setAttribute('aria-valuemax', '8');
@@ -295,7 +295,7 @@
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'caz-hazir';
-      b.textContent = h.ad;
+      b.textContent = t(h.ad);
       b.title = h.cekme;
       b.addEventListener('click', () => {
         cazAyar.cekme = [...h.cekme].map(Number);

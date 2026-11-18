@@ -1,4 +1,5 @@
   /* ================= Başlat ================= */
+  dilKur(); // önce: yardım metinleri yerine konur, sonra içleri doldurulur
   buildStops();
   buildPistons();
   cazKur();
@@ -44,7 +45,7 @@
     document.addEventListener('fullscreenchange', () => {
       const acik = !!document.fullscreenElement;
       tamEkranBtn.setAttribute('aria-pressed', String(acik));
-      tamEkranBtn.textContent = acik ? 'Küçült' : 'Tam ekran';
+      tamEkranBtn.textContent = t(acik ? 'Küçült' : 'Tam ekran');
     });
   }
 

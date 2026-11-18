@@ -17,7 +17,7 @@
   function ensureWind() {
     if (!ctx && !buildAudio()) {
       sesDesteklenmiyor = true;
-      focusHint.textContent = 'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.';
+      focusHint.textContent = t('Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.');
       focusHint.hidden = false;
       return false;
     }

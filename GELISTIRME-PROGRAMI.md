@@ -9,7 +9,7 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 | 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bitti |
 | 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bitti |
 | 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bitti |
-| 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bekliyor |
+| 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bitti |
 
 ## Aşama 0: Temeli sağlamlaştır
 
@@ -66,5 +66,5 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [x] MIDI klavye: nota, sürdürme pedalı, ifade pedalı (panjur), program değişimi (pistonlar, K1–K4, caz hazır sesleri), kanala göre bölüm; caz orgunda modülasyon tekerleği dönen hoparlörü hızlandırır. Bir kez bağlanınca sonraki açılışlarda kendiliğinden bağlanır.
 - [x] Kayıt: notalar ve ses. MIDI dosyası (biçim 0, bölüme göre kanal), ses dosyası (webm/ogg/m4a), sayfada geri çalma.
 - [x] Kendi parçanı ekleme: Türkçe ya da İngilizce nota adlarıyla yazılır, yanlış yazım yeri gösterilerek reddedilir; tarayıcıda saklanır, iki sayfada da listede; Dinle, Öğren ve eşlik çalışır. Oktav, sağ el bilgisayar klavyesinin üst sırasına düşecek biçimde kendiliğinden seçilir.
-- [ ] İngilizce arayüz.
+- [x] İngilizce arayüz: bütün metinler, register adları, parça adları, bölüm adları ve tonlar; İngilizcede nota adları C D E. Tarayıcı Türkçe değilse kendiliğinden; seçim saklanır, `?dil=en|tr` ile bağlantı verilir. Bir test, İngilizce sayfada görünen her metni ve ipucunu Türkçe kalıntı için tarar.
 - [x] Paylaşım önizlemesi: bağlantı paylaşılınca her sayfa kendi başlığını, açıklamasını ve 1200 × 630 görselini gösterir (Open Graph, Twitter kartı). Görseller `node araclar/simgeler.js` ile çizilir.

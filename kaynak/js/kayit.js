@@ -14,11 +14,11 @@
   function kayitArayuzu() {
     const b = $('#kayitBtn');
     b.setAttribute('aria-pressed', String(kayit.acik));
-    b.textContent = kayit.acik ? '■ Durdur' : '● Kaydet';
+    b.textContent = t(kayit.acik ? '■ Durdur' : '● Kaydet');
     $('#kayitPaneli').hidden = kayit.acik || (!kayit.olaylar.length && !kayit.ses);
     $('#kayitSure').textContent = sureYaz(kayit.sure);
     $('#kayitSesIndir').hidden = !kayit.ses;
-    $('#kayitCal').textContent = kayit.calan.length ? '■ Durdur' : '▶ Kaydı çal';
+    $('#kayitCal').textContent = t(kayit.calan.length ? '■ Durdur' : '▶ Kaydı çal');
   }
 
   function kayitBasla() {
@@ -82,7 +82,8 @@
       const [bolum, m] = k.split(':');
       sonuc.push({ t: kayit.sure, tur: 'off', midi: Number(m), bolum });
     }
-    return sonuc.sort((a, b) => a.t - b.t || (a.tur === 'off' ? -1 : 1));
+    // Aynı anda kapama açmadan önce gelir; gerisi kayıttaki sırasını korur (sıralama kararlıdır)
+    return sonuc.sort((a, b) => a.t - b.t || (a.tur === b.tur ? 0 : a.tur === 'off' ? -1 : 1));
   }
 
   // Standart MIDI dosyası, biçim 0. Dörtlük 480 tik, tempo 120: saniyede 960 tik.

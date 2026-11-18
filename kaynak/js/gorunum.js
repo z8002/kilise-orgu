@@ -30,7 +30,8 @@
       pedalEls.forEach((k, off) => k.classList.toggle('down', bolumdeBasili(PEDAL_ILK + off, 'P')));
     }
     const playing = [...new Set([...voices.keys(), ...playerDown.keys()])].sort((a, b) => a - b);
-    readout.innerHTML = 'Çalan:<b></b>';
+    readout.textContent = t('Çalan:');
+    readout.appendChild(document.createElement('b'));
     readout.lastChild.textContent = playing.length ? playing.map(noteName).join(' · ') : '—';
     updateFacadeTargets();
   }

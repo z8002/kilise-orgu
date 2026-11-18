@@ -60,6 +60,16 @@ Ayrıca `araclar/kaynak_denetle.py`, parçaların notalarını ve sürelerini ka
 
 Testlerdeki tuş ve piston tabloları sayfanın kodundan kopyalanmadı; README'deki tabloların bağımsız bir kopyasıdır.
 
+## İki dil
+
+Sayfa Türkçe yazılır; İngilizcesi `kaynak/js/dil.js`'dedir:
+
+- kısa metinler (düğme, etiket, ipucu) `EN` sözlüğünde, anahtar Türkçe metnin kendisi; sayfa açılırken sözlükte olan her metin ve `title`, `aria-label`, `placeholder` çevrilir;
+- uzun, biçimli metinler (yardım) şablonda öğenin `data-en` özniteliğinde İngilizce karşılığıyla durur;
+- JavaScript'in yazdığı metinler `t('Türkçe metin', { yer: tutucu })` ile geçer.
+
+Yeni bir arayüz metni eklenince sözlüğe İngilizcesi de yazılır. Unutulursa `test/dil.spec.js` yakalar: İngilizce sayfada görünen her metni ve ipucunu Türkçe harf ve sözcük için tarar. Testler Türkçe tarayıcı diliyle koşar (`playwright.config.js`, `locale`).
+
 ## Yazım kuralları
 
 - JavaScript parçaları iki boşluk girintilidir (tek bir sarmalayıcı işlevin içinde dururlar).

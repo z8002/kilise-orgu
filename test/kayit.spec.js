@@ -38,16 +38,15 @@ test('çalınan notalar MIDI dosyasına doğru sıra ve sürelerle yazılır', a
   await sayfayiAc(page);
   await page.locator('#kayitBtn').click();
   await expect(page.locator('#kayitBtn')).toHaveAttribute('aria-pressed', 'true');
-  await page.waitForTimeout(200);
-  await page.keyboard.down('KeyQ'); // Do4
-  await page.waitForTimeout(400);
-  await page.keyboard.up('KeyQ');
-  await page.keyboard.down('KeyE'); // Mi4
-  await page.keyboard.down('KeyT'); // Sol4: akor
-  await page.waitForTimeout(400);
-  await page.keyboard.up('KeyE');
-  await page.keyboard.up('KeyT');
-  await page.waitForTimeout(150);
+  // Tuşlar sayfanın içinden, kesin zamanlarla basılır (Playwright'ın tuş olayları yük altında gecikebilir)
+  await page.evaluate(() => new Promise(bitti => {
+    const tus = (tur, code) => document.dispatchEvent(new KeyboardEvent(tur, { code, bubbles: true }));
+    setTimeout(() => tus('keydown', 'KeyQ'), 200);                            // Do4
+    setTimeout(() => tus('keyup', 'KeyQ'), 600);
+    setTimeout(() => { tus('keydown', 'KeyE'); tus('keydown', 'KeyT'); }, 600); // Mi4 + Sol4: akor
+    setTimeout(() => { tus('keyup', 'KeyE'); tus('keyup', 'KeyT'); }, 1000);
+    setTimeout(bitti, 1150);
+  }));
   await page.locator('#kayitBtn').click();
   await expect(page.locator('#kayitPaneli')).toBeVisible();
 
@@ -58,6 +57,7 @@ test('çalınan notalar MIDI dosyasına doğru sıra ve sürelerle yazılır', a
   expect(o.every(x => x.kanal === 0)).toBe(true);
   const sure = nota => o.find(x => x.tur === 'off' && x.nota === nota).sn - o.find(x => x.tur === 'on' && x.nota === nota).sn;
   for (const n of [60, 64, 67]) expect(Math.abs(sure(n) - 0.4), `nota ${n}`).toBeLessThan(0.15);
+  expect(Math.abs(sure(64) - sure(67))).toBeLessThan(0.01); // birlikte basılıp bırakıldı
   expect(o[0].sn).toBeGreaterThan(0.1); // kaydın başındaki sessizlik korunur
 });
 

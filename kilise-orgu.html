@@ -593,11 +593,12 @@
   <header class="masthead">
     <div>
       <h1>Kilise Orgu</h1>
-      <p class="sub yalniz-kilise"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
-      <p class="sub yalniz-caz"><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan elektromekanik caz orgu. Dokuz çekme çubuğuyla sesini karıştır; perküsyon ve dönen hoparlörle caz kulübünün o tanıdık sesine ulaş.</p>
+      <p class="sub yalniz-kilise" data-en="&lt;span class=&quot;yalniz-klavye&quot;&gt;A pipe organ you play with your computer keyboard.&lt;/span&gt;&lt;span class=&quot;yalniz-dokunmatik&quot;&gt;A pipe organ you play with your fingers.&lt;/span&gt; The pipes sound for as long as you hold a key; let go and the sound dies away in the echo of the church."><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
+      <p class="sub yalniz-caz" data-en="&lt;span class=&quot;yalniz-klavye&quot;&gt;An electromechanical jazz organ you play with your computer keyboard.&lt;/span&gt;&lt;span class=&quot;yalniz-dokunmatik&quot;&gt;An electromechanical jazz organ you play with your fingers.&lt;/span&gt; Mix your sound with nine drawbars; with percussion and the rotary speaker you get that familiar jazz-club sound."><span class="yalniz-klavye">Bilgisayar klavyesiyle</span><span class="yalniz-dokunmatik">Parmakla</span> çalınan elektromekanik caz orgu. Dokuz çekme çubuğuyla sesini karıştır; perküsyon ve dönen hoparlörle caz kulübünün o tanıdık sesine ulaş.</p>
       <p class="org-gecis"><a class="yalniz-kilise" href="caz-orgu.html">Caz orguna geç →</a><a class="yalniz-caz" href="kilise-orgu.html">← Kilise orguna dön</a></p>
     </div>
     <div class="eylemler">
+      <button id="dilBtn" class="wind dil" type="button" lang="en">English</button>
       <button id="yukleBtn" class="wind" type="button" hidden title="Orgu uygulama gibi ana ekrandan aç; internet olmadan da çalışır"><span aria-hidden="true">＋</span> Ana ekrana ekle</button>
       <button id="parcalarBtn" class="wind" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Parçalar</button>
       <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
@@ -847,23 +848,25 @@
   <section class="howto">
     <h2>Nasıl çalınır</h2>
     <ul>
-      <li class="yalniz-dokunmatik"><strong>Parmağınla tuşa bas</strong>: basılı tuttuğun sürece ses sürer. Parmağını tuşların üstünde kaydırırsan nota değişir; iki parmakla akor basarsın.</li>
-      <li class="yalniz-dokunmatik"><strong>‹ ›</strong> klavyeyi bir oktav kaydırır. Telefonu <strong>yan çevirirsen</strong> iki oktavdan fazlası sığar.</li>
-      <li class="yalniz-dokunmatik"><strong>Tut</strong> açıkken parmağını kaldırdığın notalar çalmaya devam eder.</li>
-      <li class="yalniz-klavye"><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
+      <li class="yalniz-dokunmatik" data-en="&lt;strong&gt;Press a key with your finger&lt;/strong&gt;: the note sounds for as long as you hold it. Slide your finger across the keys to change notes; use two fingers for a chord."><strong>Parmağınla tuşa bas</strong>: basılı tuttuğun sürece ses sürer. Parmağını tuşların üstünde kaydırırsan nota değişir; iki parmakla akor basarsın.</li>
+      <li class="yalniz-dokunmatik" data-en="&lt;strong&gt;‹ ›&lt;/strong&gt; move the keyboard by an octave. &lt;strong&gt;Turn your phone sideways&lt;/strong&gt; and more than two octaves fit."><strong>‹ ›</strong> klavyeyi bir oktav kaydırır. Telefonu <strong>yan çevirirsen</strong> iki oktavdan fazlası sığar.</li>
+      <li class="yalniz-dokunmatik" data-en="While &lt;strong&gt;Hold&lt;/strong&gt; is on, notes keep sounding after you lift your finger."><strong>Tut</strong> açıkken parmağını kaldırdığın notalar çalmaya devam eder.</li>
+      <li class="yalniz-klavye" data-en="&lt;strong&gt;The bottom letter row&lt;/strong&gt; plays the lower octave; the row above (the digits are the sharps) continues an octave higher:
+        &lt;br&gt;&lt;span class=&quot;rowkeys&quot; id=&quot;rowLower&quot;&gt;&lt;/span&gt;
+        &lt;br&gt;&lt;span class=&quot;rowkeys&quot; id=&quot;rowUpper&quot;&gt;&lt;/span&gt;"><strong>Alt harf sırası</strong> alt oktavı çalar, üstteki sıra (rakamlar diyezler) bir oktav yukarıdan devam eder:
         <br><span class="rowkeys" id="rowLower"></span>
         <br><span class="rowkeys" id="rowUpper"></span></li>
-      <li class="yalniz-klavye"><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
-      <li class="yalniz-klavye"><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
-      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
-      <li class="yalniz-caz"><strong>Çekme çubukları</strong> sesi karıştırır: her biri bir ton tekerleğinin ne kadar duyulacağını belirler (16′ en pes, 1′ en tiz); aşağı çektikçe güçlenir. Üstteki rakamlar (örneğin 888000000) bu karışımın kısa yazılışıdır. Hazır seslerden biriyle başla.</li>
-      <li class="yalniz-caz"><strong>Perküsyon</strong> tuşa basınca ikinci ya da üçüncü harmonikte kısa bir vuruş ekler; yalnızca bütün tuşlar bırakılmışken basılan notada vurur, legato çalınca susar.</li>
-      <li class="yalniz-caz"><strong>Dönen hoparlör</strong>: Yavaş'ta ses ağır ağır döner, Hızlı'da titrer; geçişte boru çabuk, tambur ağır hızlanır.<span class="yalniz-klavye"> <kbd>`</kbd> tuşu (1'in solundaki) Yavaş ile Hızlı arasında geçer.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki Hızlı düğmesi de aynı işi yapar.</span></li>
-      <li class="yalniz-kilise"><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
-      <li class="yalniz-kilise"><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
-      <li><strong>● Kaydet</strong> çaldıklarını kaydeder; bitince kaydı dinleyebilir, MIDI ya da ses dosyası olarak indirebilirsin. <strong>MIDI klavye</strong> düğmesi takılı bir MIDI klavyeyi bağlar (Chrome ve Edge).</li>
-      <li class="yalniz-dokunmatik"><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
-      <li class="yalniz-dokunmatik"><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
+      <li class="yalniz-klavye" data-en="&lt;strong&gt;As long as you hold a key&lt;/strong&gt;, the note sounds. Notes you release while &lt;kbd&gt;Space&lt;/kbd&gt; is held keep sounding too."><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
+      <li class="yalniz-klavye" data-en="&lt;kbd&gt;↑&lt;/kbd&gt; &lt;kbd&gt;↓&lt;/kbd&gt; change the octave, &lt;kbd&gt;Esc&lt;/kbd&gt; silences everything."><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li data-en="The &lt;strong&gt;Pieces&lt;/strong&gt; button opens the list of thirty pieces. With &lt;strong&gt;Listen&lt;/strong&gt; the program plays the piece; with &lt;strong&gt;Learn&lt;/strong&gt; the next key lights up and the piece moves on when you press it. You can leave one hand to the program and play the other yourself.&lt;span class=&quot;yalniz-dokunmatik&quot;&gt; The keyboard scrolls to the lit key by itself.&lt;/span&gt;"><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.<span class="yalniz-dokunmatik"> Klavye, yanan tuşa kendiliğinden kayar.</span></li>
+      <li class="yalniz-caz" data-en="&lt;strong&gt;Drawbars&lt;/strong&gt; mix the sound: each sets how much of one tonewheel you hear (16′ lowest, 1′ highest); pull a bar down to make it louder. The digits above (for example 888000000) are the short way to write the mix. Start with one of the presets."><strong>Çekme çubukları</strong> sesi karıştırır: her biri bir ton tekerleğinin ne kadar duyulacağını belirler (16′ en pes, 1′ en tiz); aşağı çektikçe güçlenir. Üstteki rakamlar (örneğin 888000000) bu karışımın kısa yazılışıdır. Hazır seslerden biriyle başla.</li>
+      <li class="yalniz-caz" data-en="&lt;strong&gt;Percussion&lt;/strong&gt; adds a short hit on the second or third harmonic when you press a key. It only sounds on a note played after all keys were released and stays silent when you play legato."><strong>Perküsyon</strong> tuşa basınca ikinci ya da üçüncü harmonikte kısa bir vuruş ekler; yalnızca bütün tuşlar bırakılmışken basılan notada vurur, legato çalınca susar.</li>
+      <li class="yalniz-caz" data-en="&lt;strong&gt;Rotary speaker&lt;/strong&gt;: on Slow the sound turns gently, on Fast it shimmers; when you switch, the horn speeds up quickly and the drum slowly.&lt;span class=&quot;yalniz-klavye&quot;&gt; The &lt;kbd&gt;`&lt;/kbd&gt; key (left of 1) switches between Slow and Fast.&lt;/span&gt;&lt;span class=&quot;yalniz-dokunmatik&quot;&gt; The Fast button above the keyboard does the same.&lt;/span&gt;"><strong>Dönen hoparlör</strong>: Yavaş'ta ses ağır ağır döner, Hızlı'da titrer; geçişte boru çabuk, tambur ağır hızlanır.<span class="yalniz-klavye"> <kbd>`</kbd> tuşu (1'in solundaki) Yavaş ile Hızlı arasında geçer.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki Hızlı düğmesi de aynı işi yapar.</span></li>
+      <li class="yalniz-kilise" data-en="&lt;strong&gt;Stops&lt;/strong&gt; (the round ivory knobs) choose the colour of the sound; you can pull and push them while playing. The numbered pistons call up ready-made combinations: for that grand church-organ sound try &lt;strong&gt;5 · Plenum&lt;/strong&gt; or &lt;strong&gt;6 · Tutti&lt;/strong&gt;. To keep your own registration, press &lt;strong&gt;Set&lt;/strong&gt;, then one of &lt;strong&gt;K1–K4&lt;/strong&gt;."><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>. Kendi registrasyonunu saklamak için <strong>Ayarla</strong>'ya, sonra <strong>K1–K4</strong>'ten birine bas.</li>
+      <li class="yalniz-kilise" data-en="&lt;strong&gt;Console&lt;/strong&gt;: choose &quot;Two manuals and pedals&quot; to add the &lt;strong&gt;Swell&lt;/strong&gt; (manual II, behind shutters) and the pedals.&lt;span class=&quot;yalniz-klavye&quot;&gt; The bottom letter row plays manual I, the top row plays the Swell; click the pedals with the mouse.&lt;/span&gt;&lt;span class=&quot;yalniz-dokunmatik&quot;&gt; I · II · P above the keyboard chooses which division the on-screen keyboard plays.&lt;/span&gt; &lt;strong&gt;Couplers&lt;/strong&gt; let one division play from another; &lt;strong&gt;Auto pedal&lt;/strong&gt; also plays the lowest note held on manual I in the pedals."><strong>Konsol</strong>: "İki manuel ve pedal" seçilince panjurlu <strong>Sandık</strong> (II. manuel) ile pedal da açılır.<span class="yalniz-klavye"> Alt harf sırası I. manueli, üst sıra Sandık'ı çalar; pedala fareyle basılır.</span><span class="yalniz-dokunmatik"> Klavyenin üstündeki I · II · P, ekrandaki klavyenin hangi bölümü çalacağını seçer.</span> <strong>Kuplörler</strong> bir bölümü ötekinden de çaldırır; <strong>Otomatik pedal</strong> I. manuelde basılı en kalın notayı pedalda da çalar.</li>
+      <li data-en="&lt;strong&gt;● Record&lt;/strong&gt; records what you play; afterwards you can listen to it or download it as a MIDI or audio file. The &lt;strong&gt;MIDI keyboard&lt;/strong&gt; button connects a plugged-in MIDI keyboard (Chrome and Edge)."><strong>● Kaydet</strong> çaldıklarını kaydeder; bitince kaydı dinleyebilir, MIDI ya da ses dosyası olarak indirebilirsin. <strong>MIDI klavye</strong> düğmesi takılı bir MIDI klavyeyi bağlar (Chrome ve Edge).</li>
+      <li class="yalniz-dokunmatik" data-en="&lt;strong&gt;Add to home screen&lt;/strong&gt;: on Android, &quot;Add to Home screen&quot; or &quot;Install app&quot; in the Chrome menu; on iPhone, &quot;Add to Home Screen&quot; from Safari&#x27;s Share button. Once opened, it also works offline."><strong>Ana ekrana ekle</strong>: Android'de Chrome menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle", iPhone'da Safari'nin Paylaş düğmesinden "Ana Ekrana Ekle". Bir kez açıldıktan sonra internet olmadan da çalışır.</li>
+      <li class="yalniz-dokunmatik" data-en="&lt;strong&gt;If the sound crackles or lags&lt;/strong&gt;, turn on &lt;strong&gt;Light mode&lt;/strong&gt;: fewer pipes and a shorter reverb put less load on the phone. If there is no sound at all, turn up the phone&#x27;s volume."><strong>Ses cızırdıyor ya da gecikiyorsa</strong> <strong>Hafif mod</strong>u aç: daha az boru ve daha kısa yankıyla telefonu daha az yorar. Hiç ses gelmiyorsa telefonun sesini aç.</li>
     </ul>
   </section>
 </div>
@@ -899,10 +902,10 @@
     <details class="yazim">
       <summary>Nasıl yazılır?</summary>
       <ul>
-        <li>Notalar boşlukla ayrılır: <code>Do4 Re4 Mi4</code> ya da <code>C4 D4 E4</code>. Diyez <code>#</code> (<code>Fa#4</code>), bemol <code>b</code> (<code>Sib3</code>). Do4 orta Do'dur.</li>
-        <li>Süre iki noktadan sonra, dörtlük cinsinden: <code>Do4:2</code> ikilik, <code>Do4:1/2</code> sekizlik, <code>Do4:3/2</code> noktalı dörtlük. Yazılmazsa dörtlük.</li>
-        <li>Sus <code>r</code> (<code>r:2</code> iki vuruş), bağ <code>~</code> (öncekini uzatır), akor <code>Do4+Mi4+Sol4</code>. <code>|</code> ölçü çizgisidir; yalnızca okumayı kolaylaştırır.</li>
-        <li>Parça bu tarayıcıda saklanır; iki org sayfası da görür.</li>
+        <li data-en="Notes are separated by spaces: &lt;code&gt;C4 D4 E4&lt;/code&gt; or &lt;code&gt;Do4 Re4 Mi4&lt;/code&gt;. Sharp &lt;code&gt;#&lt;/code&gt; (&lt;code&gt;F#4&lt;/code&gt;), flat &lt;code&gt;b&lt;/code&gt; (&lt;code&gt;Bb3&lt;/code&gt;). C4 is middle C.">Notalar boşlukla ayrılır: <code>Do4 Re4 Mi4</code> ya da <code>C4 D4 E4</code>. Diyez <code>#</code> (<code>Fa#4</code>), bemol <code>b</code> (<code>Sib3</code>). Do4 orta Do'dur.</li>
+        <li data-en="Duration after a colon, in quarter notes: &lt;code&gt;C4:2&lt;/code&gt; half note, &lt;code&gt;C4:1/2&lt;/code&gt; eighth note, &lt;code&gt;C4:3/2&lt;/code&gt; dotted quarter. Without it, a quarter note.">Süre iki noktadan sonra, dörtlük cinsinden: <code>Do4:2</code> ikilik, <code>Do4:1/2</code> sekizlik, <code>Do4:3/2</code> noktalı dörtlük. Yazılmazsa dörtlük.</li>
+        <li data-en="Rest &lt;code&gt;r&lt;/code&gt; (&lt;code&gt;r:2&lt;/code&gt; two beats), tie &lt;code&gt;~&lt;/code&gt; (extends the previous note), chord &lt;code&gt;C4+E4+G4&lt;/code&gt;. &lt;code&gt;|&lt;/code&gt; is a bar line; it only makes reading easier.">Sus <code>r</code> (<code>r:2</code> iki vuruş), bağ <code>~</code> (öncekini uzatır), akor <code>Do4+Mi4+Sol4</code>. <code>|</code> ölçü çizgisidir; yalnızca okumayı kolaylaştırır.</li>
+        <li data-en="The piece is stored in this browser; both organ pages can see it.">Parça bu tarayıcıda saklanır; iki org sayfası da görür.</li>
       </ul>
     </details>
     <p class="kp-hata" id="kpHata" role="alert"></p>
@@ -1135,8 +1138,238 @@
   }
 
   const baseMidi = () => 12 * (settings.octave + 1);
-  const noteName = m => SOLFEJ[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
+  const notaAdlari = () => (DIL === 'en' ? HARFLER : SOLFEJ); // Do Re Mi ya da C D E
+  const noteName = m => notaAdlari()[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
 
+  /* ================= Dil: Türkçe ve İngilizce ================= */
+  // Sayfa Türkçe yazılır. İngilizcede:
+  //  - kısa metinler (düğmeler, etiketler, ipuçları) bu sözlükten çevrilir: anahtar Türkçe metnin kendisi;
+  //  - uzun, biçimli metinler (yardım) sayfada data-en özniteliğinde İngilizce karşılığıyla durur;
+  //  - JavaScript'in yazdığı metinler t() ile geçer; {ad} yer tutucuları doldurulur.
+  // Seçim: adresteki ?dil=en|tr, sonra kaydedilen seçim, sonra tarayıcının dili (Türkçe değilse İngilizce).
+  const DIL_ANAHTAR = 'kilise-orgu-dil';
+  const DIL = (() => {
+    try {
+      const q = new URL(location.href).searchParams.get('dil');
+      if (q === 'en' || q === 'tr') return q;
+    } catch (_) {}
+    try { const k = localStorage.getItem(DIL_ANAHTAR); if (k === 'en' || k === 'tr') return k; } catch (_) {}
+    return (navigator.languages || [navigator.language || '']).some(l => /^tr\b/i.test(l)) ? 'tr' : 'en';
+  })();
+  const HARFLER = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
+
+  const EN = {
+    // Başlık ve genel
+    'Kilise Orgu': 'Church Organ', 'Caz Orgu': 'Jazz Organ',
+    'Caz orguna geç →': 'Try the jazz organ →', '← Kilise orguna dön': '← Back to the church organ',
+    'Orgu uygulama gibi ana ekrandan aç; internet olmadan da çalışır': 'Open the organ from your home screen like an app; it also works offline',
+    'Ana ekrana ekle': 'Add to home screen', 'Parçalar': 'Pieces',
+    'Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.': 'Starts the organ\'s blower. It also starts by itself when you press the first key.',
+    'Rüzgârı aç': 'Wind on', 'Rüzgâr açık': 'Wind is on',
+    'Klavyeden çalmak için önce sayfaya bir kez tıkla.': 'Click the page once before playing with the keyboard.',
+    'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.': 'This browser does not support Web Audio; try Chrome, Edge or Firefox.',
+    'Org konsolu': 'Organ console', 'Nasıl çalınır': 'How to play', 'Türkçe': 'Türkçe', 'English': 'English',
+    // Caz orgu
+    'Ton tekerlekli org': 'Tonewheel organ', 'Çekme çubukları': 'Drawbars',
+    'Çekme çubukları: aşağı çektikçe o tekerleğin sesi güçlenir': 'Drawbars: pull a bar down to make its tonewheel louder',
+    'Çekme çubuğu {ayak}': 'Drawbar {ayak}',
+    'Hazır sesler': 'Presets', 'Perküsyon': 'Percussion', 'Perküsyon harmoniği': 'Percussion harmonic',
+    'İkinci harmonik (4′)': 'Second harmonic (4′)', 'Üçüncü harmonik (2⅔′)': 'Third harmonic (2⅔′)',
+    'Açıkken vuruş çabuk söner': 'When on, the hit decays quickly', 'Hızlı': 'Fast',
+    'Açıkken vuruş daha kısık': 'When on, the hit is softer', 'Yumuşak': 'Soft',
+    'Vibrato ve koro': 'Vibrato and chorus', 'Kapalı': 'Off',
+    'V1 · hafif vibrato': 'V1 · light vibrato', 'V2 · vibrato': 'V2 · vibrato', 'V3 · derin vibrato': 'V3 · deep vibrato',
+    'C1 · hafif koro': 'C1 · light chorus', 'C2 · koro': 'C2 · chorus', 'C3 · derin koro': 'C3 · deep chorus',
+    'Dönen hoparlör': 'Rotary speaker', 'Yavaş': 'Slow', 'Sürüş': 'Drive',
+    'Tuşa basınca ve bırakınca kontakların kısa tıkırtısı': 'The short click of the key contacts when you press and release',
+    'Tuş tıkırtısı': 'Key click', 'Dönen hoparlör: Yavaş ya da Hızlı': 'Rotary speaker: slow or fast',
+    'Klasik caz': 'Classic jazz', 'Balad': 'Ballad', 'Gospel': 'Gospel', 'Flüt': 'Flute', 'Blues': 'Blues', 'Tam': 'Full',
+    // Kombinasyonlar ve konsol
+    'Kombinasyonlar': 'Combinations', 'Kombinasyon pistonları': 'Combination pistons',
+    'Kombinasyon {n}: {ad}': 'Combination {n}: {ad}',
+    'Kendi kombinasyonların': 'Your own combinations',
+    'Önce buna, sonra K1–K4\'ten birine bas: o anki registrasyon oraya kaydedilir': 'Press this, then one of K1–K4: the current registration is saved there',
+    'Ayarla': 'Set', 'Register yazı renkleri': 'Stop label colours',
+    'Ağızlı boru': 'Flue pipe', 'Mutasyon': 'Mutation', 'Dilli boru': 'Reed pipe', 'Tremolo': 'Tremulant',
+    'Konsol': 'Console', 'Tek klavye: bilgisayar klavyesinin iki sırası da I. manueli çalar': 'One keyboard: both rows of the computer keyboard play manual I',
+    'Tek manuel': 'One manual',
+    'Sandık (II. manuel) ve pedal da açılır; bilgisayar klavyesinin üst sırası Sandık\'ı çalar': 'Adds the Swell (manual II) and the pedals; the top row of the computer keyboard plays the Swell',
+    'İki manuel ve pedal': 'Two manuals and pedals',
+    'I. manuelde basılı en kalın nota pedalda da çalar': 'The lowest note held on manual I also sounds on the pedals',
+    'Otomatik pedal': 'Auto pedal', 'Kuplörler': 'Couplers', 'Sandık panjuru': 'Swell shutters',
+    'Temel sesler': 'Foundation stops', 'Parlak sesler': 'Bright stops', 'Sandık · II. manuel': 'Swell · manual II', 'Pedal': 'Pedal',
+    'I. manuel': 'Manual I', 'Sandık': 'Swell', 'Sandık (II. manuel)': 'Swell (manual II)',
+    'Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.': 'Now choose where to save it: K1, K2, K3 or K4.',
+    'O anki registrasyon {ad} kaydedildi.': 'Current registration saved to {ad}.',
+    '{ad} boş. Kaydetmek için önce Ayarla\'ya, sonra {adA} bas.': '{ad} is empty. To save, press Set, then {ad}.',
+    'Kendi kombinasyonum {n}': 'My combination {n}', 'Kendi kombinasyonum {n} (boş)': 'My combination {n} (empty)',
+    'Sandık, I. manuelden de çalar.': 'The Swell also plays from manual I.', 'I. manuel, pedaldan da çalar.': 'Manual I also plays from the pedals.',
+    'Sandık, pedaldan da çalar.': 'The Swell also plays from the pedals.',
+    'Dua': 'Prayer', 'İlahi': 'Hymn', 'Flüt solo': 'Flute solo', 'Kornet': 'Cornet', 'Plenum': 'Plenum', 'Tutti': 'Tutti', 'İptal': 'Cancel',
+    // Klavye ve telefon çubuğu
+    'Klavye penceresi': 'Keyboard window', 'Klavyeyi bir oktav aşağı kaydır': 'Move the keyboard down an octave',
+    'Klavyeyi bir oktav yukarı kaydır': 'Move the keyboard up an octave', 'Ekrandaki klavyenin çaldığı bölüm': 'Division played by the on-screen keyboard',
+    'Tam ekran': 'Full screen', 'Küçült': 'Exit full screen',
+    'Açıkken parmağını kaldırdığın notalar çalmaya devam eder': 'While on, notes keep sounding after you lift your finger',
+    'Tut': 'Hold', 'Çal': 'Play', 'Duraklat': 'Pause', 'Başla': 'Start',
+    'II. manuel (Sandık): fareyle veya dokunarak da çalınabilir': 'Manual II (Swell): you can also play it with the mouse or by touch',
+    'Manuel: fareyle veya dokunarak da çalınabilir': 'Manual: you can also play it with the mouse or by touch',
+    'Pedal: fareyle veya dokunarak da çalınabilir': 'Pedals: you can also play them with the mouse or by touch',
+    // Şarkı çalar
+    'Bir parça seç: program çalsın ya da sana öğretsin': 'Pick a piece: let the program play it or teach it to you',
+    'Şarkı çalar': 'Song player', 'Parçayı kapat': 'Close the piece', 'Çalma biçimi': 'Playing mode',
+    'Program parçayı çalar': 'The program plays the piece', 'Dinle': 'Listen',
+    'Sıradaki tuş yanar, sen basınca ilerler': 'The next key lights up; it moves on when you press it', 'Öğren': 'Learn',
+    'Başa dön': 'Back to start', 'Bölümü yinele': 'Repeat section', 'İçinde bulunulan bölümü yinele': 'Repeat the current section',
+    'Hız': 'Speed', 'Sağ el': 'Right hand', 'Sol el': 'Left hand', 'Program çalsın': 'Program plays', 'Ben çalacağım': 'I will play', 'Sessiz': 'Silent',
+    'Bölümler': 'Sections', 'Bu bölüme git': 'Go to this section', 'Sıradaki:': 'Next:',
+    'Hazır': 'Ready', 'Çalıyor': 'Playing', 'Durakladı': 'Paused', 'Bitti': 'Finished',
+    'Bitti: {toplam} adım, {yanlis} yanlış tuş': 'Finished: {toplam} steps, {yanlis} wrong keys',
+    'Adım {adim}/{toplam} · Yanlış: {yanlis}': 'Step {adim}/{toplam} · Wrong: {yanlis}',
+    ' · Yanan tuşa bas, program seni bekler': ' · Press the lit key; the program waits for you',
+    ' · Yanan tuşlar senin elin': ' · The lit keys are your hand',
+    'Kolay': 'Easy', 'Orta': 'Medium', 'Zor': 'Hard',
+    'Kaynakla karşılaştırıldı': 'Checked against the source', 'Kaynağa bakılarak denetlendi': 'Checked by hand against the source',
+    'Ezberden; doğrulanmadı': 'From memory; not verified', 'Özgün parça': 'Original piece', 'Senin yazdığın parça': 'A piece you wrote',
+    ' · doğrulanmadı': ' · not verified',
+    'Noel': 'Christmas', 'Klasik': 'Classical', 'Opera': 'Opera', 'Caz': 'Jazz', 'Düğün': 'Wedding', 'Özgün': 'Original', 'Kendi parçaların': 'Your pieces',
+    'Hepsi': 'All',
+    // Kontroller
+    'Oktav': 'Octave', 'Bir oktav aşağı': 'One octave down', 'Bir oktav yukarı': 'One octave up',
+    'Mekân': 'Room', 'Kulüp · 0,9 sn': 'Club · 0.9 s', 'Şapel · 1,8 sn': 'Chapel · 1.8 s', 'Kilise · 3,6 sn': 'Church · 3.6 s', 'Katedral · 6,5 sn': 'Cathedral · 6.5 s',
+    'Yankı': 'Reverb', 'Ses': 'Volume', 'Açıkken bıraktığın notalar çalmaya devam eder': 'While on, notes keep sounding after you release them',
+    'Boşluk': 'Space',
+    'Daha az boru, daha az ses ve kısa yankı: zayıf telefonda ses cızırdamasın diye': 'Fewer pipes, fewer voices and a shorter reverb, so audio does not crackle on a weak phone',
+    'Hafif mod': 'Light mode',
+    'Çaldıklarını kaydet: MIDI ve ses dosyası olarak indirebilirsin': 'Record what you play; you can download it as a MIDI or audio file',
+    '● Kaydet': '● Record', '■ Durdur': '■ Stop', 'Kayıt': 'Recording', '▶ Kaydı çal': '▶ Play recording',
+    'Standart MIDI dosyası; bölüme göre kanal 1–3': 'Standard MIDI file; channels 1–3 by division', 'MIDI indir': 'Download MIDI',
+    'Hoparlöre giden ses': 'The sound going to the speakers', 'Ses indir': 'Download audio',
+    'USB ya da Bluetooth MIDI klavyeyi bağla': 'Connect a USB or Bluetooth MIDI keyboard', 'MIDI klavye': 'MIDI keyboard',
+    'Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.': 'This browser does not support MIDI keyboards; open the page in Chrome or Edge.',
+    'MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.': 'MIDI permission was not given. You can allow it in the site settings next to the address bar.',
+    'MIDI klavye bulunamadı; takıp yeniden dene.': 'No MIDI keyboard found; plug one in and try again.',
+    'Çalan:': 'Playing:',
+    'Akort ve yerleşim': 'Tuning and placement', 'Akort sistemi': 'Temperament', 'Diyapazon (La4, Hz)': 'Pitch (A4, Hz)', 'Stereo genişlik': 'Stereo width',
+    'Barok · 415': 'Baroque · 415', 'Klasik · 430': 'Classical · 430', 'Bugün · 440': 'Modern · 440', 'Orkestra · 442': 'Orchestra · 442', 'Barok kilise orgu · 466': 'Baroque church organ · 466',
+    'Eşit': 'Equal', 'Ortalama ton (¼ koma)': 'Meantone (¼ comma)', 'Pisagor': 'Pythagorean',
+    'Bugünün akordu: on iki yarım ses eşit, her tonda aynı renk. Hiçbir aralık tam pür değil.': 'Today\'s tuning: twelve equal semitones, the same colour in every key. No interval is quite pure.',
+    'Bach çağının "iyi akordu": her tonda çalınır; az diyezli tonlar temiz, çok diyezliler gergin ve renkli.': 'A "well temperament" of Bach\'s time: every key is usable; keys with few sharps are clean, those with many are tense and colourful.',
+    'Do–Mi büyük üçlüsü pür; tondan tona renk farkı belirgin.': 'The C–E major third is pure; the character of each key differs clearly.',
+    'Rönesans ve erken barok: büyük üçlüler pür ve tatlı. Sol♯–Mi♭ "kurt" beşlisi uluyarak çalar; az diyezli tonlarda kalın.': 'Renaissance and early Baroque: major thirds are pure and sweet. The G♯–E♭ "wolf" fifth howls; stay in keys with few sharps.',
+    'Beşliler pür, üçlüler sert; Orta Çağ ezgileri ve boş beşliler için.': 'Pure fifths, harsh thirds; for medieval melodies and open fifths.',
+    // Parça listesi ve kendi parçan
+    'Listeyi kapat': 'Close the list', 'Parça ya da besteci ara': 'Search pieces or composers', 'Türe göre süz': 'Filter by type',
+    'Aramaya uyan parça yok.': 'No piece matches your search.', '+ Kendi parçanı ekle': '+ Add your own piece',
+    'Kendi parçan': 'Your piece', 'Kapat': 'Close', 'Ad': 'Title', 'Besteci': 'Composer', 'İstersen boş bırak': 'Optional',
+    'Ölçü': 'Time signature', 'Tempo (dörtlük/dk)': 'Tempo (quarter notes/min)', 'Nasıl yazılır?': 'How to write notes',
+    'Do3:4 | Sol2:4   (istersen boş bırak)': 'C3:4 | G2:4   (optional)', 'Mi4 Mi4 Fa4 Sol4 | Sol4 Fa4 Mi4 Re4 | Do4:2 r:2': 'E4 E4 F4 G4 | G4 F4 E4 D4 | C4:2 r:2',
+    'Kaydet ve aç': 'Save and open', 'Sil': 'Delete', '{ad} parçasını sil': 'Delete {ad}', '"{ad}" silinsin mi?': 'Delete "{ad}"?',
+    'Parçaya bir ad ver.': 'Give the piece a title.', 'Sağ elin notalarını yaz.': 'Write the right-hand notes.', 'Sağ elde hiç nota yok.': 'The right hand has no notes.',
+    '"{ham}": süre anlaşılmadı': '"{ham}": duration not understood', '"{ham}": süre sıfır olamaz': '"{ham}": duration cannot be zero',
+    '"{n}": nota adı anlaşılmadı': '"{n}": note name not understood', '"{n}": org bu kadar pes çalmaz': '"{n}": the organ does not go this low',
+    '"{n}": org bu kadar tiz çalmaz': '"{n}": the organ does not go this high', '{el}: en çok 3000 nota yazılabilir': '{el}: at most 3000 notes',
+    'Tarayıcı parçayı saklayamadı (gizli pencere ya da dolu depolama).': 'The browser could not store the piece (private window or full storage).',
+    'Kendi parçan (besteci)': 'Your piece', 'Parça': 'Piece',
+  };
+
+  // Org registerlerinin İngilizce adları ve açıklamaları (çoğu uluslararası ad, birkaçı çevrilir)
+  const EN_REGISTER = {
+    burdon16: ['Bourdon', 'Stopped wooden pipes; a soft, deep bass an octave below.'],
+    prinsipal8: ['Principal', 'The backbone of the organ: the full main tone of open metal pipes.'],
+    gedakt8: ['Gedackt', 'Stopped flute; round, warm and slightly muffled.'],
+    gamba8: ['Gamba', 'Narrow-scaled string tone, like a violin.'],
+    oktav4: ['Octave', 'The principal an octave higher; adds brightness.'],
+    flut4: ['Flute', 'Open flute an octave higher; clear and sweet.'],
+    celeste8: ['Voix\nCéleste', 'String tuned slightly sharp; undulates with the Gamba.'],
+    nazard: ['Nazard', 'A flute an octave and a fifth up; a nasal, colourful tone.'],
+    superoktav2: ['Super-\noctave', 'Principal two octaves up; the sparkle of the plenum.'],
+    terz: ['Tierce', 'Two octaves and a third up; the salt of the cornet.'],
+    mikstur: ['Mixture', 'Four ranks of high pipes; the crown of the church organ.'],
+    trompet8: ['Trumpet', 'Reed pipe; a bright, commanding festive tone.'],
+    tremolo: ['Tremulant', 'Shakes the wind pressure; the sound undulates.'],
+    rohrflut8: ['Rohr flute', 'Chimney flute; slightly brighter than the Gedackt, singing.'],
+    salisyonal8: ['Salicional', 'Slender string tone; softer than the Gamba.'],
+    undamaris8: ['Unda maris', 'Flute tuned slightly flat; undulates with the Rohr flute like a sea wave.'],
+    traversflut4: ['Traverse\nflute', 'Open, clear tone like a transverse flute; an octave up.'],
+    flajole2: ['Flageolet', 'A thin, whistling flute two octaves up.'],
+    seskialtera: ['Sesqui-\naltera', 'Nazard and Tierce together: a cornet-coloured solo stop.'],
+    obua8: ['Oboe', 'A thin, nasal reed; a sweet solo voice.'],
+    voxhumana8: ['Vox humana', '"Human voice": a short-resonator reed; sings with the tremulant.'],
+    tremolo2: ['Tremulant', 'Shakes the Swell\'s wind; a little faster than manual I\'s.'],
+    subbas16: ['Subbass', 'Stopped wooden pedal pipe; a soft, deep foundation.'],
+    oktavbas8: ['Octave bass', 'The principal of the pedals; makes the bass line clear.'],
+    koralbas4: ['Choral bass', 'A 4′ principal for playing a chorale melody in the pedals.'],
+    trombon16: ['Trombone', 'The strong reed of the pedals; the foundation of the plenum.'],
+  };
+
+  const EN_PARCA = {
+    'neseye-ovgu': 'Ode to Joy', toccata: 'Toccata and Fugue', 'gelin-korosu': 'Bridal Chorus', tristan: 'Tristan Prelude',
+    'valkurlerin-ucusu': 'Ride of the Valkyries', kanon: 'Canon', 'sessiz-gece': 'Silent Night', 'dugun-marsi': 'Wedding March',
+    'gorsev-icin-balad': 'Ballad for Görsev', 'turk-marsi': 'Turkish March',
+  };
+  const EN_BESTECI = {
+    'Cenevre Mezmurlar Kitabı (Loys Bourgeois)': 'Genevan Psalter (Loys Bourgeois)', 'Amerikan halk ezgisi (*New Britain*)': 'American folk tune (New Britain)',
+    'Mikola Leontoviç': 'Mykola Leontovych', 'İngiliz halk ezgisi': 'English folk tune', 'Lowell Mason (Händel\'den)': 'Lowell Mason (after Handel)',
+    'Fransız ortaçağ ezgisi': 'French medieval chant', 'Stralsund ilahi kitabı': 'Stralsund hymnal', 'Kendi parçan': 'Your piece',
+  };
+  const EN_BOLUM = {
+    '1. bitiş': '1st ending', '2. bitiş': '2nd ending', 'son bitiş': 'final ending', 'bitiş': 'ending', '1. bölüm': 'part 1', '2. bölüm': 'part 2',
+    '1. bölümün bitişi': 'end of part 1', '1. cümle': 'phrase 1', '1. cümle (oktav ↑)': 'phrase 1 (octave ↑)', '2. cümle': 'phrase 2', '3. cümle': 'phrase 3',
+    'son cümle': 'final phrase', '1. tur': 'round 1', '2. tur': 'round 2', 'B (köprü)': 'B (bridge)', 'akor ve çözülüş': 'chord and resolution',
+    'ana tema': 'main theme', 'ana tema (kapanış)': 'main theme (closing)', 'giriş': 'introduction', 'kapanış': 'closing', 'kıta': 'verse',
+    'melodi': 'melody', 'nakarat': 'refrain', 'orta bölüm': 'middle section', 'tema': 'theme', 'trompet çağrısı': 'trumpet call',
+    'yalnız bas': 'bass alone', 'ön vuruş': 'pickup', 'Parça': 'piece',
+  };
+
+  function t(metin, degerler) {
+    let s = DIL === 'en' && kendi(EN, metin) ? EN[metin] : metin;
+    if (degerler) s = s.replace(/\{(\w+)\}/g, (_, k) => (k in degerler ? degerler[k] : '{' + k + '}'));
+    return s;
+  }
+  const registerAdi = s => (DIL === 'en' && EN_REGISTER[s.id] ? EN_REGISTER[s.id][0] : s.name);
+  const registerAciklamasi = s => (DIL === 'en' && EN_REGISTER[s.id] ? EN_REGISTER[s.id][1] : s.desc);
+  const parcaAdi = p => (DIL === 'en' && EN_PARCA[p.id]) || p.ad;
+  const besteciAdi = p => ((DIL === 'en' && EN_BESTECI[p.besteci]) || p.besteci).replace(/\*/g, '');
+  const bolumAdi = ad => (DIL === 'en' && EN_BOLUM[ad]) || ad;
+  // "Si♭ majör" → "B♭ major"
+  function tonAdi(ton) {
+    if (DIL !== 'en' || !ton) return ton;
+    const harf = { Do: 'C', Re: 'D', Mi: 'E', Fa: 'F', Sol: 'G', La: 'A', Si: 'B' };
+    return ton.replace(/^(Do|Re|Mi|Fa|Sol|La|Si)/, m => harf[m]).replace('majör', 'major').replace('minör', 'minor');
+  }
+
+  // Sayfadaki sabit metinleri çevirir (yalnızca İngilizcede): data-en taşıyan öğeler ve sözlükte olan metinler
+  function sayfayiCevir(kok) {
+    if (DIL !== 'en') return;
+    document.documentElement.lang = 'en';
+    kok.querySelectorAll('[data-en]').forEach(el => { el.innerHTML = el.dataset.en; });
+    const gez = document.createTreeWalker(kok, NodeFilter.SHOW_TEXT);
+    for (let d = gez.nextNode(); d; d = gez.nextNode()) {
+      const ham = d.nodeValue, kirp = ham.trim();
+      if (kirp && kendi(EN, kirp)) d.nodeValue = ham.replace(kirp, EN[kirp]);
+    }
+    kok.querySelectorAll('[title], [aria-label], [placeholder]').forEach(el => {
+      for (const a of ['title', 'aria-label', 'placeholder']) {
+        const v = el.getAttribute(a);
+        if (v && kendi(EN, v)) el.setAttribute(a, EN[v]);
+      }
+    });
+  }
+
+  function dilKur() {
+    sayfayiCevir(document.body);
+    if (DIL === 'en') document.title = t(document.title);
+    const b = $('#dilBtn');
+    b.textContent = DIL === 'en' ? 'Türkçe' : 'English';
+    b.lang = DIL === 'en' ? 'tr' : 'en';
+    b.addEventListener('click', () => {
+      try { localStorage.setItem(DIL_ANAHTAR, DIL === 'en' ? 'tr' : 'en'); } catch (_) {}
+      const u = new URL(location.href);
+      u.searchParams.delete('dil');
+      if (u.href === location.href) location.reload(); else location.replace(u.href);
+    });
+  }
   /* ================= Ses motoru ================= */
   let ctx = null;
   let A = null;
@@ -1718,7 +1951,7 @@
     yuva.className = 'cekme-yuva';
     yuva.tabIndex = 0;
     yuva.setAttribute('role', 'slider');
-    yuva.setAttribute('aria-label', `Çekme çubuğu ${c.ayak}`);
+    yuva.setAttribute('aria-label', t('Çekme çubuğu {ayak}', { ayak: c.ayak }));
     yuva.setAttribute('aria-orientation', 'vertical');
     yuva.setAttribute('aria-valuemin', '0');
     yuva.setAttribute('aria-valuemax', '8');
@@ -1798,7 +2031,7 @@
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'caz-hazir';
-      b.textContent = h.ad;
+      b.textContent = t(h.ad);
       b.title = h.cekme;
       b.addEventListener('click', () => {
         cazAyar.cekme = [...h.cekme].map(Number);
@@ -1849,7 +2082,7 @@
   function ensureWind() {
     if (!ctx && !buildAudio()) {
       sesDesteklenmiyor = true;
-      focusHint.textContent = 'Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.';
+      focusHint.textContent = t('Bu tarayıcı Web Audio desteklemiyor; Chrome, Edge ya da Firefox ile açmayı dene.');
       focusHint.hidden = false;
       return false;
     }
@@ -2000,7 +2233,7 @@
       const host = document.getElementById('jamb-' + jamb);
       const list = STOPS.filter(s => s.jamb === jamb);
       const h = document.createElement('h3');
-      h.textContent = baslik;
+      h.textContent = t(baslik);
       const grid = document.createElement('div');
       grid.className = 'knobs';
       grid.style.setProperty('--cols', sutun);
@@ -2011,12 +2244,12 @@
         b.dataset.family = s.family;
         b.dataset.id = s.id;
         // Sandık ve pedal registerlerinin adına bölüm eklenir (iki manuelde de Tremolo var)
-        const label = `${s.name.replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${BOLUM_ADI[s.bolum]}`);
-        b.title = `${label} — ${s.desc}`;
+        const label = `${registerAdi(s).replace('\n', ' ')} ${s.foot}`.trim() + (s.bolum === 'I' ? '' : ` · ${t(BOLUM_ADI[s.bolum])}`);
+        b.title = `${label} — ${registerAciklamasi(s)}`;
         b.setAttribute('aria-label', label);
         b.setAttribute('aria-pressed', String(stopsOn.has(s.id)));
         b.innerHTML = '<span class="nm"></span><span class="ft"></span>';
-        b.firstChild.textContent = s.name;
+        b.firstChild.textContent = registerAdi(s);
         b.lastChild.textContent = s.foot;
         b.addEventListener('click', () => { setStop(s.id, !stopsOn.has(s.id)); afterRegistration(); });
         knobEls[s.id] = b;
@@ -2030,7 +2263,7 @@
       b.type = 'button';
       b.className = 'kuplor';
       b.textContent = k.ad;
-      b.title = k.desc;
+      b.title = t(k.desc);
       b.setAttribute('aria-pressed', String(kuplorler.has(k.id)));
       b.addEventListener('click', () => kuplorDegistir(k.id, !kuplorler.has(k.id)));
       kuplorEls[k.id] = b;
@@ -2052,10 +2285,10 @@
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'piston';
-      b.setAttribute('aria-label', `Kombinasyon ${p.n}: ${p.name}`);
+      b.setAttribute('aria-label', t('Kombinasyon {n}: {ad}', { n: p.n, ad: t(p.name) }));
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
-      b.lastChild.textContent = p.name;
+      b.lastChild.textContent = t(p.name);
       b.addEventListener('click', () => { ayarlaKapat(); applyPiston(p.n); });
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
@@ -2076,7 +2309,7 @@
     $('#ayarla').addEventListener('click', () => {
       ayarlaniyor = !ayarlaniyor;
       $('#ayarla').setAttribute('aria-pressed', String(ayarlaniyor));
-      kombinasyonDurumu(ayarlaniyor ? 'Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.' : '');
+      kombinasyonDurumu(ayarlaniyor ? t('Şimdi kaydedileceği yeri seç: K1, K2, K3 ya da K4.') : '');
     });
   }
 
@@ -2095,13 +2328,13 @@
     if (ayarlaniyor) {
       kendiKombinasyonlar[i] = { stops: [...stopsOn], kuplorler: [...kuplorler] };
       ayarlaKapat();
-      kombinasyonDurumu(`O anki registrasyon ${adA} kaydedildi.`);
+      kombinasyonDurumu(t('O anki registrasyon {ad} kaydedildi.', { ad: DIL === 'en' ? ad : adA }));
       updatePistons();
       save();
       return;
     }
     const k = kendiKombinasyonlar[i];
-    if (!k) { kombinasyonDurumu(`${ad} boş. Kaydetmek için önce Ayarla'ya, sonra ${adA} bas.`); return; }
+    if (!k) { kombinasyonDurumu(t("{ad} boş. Kaydetmek için önce Ayarla'ya, sonra {adA} bas.", { ad, adA })); return; }
     kombinasyonDurumu('');
     const want = new Set(k.stops), kw = new Set(k.kuplorler);
     STOPS.forEach(s => setStop(s.id, want.has(s.id)));
@@ -2116,7 +2349,7 @@
     kendiEls.forEach((el, i) => {
       const k = kendiKombinasyonlar[i];
       el.dataset.dolu = String(!!k);
-      el.setAttribute('aria-label', `Kendi kombinasyonum ${i + 1}` + (k ? '' : ' (boş)'));
+      el.setAttribute('aria-label', t(k ? 'Kendi kombinasyonum {n}' : 'Kendi kombinasyonum {n} (boş)', { n: i + 1 }));
       el.setAttribute('aria-current', String(!!k && ayniKume(new Set(k.stops), stopsOn) && ayniKume(new Set(k.kuplorler), kuplorler)));
     });
   }
@@ -2151,7 +2384,7 @@
         // Do tuşlarında nota adı hep yazar; öbür beyaz tuşlarda yalnızca telefon görünümünde
         const n = document.createElement('span');
         n.className = off % 12 === 0 ? 'note' : 'note ad';
-        if (off % 12) n.textContent = SOLFEJ[off % 12];
+        if (off % 12) n.textContent = notaAdlari()[off % 12];
         k.appendChild(n);
       }
       const lab = document.createElement('span');
@@ -2350,7 +2583,8 @@
       pedalEls.forEach((k, off) => k.classList.toggle('down', bolumdeBasili(PEDAL_ILK + off, 'P')));
     }
     const playing = [...new Set([...voices.keys(), ...playerDown.keys()])].sort((a, b) => a - b);
-    readout.innerHTML = 'Çalan:<b></b>';
+    readout.textContent = t('Çalan:');
+    readout.appendChild(document.createElement('b'));
     readout.lastChild.textContent = playing.length ? playing.map(noteName).join(' · ') : '—';
     updateFacadeTargets();
   }
@@ -3048,18 +3282,18 @@
   function calarArayuzKur() {
     const p = calar.parca, c = calar.cizelge;
     $('#calarNo').textContent = typeof p.no === 'number' ? p.no + '.' : p.no;
-    $('#calarAd').textContent = p.ad;
-    $('#calarBesteci').textContent = p.besteci;
-    $('#calarBilgi').textContent = [p.ton, p.olcu, ZORLUK_ADI[p.zorluk], DOGRULAMA_ADI[p.dogrulama]].filter(Boolean).join(' · ');
+    $('#calarAd').textContent = parcaAdi(p);
+    $('#calarBesteci').textContent = besteciAdi(p);
+    $('#calarBilgi').textContent = [tonAdi(p.ton), p.olcu, t(ZORLUK_ADI[p.zorluk]), t(DOGRULAMA_ADI[p.dogrulama])].filter(Boolean).join(' · ');
     const host = $('#calarBolumler');
     host.textContent = '';
     c.bolumler.forEach((b, i) => {
       const d = document.createElement('button');
       d.type = 'button';
       d.className = 'bolum';
-      d.textContent = b.ad;
+      d.textContent = bolumAdi(b.ad);
       d.dataset.no = i;
-      d.title = 'Bu bölüme git';
+      d.title = t('Bu bölüme git');
       d.addEventListener('click', () => calarKonumaGit(b.bas));
       host.appendChild(d);
     });
@@ -3084,7 +3318,7 @@
     el.hidden = false;
     const bas = document.createElement('span');
     bas.className = 'siradaki-bas';
-    bas.textContent = 'Sıradaki:';
+    bas.textContent = t('Sıradaki:');
     el.appendChild(bas);
     calar.adimlar.slice(calar.adim, calar.adim + 10).forEach((a, i) => {
       const k = document.createElement('kbd');
@@ -3122,7 +3356,7 @@
     // Telefonda klavyenin üstündeki düğme, çalar panelindekinin eşi
     for (const oynat of [$('#calarOynat'), $('#dokOynat')]) {
       oynat.textContent = caliyor ? '❚❚' : '▶';
-      oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
+      oynat.setAttribute('aria-label', t(caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal')));
       oynat.setAttribute('aria-pressed', String(caliyor));
     }
     $('#modDinle').setAttribute('aria-pressed', String(calar.mod === 'dinle'));
@@ -3132,14 +3366,14 @@
     $('#elSag').value = calar.eller.sag;
     $('#elSol').value = calar.eller.sol;
     $('#calarDongu').setAttribute('aria-pressed', String(calar.dongu));
-    let durum = DURUM_ADI[calar.durum] || '';
+    let durum = t(DURUM_ADI[calar.durum] || '');
     if (calar.mod === 'ogren') {
       const toplam = calar.adimlar.length;
-      if (calar.durum === 'bitti') durum = `Bitti: ${toplam} adım, ${calar.yanlis} yanlış tuş`;
-      else if (calar.durum === 'caliyor') durum = `Adım ${Math.min(calar.adim + 1, toplam)}/${toplam} · Yanlış: ${calar.yanlis}`;
-      else durum += ' · Yanan tuşa bas, program seni bekler';
+      if (calar.durum === 'bitti') durum = t('Bitti: {toplam} adım, {yanlis} yanlış tuş', { toplam, yanlis: calar.yanlis });
+      else if (calar.durum === 'caliyor') durum = t('Adım {adim}/{toplam} · Yanlış: {yanlis}', { adim: Math.min(calar.adim + 1, toplam), toplam, yanlis: calar.yanlis });
+      else durum += t(' · Yanan tuşa bas, program seni bekler');
     } else if (calar.cizelge.eller.some(el => calar.eller[el] === 'ben') && calar.durum !== 'bitti') {
-      durum += ' · Yanan tuşlar senin elin';
+      durum += t(' · Yanan tuşlar senin elin');
     }
     $('#calarDurum').textContent = durum;
     calarEl.dataset.durum = calar.durum;
@@ -3163,7 +3397,7 @@
     let adet = 0;
     for (const p of PARCALAR) {
       if (liste.secili && !p.etiketler.includes(liste.secili)) continue;
-      if (ara && !(p.ad + ' ' + p.besteci).toLocaleLowerCase('tr').includes(ara)) continue;
+      if (ara && ![p.ad, p.besteci, parcaAdi(p), besteciAdi(p)].join(' ').toLocaleLowerCase('tr').includes(ara)) continue;
       adet++;
       const li = document.createElement('li');
       const d = document.createElement('button');
@@ -3172,9 +3406,9 @@
       d.dataset.id = p.id;
       d.innerHTML = '<span class="p-no"></span><span class="p-ad"></span><span class="p-besteci"></span><span class="p-ek"></span>';
       d.children[0].textContent = p.no;
-      d.children[1].textContent = p.ad;
-      d.children[2].textContent = p.besteci;
-      d.children[3].textContent = `${ZORLUK_ADI[p.zorluk]}${p.dogrulama === 'ezber' ? ' · doğrulanmadı' : ''}`;
+      d.children[1].textContent = parcaAdi(p);
+      d.children[2].textContent = besteciAdi(p);
+      d.children[3].textContent = t(ZORLUK_ADI[p.zorluk]) + (p.dogrulama === 'ezber' ? t(' · doğrulanmadı') : '');
       d.addEventListener('click', () => {
         liste.kutu.close();
         calarYukle(p.id, 'dinle');
@@ -3186,8 +3420,8 @@
         const sil = document.createElement('button');
         sil.type = 'button';
         sil.className = 'parca-sil';
-        sil.textContent = 'Sil';
-        sil.setAttribute('aria-label', `${p.ad} parçasını sil`);
+        sil.textContent = t('Sil');
+        sil.setAttribute('aria-label', t('{ad} parçasını sil', { ad: p.ad }));
         sil.addEventListener('click', () => kendiParcaSil(p.id));
         li.appendChild(sil);
         li.className = 'kendi-satir';
@@ -3215,8 +3449,8 @@
       });
       liste.etiketler.appendChild(d);
     };
-    ekle(null, 'Hepsi');
-    for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, ETIKET_ADI[e]);
+    ekle(null, t('Hepsi'));
+    for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, t(ETIKET_ADI[e]));
   }
 
   function listeKur() {
@@ -3287,18 +3521,18 @@
   function kendiTokenCevir(ham) {
     const iki = ham.indexOf(':');
     const ad = iki < 0 ? ham : ham.slice(0, iki), sure = iki < 0 ? '' : ham.slice(iki + 1);
-    if (iki >= 0 && !/^(\d+(\/[1-9]\d*)?|\d*\.\d+)$/.test(sure)) throw new Error(`"${ham}": süre anlaşılmadı`);
-    if (iki >= 0 && !(sureCarpani(sure) > 0)) throw new Error(`"${ham}": süre sıfır olamaz`);
+    if (iki >= 0 && !/^(\d+(\/[1-9]\d*)?|\d*\.\d+)$/.test(sure)) throw new Error(t('"{ham}": süre anlaşılmadı', { ham }));
+    if (iki >= 0 && !(sureCarpani(sure) > 0)) throw new Error(t('"{ham}": süre sıfır olamaz', { ham }));
     const ek = iki < 0 ? '' : ':' + sure;
     if (/^(r|-|sus)$/i.test(ad)) return 'r' + ek;
     if (ad === '~') return '~' + ek;
     return ad.split('+').map(n => {
       const m = /^(do|re|mi|fa|sol|la|si|[a-g])([#♯b♭]?)(\d)$/i.exec(n);
-      if (!m) throw new Error(`"${n}": nota adı anlaşılmadı`);
+      if (!m) throw new Error(t('"{n}": nota adı anlaşılmadı', { n }));
       const harf = TR_NOTA[m[1].toLowerCase()] || m[1].toUpperCase();
       const isaret = m[2] === '♯' ? '#' : m[2] === '♭' ? 'b' : m[2];
       const midi = notaMidi(harf + isaret + m[3]);
-      if (midi < 24 || midi > 108) throw new Error(`"${n}": org bu kadar ${midi < 24 ? 'pes' : 'tiz'} çalmaz`);
+      if (midi < 24 || midi > 108) throw new Error(t(midi < 24 ? '"{n}": org bu kadar pes çalmaz' : '"{n}": org bu kadar tiz çalmaz', { n }));
       return harf + isaret + m[3];
     }).join('+') + ek;
   }
@@ -3306,7 +3540,7 @@
   // Bir elin yazısını iç biçime çevirir; süresini (dörtlük) ve notalarını döndürür
   function kendiEliCoz(metin, elAdi) {
     const tokenlar = metin.split(/\s+/).filter(t => t && t !== '|');
-    if (tokenlar.length > 3000) throw new Error(`${elAdi}: en çok 3000 nota yazılabilir`);
+    if (tokenlar.length > 3000) throw new Error(t('{el}: en çok 3000 nota yazılabilir', { el: elAdi }));
     const cevrilmis = tokenlar.map(t => { try { return kendiTokenCevir(t); } catch (e) { throw new Error(`${elAdi}, ${e.message}`); } });
     const { olaylar, sure } = dizgileriCoz([cevrilmis.join(' ')], TPQ);
     return { satir: cevrilmis.join(' '), sure: sure / TPQ, notalar: olaylar.flatMap(o => o.notalar) };
@@ -3315,11 +3549,11 @@
   // Formdaki bilgilerden parça nesnesi kurar (otuz parçayla aynı biçim)
   function kendiParcaKur(bilgi) {
     const ad = bilgi.ad.trim();
-    if (!ad) throw new Error('Parçaya bir ad ver.');
-    if (!bilgi.sag.trim()) throw new Error('Sağ elin notalarını yaz.');
-    const sag = kendiEliCoz(bilgi.sag, 'Sağ el');
-    const sol = bilgi.sol.trim() ? kendiEliCoz(bilgi.sol, 'Sol el') : null;
-    if (!sag.notalar.length) throw new Error('Sağ elde hiç nota yok.');
+    if (!ad) throw new Error(t('Parçaya bir ad ver.'));
+    if (!bilgi.sag.trim()) throw new Error(t('Sağ elin notalarını yaz.'));
+    const sag = kendiEliCoz(bilgi.sag, t('Sağ el'));
+    const sol = bilgi.sol.trim() ? kendiEliCoz(bilgi.sol, t('Sol el')) : null;
+    if (!sag.notalar.length) throw new Error(t('Sağ elde hiç nota yok.'));
     // İki elin uzunluğu eşitlenir: kısa kalanın sonuna sus eklenir
     const uzun = Math.max(sag.sure, sol ? sol.sure : 0);
     const doldur = (el) => (el.sure < uzun - 1e-9 ? el.satir + ' r:' + Number((uzun - el.sure).toFixed(6)) : el.satir);
@@ -3395,7 +3629,7 @@
       } catch (err) { hata.textContent = err.message; return; }
       const kayitli = kendiParcalari();
       kayitli.push({ id: p.id, ad: p.ad, besteci: $('#kpBesteci').value.trim(), olcu: p.olcu, tempo: p.tempo, yazi: p.yazi });
-      if (!kendiParcalariYaz(kayitli)) { hata.textContent = 'Tarayıcı parçayı saklayamadı (gizli pencere ya da dolu depolama).'; return; }
+      if (!kendiParcalariYaz(kayitli)) { hata.textContent = t('Tarayıcı parçayı saklayamadı (gizli pencere ya da dolu depolama).'); return; }
       kendiParcayiEkle(p);
       etiketleriYaz();
       kutu.close();
@@ -3406,7 +3640,7 @@
 
   function kendiParcaSil(id) {
     const p = PARCA_BY_ID[id];
-    if (!p || !confirm(`"${p.ad}" silinsin mi?`)) return;
+    if (!p || !confirm(t('"{ad}" silinsin mi?', { ad: p.ad }))) return;
     kendiParcalariYaz(kendiParcalari().filter(k => k.id !== id));
     if (calar.parca && calar.parca.id === id) calarKapat();
     kendiParcayiCikar(id);
@@ -3420,7 +3654,7 @@
 
   function updateWindUI() {
     windBtn.setAttribute('aria-pressed', String(windOn));
-    $('#windLabel').textContent = windOn ? 'Rüzgâr açık' : 'Rüzgârı aç';
+    $('#windLabel').textContent = t(windOn ? 'Rüzgâr açık' : 'Rüzgârı aç');
   }
   windBtn.addEventListener('click', () => {
     if (windOn) {
@@ -3592,9 +3826,9 @@
   // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
   // Akort sistemi, diyapazon, stereo genişlik
   const akortSel = $('#akort'), diyapazonSel = $('#diyapazon'), stereoIn = $('#stereo');
-  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(a.ad, id));
-  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(ad, String(hz)));
-  const akortBilgisi = () => { $('#akortBilgi').textContent = AKORTLAR[settings.akort].bilgi; };
+  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(t(a.ad), id));
+  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(t(ad), String(hz)));
+  const akortBilgisi = () => { $('#akortBilgi').textContent = t(AKORTLAR[settings.akort].bilgi); };
   akortSel.value = settings.akort;
   diyapazonSel.value = String(settings.diyapazon);
   stereoIn.value = settings.stereo; $('#stereoOut').textContent = settings.stereo;
@@ -3626,7 +3860,7 @@
 
   async function midiBagla(sessiz) {
     if (!navigator.requestMIDIAccess) {
-      if (!sessiz) midiDurumu('Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.');
+      if (!sessiz) midiDurumu(t('Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.'));
       return;
     }
     try {
@@ -3634,7 +3868,7 @@
     } catch (_) {
       settings.midi = false;
       save();
-      if (!sessiz) midiDurumu('MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.');
+      if (!sessiz) midiDurumu(t('MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.'));
       return;
     }
     settings.midi = true;
@@ -3651,7 +3885,7 @@
       adlar.push(g.name || 'MIDI klavye');
     }
     $('#midiBagla').setAttribute('aria-pressed', String(adlar.length > 0));
-    midiDurumu(adlar.length ? `MIDI: ${adlar.join(', ')}` : 'MIDI klavye bulunamadı; takıp yeniden dene.');
+    midiDurumu(adlar.length ? `MIDI: ${adlar.join(', ')}` : t('MIDI klavye bulunamadı; takıp yeniden dene.'));
   }
 
   function midiMesaji(id, d) {
@@ -3708,11 +3942,11 @@
   function kayitArayuzu() {
     const b = $('#kayitBtn');
     b.setAttribute('aria-pressed', String(kayit.acik));
-    b.textContent = kayit.acik ? '■ Durdur' : '● Kaydet';
+    b.textContent = t(kayit.acik ? '■ Durdur' : '● Kaydet');
     $('#kayitPaneli').hidden = kayit.acik || (!kayit.olaylar.length && !kayit.ses);
     $('#kayitSure').textContent = sureYaz(kayit.sure);
     $('#kayitSesIndir').hidden = !kayit.ses;
-    $('#kayitCal').textContent = kayit.calan.length ? '■ Durdur' : '▶ Kaydı çal';
+    $('#kayitCal').textContent = t(kayit.calan.length ? '■ Durdur' : '▶ Kaydı çal');
   }
 
   function kayitBasla() {
@@ -3776,7 +4010,8 @@
       const [bolum, m] = k.split(':');
       sonuc.push({ t: kayit.sure, tur: 'off', midi: Number(m), bolum });
     }
-    return sonuc.sort((a, b) => a.t - b.t || (a.tur === 'off' ? -1 : 1));
+    // Aynı anda kapama açmadan önce gelir; gerisi kayıttaki sırasını korur (sıralama kararlıdır)
+    return sonuc.sort((a, b) => a.t - b.t || (a.tur === b.tur ? 0 : a.tur === 'off' ? -1 : 1));
   }
 
   // Standart MIDI dosyası, biçim 0. Dörtlük 480 tik, tempo 120: saniyede 960 tik.
@@ -3846,6 +4081,7 @@
     kayitArayuzu();
   }
   /* ================= Başlat ================= */
+  dilKur(); // önce: yardım metinleri yerine konur, sonra içleri doldurulur
   buildStops();
   buildPistons();
   cazKur();
@@ -3891,7 +4127,7 @@
     document.addEventListener('fullscreenchange', () => {
       const acik = !!document.fullscreenElement;
       tamEkranBtn.setAttribute('aria-pressed', String(acik));
-      tamEkranBtn.textContent = acik ? 'Küçült' : 'Tam ekran';
+      tamEkranBtn.textContent = t(acik ? 'Küçült' : 'Tam ekran');
     });
   }
 

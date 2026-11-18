@@ -8,18 +8,18 @@
   function kendiTokenCevir(ham) {
     const iki = ham.indexOf(':');
     const ad = iki < 0 ? ham : ham.slice(0, iki), sure = iki < 0 ? '' : ham.slice(iki + 1);
-    if (iki >= 0 && !/^(\d+(\/[1-9]\d*)?|\d*\.\d+)$/.test(sure)) throw new Error(`"${ham}": süre anlaşılmadı`);
-    if (iki >= 0 && !(sureCarpani(sure) > 0)) throw new Error(`"${ham}": süre sıfır olamaz`);
+    if (iki >= 0 && !/^(\d+(\/[1-9]\d*)?|\d*\.\d+)$/.test(sure)) throw new Error(t('"{ham}": süre anlaşılmadı', { ham }));
+    if (iki >= 0 && !(sureCarpani(sure) > 0)) throw new Error(t('"{ham}": süre sıfır olamaz', { ham }));
     const ek = iki < 0 ? '' : ':' + sure;
     if (/^(r|-|sus)$/i.test(ad)) return 'r' + ek;
     if (ad === '~') return '~' + ek;
     return ad.split('+').map(n => {
       const m = /^(do|re|mi|fa|sol|la|si|[a-g])([#♯b♭]?)(\d)$/i.exec(n);
-      if (!m) throw new Error(`"${n}": nota adı anlaşılmadı`);
+      if (!m) throw new Error(t('"{n}": nota adı anlaşılmadı', { n }));
       const harf = TR_NOTA[m[1].toLowerCase()] || m[1].toUpperCase();
       const isaret = m[2] === '♯' ? '#' : m[2] === '♭' ? 'b' : m[2];
       const midi = notaMidi(harf + isaret + m[3]);
-      if (midi < 24 || midi > 108) throw new Error(`"${n}": org bu kadar ${midi < 24 ? 'pes' : 'tiz'} çalmaz`);
+      if (midi < 24 || midi > 108) throw new Error(t(midi < 24 ? '"{n}": org bu kadar pes çalmaz' : '"{n}": org bu kadar tiz çalmaz', { n }));
       return harf + isaret + m[3];
     }).join('+') + ek;
   }
@@ -27,7 +27,7 @@
   // Bir elin yazısını iç biçime çevirir; süresini (dörtlük) ve notalarını döndürür
   function kendiEliCoz(metin, elAdi) {
     const tokenlar = metin.split(/\s+/).filter(t => t && t !== '|');
-    if (tokenlar.length > 3000) throw new Error(`${elAdi}: en çok 3000 nota yazılabilir`);
+    if (tokenlar.length > 3000) throw new Error(t('{el}: en çok 3000 nota yazılabilir', { el: elAdi }));
     const cevrilmis = tokenlar.map(t => { try { return kendiTokenCevir(t); } catch (e) { throw new Error(`${elAdi}, ${e.message}`); } });
     const { olaylar, sure } = dizgileriCoz([cevrilmis.join(' ')], TPQ);
     return { satir: cevrilmis.join(' '), sure: sure / TPQ, notalar: olaylar.flatMap(o => o.notalar) };
@@ -36,11 +36,11 @@
   // Formdaki bilgilerden parça nesnesi kurar (otuz parçayla aynı biçim)
   function kendiParcaKur(bilgi) {
     const ad = bilgi.ad.trim();
-    if (!ad) throw new Error('Parçaya bir ad ver.');
-    if (!bilgi.sag.trim()) throw new Error('Sağ elin notalarını yaz.');
-    const sag = kendiEliCoz(bilgi.sag, 'Sağ el');
-    const sol = bilgi.sol.trim() ? kendiEliCoz(bilgi.sol, 'Sol el') : null;
-    if (!sag.notalar.length) throw new Error('Sağ elde hiç nota yok.');
+    if (!ad) throw new Error(t('Parçaya bir ad ver.'));
+    if (!bilgi.sag.trim()) throw new Error(t('Sağ elin notalarını yaz.'));
+    const sag = kendiEliCoz(bilgi.sag, t('Sağ el'));
+    const sol = bilgi.sol.trim() ? kendiEliCoz(bilgi.sol, t('Sol el')) : null;
+    if (!sag.notalar.length) throw new Error(t('Sağ elde hiç nota yok.'));
     // İki elin uzunluğu eşitlenir: kısa kalanın sonuna sus eklenir
     const uzun = Math.max(sag.sure, sol ? sol.sure : 0);
     const doldur = (el) => (el.sure < uzun - 1e-9 ? el.satir + ' r:' + Number((uzun - el.sure).toFixed(6)) : el.satir);
@@ -116,7 +116,7 @@
       } catch (err) { hata.textContent = err.message; return; }
       const kayitli = kendiParcalari();
       kayitli.push({ id: p.id, ad: p.ad, besteci: $('#kpBesteci').value.trim(), olcu: p.olcu, tempo: p.tempo, yazi: p.yazi });
-      if (!kendiParcalariYaz(kayitli)) { hata.textContent = 'Tarayıcı parçayı saklayamadı (gizli pencere ya da dolu depolama).'; return; }
+      if (!kendiParcalariYaz(kayitli)) { hata.textContent = t('Tarayıcı parçayı saklayamadı (gizli pencere ya da dolu depolama).'); return; }
       kendiParcayiEkle(p);
       etiketleriYaz();
       kutu.close();
@@ -127,7 +127,7 @@
 
   function kendiParcaSil(id) {
     const p = PARCA_BY_ID[id];
-    if (!p || !confirm(`"${p.ad}" silinsin mi?`)) return;
+    if (!p || !confirm(t('"{ad}" silinsin mi?', { ad: p.ad }))) return;
     kendiParcalariYaz(kendiParcalari().filter(k => k.id !== id));
     if (calar.parca && calar.parca.id === id) calarKapat();
     kendiParcayiCikar(id);

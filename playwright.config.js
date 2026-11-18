@@ -10,6 +10,8 @@ module.exports = defineConfig({
   reporter: process.env.CI ? [['github'], ['list']] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:4173/',
+    // Sayfa dili tarayıcının dilinden seçilir; testler Türkçe arayüzle koşar (İngilizce: test/dil.spec.js)
+    locale: 'tr-TR',
     // Hizmet çalışanı (sw.js) testlerde kapalı: yazı tipi isteklerini Playwright'ın yerine o karşılamasın.
     // İnternetsiz çalışma testi (test/uygulama.spec.js) onu kendi bağlamında açar.
     serviceWorkers: 'block',

@@ -29,7 +29,7 @@
         // Do tuşlarında nota adı hep yazar; öbür beyaz tuşlarda yalnızca telefon görünümünde
         const n = document.createElement('span');
         n.className = off % 12 === 0 ? 'note' : 'note ad';
-        if (off % 12) n.textContent = SOLFEJ[off % 12];
+        if (off % 12) n.textContent = notaAdlari()[off % 12];
         k.appendChild(n);
       }
       const lab = document.createElement('span');

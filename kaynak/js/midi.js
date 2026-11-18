@@ -11,7 +11,7 @@
 
   async function midiBagla(sessiz) {
     if (!navigator.requestMIDIAccess) {
-      if (!sessiz) midiDurumu('Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.');
+      if (!sessiz) midiDurumu(t('Bu tarayıcı MIDI klavyeyi desteklemiyor; Chrome ya da Edge ile aç.'));
       return;
     }
     try {
@@ -19,7 +19,7 @@
     } catch (_) {
       settings.midi = false;
       save();
-      if (!sessiz) midiDurumu('MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.');
+      if (!sessiz) midiDurumu(t('MIDI izni verilmedi. Adres çubuğundaki site ayarlarından izin verebilirsin.'));
       return;
     }
     settings.midi = true;
@@ -36,7 +36,7 @@
       adlar.push(g.name || 'MIDI klavye');
     }
     $('#midiBagla').setAttribute('aria-pressed', String(adlar.length > 0));
-    midiDurumu(adlar.length ? `MIDI: ${adlar.join(', ')}` : 'MIDI klavye bulunamadı; takıp yeniden dene.');
+    midiDurumu(adlar.length ? `MIDI: ${adlar.join(', ')}` : t('MIDI klavye bulunamadı; takıp yeniden dene.'));
   }
 
   function midiMesaji(id, d) {

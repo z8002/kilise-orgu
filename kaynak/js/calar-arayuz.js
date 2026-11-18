@@ -24,18 +24,18 @@
   function calarArayuzKur() {
     const p = calar.parca, c = calar.cizelge;
     $('#calarNo').textContent = typeof p.no === 'number' ? p.no + '.' : p.no;
-    $('#calarAd').textContent = p.ad;
-    $('#calarBesteci').textContent = p.besteci;
-    $('#calarBilgi').textContent = [p.ton, p.olcu, ZORLUK_ADI[p.zorluk], DOGRULAMA_ADI[p.dogrulama]].filter(Boolean).join(' · ');
+    $('#calarAd').textContent = parcaAdi(p);
+    $('#calarBesteci').textContent = besteciAdi(p);
+    $('#calarBilgi').textContent = [tonAdi(p.ton), p.olcu, t(ZORLUK_ADI[p.zorluk]), t(DOGRULAMA_ADI[p.dogrulama])].filter(Boolean).join(' · ');
     const host = $('#calarBolumler');
     host.textContent = '';
     c.bolumler.forEach((b, i) => {
       const d = document.createElement('button');
       d.type = 'button';
       d.className = 'bolum';
-      d.textContent = b.ad;
+      d.textContent = bolumAdi(b.ad);
       d.dataset.no = i;
-      d.title = 'Bu bölüme git';
+      d.title = t('Bu bölüme git');
       d.addEventListener('click', () => calarKonumaGit(b.bas));
       host.appendChild(d);
     });
@@ -60,7 +60,7 @@
     el.hidden = false;
     const bas = document.createElement('span');
     bas.className = 'siradaki-bas';
-    bas.textContent = 'Sıradaki:';
+    bas.textContent = t('Sıradaki:');
     el.appendChild(bas);
     calar.adimlar.slice(calar.adim, calar.adim + 10).forEach((a, i) => {
       const k = document.createElement('kbd');
@@ -98,7 +98,7 @@
     // Telefonda klavyenin üstündeki düğme, çalar panelindekinin eşi
     for (const oynat of [$('#calarOynat'), $('#dokOynat')]) {
       oynat.textContent = caliyor ? '❚❚' : '▶';
-      oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
+      oynat.setAttribute('aria-label', t(caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal')));
       oynat.setAttribute('aria-pressed', String(caliyor));
     }
     $('#modDinle').setAttribute('aria-pressed', String(calar.mod === 'dinle'));
@@ -108,14 +108,14 @@
     $('#elSag').value = calar.eller.sag;
     $('#elSol').value = calar.eller.sol;
     $('#calarDongu').setAttribute('aria-pressed', String(calar.dongu));
-    let durum = DURUM_ADI[calar.durum] || '';
+    let durum = t(DURUM_ADI[calar.durum] || '');
     if (calar.mod === 'ogren') {
       const toplam = calar.adimlar.length;
-      if (calar.durum === 'bitti') durum = `Bitti: ${toplam} adım, ${calar.yanlis} yanlış tuş`;
-      else if (calar.durum === 'caliyor') durum = `Adım ${Math.min(calar.adim + 1, toplam)}/${toplam} · Yanlış: ${calar.yanlis}`;
-      else durum += ' · Yanan tuşa bas, program seni bekler';
+      if (calar.durum === 'bitti') durum = t('Bitti: {toplam} adım, {yanlis} yanlış tuş', { toplam, yanlis: calar.yanlis });
+      else if (calar.durum === 'caliyor') durum = t('Adım {adim}/{toplam} · Yanlış: {yanlis}', { adim: Math.min(calar.adim + 1, toplam), toplam, yanlis: calar.yanlis });
+      else durum += t(' · Yanan tuşa bas, program seni bekler');
     } else if (calar.cizelge.eller.some(el => calar.eller[el] === 'ben') && calar.durum !== 'bitti') {
-      durum += ' · Yanan tuşlar senin elin';
+      durum += t(' · Yanan tuşlar senin elin');
     }
     $('#calarDurum').textContent = durum;
     calarEl.dataset.durum = calar.durum;
@@ -139,7 +139,7 @@
     let adet = 0;
     for (const p of PARCALAR) {
       if (liste.secili && !p.etiketler.includes(liste.secili)) continue;
-      if (ara && !(p.ad + ' ' + p.besteci).toLocaleLowerCase('tr').includes(ara)) continue;
+      if (ara && ![p.ad, p.besteci, parcaAdi(p), besteciAdi(p)].join(' ').toLocaleLowerCase('tr').includes(ara)) continue;
       adet++;
       const li = document.createElement('li');
       const d = document.createElement('button');
@@ -148,9 +148,9 @@
       d.dataset.id = p.id;
       d.innerHTML = '<span class="p-no"></span><span class="p-ad"></span><span class="p-besteci"></span><span class="p-ek"></span>';
       d.children[0].textContent = p.no;
-      d.children[1].textContent = p.ad;
-      d.children[2].textContent = p.besteci;
-      d.children[3].textContent = `${ZORLUK_ADI[p.zorluk]}${p.dogrulama === 'ezber' ? ' · doğrulanmadı' : ''}`;
+      d.children[1].textContent = parcaAdi(p);
+      d.children[2].textContent = besteciAdi(p);
+      d.children[3].textContent = t(ZORLUK_ADI[p.zorluk]) + (p.dogrulama === 'ezber' ? t(' · doğrulanmadı') : '');
       d.addEventListener('click', () => {
         liste.kutu.close();
         calarYukle(p.id, 'dinle');
@@ -162,8 +162,8 @@
         const sil = document.createElement('button');
         sil.type = 'button';
         sil.className = 'parca-sil';
-        sil.textContent = 'Sil';
-        sil.setAttribute('aria-label', `${p.ad} parçasını sil`);
+        sil.textContent = t('Sil');
+        sil.setAttribute('aria-label', t('{ad} parçasını sil', { ad: p.ad }));
         sil.addEventListener('click', () => kendiParcaSil(p.id));
         li.appendChild(sil);
         li.className = 'kendi-satir';
@@ -191,8 +191,8 @@
       });
       liste.etiketler.appendChild(d);
     };
-    ekle(null, 'Hepsi');
-    for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, ETIKET_ADI[e]);
+    ekle(null, t('Hepsi'));
+    for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, t(ETIKET_ADI[e]));
   }
 
   function listeKur() {

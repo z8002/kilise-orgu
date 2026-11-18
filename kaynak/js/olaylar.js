@@ -5,7 +5,7 @@
 
   function updateWindUI() {
     windBtn.setAttribute('aria-pressed', String(windOn));
-    $('#windLabel').textContent = windOn ? 'Rüzgâr açık' : 'Rüzgârı aç';
+    $('#windLabel').textContent = t(windOn ? 'Rüzgâr açık' : 'Rüzgârı aç');
   }
   windBtn.addEventListener('click', () => {
     if (windOn) {
@@ -177,9 +177,9 @@
   // Dokunmatik ekranda "önce sayfaya tıkla" uyarısı anlamsız; ses desteği yoksa yine de görünür
   // Akort sistemi, diyapazon, stereo genişlik
   const akortSel = $('#akort'), diyapazonSel = $('#diyapazon'), stereoIn = $('#stereo');
-  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(a.ad, id));
-  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(ad, String(hz)));
-  const akortBilgisi = () => { $('#akortBilgi').textContent = AKORTLAR[settings.akort].bilgi; };
+  for (const [id, a] of Object.entries(AKORTLAR)) akortSel.add(new Option(t(a.ad), id));
+  for (const [hz, ad] of DIYAPAZONLAR) diyapazonSel.add(new Option(t(ad), String(hz)));
+  const akortBilgisi = () => { $('#akortBilgi').textContent = t(AKORTLAR[settings.akort].bilgi); };
   akortSel.value = settings.akort;
   diyapazonSel.value = String(settings.diyapazon);
   stereoIn.value = settings.stereo; $('#stereoOut').textContent = settings.stereo;

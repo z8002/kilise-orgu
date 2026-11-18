@@ -70,5 +70,6 @@
   }
 
   const baseMidi = () => 12 * (settings.octave + 1);
-  const noteName = m => SOLFEJ[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
+  const notaAdlari = () => (DIL === 'en' ? HARFLER : SOLFEJ); // Do Re Mi ya da C D E
+  const noteName = m => notaAdlari()[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1);
 
