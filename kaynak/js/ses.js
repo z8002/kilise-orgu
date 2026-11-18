@@ -109,16 +109,28 @@
   const keyScale = f => (f > 1800 ? Math.pow(1800 / f, 0.5) : 1);
 
   class Voice {
-    constructor(midi, t0) {
+    // t0 ileri bir an olabilir (şarkı çalar notaları önceden zamanlar); stopIds verilmezse açık registerler kullanılır.
+    constructor(midi, t0, stopIds) {
       this.midi = midi;
+      this.t0 = t0;
       this.freq = 440 * Math.pow(2, (midi - 69) / 12);
       this.stops = new Map();
       this.released = false;
       this.breath = null;
       this.out = ctx.createGain();
       this.out.connect(A.bus);
-      for (const id of stopsOn) this.addStop(STOP_BY_ID[id], t0);
+      for (const id of (stopIds || stopsOn)) this.addStop(STOP_BY_ID[id], t0);
       if (this.stops.size) this.articulate(t0);
+    }
+
+    // Henüz başlamamış (ya da hemen susması gereken) sesi iz bırakmadan keser.
+    cancel() {
+      if (this.released) return;
+      this.released = true;
+      try { this.out.disconnect(); } catch (_) {}
+      const t = ctx.currentTime;
+      for (const s of this.stops.values()) s.oscs.forEach(o => { try { o.stop(t); } catch (_) {} });
+      if (this.breath) { try { this.breath.src.stop(t); } catch (_) {} }
     }
 
     addStop(stop, t0) {

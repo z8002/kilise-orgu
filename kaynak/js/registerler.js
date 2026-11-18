@@ -9,7 +9,7 @@
     if (ctx) {
       const t = ctx.currentTime;
       if (stop.effect) applyTremolo();
-      else for (const v of voices.values()) (on ? v.addStop(stop, t) : v.removeStop(id, t));
+      else for (const v of [...voices.values(), ...playerVoices]) (on ? v.addStop(stop, Math.max(t, v.t0)) : v.removeStop(id, Math.max(t, v.t0)));
     }
     knobEls[id].setAttribute('aria-pressed', String(on));
   }
@@ -45,6 +45,14 @@
     }
   }
 
+  function applyPiston(n) {
+    const p = PISTONS.find(x => x.n === String(n));
+    if (!p) return;
+    const want = new Set(p.stops);
+    STOPS.forEach(s => setStop(s.id, want.has(s.id)));
+    afterRegistration();
+  }
+
   function buildPistons() {
     const host = $('#pistons');
     for (const p of PISTONS) {
@@ -55,11 +63,7 @@
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
       b.lastChild.textContent = p.name;
-      b.addEventListener('click', () => {
-        const want = new Set(p.stops);
-        STOPS.forEach(s => setStop(s.id, want.has(s.id)));
-        afterRegistration();
-      });
+      b.addEventListener('click', () => applyPiston(p.n));
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
     }

@@ -19,6 +19,8 @@ EL_ADI = {'sag': 'sağ', 'sol': 'sol'}
 
 GIRIS = '''## Örnek parçalar
 
+Programdaki **Parçalar** düğmesi bu otuz parçayı açar: **Dinle** ile program parçayı kendisi çalar, **Öğren** ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin. Her parçanın altındaki "▶ Programda aç" bağlantısı parçayı doğrudan açar.
+
 Her parçanın notaları [`parcalar/`](parcalar/) klasöründeki bir dosyada durur; aşağıdaki tuş dizileri o dosyalardan üretilir. Tuş harfleri Türkçe Q klavyeye göredir.
 
 Okuma kuralları:

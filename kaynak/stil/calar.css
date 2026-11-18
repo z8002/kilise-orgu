@@ -1,0 +1,102 @@
+
+  /* ---------- Şarkı çalar ---------- */
+  .eylemler { display: flex; flex-wrap: wrap; gap: 10px; }
+  .parca-sec {
+    justify-self: center; display: inline-flex; align-items: center; gap: .6rem;
+    font: 500 .95rem var(--font-ui); color: var(--ivory-dim);
+    background: rgba(17,12,8,.35); border: 1px dashed var(--oak-edge); border-radius: 999px; padding: .5rem 1.1rem; cursor: pointer;
+  }
+  .parca-sec:hover { color: var(--ivory); border-color: var(--gilt-deep); }
+  .calar {
+    display: grid; gap: 12px; padding: 14px 16px;
+    background: rgba(17,12,8,.45); border: 1px solid var(--oak-edge); border-radius: 10px;
+  }
+  .calar[hidden], .parca-sec[hidden], .calar [hidden] { display: none; }
+  .calar-ust { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .calar-baslik { margin: 0; font-size: 1.05rem; line-height: 1.3; color: var(--ivory-dim); }
+  .calar-baslik strong { font-family: var(--font-stop); font-size: 1.35rem; font-weight: 700; color: var(--ivory); letter-spacing: .01em; }
+  .calar-besteci::before { content: "· "; }
+  .calar-bilgi { margin: -8px 0 0; font-size: .85rem; color: var(--ivory-mute); }
+  .calar-kapat {
+    flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--oak-edge);
+    background: var(--oak); color: var(--ivory-dim); font-size: 1.2rem; line-height: 1; cursor: pointer;
+  }
+  .calar-kapat:hover { color: var(--ivory); border-color: var(--gilt-deep); }
+  .calar-dugmeler { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px; }
+  .tasima { display: flex; align-items: center; gap: 10px; }
+  .segment { display: inline-flex; border: 1px solid var(--oak-edge); border-radius: 8px; overflow: hidden; }
+  .segment button {
+    height: 36px; padding: 0 .9rem; border: 0; background: var(--oak); color: var(--ivory-dim); font-weight: 500; cursor: pointer;
+  }
+  .segment button + button { border-left: 1px solid var(--oak-edge); }
+  .segment button[aria-pressed="true"] { background: var(--gilt); color: var(--brass-ink); }
+  .oynat {
+    width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font-size: 1.05rem; color: var(--brass-ink);
+    background: radial-gradient(circle at 40% 35%, #f6dc9a, var(--gilt) 55%, var(--gilt-deep));
+    box-shadow: 0 2px 0 var(--ebony), inset 0 -2px 3px rgba(0,0,0,.3);
+  }
+  .oynat:active { transform: translateY(2px); box-shadow: none; }
+  .kucuk {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--oak-edge); background: var(--oak); color: var(--ivory); cursor: pointer;
+  }
+  .kucuk:hover { border-color: var(--gilt-deep); }
+  .kucuk[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .calar-bolumler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bolum {
+    font: 500 .8rem/1 var(--font-ui); color: var(--ivory-dim); background: var(--oak); cursor: pointer;
+    border: 1px solid var(--oak-edge); border-radius: 999px; padding: 6px 10px;
+  }
+  .bolum:hover { border-color: var(--gilt-deep); }
+  .bolum[aria-current="true"] { background: var(--knob-ivory); color: var(--ink); border-color: var(--knob-ivory); }
+  .calar-ilerleme { height: 4px; border-radius: 2px; background: rgba(86,59,39,.7); overflow: hidden; }
+  #calarCubuk { height: 100%; width: 0; background: var(--gilt); }
+  .calar-siradaki { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 32px; color: var(--ivory-mute); font-size: .9rem; }
+  .calar-siradaki[hidden] { display: none; }
+  .calar-siradaki kbd { font-size: .85rem; padding: 2px 7px; color: var(--ivory-dim); }
+  .calar-siradaki kbd.simdi { font-size: 1.15rem; color: var(--brass-ink); background: var(--gilt-bright); border-color: var(--gilt-deep); }
+  .calar-durum { margin: 0; min-height: 1.5em; color: var(--ivory-dim); font-size: .9rem; }
+
+  /* Programın çaldığı ve çalınması beklenen tuşlar */
+  .key.white.prog-sag { background: linear-gradient(#f7e6b8, var(--key-lit) 70%, #d8b86a); }
+  .key.black.prog-sag { background: linear-gradient(#6a4e26, #33240f); }
+  .key.white.prog-sol { background: linear-gradient(#cfe0f3, #9fc0e6 70%, #6f96c4); }
+  .key.black.prog-sol { background: linear-gradient(#2f4a6e, #16263d); }
+  .key.hedef { box-shadow: inset 0 0 0 3px #3f9b62, inset 0 -7px 0 #3f9b62; }
+  .key.white.hedef { background: linear-gradient(#e5f6e7, #b9e6c1 70%, #86c796); }
+  .key.black.hedef { background: linear-gradient(#2f6b45, #17361f); }
+  .key.hedef.hedef-sol { box-shadow: inset 0 0 0 3px #3b79b8, inset 0 -7px 0 #3b79b8; }
+  .key.white.hedef.hedef-sol { background: linear-gradient(#e2eefb, #b5d1f0 70%, #86aedb); }
+  .key.black.hedef.hedef-sol { background: linear-gradient(#2b4f7a, #152a44); }
+  .key.yanlis { box-shadow: inset 0 0 0 3px var(--reed) !important; }
+
+  /* Parça listesi */
+  .liste {
+    width: min(560px, calc(100vw - 24px)); max-height: min(720px, calc(100vh - 24px)); padding: 18px;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+  .liste[open] { display: grid; grid-template-rows: auto auto auto 1fr; gap: 12px; }
+  .liste::backdrop { background: rgba(0,0,0,.6); }
+  .liste-ust { display: flex; align-items: center; justify-content: space-between; }
+  .liste h2 { margin: 0; font-family: var(--font-stop); font-weight: 700; font-size: 1.6rem; }
+  .liste input[type="search"] {
+    height: 40px; font: 500 1rem var(--font-ui); color: var(--ivory); background: var(--oak-deep);
+    border: 1px solid var(--oak-edge); border-radius: 8px; padding: 0 .8rem; width: 100%;
+  }
+  .etiketler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .etiket {
+    font: 500 .85rem/1 var(--font-ui); color: var(--ivory-dim); background: var(--oak-2); cursor: pointer;
+    border: 1px solid var(--oak-edge); border-radius: 999px; padding: 7px 12px;
+  }
+  .etiket[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .liste ul { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: grid; gap: 4px; align-content: start; min-height: 120px; }
+  .parca-satiri {
+    width: 100%; display: grid; grid-template-columns: 2.2em 1fr auto; gap: 2px 10px; align-items: baseline; text-align: left;
+    padding: 9px 10px; border: 1px solid transparent; border-radius: 8px; background: none; color: var(--ivory); cursor: pointer;
+  }
+  .parca-satiri:hover, .parca-satiri:focus-visible { background: var(--oak-2); border-color: var(--oak-edge); }
+  .p-no { font: 500 .85rem var(--font-mono); color: var(--ivory-mute); grid-row: span 2; }
+  .p-ad { font-weight: 500; }
+  .p-besteci { grid-column: 2; font-size: .85rem; color: var(--ivory-mute); }
+  .p-ek { grid-column: 3; grid-row: 1 / span 2; font-size: .8rem; color: var(--ivory-mute); text-align: right; }
+  #parcaYok { margin: 0; color: var(--ivory-mute); }

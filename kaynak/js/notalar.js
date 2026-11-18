@@ -4,6 +4,9 @@
   const sustained = new Set(); // "Tut" ile bırakılmış ama çalan notalar
   const codeHeld = new Map();  // klavye kodu -> midi
   const ptr = new Map();       // pointerId -> midi
+  const playerVoices = new Set();   // şarkı çaların zamanladığı, henüz bırakılmamış sesler
+  const playerDown = new Map();     // midi -> { n, el }: şarkı çaların o an çaldığı notalar (görünüm için)
+  const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
 
   function ensureWind() {
@@ -24,6 +27,7 @@
     if (!h) { h = new Set(); holders.set(midi, h); }
     const first = h.size === 0;
     h.add(src);
+    if (typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
     if (!first) return;
     sustained.delete(midi);
     if (!voices.has(midi)) {

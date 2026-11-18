@@ -10,6 +10,7 @@
   windBtn.addEventListener('click', () => {
     if (windOn) {
       windOn = false;
+      if (calar.parca) calarDurdur();
       releaseAll();
       updateWindUI();
       setTimeout(() => { if (!windOn && ctx) ctx.suspend().catch(() => {}); }, 3000);
@@ -27,7 +28,12 @@
       if (!e.repeat) { sustainKey = true; updateSustain(); }
       return;
     }
-    if (e.code === 'Escape') { releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (e.code === 'Escape') { calarDuraklat(); releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (e.code === 'Enter' && !inField && calar.parca && tag !== 'BUTTON') {
+      e.preventDefault();
+      if (!e.repeat) (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());
+      return;
+    }
     if (!inField && (e.code === 'ArrowUp' || e.code === 'ArrowDown')) {
       e.preventDefault();
       if (!e.repeat) shiftOctave(e.code === 'ArrowUp' ? 1 : -1);

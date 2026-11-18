@@ -18,6 +18,7 @@ Ya da bilgisayarına indir:
 
 ## Özellikler
 
+- **Şarkı çalar:** 30 parçayı program kendisi çalar (Dinle) ya da sana adım adım öğretir (Öğren): sıradaki tuş yanar, doğru tuşa basınca ilerler. Bir eli programa bırakıp öbürünü kendin çalabilir, hızı düşürebilir, bir bölümü yineletebilirsin. Registrasyon ve oktav parçaya göre kendiliğinden ayarlanır.
 - **Sürekli ses:** Tuş basılı kaldıkça nota çalar, bırakınca yankıyla söner. `Boşluk` basılıyken bıraktığın notalar da çalmaya devam eder.
 - **13 register:** Gerçek org registerleri, çalarken de açılıp kapatılabilir.
 - **7 kombinasyon pistonu:** Hazır registrasyonlar.
@@ -83,6 +84,8 @@ Sayfa açıldığında Oktav kutusunda **Do3 – Sol5** yazar. Aşağıdaki eşl
 <!-- PARCALAR:BASLA -->
 ## Örnek parçalar
 
+Programdaki **Parçalar** düğmesi bu otuz parçayı açar: **Dinle** ile program parçayı kendisi çalar, **Öğren** ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin. Her parçanın altındaki "▶ Programda aç" bağlantısı parçayı doğrudan açar.
+
 Her parçanın notaları [`parcalar/`](parcalar/) klasöründeki bir dosyada durur; aşağıdaki tuş dizileri o dosyalardan üretilir. Tuş harfleri Türkçe Q klavyeye göredir.
 
 Okuma kuralları:
@@ -132,6 +135,8 @@ Okuma kuralları:
 
 Beethoven'ın 9. Senfonisi'nin koro teması; listenin en kolay parçası. Burada ilahi kitaplarındaki düz ritimli hâli var (kaynakta Sol majör, burada Do majöre aktarıldı).
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=neseye-ovgu)
+
 **Ton:** Do majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 120 · **Registrasyon:** **2 · İlahi** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -148,6 +153,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 2. Toccata ve Füg Re minör, BWV 565 (Bach)
 
 Kilise orgunun en ünlü açılışı: her biri bir oktav aşağıdan yinelenen üç cümle, ardından gerilimli bir akor ve Re majöre çözülüş. Ritim serbesttir; her cümlenin son notası uzun tutulur. Birinci cümle bir oktav yukarıda çalındığı için programda o cümlede oktav kendiliğinden değişir.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=toccata)
 
 **Ton:** Re minör · **Ölçü:** 4/4 · **Birim:** on altılık nota · **Tempo:** ♩ = 50 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do3 – Sol5; 1. cümle (oktav ↑) bölümünde Do4 – Sol6 · **Zorluk:** orta
 
@@ -172,6 +179,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Düğünlerde gelin girerken çalınan marş ("Treulich geführt"). İlk iki satır ezginin en tanınan kısmıdır; son satır, parçayı Do'da bitirmek için eklenmiş bir tekrardır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=gelin-korosu)
+
 **Ton:** Do majör · **Ölçü:** 2/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 66 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -188,6 +197,8 @@ Ezberden yazıldı; henüz bir nota kaynağıyla karşılaştırılmadı.
 ### 4. *Tristan und Isolde*, Prelüd (Wagner)
 
 Operanın açılışındaki iki cümle ve ünlü "Tristan akoru". Çok yavaş çalınır; cümleler arasında sessizlik bırakılır. Sağ el ezgiyi (önce çello, sonra obua çizgisini), sol el akorları çalar.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=tristan)
 
 **Ton:** La minör · **Ölçü:** 6/8 · **Birim:** sekizlik nota · **Tempo:** ♩ = 44 · **Registrasyon:** **1 · Dua** · **Oktav:** Do3 – Sol5 · **Zorluk:** zor
 
@@ -210,6 +221,8 @@ Ezberden yazıldı; henüz bir nota kaynağıyla karşılaştırılmadı.
 
 *Die Walküre* operasının ünlü teması. Pes notalar alt sırada (sol el), tiz notalar üst sırada (sağ el) çalınır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=valkurlerin-ucusu)
+
 **Ton:** Si minör · **Ölçü:** 9/8 · **Birim:** on altılık nota · **Tempo:** ♩ = 132 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -227,6 +240,8 @@ Ezberden yazıldı; henüz bir nota kaynağıyla karşılaştırılmadı.
 ### 6. Kanon Re majör (Pachelbel)
 
 İki elle çalınır. Sol el sekiz notalık bası hiç değiştirmeden yineler; sağ el birinci kemanın ilk iki cümlesini çalar. Bas, kaynaktakinden bir oktav yukarı yazıldı.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=kanon)
 
 **Ton:** Re majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 56 · **Registrasyon:** **2 · İlahi** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
@@ -254,6 +269,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Plenumla çalınan klasik kapanış ilahisi. Sağ ve sol el aynı ezgiyi bir oktav arayla çalar. Ritim, John Dowland'ın düzenlemesindeki özgün ritimdir: her cümle uzun bir notayla başlar ve biter.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=old-hundredth)
+
 **Ton:** Sol majör · **Ölçü:** 4/2 · **Birim:** ikilik nota · **Tempo:** ♩ = 132 · **Registrasyon:** **5 · Plenum**; son cümle bölümünde **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -279,6 +296,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 *Schafe können sicher weiden*; Av Kantatı'ndaki soprano aryasının ilk bölümü, orijinal tonunda. Kaynak: Breitkopf & Härtel baskısı (1881).
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=sheep-may-safely-graze)
+
 **Ton:** Si♭ majör · **Ölçü:** 4/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 66 · **Registrasyon:** **3 · Flüt solo** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -301,6 +320,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 En bilinen Noel ilahisi. Sakin, sallanır gibi bir ritimle çalınır (kaynakta Si♭ majör, burada Do majöre aktarıldı).
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=sessiz-gece)
+
 **Ton:** Do majör · **Ölçü:** 6/8 · **Birim:** sekizlik nota · **Tempo:** ♩ = 63 · **Registrasyon:** **1 · Dua**; B bölümünde **2 · İlahi** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -321,6 +342,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 *New Britain* ezgisi. **4 · Kornet** ya da **2 · İlahi** ile çalınır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=amazing-grace)
+
 **Ton:** Sol majör · **Ölçü:** 3/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 84 · **Registrasyon:** **4 · Kornet** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -339,6 +362,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 11. Carol of the Bells, *Şçedrık* (Leontoviç, 1916)
 
 Ukrayna halk ezgisinden doğan Noel şarkısı; Leontoviç'in 1916 tarihli koro düzenlemesi. Bütün parça dört notalı tek bir motif üzerine kuruludur. Sağ el soprano partisidir; sol el, korodaki alto partisinin bir oktav aşağısıdır. **4 · Kornet** zile benzer bir ses verir.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=carol-of-the-bells)
 
 **Ton:** Sol minör · **Ölçü:** 3/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 168 · **Registrasyon:** **4 · Kornet** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
@@ -391,6 +416,8 @@ Kaynak: [Vikipedi (İngilizce), "Shchedryk (song)" maddesindeki nota](https://en
 
 *Jesus bleibet meine Freude* koralinin ünlü eşlik ezgisi; burada ilk sekiz ölçüsü var. Ezgi kesintisiz üçlüler hâlinde akar: her üç notalık grubu eşit ve bağlı çal, gruplar arasında durma.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=jesu-joy)
+
 **Ton:** Sol majör · **Ölçü:** 9/8 · **Birim:** sekizlik nota · **Tempo:** ♩ = 92 · **Registrasyon:** **3 · Flüt solo** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -408,6 +435,8 @@ Ezberden yazıldı; henüz bir nota kaynağıyla karşılaştırılmadı.
 ### 13. Ave Maria, D 839 (Schubert)
 
 *Ellens dritter Gesang*; ses partisinin ilk kıtası, orijinal tonunda. Çok yavaş çalınır (notada *Sehr langsam*). Küçük süs notaları atlandı.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=ave-maria)
 
 **Ton:** Si♭ majör · **Ölçü:** 4/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 44 · **Registrasyon:** **1 · Dua** · **Oktav:** Do3 – Sol5 · **Zorluk:** zor
 
@@ -435,6 +464,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 14. Düğün Marşı, *Bir Yaz Gecesi Rüyası* (Mendelssohn)
 
 Kiliseden çıkışta çalınan düğün marşı. Burada Théodore Dubois'nın org düzenlemesinin üst sesi var (Durand, Paris): trompet çağrısı, ana tema, orta bölüm ve yine ana tema.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=dugun-marsi)
 
 **Ton:** Do majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 130 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do4 – Sol6 · **Zorluk:** orta
 
@@ -466,6 +497,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 En çok söylenen Noel ilahilerinden biri. Burada soprano partisinin tamamı var.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=adeste-fideles)
+
 **Ton:** Sol majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 100 · **Registrasyon:** **2 · İlahi**; nakarat bölümünde **5 · Plenum** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -485,6 +518,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 16. Air, *G Teli Üzerine Arya*, BWV 1068 (Bach)
 
 Orkestra Süiti No. 3'ün ünlü ağır bölümü. Burada üst ses var; küçük vurgu notaları atlandı. Uzun tutulan notalarıyla ünlüdür: bir nota, sonraki hızlı grup başlayana kadar basılı kalır.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=air)
 
 **Ton:** Re majör · **Ölçü:** 4/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 36 · **Registrasyon:** **1 · Dua** · **Oktav:** Do4 – Sol6 · **Zorluk:** zor
 
@@ -522,6 +557,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 *Messiah* oratoryosunun ünlü korosu. Burada soprano partisinin açılışı var: "Hallelujah" çağrıları ve iki kez "For the Lord God omnipotent reigneth". Sopranoların sustuğu iki buçuk ölçü atlandı.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=hallelujah)
+
 **Ton:** Re majör · **Ölçü:** 4/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 112 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -548,6 +585,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Noel ilahisi. Ezgi Mendelssohn'un, söz Charles Wesley'nin. Burada soprano partisinin tamamı var.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=hark-the-herald-angels-sing)
+
 **Ton:** Fa majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 108 · **Registrasyon:** **2 · İlahi**; nakarat bölümünde **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -571,6 +610,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Kilisede en çok söylenen ilahilerden biri; ağır ve görkemli çalınır. Burada soprano partisinin tamamı var.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=holy-holy-holy)
+
 **Ton:** Re majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 92 · **Registrasyon:** **5 · Plenum** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -592,6 +633,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Reform kiliselerinin marşı sayılan Luther korali. Burada, bugün ilahi kitaplarında yaygın olan düz ritimli sürümün soprano partisi var.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=ein-feste-burg)
+
 **Ton:** Do majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 84 · **Registrasyon:** **5 · Plenum**; C bölümünde **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -612,6 +655,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 21. Greensleeves, *What Child Is This* (16. yüzyıl)
 
 İngiliz halk ezgisi; Noel'de *What Child Is This?* sözleriyle söylenir. Sallanır gibi bir ritmi vardır: her ölçüde "uzun–kısa" iki kez tekrar eder.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=greensleeves)
 
 **Ton:** Mi minör · **Ölçü:** 6/8 · **Birim:** sekizlik nota · **Tempo:** ♩ = 80 · **Registrasyon:** **3 · Flüt solo** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
@@ -636,6 +681,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Neşeli bir Noel ilahisi. Ezgi, Lowell Mason'ın Händel'den uyarlamasıdır. Açılışı yukarıdan aşağı inen bir gamdır; tören havasında, geniş çalınır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=joy-to-the-world)
+
 **Ton:** Re majör · **Ölçü:** 2/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 100 · **Registrasyon:** **6 · Tutti** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -656,6 +703,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Advent ilahisi. Ezgi 15. yüzyıldan kalma bir Fransız ezgisidir; Thomas Helmore 1856'da düzenlemiştir. Ağır ve düzgün çalınır; cümleler ölçü çizgilerine uymaz.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=veni-emmanuel)
+
 **Ton:** Mi minör · **Ölçü:** 4/4 · **Birim:** sekizlik nota · **Tempo:** ♩ = 72 · **Registrasyon:** **1 · Dua**; nakarat bölümünde **5 · Plenum** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -675,6 +724,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 24. Abide with Me, *Eventide* (Monk, 1861)
 
 Akşam ilahisi; cenaze ve anma törenlerinde de çalınır. Kaynaktaki nota Mi♭ majörden Re majöre aktarılmıştır; burada da Re majör.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=abide-with-me)
 
 **Ton:** Re majör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 72 · **Registrasyon:** **1 · Dua** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
@@ -697,6 +748,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 
 Alman korali. Ezgi Stralsund ilahi kitabındandır (1665), düzenleme William S. Bennett'in (1864). Kaynaktaki nota Sol majörden Fa majöre aktarılmıştır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=lobe-den-herren)
+
 **Ton:** Fa majör · **Ölçü:** 3/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 108 · **Registrasyon:** **2 · İlahi**; B bölümünde **5 · Plenum** · **Oktav:** Do3 – Sol5 · **Zorluk:** kolay
 
 ```
@@ -716,6 +769,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 26. Görsev İçin Balad (özgün parça, Kerem Görsev'e ithaf)
 
 Bu parça Kerem Görsev'in bir eseri **değildir**: onun klasik müzikle cazı harmanlayan piyano üslubundan esinlenerek bu proje için yazılmış özgün bir caz baladıdır ve ona ithaf edilmiştir. Çalma sırası caz standartlarındaki gibi A – A – B – A'dır. Lead sheet'i ve piyano düzenlemesi [`notalar/gorsev-icin-balad/`](notalar/gorsev-icin-balad/) klasöründe.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=gorsev-icin-balad)
 
 **Ton:** Re minör · **Ölçü:** 4/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 60 · **Registrasyon:** **3 · Flüt solo**; B (köprü) bölümünde **4 · Kornet** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
@@ -764,6 +819,8 @@ Bu proje için yazıldı.
 
 Beethoven'ın en ünlü piyano parçası; burada bilinen ilk bölümü var. Sol eldeki bas notaları (La2, Mi2) klavyenin altında kaldığı için yalnızca sağ el yazıldı; melodi kendi başına tanınır.
 
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=fur-elise)
+
 **Ton:** La minör · **Ölçü:** 3/8 · **Birim:** on altılık nota · **Tempo:** ♩ = 66 · **Registrasyon:** **3 · Flüt solo** · **Oktav:** Do3 – Sol5 · **Zorluk:** orta
 
 ```
@@ -790,6 +847,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 28. Gymnopédie No. 1 (Satie, 1888)
 
 Erik Satie'nin ağır, rüya gibi piyano parçası; caz baladlarını andıran yedili akorlarıyla bilinir. Notada *Lent et douloureux* (ağır ve acılı) yazar. Burada melodisi var; sol eldeki bas ve akorlar klavyeye sığmadığı için yazılmadı.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=gymnopedie-no-1)
 
 **Ton:** Re majör · **Ölçü:** 3/4 · **Birim:** dörtlük nota · **Tempo:** ♩ = 70 · **Registrasyon:** **1 · Dua** · **Oktav:** Do4 – Sol6 · **Zorluk:** kolay
 
@@ -818,6 +877,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 29. Türk Marşı, *Rondo alla Turca*, K. 331 (Mozart, 1783)
 
 Mozart'ın La majör piyano sonatının son bölümü; Osmanlı mehter müziğinden esinlenir. Burada sağ el partisinin ilk bölümü var; akorlarda üst ses alındı. Re5'e kadar olan notalar alt sıraya yazıldı, böylece baştaki "Do–Re–Do–Si–Do" süsü yan yana tuşlara düşer.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=turk-marsi)
 
 **Ton:** La minör · **Ölçü:** 2/4 · **Birim:** on altılık nota · **Tempo:** ♩ = 120 · **Registrasyon:** **4 · Kornet**; B bölümünde **6 · Tutti** · **Oktav:** Do4 – Sol6 · **Zorluk:** zor
 
@@ -852,6 +913,8 @@ Kaynak: [Mutopia Project](https://www.mutopiaproject.org/cgibin/piece-info.cgi?i
 ### 30. The Entertainer (Scott Joplin, 1902)
 
 Ragtime'ın en ünlü parçası; caz bu müzikten doğdu. Notada *Not fast* (aceleye getirmeden) yazar. Burada sağ el partisinin girişi ve ilk teması var; akorlarda üst ses alındı. Melodi iki oktavdan geniş olduğu için Mi5'e kadar olan notalar alt sıraya yazıldı.
+
+[▶ Programda aç](https://z8002.github.io/kilise-orgu/kilise-orgu.html?parca=the-entertainer)
 
 **Ton:** Do majör · **Ölçü:** 2/4 · **Birim:** on altılık nota · **Tempo:** ♩ = 84 · **Registrasyon:** **4 · Kornet** · **Oktav:** Do4 – Sol6 · **Zorluk:** zor
 

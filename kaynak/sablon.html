@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Cormorant+SC:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IM+Fell+English+SC&display=swap">
 <style>
 /*@ekle stil/ana.css*/
+/*@ekle stil/calar.css*/
 </style>
 </head>
 <body>
@@ -18,10 +19,13 @@
       <h1>Kilise Orgu</h1>
       <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
     </div>
-    <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
-      <span class="lamp" aria-hidden="true"></span>
-      <span id="windLabel">Rüzgârı aç</span>
-    </button>
+    <div class="eylemler">
+      <button id="parcalarBtn" class="wind" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Parçalar</button>
+      <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
+        <span class="lamp" aria-hidden="true"></span>
+        <span id="windLabel">Rüzgârı aç</span>
+      </button>
+    </div>
   </header>
 
   <p id="focusHint" class="focus-hint" hidden>Klavyeden çalmak için önce sayfaya bir kez tıkla.</p>
@@ -50,6 +54,51 @@
       <div class="manual-wrap">
         <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
       </div>
+
+      <button id="parcaSec" class="parca-sec" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Bir parça seç: program çalsın ya da sana öğretsin</button>
+
+      <section class="calar" id="calar" aria-label="Şarkı çalar" hidden>
+        <div class="calar-ust">
+          <p class="calar-baslik"><span id="calarNo"></span> <strong id="calarAd"></strong> <span class="calar-besteci" id="calarBesteci"></span></p>
+          <button id="calarKapat" class="calar-kapat" type="button" aria-label="Parçayı kapat">×</button>
+        </div>
+        <p class="calar-bilgi" id="calarBilgi"></p>
+        <div class="calar-dugmeler">
+          <div class="tasima">
+            <div class="segment" role="group" aria-label="Çalma biçimi">
+              <button type="button" id="modDinle" aria-pressed="true" title="Program parçayı çalar">Dinle</button>
+              <button type="button" id="modOgren" aria-pressed="false" title="Sıradaki tuş yanar, sen basınca ilerler">Öğren</button>
+            </div>
+            <button id="calarOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false">▶</button>
+            <button id="calarBas" class="kucuk" type="button" aria-label="Başa dön" title="Başa dön">⏮</button>
+            <button id="calarDongu" class="kucuk" type="button" aria-pressed="false" aria-label="Bölümü yinele" title="İçinde bulunulan bölümü yinele">↻</button>
+          </div>
+          <label class="ctl" for="calarHiz">
+            <span class="ctl-label">Hız <output id="calarHizOut">100%</output></span>
+            <input type="range" id="calarHiz" min="40" max="150" step="5" value="100">
+          </label>
+          <label class="ctl" id="elSagKutu" for="elSag">
+            <span class="ctl-label">Sağ el</span>
+            <select id="elSag">
+              <option value="program">Program çalsın</option>
+              <option value="ben">Ben çalacağım</option>
+              <option value="kapali">Sessiz</option>
+            </select>
+          </label>
+          <label class="ctl" id="elSolKutu" for="elSol">
+            <span class="ctl-label">Sol el</span>
+            <select id="elSol">
+              <option value="program">Program çalsın</option>
+              <option value="ben">Ben çalacağım</option>
+              <option value="kapali">Sessiz</option>
+            </select>
+          </label>
+        </div>
+        <div class="calar-bolumler" id="calarBolumler" role="group" aria-label="Bölümler"></div>
+        <div class="calar-ilerleme" aria-hidden="true"><div id="calarCubuk"></div></div>
+        <p class="calar-siradaki" id="calarSiradaki" hidden></p>
+        <p class="calar-durum" id="calarDurum" aria-live="polite"></p>
+      </section>
 
       <div class="controls">
         <div class="ctl">
@@ -90,10 +139,22 @@
         <br><span class="rowkeys" id="rowUpper"></span></li>
       <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
       <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.</li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
     </ul>
   </section>
 </div>
+
+<dialog id="parcaListesi" class="liste" aria-labelledby="parcaListesiBaslik">
+  <div class="liste-ust">
+    <h2 id="parcaListesiBaslik">Parçalar</h2>
+    <button id="parcaListesiKapat" class="calar-kapat" type="button" aria-label="Listeyi kapat">×</button>
+  </div>
+  <input type="search" id="parcaAra" placeholder="Parça ya da besteci ara" aria-label="Parça ya da besteci ara" autocomplete="off">
+  <div class="etiketler" id="parcaEtiketleri" role="group" aria-label="Türe göre süz"></div>
+  <ul id="parcaSatirlari"></ul>
+  <p id="parcaYok" hidden>Aramaya uyan parça yok.</p>
+</dialog>
 
 <script>
 (() => {
@@ -107,6 +168,9 @@
 /*@ekle js/manuel.js*/
 /*@ekle js/gorunum.js*/
 /*@ekle js/cephe.js*/
+/*@ekle js/parca.js*/
+/*@ekle js/calar.js*/
+/*@ekle js/calar-arayuz.js*/
 /*@ekle js/olaylar.js*/
 /*@ekle js/baslat.js*/
 })();

@@ -6,7 +6,7 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 |---|---|---|
 | 0. Temel | Araçlar depoda, her değişiklik kendiliğinden denetleniyor | Bitti |
 | 1. Parça verisi | 30 parça programın okuyabildiği biçimde; 25'i kaynağıyla doğrulandı | Bitti |
-| 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bekliyor |
+| 2. Şarkı çalar | Dinle, öğren, eşlikli çal | Bitti |
 | 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bekliyor |
 | 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bekliyor |
 | 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bekliyor |
@@ -32,11 +32,13 @@ Aktarım sırasında bulunan hatalar: Amazing Grace'in üçüncü satırı yanl�
 
 ## Aşama 2: Şarkı çalar
 
-- [ ] Parça listesi.
-- [ ] Dinle.
-- [ ] Öğren.
-- [ ] Eşlik.
-- [ ] Parça bağlantıları.
+- [x] Parça listesi: ada ve besteciye göre arama, türe göre süzme.
+- [x] Dinle: program parçayı tempoda çalar; registrasyon, oktav ve sallanan ritim parçaya göre ayarlanır, tuşlar ve borular yanar.
+- [x] Öğren: sıradaki tuş yanar, doğru tuşa basınca ilerler; yanlış tuşlar sayılır.
+- [x] Eşlik: her el için "Program çalsın", "Ben çalacağım" ya da "Sessiz".
+- [x] Hız (%40–150), bölüme atlama, bölüm yineleme.
+- [x] Parça bağlantıları (`kilise-orgu.html?parca=…`); README'de her parçada "▶ Programda aç".
+- [x] Testler: sayfadaki çözücü Python çözücüsüyle aynı çizelgeyi üretiyor; otuz parçanın her biri baştan sona doğru notalarla çalınıyor; Öğren adım adım ilerliyor.
 
 ## Aşama 3: Telefon
 

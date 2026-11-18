@@ -43,8 +43,9 @@
     if (!fac.pairOrder.length) return;
     fac.target.fill(0);
     const M = fac.target.length - 1;
-    for (const [midi, v] of voices) {
-      if (!v.stops.size) continue;
+    const yanan = [...playerDown.keys()];
+    for (const [midi, v] of voices) if (v.stops.size) yanan.push(midi);
+    for (const midi of yanan) {
       const u = clamp((96 - midi) / (96 - 28), 0, 1); // kalın notalar uzun boruları yakar
       fac.target[fac.pairOrder[Math.round(u * M)]] = 1;
     }

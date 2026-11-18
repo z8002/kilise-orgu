@@ -248,6 +248,108 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
   }
+
+  /* ---------- Şarkı çalar ---------- */
+  .eylemler { display: flex; flex-wrap: wrap; gap: 10px; }
+  .parca-sec {
+    justify-self: center; display: inline-flex; align-items: center; gap: .6rem;
+    font: 500 .95rem var(--font-ui); color: var(--ivory-dim);
+    background: rgba(17,12,8,.35); border: 1px dashed var(--oak-edge); border-radius: 999px; padding: .5rem 1.1rem; cursor: pointer;
+  }
+  .parca-sec:hover { color: var(--ivory); border-color: var(--gilt-deep); }
+  .calar {
+    display: grid; gap: 12px; padding: 14px 16px;
+    background: rgba(17,12,8,.45); border: 1px solid var(--oak-edge); border-radius: 10px;
+  }
+  .calar[hidden], .parca-sec[hidden], .calar [hidden] { display: none; }
+  .calar-ust { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .calar-baslik { margin: 0; font-size: 1.05rem; line-height: 1.3; color: var(--ivory-dim); }
+  .calar-baslik strong { font-family: var(--font-stop); font-size: 1.35rem; font-weight: 700; color: var(--ivory); letter-spacing: .01em; }
+  .calar-besteci::before { content: "· "; }
+  .calar-bilgi { margin: -8px 0 0; font-size: .85rem; color: var(--ivory-mute); }
+  .calar-kapat {
+    flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--oak-edge);
+    background: var(--oak); color: var(--ivory-dim); font-size: 1.2rem; line-height: 1; cursor: pointer;
+  }
+  .calar-kapat:hover { color: var(--ivory); border-color: var(--gilt-deep); }
+  .calar-dugmeler { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px; }
+  .tasima { display: flex; align-items: center; gap: 10px; }
+  .segment { display: inline-flex; border: 1px solid var(--oak-edge); border-radius: 8px; overflow: hidden; }
+  .segment button {
+    height: 36px; padding: 0 .9rem; border: 0; background: var(--oak); color: var(--ivory-dim); font-weight: 500; cursor: pointer;
+  }
+  .segment button + button { border-left: 1px solid var(--oak-edge); }
+  .segment button[aria-pressed="true"] { background: var(--gilt); color: var(--brass-ink); }
+  .oynat {
+    width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font-size: 1.05rem; color: var(--brass-ink);
+    background: radial-gradient(circle at 40% 35%, #f6dc9a, var(--gilt) 55%, var(--gilt-deep));
+    box-shadow: 0 2px 0 var(--ebony), inset 0 -2px 3px rgba(0,0,0,.3);
+  }
+  .oynat:active { transform: translateY(2px); box-shadow: none; }
+  .kucuk {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--oak-edge); background: var(--oak); color: var(--ivory); cursor: pointer;
+  }
+  .kucuk:hover { border-color: var(--gilt-deep); }
+  .kucuk[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .calar-bolumler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bolum {
+    font: 500 .8rem/1 var(--font-ui); color: var(--ivory-dim); background: var(--oak); cursor: pointer;
+    border: 1px solid var(--oak-edge); border-radius: 999px; padding: 6px 10px;
+  }
+  .bolum:hover { border-color: var(--gilt-deep); }
+  .bolum[aria-current="true"] { background: var(--knob-ivory); color: var(--ink); border-color: var(--knob-ivory); }
+  .calar-ilerleme { height: 4px; border-radius: 2px; background: rgba(86,59,39,.7); overflow: hidden; }
+  #calarCubuk { height: 100%; width: 0; background: var(--gilt); }
+  .calar-siradaki { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 32px; color: var(--ivory-mute); font-size: .9rem; }
+  .calar-siradaki[hidden] { display: none; }
+  .calar-siradaki kbd { font-size: .85rem; padding: 2px 7px; color: var(--ivory-dim); }
+  .calar-siradaki kbd.simdi { font-size: 1.15rem; color: var(--brass-ink); background: var(--gilt-bright); border-color: var(--gilt-deep); }
+  .calar-durum { margin: 0; min-height: 1.5em; color: var(--ivory-dim); font-size: .9rem; }
+
+  /* Programın çaldığı ve çalınması beklenen tuşlar */
+  .key.white.prog-sag { background: linear-gradient(#f7e6b8, var(--key-lit) 70%, #d8b86a); }
+  .key.black.prog-sag { background: linear-gradient(#6a4e26, #33240f); }
+  .key.white.prog-sol { background: linear-gradient(#cfe0f3, #9fc0e6 70%, #6f96c4); }
+  .key.black.prog-sol { background: linear-gradient(#2f4a6e, #16263d); }
+  .key.hedef { box-shadow: inset 0 0 0 3px #3f9b62, inset 0 -7px 0 #3f9b62; }
+  .key.white.hedef { background: linear-gradient(#e5f6e7, #b9e6c1 70%, #86c796); }
+  .key.black.hedef { background: linear-gradient(#2f6b45, #17361f); }
+  .key.hedef.hedef-sol { box-shadow: inset 0 0 0 3px #3b79b8, inset 0 -7px 0 #3b79b8; }
+  .key.white.hedef.hedef-sol { background: linear-gradient(#e2eefb, #b5d1f0 70%, #86aedb); }
+  .key.black.hedef.hedef-sol { background: linear-gradient(#2b4f7a, #152a44); }
+  .key.yanlis { box-shadow: inset 0 0 0 3px var(--reed) !important; }
+
+  /* Parça listesi */
+  .liste {
+    width: min(560px, calc(100vw - 24px)); max-height: min(720px, calc(100vh - 24px)); padding: 18px;
+    color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+  .liste[open] { display: grid; grid-template-rows: auto auto auto 1fr; gap: 12px; }
+  .liste::backdrop { background: rgba(0,0,0,.6); }
+  .liste-ust { display: flex; align-items: center; justify-content: space-between; }
+  .liste h2 { margin: 0; font-family: var(--font-stop); font-weight: 700; font-size: 1.6rem; }
+  .liste input[type="search"] {
+    height: 40px; font: 500 1rem var(--font-ui); color: var(--ivory); background: var(--oak-deep);
+    border: 1px solid var(--oak-edge); border-radius: 8px; padding: 0 .8rem; width: 100%;
+  }
+  .etiketler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .etiket {
+    font: 500 .85rem/1 var(--font-ui); color: var(--ivory-dim); background: var(--oak-2); cursor: pointer;
+    border: 1px solid var(--oak-edge); border-radius: 999px; padding: 7px 12px;
+  }
+  .etiket[aria-pressed="true"] { background: var(--gilt); border-color: var(--gilt); color: var(--brass-ink); }
+  .liste ul { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: grid; gap: 4px; align-content: start; min-height: 120px; }
+  .parca-satiri {
+    width: 100%; display: grid; grid-template-columns: 2.2em 1fr auto; gap: 2px 10px; align-items: baseline; text-align: left;
+    padding: 9px 10px; border: 1px solid transparent; border-radius: 8px; background: none; color: var(--ivory); cursor: pointer;
+  }
+  .parca-satiri:hover, .parca-satiri:focus-visible { background: var(--oak-2); border-color: var(--oak-edge); }
+  .p-no { font: 500 .85rem var(--font-mono); color: var(--ivory-mute); grid-row: span 2; }
+  .p-ad { font-weight: 500; }
+  .p-besteci { grid-column: 2; font-size: .85rem; color: var(--ivory-mute); }
+  .p-ek { grid-column: 3; grid-row: 1 / span 2; font-size: .8rem; color: var(--ivory-mute); text-align: right; }
+  #parcaYok { margin: 0; color: var(--ivory-mute); }
 </style>
 </head>
 <body>
@@ -257,10 +359,13 @@
       <h1>Kilise Orgu</h1>
       <p class="sub">Bilgisayar klavyesiyle çalınan borulu org. Tuşa basılı tuttuğun sürece borular öter; bırakınca ses kilisenin yankısında söner.</p>
     </div>
-    <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
-      <span class="lamp" aria-hidden="true"></span>
-      <span id="windLabel">Rüzgârı aç</span>
-    </button>
+    <div class="eylemler">
+      <button id="parcalarBtn" class="wind" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Parçalar</button>
+      <button id="wind" class="wind" type="button" aria-pressed="false" title="Org motorunu (körüğü) çalıştırır. İlk tuşa bastığında da kendiliğinden açılır.">
+        <span class="lamp" aria-hidden="true"></span>
+        <span id="windLabel">Rüzgârı aç</span>
+      </button>
+    </div>
   </header>
 
   <p id="focusHint" class="focus-hint" hidden>Klavyeden çalmak için önce sayfaya bir kez tıkla.</p>
@@ -289,6 +394,51 @@
       <div class="manual-wrap">
         <div class="manual" id="manual" role="group" aria-label="Manuel: fareyle veya dokunarak da çalınabilir"></div>
       </div>
+
+      <button id="parcaSec" class="parca-sec" type="button" aria-haspopup="dialog"><span aria-hidden="true">♪</span> Bir parça seç: program çalsın ya da sana öğretsin</button>
+
+      <section class="calar" id="calar" aria-label="Şarkı çalar" hidden>
+        <div class="calar-ust">
+          <p class="calar-baslik"><span id="calarNo"></span> <strong id="calarAd"></strong> <span class="calar-besteci" id="calarBesteci"></span></p>
+          <button id="calarKapat" class="calar-kapat" type="button" aria-label="Parçayı kapat">×</button>
+        </div>
+        <p class="calar-bilgi" id="calarBilgi"></p>
+        <div class="calar-dugmeler">
+          <div class="tasima">
+            <div class="segment" role="group" aria-label="Çalma biçimi">
+              <button type="button" id="modDinle" aria-pressed="true" title="Program parçayı çalar">Dinle</button>
+              <button type="button" id="modOgren" aria-pressed="false" title="Sıradaki tuş yanar, sen basınca ilerler">Öğren</button>
+            </div>
+            <button id="calarOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false">▶</button>
+            <button id="calarBas" class="kucuk" type="button" aria-label="Başa dön" title="Başa dön">⏮</button>
+            <button id="calarDongu" class="kucuk" type="button" aria-pressed="false" aria-label="Bölümü yinele" title="İçinde bulunulan bölümü yinele">↻</button>
+          </div>
+          <label class="ctl" for="calarHiz">
+            <span class="ctl-label">Hız <output id="calarHizOut">100%</output></span>
+            <input type="range" id="calarHiz" min="40" max="150" step="5" value="100">
+          </label>
+          <label class="ctl" id="elSagKutu" for="elSag">
+            <span class="ctl-label">Sağ el</span>
+            <select id="elSag">
+              <option value="program">Program çalsın</option>
+              <option value="ben">Ben çalacağım</option>
+              <option value="kapali">Sessiz</option>
+            </select>
+          </label>
+          <label class="ctl" id="elSolKutu" for="elSol">
+            <span class="ctl-label">Sol el</span>
+            <select id="elSol">
+              <option value="program">Program çalsın</option>
+              <option value="ben">Ben çalacağım</option>
+              <option value="kapali">Sessiz</option>
+            </select>
+          </label>
+        </div>
+        <div class="calar-bolumler" id="calarBolumler" role="group" aria-label="Bölümler"></div>
+        <div class="calar-ilerleme" aria-hidden="true"><div id="calarCubuk"></div></div>
+        <p class="calar-siradaki" id="calarSiradaki" hidden></p>
+        <p class="calar-durum" id="calarDurum" aria-live="polite"></p>
+      </section>
 
       <div class="controls">
         <div class="ctl">
@@ -329,10 +479,22 @@
         <br><span class="rowkeys" id="rowUpper"></span></li>
       <li><strong>Tuşu basılı tuttuğun sürece</strong> ses devam eder. <kbd>Boşluk</kbd> basılıyken bıraktığın notalar da çalmaya devam eder.</li>
       <li><kbd>↑</kbd> <kbd>↓</kbd> oktav değiştirir, <kbd>Esc</kbd> bütün sesleri susturur.</li>
+      <li><strong>Parçalar</strong> düğmesi otuz parçalık listeyi açar. <strong>Dinle</strong> ile program parçayı kendisi çalar; <strong>Öğren</strong> ile sıradaki tuş yanar ve sen basınca ilerler. Bir eli programa bırakıp öbürünü kendin de çalabilirsin.</li>
       <li><strong>Registerler</strong> (fildişi yuvarlak düğmeler) org sesinin rengini seçer; çalarken de çekip itebilirsin. Numaralı pistonlar hazır kombinasyonları çağırır: kilise orgunun o görkemli sesi için <strong>5 · Plenum</strong> ya da <strong>6 · Tutti</strong>.</li>
     </ul>
   </section>
 </div>
+
+<dialog id="parcaListesi" class="liste" aria-labelledby="parcaListesiBaslik">
+  <div class="liste-ust">
+    <h2 id="parcaListesiBaslik">Parçalar</h2>
+    <button id="parcaListesiKapat" class="calar-kapat" type="button" aria-label="Listeyi kapat">×</button>
+  </div>
+  <input type="search" id="parcaAra" placeholder="Parça ya da besteci ara" aria-label="Parça ya da besteci ara" autocomplete="off">
+  <div class="etiketler" id="parcaEtiketleri" role="group" aria-label="Türe göre süz"></div>
+  <ul id="parcaSatirlari"></ul>
+  <p id="parcaYok" hidden>Aramaya uyan parça yok.</p>
+</dialog>
 
 <script>
 (() => {
@@ -406,9 +568,10 @@
 
   const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3 };
   const stopsOn = new Set(PISTONS[4].stops);
-  const STORE_KEY = 'kilise-orgu-v1';
+  // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
+  const STORE_KEY = 'kilise-orgu-v2';
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || localStorage.getItem('kilise-orgu-v1') || 'null');
     if (saved) {
       if (ROOMS[saved.room]) settings.room = saved.room;
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);
@@ -535,16 +698,28 @@
   const keyScale = f => (f > 1800 ? Math.pow(1800 / f, 0.5) : 1);
 
   class Voice {
-    constructor(midi, t0) {
+    // t0 ileri bir an olabilir (şarkı çalar notaları önceden zamanlar); stopIds verilmezse açık registerler kullanılır.
+    constructor(midi, t0, stopIds) {
       this.midi = midi;
+      this.t0 = t0;
       this.freq = 440 * Math.pow(2, (midi - 69) / 12);
       this.stops = new Map();
       this.released = false;
       this.breath = null;
       this.out = ctx.createGain();
       this.out.connect(A.bus);
-      for (const id of stopsOn) this.addStop(STOP_BY_ID[id], t0);
+      for (const id of (stopIds || stopsOn)) this.addStop(STOP_BY_ID[id], t0);
       if (this.stops.size) this.articulate(t0);
+    }
+
+    // Henüz başlamamış (ya da hemen susması gereken) sesi iz bırakmadan keser.
+    cancel() {
+      if (this.released) return;
+      this.released = true;
+      try { this.out.disconnect(); } catch (_) {}
+      const t = ctx.currentTime;
+      for (const s of this.stops.values()) s.oscs.forEach(o => { try { o.stop(t); } catch (_) {} });
+      if (this.breath) { try { this.breath.src.stop(t); } catch (_) {} }
     }
 
     addStop(stop, t0) {
@@ -654,6 +829,9 @@
   const sustained = new Set(); // "Tut" ile bırakılmış ama çalan notalar
   const codeHeld = new Map();  // klavye kodu -> midi
   const ptr = new Map();       // pointerId -> midi
+  const playerVoices = new Set();   // şarkı çaların zamanladığı, henüz bırakılmamış sesler
+  const playerDown = new Map();     // midi -> { n, el }: şarkı çaların o an çaldığı notalar (görünüm için)
+  const targets = new Map();        // midi -> el: çalınması beklenen notalar (Öğren ve Eşlik)
   let sustainKey = false, sustainLatch = false, sustainOn = false;
 
   function ensureWind() {
@@ -674,6 +852,7 @@
     if (!h) { h = new Set(); holders.set(midi, h); }
     const first = h.size === 0;
     h.add(src);
+    if (typeof calarKullaniciBasti === 'function') calarKullaniciBasti(midi);
     if (!first) return;
     sustained.delete(midi);
     if (!voices.has(midi)) {
@@ -731,7 +910,7 @@
     if (ctx) {
       const t = ctx.currentTime;
       if (stop.effect) applyTremolo();
-      else for (const v of voices.values()) (on ? v.addStop(stop, t) : v.removeStop(id, t));
+      else for (const v of [...voices.values(), ...playerVoices]) (on ? v.addStop(stop, Math.max(t, v.t0)) : v.removeStop(id, Math.max(t, v.t0)));
     }
     knobEls[id].setAttribute('aria-pressed', String(on));
   }
@@ -767,6 +946,14 @@
     }
   }
 
+  function applyPiston(n) {
+    const p = PISTONS.find(x => x.n === String(n));
+    if (!p) return;
+    const want = new Set(p.stops);
+    STOPS.forEach(s => setStop(s.id, want.has(s.id)));
+    afterRegistration();
+  }
+
   function buildPistons() {
     const host = $('#pistons');
     for (const p of PISTONS) {
@@ -777,11 +964,7 @@
       b.innerHTML = '<span class="btn"></span><span class="pl"></span>';
       b.firstChild.textContent = p.n;
       b.lastChild.textContent = p.name;
-      b.addEventListener('click', () => {
-        const want = new Set(p.stops);
-        STOPS.forEach(s => setStop(s.id, want.has(s.id)));
-        afterRegistration();
-      });
+      b.addEventListener('click', () => applyPiston(p.n));
       pistonEls.push({ el: b, set: new Set(p.stops) });
       host.appendChild(b);
     }
@@ -874,6 +1057,8 @@
     } catch (_) {}
   }
 
+  function setOctave(n) { shiftOctave(n - settings.octave); }
+
   function shiftOctave(d) {
     const n = clamp(settings.octave + d, 1, 5);
     if (n === settings.octave) return;
@@ -892,8 +1077,14 @@
       const down = holders.has(m);
       k.classList.toggle('down', down);
       k.classList.toggle('held', !down && sustained.has(m));
+      const prog = playerDown.get(m);
+      k.classList.toggle('prog-sag', !!prog && prog.el === 'sag');
+      k.classList.toggle('prog-sol', !!prog && prog.el === 'sol');
+      const hedef = targets.get(m);
+      k.classList.toggle('hedef', !!hedef && !down);
+      k.classList.toggle('hedef-sol', hedef === 'sol' && !down);
     });
-    const playing = [...voices.keys()].sort((a, b) => a - b);
+    const playing = [...new Set([...voices.keys(), ...playerDown.keys()])].sort((a, b) => a - b);
     readout.innerHTML = 'Çalan:<b></b>';
     readout.lastChild.textContent = playing.length ? playing.map(noteName).join(' · ') : '—';
     updateFacadeTargets();
@@ -944,8 +1135,9 @@
     if (!fac.pairOrder.length) return;
     fac.target.fill(0);
     const M = fac.target.length - 1;
-    for (const [midi, v] of voices) {
-      if (!v.stops.size) continue;
+    const yanan = [...playerDown.keys()];
+    for (const [midi, v] of voices) if (v.stops.size) yanan.push(midi);
+    for (const midi of yanan) {
       const u = clamp((96 - midi) / (96 - 28), 0, 1); // kalın notalar uzun boruları yakar
       fac.target[fac.pairOrder[Math.round(u * M)]] = 1;
     }
@@ -1029,6 +1221,718 @@
     }
   }
 
+  /* ================= Parçalar ================= */
+  // Parça verisi parcalar/*.json dosyalarından derleme sırasında gömülür (araclar/derle.py).
+  const PARCALAR =
+  [
+    {"id":"neseye-ovgu","no":1,"ad":"Neşeye Övgü","besteci":"Ludwig van Beethoven","etiketler":["klasik","ilahi"],"zorluk":1,"ton":"Do majör","olcu":"4/4","tempo":120,"birim":"1/4","oktav":3,"piston":"2","sira":["A"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | E4:1.5 D4:.5 D4:2","E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | D4:1.5 C4:.5 C4:2","D4 D4 E4 C4 | D4 E4:.5 F4:.5 E4 C4 | D4 E4:.5 F4:.5 E4 D4 | C4 D4 G3:2","E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | D4:1.5 C4:.5 C4:2"]}}},
+    {"id":"toccata","no":2,"ad":"Toccata ve Füg","besteci":"Johann Sebastian Bach","etiketler":["klasik"],"zorluk":2,"ton":"Re minör","olcu":"4/4","tempo":50,"birim":"1/16","oktav":3,"piston":"6","bolumOktav":{"c1":4},"sira":["c1","c2","c3","akor"],"dogrulama":"kaynak-elle","bolumler":{"c1":{"ad":"1. cümle (oktav ↑)","sag":["A5:.5 G5:.5 A5:6 r G5:.5 F5:.5 E5:.5 D5:.5 C#5 D5:8 r:4"]},"c2":{"ad":"2. cümle","sag":["A4:.5 G4:.5 A4:6 r E4 F4 C#4 D4:8 r:4"]},"c3":{"ad":"3. cümle","sag":["A3:.5 G3:.5 A3:6 r G3:.5 F3:.5 E3:.5 D3:.5 C#3 D3:8 r:4"]},"akor":{"ad":"akor ve çözülüş","sag":["r:4 C#4+E4+G4+Bb4:12 | D4+F#4+A4:16"],"sol":["D3:16 | D3:16"]}}},
+    {"id":"gelin-korosu","no":3,"ad":"Gelin Korosu","besteci":"Richard Wagner","etiketler":["opera","dugun"],"zorluk":1,"ton":"Do majör","olcu":"2/4","tempo":66,"birim":"1/8","oktav":3,"piston":"6","sira":["A","son"],"dogrulama":"ezber","bolumler":{"A":{"sag":["G4:2 C5:1.5 C5:.5 | C5:4 | G4:2 D5:1.5 B4:.5 | C5:4","G4:2 C5:1.5 F5:.5 | F5:2 E5:1.5 D5:.5 | C5:2 B4:1.5 C5:.5 | D5:4"]},"son":{"ad":"bitiş","sag":["G4:2 C5:1.5 C5:.5 | C5:4 | G4:2 D5:1.5 B4:.5 | C5:4"]}}},
+    {"id":"tristan","no":4,"ad":"Tristan Prelüdü","besteci":"Richard Wagner","etiketler":["opera"],"zorluk":3,"ton":"La minör","olcu":"6/8","tempo":44,"birim":"1/8","oktav":3,"piston":"1","sira":["c1","c2"],"dogrulama":"ezber","bolumler":{"c1":{"ad":"1. cümle","sag":["A3 | F4:5 E4 | G#4:5 A4 | A#4 B4:3 r:2 | r:5"],"sol":["r | r:6 | F3+B3+D#4:6 | E3+G#3+D4:4 r:2 | r:5"]},"c2":{"ad":"2. cümle","sag":["B3 | G#4:5 G4 | B4:5 C5 | C#5 D5:3 r:2"],"sol":["r | r:6 | G#3+D4+F#4:6 | G3+B3+F4:4 r:2"]}}},
+    {"id":"valkurlerin-ucusu","no":5,"ad":"Valkürlerin Uçuşu","besteci":"Richard Wagner","etiketler":["opera"],"zorluk":2,"ton":"Si minör","olcu":"9/8","tempo":132,"birim":"1/16","oktav":3,"piston":"6","sira":["A"],"dogrulama":"ezber","bolumler":{"A":{"sag":["F#3 | B3:3 F#3 B3:2 D4:6 B3:5 B3","D4:3 B3 D4:2 F#4:6 D4:5 D4","F#4:3 D4 F#4:2 A4:6 A3:5 A3","D4:3 A3 D4:2 F#4:12"]}}},
+    {"id":"kanon","no":6,"ad":"Kanon","besteci":"Johann Pachelbel","etiketler":["klasik","dugun"],"zorluk":2,"ton":"Re majör","olcu":"4/4","tempo":56,"birim":"1/4","oktav":3,"piston":"2","sira":["bas","tur1","tur2","son"],"dogrulama":"kaynak","bolumler":{"bas":{"ad":"yalnız bas","sag":["r:4 | r:4"],"sol":["D4 A3 B3 F#3 | G3 D3 G3 A3"]},"tur1":{"ad":"1. tur","sag":["F#5 E5 D5 C#5 | B4 A4 B4 C#5"],"sol":["D4 A3 B3 F#3 | G3 D3 G3 A3"]},"tur2":{"ad":"2. tur","sag":["D5 C#5 B4 A4 | G4 F#4 G4 E4"],"sol":["D4 A3 B3 F#3 | G3 D3 G3 A3"]},"son":{"ad":"bitiş","sag":["D5:4"],"sol":["D4:4"]}}},
+    {"id":"old-hundredth","no":7,"ad":"Old Hundredth","besteci":"Cenevre Mezmurlar Kitabı (Loys Bourgeois)","etiketler":["ilahi"],"zorluk":2,"ton":"Sol majör","olcu":"4/2","tempo":132,"birim":"1/2","oktav":3,"piston":"5","bolumPiston":{"B":"6"},"sira":["A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["G4:2 | G4 F#4 E4 D4 | G4:2 A4:2 | B4:2","B4:2 | B4 B4 A4 G4 | C5:2 B4:2 | A4:2","G4:2 | A4 B4 A4 G4 | E4:2 F#4:2 | G4:2"],"sol":["G3:2 | G3 F#3 E3 D3 | G3:2 A3:2 | B3:2","B3:2 | B3 B3 A3 G3 | C4:2 B3:2 | A3:2","G3:2 | A3 B3 A3 G3 | E3:2 F#3:2 | G3:2"]},"B":{"ad":"son cümle","sag":["D5:2 | B4 G4 A4 C5 | B4:2 A4:2 | G4:2"],"sol":["D4:2 | B3 G3 A3 C4 | B3:2 A3:2 | G3:2"]}}},
+    {"id":"sheep-may-safely-graze","no":8,"ad":"Sheep May Safely Graze","besteci":"Johann Sebastian Bach","etiketler":["klasik","dugun"],"zorluk":2,"ton":"Si♭ majör","olcu":"4/4","tempo":66,"birim":"1/8","oktav":3,"piston":"3","sira":["A"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["Bb4:2 D5 C5 C5:3 D5 | Eb5:2 G5 F5 D5:2 C5 Bb4","D5 Bb4 A4 G4 C5:3 D5 | A4:2 G4 F4 F4:4","F4:2 Ab4 G4 G4:3 A4 | Bb4:2 D5 C5 A4:2 G4 F4","F5:2 G5 F5 F5 D5 C5 Bb4 | F5:2 G5 F5 F5 D5 C5 Bb4","Eb5:3 F5 D5 C5 Bb4 C5 | A4:3 Bb4 Bb4:4","r:4 G5 Eb5 D5 C5 | F5:3 G5 D5:3 C5:.5 Bb4:.5","Bb4:2"]}}},
+    {"id":"sessiz-gece","no":9,"ad":"Sessiz Gece","besteci":"Franz Xaver Gruber","etiketler":["noel","ilahi"],"zorluk":1,"ton":"Do majör","olcu":"6/8","tempo":63,"birim":"1/8","oktav":3,"piston":"1","bolumPiston":{"B":"2"},"sira":["A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["G4:1.5 A4:.5 G4 E4:3 | G4:1.5 A4:.5 G4 E4:3","D5:2 D5 B4:3 | C5:2 C5 G4:3","A4:2 A4 C5:1.5 B4:.5 A4 | G4:1.5 A4:.5 G4 E4:3","A4:2 A4 C5:1.5 B4:.5 A4 | G4:1.5 A4:.5 G4 E4:3"]},"B":{"sag":["D5:2 D5 F5:1.5 D5:.5 B4 | C5:3 E5:3","C5:1.5 G4:.5 E4 G4:1.5 F4:.5 D4 | C4:6"]}}},
+    {"id":"amazing-grace","no":10,"ad":"Amazing Grace","besteci":"Amerikan halk ezgisi (*New Britain*)","etiketler":["ilahi"],"zorluk":1,"ton":"Sol majör","olcu":"3/4","tempo":84,"birim":"1/4","oktav":3,"piston":"4","sira":["A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | G4:2 E4 | D4:2","D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | D5:2"]},"B":{"sag":["B4 | D5:1.5 B4:.5 D5:.5 B4:.5 | G4:2 D4 | E4:1.5 G4:.5 G4:.5 E4:.5 | D4:2","D4 | G4:2 B4:.5 G4:.5 | B4:2 A4 | G4:3"]}}},
+    {"id":"carol-of-the-bells","no":11,"ad":"Carol of the Bells","besteci":"Mikola Leontoviç","etiketler":["noel"],"zorluk":2,"ton":"Sol minör","olcu":"3/4","tempo":168,"birim":"1/8","oktav":3,"piston":"4","bolumTempo":{"son2":0.75},"sira":["giris","A1","A2","A3","B","C","D","E","son1","A1","A2","A3","B","C","D","E","son2"],"dogrulama":"kaynak","bolumler":{"giris":{"ad":"giriş","sag":["Bb4:2 A4 Bb4 G4:2"],"sol":["r:6"]},"A1":{"sag":["Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"],"sol":["r:6 | r:6 | r:6"]},"A2":{"sag":["Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2","Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"],"sol":["G3:6 | F3:6 | Eb3:6 | D3:6","G3:6 | F3:6 | Eb3:6 | D3:6"]},"A3":{"sag":["Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"],"sol":["G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2"]},"B":{"sag":["D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2 | D5:2 C5 D5 Bb4:2"],"sol":["Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2 | Bb3:2 A3 Bb3 G3:2"]},"C":{"sag":["G5:2 G5 G5 F5 Eb5 | D5:2 D5 D5 C5 Bb4 | C5:2 C5 C5 D5 C5 | G4:2 G4 G4 G4:2"],"sol":["G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2 | G3:2 G3 G3 G3:2"]},"D":{"sag":["D4 E4 F#4 G4 A4 Bb4 | C5 D5 C5:2 Bb4:2 | D4 E4 F#4 G4 A4 Bb4 | C5 D5 C5:2 Bb4:2"],"sol":["D3:6 | E3:2 F#3:2 G3:2 | D3:6 | E3:2 F#3:2 G3:2"]},"E":{"sag":["Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2 | Bb4:2 A4 Bb4 G4:2"],"sol":["D3:6 | C3:6 | F3:6 | Eb3:6"]},"son1":{"ad":"1. bitiş","sag":["Bb4:2 A4 Bb4 G4:2"],"sol":["D3:4 r:2"]},"son2":{"ad":"2. bitiş","sag":["G4:6 | ~:6 | ~:6 | D5:2 C5 D5 G4:2"],"sol":["D3:6 | ~:6 | ~:6 | Bb3:2 A3 Bb3 G3:2"]}}},
+    {"id":"jesu-joy","no":12,"ad":"Jesu, Joy of Man's Desiring","besteci":"Johann Sebastian Bach","etiketler":["klasik","ilahi","dugun"],"zorluk":2,"ton":"Sol majör","olcu":"9/8","tempo":92,"birim":"1/8","oktav":3,"piston":"3","sira":["A"],"dogrulama":"ezber","bolumler":{"A":{"sag":["r G4 A4 B4 D5 C5 C5 E5 D5 | D5 G5 F#5 G5 D5 B4 G4 A4 B4","C5 D5 E5 D5 C5 B4 A4 B4 G4 | F#4 G4 A4 D4 F#4 A4 C5 B4 A4","B4 G4 A4 B4 D5 C5 C5 E5 D5 | D5 G5 F#5 G5 D5 B4 G4 A4 B4","E5 D5 C5 B4 A4 G4 D4 G4 F#4 | G4 B4 D5 G5 D5 B4 G4:3"]}}},
+    {"id":"ave-maria","no":13,"ad":"Ave Maria","besteci":"Franz Schubert","etiketler":["klasik","dugun"],"zorluk":3,"ton":"Si♭ majör","olcu":"4/4","tempo":44,"birim":"1/8","oktav":3,"piston":"1","sira":["A"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["Bb4:3 A4:.5 Bb4:.5 D5:3.5 C5:.5","Bb4:2 r:2 C5:2 Bb4:.5 A4:.5 G4:.5 A4:.5","Bb4:2 r D5 D5:1.5 C5:.25 Bb4:.25 A4:.5 G4:.5 D5:.5 E5:.5","D5:2 Db5:1.5 A4:.5 C5:1.5 Bb4:.5 A4:1/3 C5:1/3 D5:1/3 Eb5:1/3 C5:1/3 A4:1/3","Bb4:3 D5:.5 C5:.5 C5:1.5 A4:.5 G4:1/3 B4:1/3 D5:1/3 F5:1/3 D5:1/3 B4:1/3","C5:7/3 G4:1/3 A4:1/3 Bb4:1/3 A4:1/3 G4:1/3 F4:2 r F4","C5:1.5 C5:.5 C5:.75 B4:.25 C5:.75 D5:.25 C5:.75 D5:.25 Bb4 r Bb4","C5:1.5 C5:.5 C5:1/3 B4:1/3 C5:1/3 Eb5:1/3 D5:1/3 C5:1/3 Bb4:2 r Bb4","C5:1.5 C5:.5 D5:.75 D5:.25 D5:1/3 C5:1/3 D5:1/3 Eb5 Eb5 r:1.5 G4:.5","C5:1.5 C5:.5 Bb4:1/3 A4:1/3 Bb4:1/3 Db5:1/3 C5:1/3 Bb4:1/3 C5:3 r","Bb4:3 A4:.5 Bb4:.5 D5:3.5 C5:.5","Bb4:2"]}}},
+    {"id":"dugun-marsi","no":14,"ad":"Düğün Marşı","besteci":"Felix Mendelssohn","etiketler":["klasik","dugun"],"zorluk":2,"ton":"Do majör","olcu":"4/4","tempo":130,"birim":"1/4","oktav":4,"piston":"6","sira":["fanfar","A","B","A2"],"dogrulama":"kaynak","bolumler":{"fanfar":{"ad":"trompet çağrısı","sag":["C4:1/3 C4:1/3 C4:1/3 | C4:2 r C4:1/3 C4:1/3 C4:1/3 | C4:2 r C4:1/3 C4:1/3 C4:1/3","E4 E4:1/3 E4:1/3 E4:1/3 E4 E4:1/3 E4:1/3 E4:1/3 | G4 G4:1/3 G4:1/3 G4:1/3 G4 r"]},"A":{"ad":"ana tema","sag":["C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5","C5:2 D5 G4:.75 D5:.25 | E5 r:1.5 C5:.25 r:.25 E5:.25 r:.25 G5:.25 r:.25","C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5","C5:2 E5 D5:.75 E5:.25 | D5:2 C5 r"]},"B":{"ad":"orta bölüm","sag":["C5:2 C5:1.5 C5:.5 | E5 D5 B4:.5 r:.5 G4:.5 r:.5","G4:1.5 C5:.5 C5:1.5 E5:.5 | E5 D5 B4:.5 r:.5 G4:.5 r:.5","G4:1.5 E5:.5 E5:1.5 G5:.5 | G5:2 F5 E5","D5 C#5:.75 E5:.25 D5 A4:.75 C5:.25 | B4 G5 A5 B5"]},"A2":{"ad":"ana tema (kapanış)","sag":["C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 D5:.5 r:.5","C5:2 D5 G4:.75 D5:.25 | E5 r:1.5 C5:.25 r:.25 E5:.25 r:.25 G5:.25 r:.25","C6:2 B5:1.5 F#5:.5 | A5 G5 F5:.5 r:.5 A5:.5 r:.5","C5:2 E5 D5:.75 E5:.25 | D5:2 C5"]}}},
+    {"id":"adeste-fideles","no":15,"ad":"Adeste Fideles","besteci":"John Francis Wade","etiketler":["noel","ilahi"],"zorluk":1,"ton":"Sol majör","olcu":"4/4","tempo":100,"birim":"1/4","oktav":3,"piston":"2","bolumPiston":{"nakarat":"5"},"sira":["A","nakarat"],"dogrulama":"kaynak","bolumler":{"A":{"ad":"kıta","sag":["G4 | G4:2 D4 G4 | A4:2 D4:2 | B4 A4 B4 C5 | B4:2 A4 G4","G4:2 F#4 E4 | F#4 G4 A4 B4 | F#4:2 E4:1.5 D4:.5 | D4:4","D5:2 C5 B4 | C5:2 B4:2 | A4 B4 G4 A4 | F#4:1.5 E4:.5 D4 B4"]},"nakarat":{"sag":["B4 A4 B4 C5 | B4:2 A4 B4 | B4 A4 B4 C5 | B4:2 A4 B4","C5 B4 A4 G4 | F#4:2 G4 C5 | B4:2 A4:1.5 G4:.5 | G4:3"]}}},
+    {"id":"air","no":16,"ad":"Air","besteci":"Johann Sebastian Bach","etiketler":["klasik","dugun"],"zorluk":3,"ton":"Re majör","olcu":"4/4","tempo":36,"birim":"1/8","oktav":4,"piston":"1","sira":["A","Ason","A","Ason","B","B"],"dogrulama":"kaynak","bolumler":{"A":{"ad":"1. bölüm","sag":["F#5:8","~ B5:.5 G5:.5 E5:.5 D5:.5 C#5:.5 D5:.5 C#5:2 A4:2","A5:4.5 F#5:.5 C5:.5 B4:.5 E5:.5 D#5:.5 A5:.5 G5:.5","G5:4.5 E5:.5 B4:.5 A4:.5 D5:.5 C#5:.5 G5:.5 F#5:.5","F#5:3 G#5:.5 A5:.5 D5 D5:.25 E5:.25 F#5 E5:.5 E5:.5 D5:.5"]},"Ason":{"ad":"1. bölümün bitişi","sag":["C#5:.5 B4:.5 B4:.25 C#5:.25 D5:1.5 C#5:.5 B4:.5 A4:4"]},"B":{"ad":"2. bölüm","sag":["C#5:2.5 D5:.25 C#5:.25 B4:.25 C#5:.25 A4:.5 A5:3 C5","B4 B5:1.5 A5:.5 G5:.5 F#5:.5 G5:2.25 F#5:.25 E5:.25 D5:.25 C#5:.5 B4:.5","A#4:.5 B4:.5 C#5:1.5 D5:.5 E5:1.5 F#5:.5 G5:2 F#5","E5:.5 D5:.5 C#5:.5 B4:.5 C#5:.5 D5:.25 E5:.25 D5 B4:4","D5:2.5 F#5:.5 E5:.5 D5:.5 B5:3 A5:.5 G#5:.5","F#5:.25 E5:.25 A5:.5 A4 B4:1.5 C#5:.25 D5:.25 C#5:1.5 B4:.5 A4:2","D5:3 F#5:.5 E5:.5 E5:3 G5:.5 F#5:.5","F#5:3 A5:.5 G5:.5 G5:4","A4:2.5 C#5:.5 E5:.5 G5:.5 G5:.5 E5:.5 F#5:2.5 G5:.25 A5:.25","D5:2.5 F#5:.5 A5:.5 C6:.5 B5:3 D5","C#5:.5 E5:.5 G5:2 B4 A4 E5:.5 F#5:.25 G5:.75 F#5 E5:.5","D5:.25 C#5:.25 B4 C#5:.5 D5 C#5:.5 D5:.5 D5:4"]}}},
+    {"id":"hallelujah","no":17,"ad":"Hallelujah","besteci":"Georg Friedrich Händel","etiketler":["klasik","ilahi"],"zorluk":2,"ton":"Re majör","olcu":"4/4","tempo":112,"birim":"1/8","oktav":3,"piston":"6","sira":["A","B","C","D"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["D5:3 A4 B4 A4 r:2","D5:3 A4 B4 A4 r D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r D5","C#5 D5:2 C#5 D5:2 r:2"]},"B":{"sag":["E5:3 A4 F#5 E5 r:2","E5:3 A4 F#5 E5 r E5:.5 E5:.5 | F#5 E5 r E5:.5 E5:.5 F#5 E5 r E5","F#5 E5 D5:2 C#5:2 r:2"]},"C":{"sag":["A4:4 B4:2 C#5:2 | D5 D4 D5:3 D5 C#5:2","B4:4 A4:2 r E5:.5 E5:.5","D5 C#5 r E5:.5 E5:.5 D5 C#5 r E5:.5 E5:.5 | F#5 E5 r E5:.5 E5:.5 F#5 E5 r"]},"D":{"sag":["D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r D5:.5 D5:.5 | D5 D5 r D5:.5 D5:.5 D5 D5 r:2","D5:4 E5:2 F#5:2 | G5 G4 G5:3 G5 F#5:2 | E5:4 D5:2"]}}},
+    {"id":"hark-the-herald-angels-sing","no":18,"ad":"Hark! The Herald Angels Sing","besteci":"Felix Mendelssohn","etiketler":["noel","ilahi"],"zorluk":1,"ton":"Fa majör","olcu":"4/4","tempo":108,"birim":"1/4","oktav":3,"piston":"2","bolumPiston":{"nakarat":"6"},"sira":["A","B","nakarat"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["C4 F4 F4:1.5 E4:.5 | F4 A4 A4 G4","C5 C5 C5:1.5 Bb4:.5 | A4 G4 A4:2","C4 F4 F4:1.5 E4:.5 | F4 A4 A4 G4","C5 G4 G4:1.5 E4:.5 | E4 D4 C4:2"]},"B":{"sag":["C5 C5 C5 F4 | Bb4 A4 A4 G4","C5 C5 C5 F4 | Bb4 A4 A4 G4","D5 D5 D5 C5 | Bb4 A4 Bb4:2","G4 A4:.5 Bb4:.5 C5:1.5 F4:.5 | F4 G4 A4:2"]},"nakarat":{"sag":["D5:1.5 D5:.5 D5 C5 | Bb4 A4 Bb4:2","G4 A4:.5 Bb4:.5 C5:1.5 F4:.5 | F4 G4 F4:2"]}}},
+    {"id":"holy-holy-holy","no":19,"ad":"Holy, Holy, Holy","besteci":"John Bacchus Dykes","etiketler":["ilahi"],"zorluk":1,"ton":"Re majör","olcu":"4/4","tempo":92,"birim":"1/4","oktav":3,"piston":"5","sira":["A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["D4 D4 F#4 F#4 | A4:2 A4:2","B4:2 B4 B4 | A4:2 F#4:2","A4:1.5 A4:.5 A4 A4 | D5:2 C#5 A4","E4 A4 B4:1.5 A4:.5 | A4:4"]},"B":{"sag":["D4 D4 F#4 F#4 | A4:2 A4:2","B4:1.5 B4:.5 B4 B4 | A4:2 A4:2","D5:2 A4 A4 | B4:2 F#4:2","G4 E4 E4:1.5 D4:.5 | D4:4"]}}},
+    {"id":"ein-feste-burg","no":20,"ad":"Ein feste Burg","besteci":"Martin Luther","etiketler":["ilahi"],"zorluk":1,"ton":"Do majör","olcu":"4/4","tempo":84,"birim":"1/4","oktav":3,"piston":"5","bolumPiston":{"C":"6"},"sira":["A","A","B","C"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["C5 | C5 C5 G4:.5 A4:.5 B4 | C5:.5 B4:.5 A4 G4 C5","B4 A4 G4 A4 | F4:.5 E4:.5 D4 C4"]},"B":{"sag":["C4 | G4 A4 G4 F#4 | G4:3 C4 | G4 G4 A4 B4 | C5:3 B4"]},"C":{"sag":["C5 B4 A4 A4 | G4:3 A4 | A4 G4 A4 F4 | E4:3 C5","B4 A4 G4 A4 | F4:.5 E4:.5 D4 C4"]}}},
+    {"id":"greensleeves","no":21,"ad":"Greensleeves","besteci":"İngiliz halk ezgisi","etiketler":["noel","ilahi"],"zorluk":2,"ton":"Mi minör","olcu":"6/8","tempo":80,"birim":"1/8","oktav":3,"piston":"3","sira":["A","nakarat"],"dogrulama":"kaynak","bolumler":{"A":{"ad":"kıta","sag":["E4 | G4:2 A4 B4:1.5 C5:.5 B4 | A4:2 F#4 D4:1.5 E4:.5 F#4","G4:2 E4 E4:1.5 D#4:.5 E4 | F#4:3 B3:2 E4","G4:2 A4 B4:1.5 C5:.5 B4 | A4:2 F#4 D4:1.5 E4:.5 F#4","G4:1.5 F#4:.5 E4 D#4:1.5 C#4:.5 D#4 | E4:3 E4:2 r"]},"nakarat":{"sag":["D5:3 D5:1.5 C#5:.5 B4 | A4:2 F#4 D4:1.5 E4:.5 F#4","G4:2 E4 E4:1.5 D#4:.5 E4 | F#4:2 D#4 B3:2 r","D5:3 D5:1.5 C5:.5 B4 | A4:2 F#4 D4:1.5 E4:.5 F#4","G4:1.5 F#4:.5 E4 D#4:1.5 C#4:.5 D#4 | E4:3 E4:2"]}}},
+    {"id":"joy-to-the-world","no":22,"ad":"Joy to the World","besteci":"Lowell Mason (Händel'den)","etiketler":["noel","ilahi"],"zorluk":2,"ton":"Re majör","olcu":"2/4","tempo":100,"birim":"1/8","oktav":3,"piston":"6","sira":["A"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["D5:2 C#5:1.5 B4:.5 | A4:3 G4 | F#4:2 E4:2 | D4:3 A4","B4:3 B4 | C#5:3 C#5 | D5:3 D5","D5 C#5 B4 A4 | A4:1.5 G4:.5 A4 D5","D5 C#5 B4 A4 | A4:1.5 G4:.5 F#4 F#4","F#4 F#4 F#4 F#4:.5 G4:.5 | A4:3 G4:.5 F#4:.5","E4 E4 E4 E4:.5 F#4:.5 | G4:3 F#4:.5 E4:.5","D4 D5:2 B4 | A4:1.5 G4:.5 F#4 G4 | F#4:2 E4:2 | D4:4"]}}},
+    {"id":"veni-emmanuel","no":23,"ad":"O Come, O Come, Emmanuel","besteci":"Fransız ortaçağ ezgisi","etiketler":["noel","ilahi"],"zorluk":1,"ton":"Mi minör","olcu":"4/4","tempo":72,"birim":"1/8","oktav":3,"piston":"1","bolumPiston":{"nakarat":"5"},"sira":["A","nakarat"],"dogrulama":"kaynak","bolumler":{"A":{"ad":"kıta","sag":["E4 | G4 B4 B4 B4 A4 C5 B4 A4 | G4:3","A4 B4 G4 E4 G4 | A4 F#4 E4 D4 E4:3","A4 | A4 E4 E4 F#4 G4:2 F#4 E4 | D4:3","G4 A4 B4 B4 B4 | A4 C5 B4 A4 G4:3"]},"nakarat":{"sag":["D5 | D5:3 B4 B4:3","B4 | A4 C5 B4 A4 G4 A4 B4 G4","E4 G4 A4 F#4 E4 D4 E4"]}}},
+    {"id":"abide-with-me","no":24,"ad":"Abide with Me","besteci":"William Henry Monk","etiketler":["ilahi"],"zorluk":1,"ton":"Re majör","olcu":"4/4","tempo":72,"birim":"1/4","oktav":3,"piston":"1","sira":["A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["F#4:2 F#4 E4 | D4:2 A4:2","B4 A4 A4 G4 | F#4:4","F#4:2 G4 A4 | B4:2 A4:2","G4 E4 F#4 G#4 | A4:4"]},"B":{"sag":["F#4:2 F#4 E4 | D4:2 A4:2","A4 G4 G4 F#4 | E4:4","E4:2 F#4 G4 | F#4 E4 D4 G4","F#4:2 E4:2 | D4:4"]}}},
+    {"id":"lobe-den-herren","no":25,"ad":"Lobe den Herren","besteci":"Stralsund ilahi kitabı","etiketler":["ilahi"],"zorluk":1,"ton":"Fa majör","olcu":"3/4","tempo":108,"birim":"1/4","oktav":3,"piston":"2","bolumPiston":{"B":"5"},"sira":["A","A","B"],"dogrulama":"kaynak","bolumler":{"A":{"sag":["F4 F4 C5 | A4:1.5 G4:.5 F4 | E4 D4 C4","D4 E4 F4 | G4:3 | F4:3"]},"B":{"sag":["C5 C5 C5 | D5:3 | A4 Bb4 C5 | C5:1.5 Bb4:.5 A4 | G4:3","C4 D4 E4 | F4 G4 A4 | G4:3 | F4:3"]}}},
+    {"id":"gorsev-icin-balad","no":26,"ad":"Görsev İçin Balad","besteci":"Claude","etiketler":["caz","ozgun"],"zorluk":2,"ton":"Re minör","olcu":"4/4","tempo":60,"swing":0.58,"birim":"1/4","oktav":3,"piston":"3","bolumPiston":{"B":"4"},"bolumTempo":{"bitis":0.75},"sira":["A","A","B","A","bitis"],"dogrulama":"ozgun","bolumler":{"A":{"sag":["D5 A4:.5 E5:.5 F5:2 | E5 D5 C#5:2","C5 G4:.5 D5:.5 E5:2 | D5 C5 B4:2","Bb4:.5 D5:.5 F5 E5:2 | A4:.5 C5:.5 E5 D5:2","G4:.5 Bb4:.5 D5 C#5:2 | D5:4"],"sol":["D3+D4:4 | D3+C#4:4","D3+C4:4 | D3+C4:2 D3+B3:2","G3+Bb3:2 C3+Bb3:2 | F3+A3:2 Bb3+D4:2","E3+D4:2 A3+C#4:2 | D3+D4:4"]},"B":{"ad":"B (köprü)","sag":["Eb5 D5:.5 Eb5:.5 G5:2 | F5 Eb5:.5 C5:.5 A4:2","D5 C5:.5 D5:.5 F5:2 | Eb5 D5:.5 Bb4:.5 G4:2","Bb4 D5 G5:2 | F5 E5 C#5:2","D5:3 A4 | E5:.5 D5:.5 C#5:.5 Bb4:.5 A4:2"],"sol":["C3+Bb3:4 | F3+A3:4","Bb3+D4:4 | F3+Bb3:4","E3+D4:4 | A3+C#4:4","D3+D4:4 | A3+C#4:4"]},"bitis":{"ad":"bitiş","sag":["F5:4 | F#5:4"],"sol":["D3+B3:4 | D3+A3:4"]}}},
+    {"id":"fur-elise","no":27,"ad":"Für Elise","besteci":"Ludwig van Beethoven","etiketler":["klasik"],"zorluk":2,"ton":"La minör","olcu":"3/8","tempo":66,"birim":"1/16","oktav":3,"piston":"3","sira":["giris","A","A1","A","A2","B","A","son"],"dogrulama":"kaynak","bolumler":{"giris":{"ad":"ön vuruş","sag":["E5 D#5"]},"A":{"sag":["E5 D#5 E5 B4 D5 C5 | A4:2 r C4 E4 A4","B4:2 r E4 G#4 B4 | C5:2 r E4 E5 D#5","E5 D#5 E5 B4 D5 C5 | A4:2 r C4 E4 A4","B4:2 r E4 C5 B4"]},"A1":{"ad":"1. bitiş","sag":["A4:4 E5 D#5"]},"A2":{"ad":"2. bitiş","sag":["A4:2 r B4 C5 D5"]},"B":{"sag":["E5:3 G4 F5 E5 | D5:3 F4 E5 D5","C5:3 E4 D5 C5 | B4:2 r E4 E5 r","r E5 E5 r:2 D#5 | E5:2 r D#5 E5 D#5"]},"son":{"ad":"son bitiş","sag":["A4:6"]}}},
+    {"id":"gymnopedie-no-1","no":28,"ad":"Gymnopédie No. 1","besteci":"Erik Satie","etiketler":["klasik"],"zorluk":1,"ton":"Re majör","olcu":"3/4","tempo":70,"birim":"1/4","oktav":4,"piston":"1","sira":["A","bitis1","A","bitis2"],"dogrulama":"kaynak","bolumler":{"A":{"ad":"melodi","sag":["r F#5 A5 | G5 F#5 C#5 | B4 C#5 D5 | A4:3","F#4:3 | ~:3 | ~:3 | ~:3","r F#5 A5 | G5 F#5 C#5 | B4 C#5 D5 | A4:3","C#5:3 | F#5:3 | E4:3 | ~:3","~:3 | A4 B4 C5 | E5 D5 B4 | D5 C5 B4","D5:3 | ~:2 D5 | E5 F5 G5 | A5 C5 D5","E5 D5 B4 | D5:3 | ~:2 D5"]},"bitis1":{"ad":"1. bitiş","sag":["G5:3 | F#5:3 | B4 A4 B4 | C#5 D5 E5","C#5 D5 E5 | F#4:3 | C4+E4+A4+C5:3 | D4+F#4+A4+D5:3"]},"bitis2":{"ad":"2. bitiş","sag":["G5:3 | F5:3 | B4 C5 F5 | E5 D5 C5","E5 D5 C5 | F4:3 | C4+E4+A4+C5:3 | D4+F4+A4+D5:3"]}}},
+    {"id":"turk-marsi","no":29,"ad":"Türk Marşı","besteci":"Wolfgang Amadeus Mozart","etiketler":["klasik"],"zorluk":3,"ton":"La minör","olcu":"2/4","tempo":120,"birim":"1/16","oktav":4,"piston":"4","sagAltSinir":"D5","bolumPiston":{"B":"6"},"sira":["giris","A","A1","A","A2","B","kapanis"],"dogrulama":"kaynak","bolumler":{"giris":{"ad":"ön vuruş","sag":["B4 A4 G#4 A4"]},"A":{"sag":["C5 r:3 D5 C5 B4 C5 | E5 r:3 F5 E5 D#5 E5","B5 A5 G#5 A5 B5 A5 G#5 A5 | C6:4 A5 r C6 r","B5 r A5 r G5 r A5 r | B5 r A5 r G5 r A5 r","B5 r A5 r G5 r F#5 r"]},"A1":{"ad":"1. bitiş","sag":["E5:4 B4 A4 G#4 A4"]},"A2":{"ad":"2. bitiş","sag":["E5:4 E5 r F5 r"]},"B":{"sag":["G5 r G5 r A5 G5 F5 E5 | D5:4 E5 r F5 r","G5 r G5 r A5 G5 F5 E5 | D5:4 C5 r D5 r","E5 r E5 r F5 E5 D5 C5 | B4:4 C5 r D5 r","E5 r E5 r F5 E5 D5 C5 | B4:4 B4 A4 G#4 A4"]},"kapanis":{"ad":"kapanış","sag":["C5 r:3 D5 C5 B4 C5 | E5 r:3 F5 E5 D#5 E5","B5 A5 G#5 A5 B5 A5 G#5 A5 | C6:2 r:2 A5 r B5 r","C6 r B5 r A5 r G#5 r | A5 r E5 r F5 r D5 r","C5:4 B4:3 A4:.5 B4:.5 | A4:4"]}}},
+    {"id":"the-entertainer","no":30,"ad":"The Entertainer","besteci":"Scott Joplin","etiketler":["caz"],"zorluk":3,"ton":"Do majör","olcu":"2/4","tempo":84,"birim":"1/16","oktav":4,"piston":"4","sagAltSinir":"E5","sira":["giris","onvurus","tema","son1","tema","son2"],"dogrulama":"kaynak","bolumler":{"giris":{"ad":"giriş","sag":["D6 E6 C6 A5:2 B5 G5:2 | D5 E5 C5 A4:2 B4 G4:2"]},"onvurus":{"ad":"ön vuruş","sag":["D4 D#4"]},"tema":{"sag":["E4 C5:2 E4 C5:2 E4 C5 | ~:5 C6 D6 D#6","E6 C6 D6 E6:2 B5 D6:2 | C6:6 D4 D#4","E4 C5:2 E4 C5:2 E4 C5 | ~:6 A5 G5","F#5 A5 C6 E6:2 D6 C6 A5 | D6:6 D4 D#4","E4 C5:2 E4 C5:2 E4 C5 | ~:5 C6 D6 D#6","E6 C6 D6 E6:2 B5 D6:2 | C6:6 C6 D6","E6 C6 D6 E6:2 C6 D6 C6 | E6 C6 D6 E6:2 C6 D6 C6","E6 C6 D6 E6:2 B5 D6:2"]},"son1":{"ad":"1. bitiş","sag":["C6:6 D4 D#4"]},"son2":{"ad":"2. bitiş","sag":["C6:8"]}}}
+  ]
+  ;
+  const PARCA_BY_ID = Object.fromEntries(PARCALAR.map(p => [p.id, p]));
+  const TPQ = 960; // dörtlük başına tik
+  const NOTA_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+
+  function notaMidi(ad) {
+    const m = /^([A-G])([#b]?)(\d)$/.exec(ad);
+    if (!m) throw new Error('nota adı anlaşılmadı: ' + ad);
+    return 12 * (Number(m[3]) + 1) + NOTA_PC[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0);
+  }
+
+  // "3/2", ".5", "2" → sayı
+  function sureCarpani(metin) {
+    if (!metin) return 1;
+    const kesir = metin.split('/');
+    return kesir.length === 2 ? Number(kesir[0]) / Number(kesir[1]) : Number(metin);
+  }
+
+  // Bir elin satırlarını olaylara çevirir: [{ t, d, notalar }] (tik; t bölüm başından)
+  function dizgileriCoz(satirlar, birimTik) {
+    const olaylar = [];
+    let t = 0, son = null;
+    for (const satir of satirlar) {
+      for (const p of satir.split(/\s+/)) {
+        if (!p || p === '|') continue;
+        const iki = p.indexOf(':');
+        const ad = iki < 0 ? p : p.slice(0, iki);
+        const d = Math.round(sureCarpani(iki < 0 ? '' : p.slice(iki + 1)) * birimTik);
+        if (ad === 'r') son = null;
+        else if (ad === '~') { if (son) son.d += d; }
+        else { son = { t, d, notalar: ad.split('+').map(notaMidi).sort((a, b) => a - b) }; olaylar.push(son); }
+        t += d;
+      }
+    }
+    return { olaylar, sure: t };
+  }
+
+  const cizelgeOnbellegi = new Map();
+
+  // Çalma sırasına göre açılmış zaman çizelgesi.
+  //   olaylar: [{ t, d, notalar, el, sira }] (t: parça başından tik), bolumler: [{ kimlik, ad, bas, bit, piston, oktav, tempo }]
+  function parcaCizelgesi(parca) {
+    if (cizelgeOnbellegi.has(parca.id)) return cizelgeOnbellegi.get(parca.id);
+    const [pay, payda] = parca.birim.split('/').map(Number);
+    const birimTik = TPQ * 4 * pay / payda;
+    const cozulmus = {};
+    for (const [kimlik, b] of Object.entries(parca.bolumler)) {
+      const eller = {};
+      let sure = 0;
+      for (const el of ['sag', 'sol']) if (b[el]) { eller[el] = dizgileriCoz(b[el], birimTik); sure = eller[el].sure; }
+      cozulmus[kimlik] = { eller, sure };
+    }
+    const olaylar = [], bolumler = [];
+    let t = 0;
+    parca.sira.forEach((kimlik, sira) => {
+      const b = cozulmus[kimlik];
+      for (const [el, { olaylar: liste }] of Object.entries(b.eller)) {
+        for (const o of liste) olaylar.push({ t: t + o.t, d: o.d, notalar: o.notalar, el, sira });
+      }
+      bolumler.push({
+        kimlik, ad: parca.bolumler[kimlik].ad || kimlik, bas: t, bit: t + b.sure,
+        piston: (parca.bolumPiston && parca.bolumPiston[kimlik]) || parca.piston,
+        oktav: (parca.bolumOktav && parca.bolumOktav[kimlik]) || parca.oktav,
+        tempo: parca.tempo * ((parca.bolumTempo && parca.bolumTempo[kimlik]) || 1),
+      });
+      t += b.sure;
+    });
+    olaylar.sort((a, b) => a.t - b.t || (a.el < b.el ? -1 : a.el > b.el ? 1 : 0));
+    const eller = ['sag', 'sol'].filter(el => olaylar.some(o => o.el === el));
+    const c = { olaylar, bolumler, toplam: t, eller };
+    cizelgeOnbellegi.set(parca.id, c);
+    return c;
+  }
+
+  // Sallanan sekizlikler: vuruşun ortası, vuruşun `swing` kesrine kayar (0.5 = düz).
+  function swingTik(tik, swing) {
+    if (!swing || swing === 0.5) return tik;
+    const vurus = Math.floor(tik / TPQ), k = (tik - vurus * TPQ) / TPQ;
+    const kaymis = k < 0.5 ? k * 2 * swing : swing + (k - 0.5) * 2 * (1 - swing);
+    return (vurus + kaymis) * TPQ;
+  }
+
+  // Parçanın başından `tik` anına kadar geçen süre (saniye), hız çarpanı 1 iken.
+  function parcaSaniyesi(parca, cizelge, tik) {
+    let sn = 0;
+    for (const b of cizelge.bolumler) {
+      if (tik <= b.bas) break;
+      const son = Math.min(tik, b.bit);
+      sn += (swingTik(son, parca.swing) - swingTik(b.bas, parca.swing)) / TPQ * 60 / b.tempo;
+    }
+    return sn;
+  }
+
+  // Notanın basılacağı klavye tuşu (kod). Sol el alt sırayı, sağ el üst sırayı yeğler.
+  function notaTusu(parca, midi, el, oktav) {
+    const fark = midi - 12 * (oktav + 1);
+    const altta = fark >= 0 && fark < LOWER_ROW.length, ustte = fark >= 12 && fark < 12 + UPPER_ROW.length;
+    if (!altta && !ustte) return null;
+    if (altta && ustte) {
+      const altTercih = el === 'sol' || (parca.sagAltSinir && midi <= notaMidi(parca.sagAltSinir));
+      return altTercih ? LOWER_ROW[fark] : UPPER_ROW[fark - 12];
+    }
+    return altta ? LOWER_ROW[fark] : UPPER_ROW[fark - 12];
+  }
+
+  /* ================= Şarkı çalar ================= */
+  // Dinle: program parçayı tempoda çalar. "Ben" seçilen el çalınmaz, yalnızca basılacak tuşlar yanar (eşlik).
+  // Öğren: program, "Ben" seçilen elin sıradaki tuşlarına basılmasını bekler; öbür eli o adıma kadar kendisi çalar.
+  const calar = {
+    parca: null, cizelge: null,
+    mod: 'dinle',                              // 'dinle' | 'ogren'
+    eller: { sag: 'program', sol: 'program' }, // 'program' | 'ben' | 'kapali'
+    hiz: 100,                                  // yüzde
+    dongu: false,                              // içinde bulunulan bölümü yinele
+    durum: 'bos',                              // 'bos' | 'hazir' | 'caliyor' | 'durakladi' | 'bitti'
+    konum: 0,                                  // tik
+    t0: 0, sira: 0, bolumNo: -1, basTik: 0,    // Dinle: zamanlama durumu
+    bekleyenKayit: null,                       // { t, stops }: bölüm geçişinde, henüz uygulanmamış registrasyon
+    acik: [], sayaclar: new Set(), dongu_id: 0,
+    adimlar: [], adim: 0, taze: new Set(), yanlis: 0, bitisSayaci: 0,
+    gunluk: null,                              // testler için: zamanlanan program notaları
+  };
+  const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
+  const ARALIK_MS = 25;
+
+  const calarSaniye = tik => parcaSaniyesi(calar.parca, calar.cizelge, tik) / (calar.hiz / 100);
+
+  // Zamanın (ctx) karşılık geldiği tik: calarSaniye'nin tersi (ikili arama)
+  function calarTik(zaman) {
+    const hedef = zaman - calar.t0;
+    let a = 0, b = calar.cizelge.toplam;
+    if (hedef <= 0) return 0;
+    if (hedef >= calarSaniye(b)) return b;
+    for (let i = 0; i < 32; i++) {
+      const m = (a + b) / 2;
+      if (calarSaniye(m) < hedef) a = m; else b = m;
+    }
+    return Math.round(b);
+  }
+
+  function calarSayac(zaman, is) {
+    const id = setTimeout(() => { calar.sayaclar.delete(id); is(); }, Math.max(0, (zaman - ctx.currentTime) * 1000));
+    calar.sayaclar.add(id);
+  }
+
+  function calarIsik(harita, o, yak) {
+    for (const m of o.notalar) {
+      if (harita === targets) { if (yak) targets.set(m, o.el); else targets.delete(m); continue; }
+      const e = playerDown.get(m) || { n: 0, el: o.el };
+      e.n += yak ? 1 : -1;
+      e.el = o.el;
+      if (e.n > 0) playerDown.set(m, e); else playerDown.delete(m);
+    }
+    refreshView();
+  }
+
+  // Bir olayı tBas–tBit arasında çalınmak üzere zamanlar.
+  function calarOlay(o, tBas, tBit, sonraki) {
+    const rol = calar.eller[o.el];
+    if (rol === 'kapali') return;
+    if (rol === 'ben') {
+      if (calar.mod === 'dinle') { calarSayac(tBas, () => calarIsik(targets, o, true)); calarSayac(tBit, () => calarIsik(targets, o, false)); }
+      return;
+    }
+    // Aynı nota hemen yineleniyorsa araya kısa bir nefes koy
+    const yinelenen = sonraki && sonraki.t === o.t + o.d && sonraki.notalar.some(m => o.notalar.includes(m));
+    const bit = yinelenen ? Math.max(tBas + (tBit - tBas) * 0.6, tBit - 0.045) : tBit;
+    const kayit = calar.bekleyenKayit && tBas >= calar.bekleyenKayit.t - 1e-4 ? calar.bekleyenKayit.stops : undefined;
+    for (const m of o.notalar) {
+      const v = new Voice(m, tBas, kayit);
+      playerVoices.add(v);
+      calar.acik.push({ v, bit });
+    }
+    if (calar.gunluk) calar.gunluk.push({ tik: o.t, el: o.el, notalar: o.notalar, bas: tBas, bit });
+    calarSayac(tBas, () => calarIsik(playerDown, o, true));
+    calarSayac(bit, () => calarIsik(playerDown, o, false));
+  }
+
+  function calarAcikKapat(ufuk) {
+    calar.acik = calar.acik.filter(a => {
+      if (a.bit >= ufuk) return true;
+      a.v.release(Math.max(a.bit, ctx.currentTime));
+      playerVoices.delete(a.v);
+      return false;
+    });
+  }
+
+  // Bölümün registrasyonunu ve oktavını uygular (bir önceki bölümden farklıysa).
+  function calarBolumeGir(no, zaman) {
+    const b = calar.cizelge.bolumler[no], onceki = no > 0 ? calar.cizelge.bolumler[no - 1] : null;
+    const pistonDegisti = !onceki || onceki.piston !== b.piston || calar.yeniBaslangic;
+    calar.yeniBaslangic = false;
+    if (pistonDegisti) calar.bekleyenKayit = { t: zaman, stops: PISTONS.find(p => p.n === b.piston).stops };
+    calarSayac(zaman, () => {
+      if (pistonDegisti) { applyPiston(b.piston); calar.bekleyenKayit = null; }
+      if (settings.octave !== b.oktav) setOctave(b.oktav);
+      calar.gorunenBolum = no;
+      calarArayuzGuncelle();
+    });
+  }
+
+  function calarZamanla() {
+    if (calar.durum !== 'caliyor') return;
+    const c = calar.cizelge, ufuk = ctx.currentTime + UFUK;
+    calarAcikKapat(ufuk);
+    if (calar.mod !== 'dinle') return;
+    for (;;) {
+      // Bölüm yinelemesi: bölümün sonuna gelince başına dön
+      const b = c.bolumler[Math.max(0, calar.bolumNo)];
+      if (calar.dongu && calar.bolumNo >= 0 && calar.t0 + calarSaniye(b.bit) < ufuk) {
+        calar.t0 += calarSaniye(b.bit) - calarSaniye(b.bas);
+        calar.sira = c.olaylar.findIndex(o => o.t >= b.bas);
+        if (calar.sira < 0) calar.sira = c.olaylar.length;
+        continue;
+      }
+      if (calar.bolumNo + 1 < c.bolumler.length) {
+        const zaman = calar.t0 + calarSaniye(c.bolumler[calar.bolumNo + 1].bas);
+        if (zaman < ufuk && (calar.sira >= c.olaylar.length || c.olaylar[calar.sira].t >= c.bolumler[calar.bolumNo + 1].bas)) {
+          calar.bolumNo++;
+          calarBolumeGir(calar.bolumNo, Math.max(zaman, ctx.currentTime));
+          continue;
+        }
+      }
+      if (calar.sira >= c.olaylar.length) break;
+      const o = c.olaylar[calar.sira];
+      const tBas = calar.t0 + calarSaniye(o.t);
+      if (tBas >= ufuk) break;
+      calar.sira++;
+      if (o.t < calar.basTik) continue;
+      const sonraki = c.olaylar.slice(calar.sira).find(x => x.el === o.el);
+      calarOlay(o, tBas, calar.t0 + calarSaniye(o.t + o.d), sonraki);
+    }
+    calar.konum = calarTik(ctx.currentTime);
+    calarIlerlemeGuncelle();
+    if (calar.sira >= c.olaylar.length && !calar.dongu && ctx.currentTime > calar.t0 + calarSaniye(c.toplam) + 0.05) calarBitir();
+  }
+
+  function calarSesleriKes() {
+    for (const id of calar.sayaclar) clearTimeout(id);
+    calar.sayaclar.clear();
+    const simdi = ctx ? ctx.currentTime : 0;
+    for (const a of calar.acik) { if (a.v.t0 <= simdi) a.v.release(simdi); else a.v.cancel(); }
+    calar.acik = [];
+    playerVoices.clear();
+    playerDown.clear();
+    targets.clear();
+    calar.bekleyenKayit = null;
+    refreshView();
+  }
+
+  function calarBitir() {
+    calarSesleriKes();
+    calar.durum = 'bitti';
+    calar.konum = calar.cizelge.toplam;
+    calarArayuzGuncelle();
+  }
+
+  /* ---- Öğren: adım adım ---- */
+  function calarAdimlariKur() {
+    const adimlar = [];
+    for (const o of calar.cizelge.olaylar) {
+      if (calar.eller[o.el] !== 'ben') continue;
+      let a = adimlar[adimlar.length - 1];
+      if (!a || a.t !== o.t) { a = { t: o.t, notalar: [], eller: new Map(), sira: o.sira }; adimlar.push(a); }
+      for (const m of o.notalar) if (!a.eller.has(m)) { a.notalar.push(m); a.eller.set(m, o.el); }
+    }
+    calar.adimlar = adimlar;
+  }
+
+  // [bas, bit) tik aralığındaki program notalarını şimdi başlayacak biçimde çalar.
+  function calarAraligiCal(bas, bit) {
+    const c = calar.cizelge;
+    const t0 = ctx.currentTime + 0.03 - calarSaniye(bas);
+    c.olaylar.forEach((o, i) => {
+      if (o.t < bas || o.t >= bit || calar.eller[o.el] !== 'program') return;
+      const sonraki = c.olaylar.slice(i + 1).find(x => x.el === o.el);
+      calarOlay(o, t0 + calarSaniye(o.t), t0 + calarSaniye(o.t + o.d), sonraki);
+    });
+    return t0 + calarSaniye(bit);
+  }
+
+  function calarAdimaGec(no) {
+    const c = calar.cizelge;
+    calar.adim = no;
+    calar.taze.clear();
+    targets.clear();
+    if (no >= calar.adimlar.length) { refreshView(); return; }
+    const a = calar.adimlar[no];
+    calar.konum = a.t;
+    const b = c.bolumler[a.sira];
+    if (calar.gorunenBolum !== a.sira) {
+      const onceki = c.bolumler[calar.gorunenBolum];
+      if (!onceki || onceki.piston !== b.piston) applyPiston(b.piston);
+      if (settings.octave !== b.oktav) setOctave(b.oktav);
+      calar.gorunenBolum = a.sira;
+    }
+    for (const m of a.notalar) targets.set(m, a.eller.get(m));
+    refreshView();
+    calarArayuzGuncelle();
+  }
+
+  // noteOn her tuş basışında çağırır.
+  function calarKullaniciBasti(midi) {
+    if (calar.mod !== 'ogren' || calar.durum !== 'caliyor' || calar.adim >= calar.adimlar.length) return;
+    const a = calar.adimlar[calar.adim];
+    if (!a.notalar.includes(midi)) {
+      calar.yanlis++;
+      calarYanlisGoster(midi);
+      calarArayuzGuncelle();
+      return;
+    }
+    calar.taze.add(midi);
+    if (!a.notalar.every(m => holders.has(m))) return;
+    // Adım tamam: öbür elin bu adımdan sonrakine kadar olan notalarını çal, sonraki adıma geç
+    const c = calar.cizelge;
+    const sonraki = calar.adimlar[calar.adim + 1];
+    let bit = sonraki ? sonraki.t : c.toplam;
+    let no = calar.adim + 1;
+    if (calar.dongu) {
+      const b = c.bolumler[a.sira];
+      if (!sonraki || sonraki.t >= b.bit) { bit = b.bit; no = calar.adimlar.findIndex(x => x.t >= b.bas); }
+    }
+    const sonAn = calarAraligiCal(a.t, bit);
+    if (no >= calar.adimlar.length) {
+      calarAdimaGec(no);
+      clearTimeout(calar.bitisSayaci);
+      calar.bitisSayaci = setTimeout(() => { if (calar.durum === 'caliyor') calarBitir(); }, Math.max(300, (sonAn - ctx.currentTime) * 1000 + 200));
+    } else calarAdimaGec(no);
+  }
+
+  /* ---- Komutlar ---- */
+  function calarYukle(id, mod) {
+    const parca = PARCA_BY_ID[id];
+    if (!parca) return false;
+    if (calar.parca) calarDurdur();
+    calar.parca = parca;
+    calar.cizelge = parcaCizelgesi(parca);
+    calar.hiz = 100;
+    calar.dongu = false;
+    calar.konum = 0;
+    calar.yanlis = 0;
+    calar.gorunenBolum = -1;
+    calarModSec(mod === 'ogren' ? 'ogren' : 'dinle', true);
+    calar.durum = 'hazir';
+    // Parçanın önerdiği ayarlar
+    const ilk = calar.cizelge.bolumler[0];
+    applyPiston(ilk.piston);
+    if (settings.octave !== ilk.oktav) setOctave(ilk.oktav);
+    if (parca.mekan && ROOMS[parca.mekan] && settings.room !== parca.mekan) { settings.room = parca.mekan; $('#room').value = parca.mekan; applyRoom(); save(); }
+    calarArayuzKur();
+    calarArayuzGuncelle();
+    return true;
+  }
+
+  function calarModSec(mod, sessiz) {
+    if (calar.durum === 'caliyor') calarDuraklat();
+    calar.mod = mod;
+    const eller = calar.cizelge.eller;
+    if (mod === 'ogren') {
+      // En az bir eli kullanıcı çalmalı
+      if (!eller.some(el => calar.eller[el] === 'ben')) {
+        calar.eller.sag = eller.includes('sag') ? 'ben' : 'kapali';
+        calar.eller.sol = eller.includes('sol') ? (eller.includes('sag') ? 'program' : 'ben') : 'kapali';
+      }
+    } else if (sessiz) {
+      calar.eller.sag = 'program'; calar.eller.sol = 'program';
+    }
+    calarAdimlariKur();
+    calar.adim = Math.max(0, calar.adimlar.findIndex(a => a.t >= calar.konum));
+    if (!sessiz) calarArayuzGuncelle();
+  }
+
+  function calarElSec(el, rol) {
+    const caliyordu = calar.durum === 'caliyor';
+    if (caliyordu) calarDuraklat();
+    calar.eller[el] = rol;
+    // Öğren'de bir eli kullanıcı çalmalı: kullanıcı elini bırakınca öbür el ona geçer (yoksa seçim geri alınır)
+    if (calar.mod === 'ogren' && !calar.cizelge.eller.some(e => calar.eller[e] === 'ben')) {
+      const obur = calar.cizelge.eller.find(e => e !== el);
+      calar.eller[obur || el] = 'ben';
+    }
+    calarAdimlariKur();
+    calar.adim = Math.max(0, calar.adimlar.findIndex(a => a.t >= calar.konum));
+    if (caliyordu) calarBasla();
+    calarArayuzGuncelle();
+  }
+
+  function calarBasla() {
+    if (!calar.parca || calar.durum === 'caliyor') return;
+    if (!ensureWind()) return;
+    const c = calar.cizelge;
+    if (calar.durum === 'bitti' || calar.konum >= c.toplam) { calar.konum = 0; calar.yanlis = 0; }
+    calar.durum = 'caliyor';
+    // Baştan başlarken ya da bir bölüme atlanınca o bölümün registrasyonu uygulanır; duraklatıp sürdürünce dokunulmaz.
+    calar.yeniBaslangic = calar.kayitZorla || calar.konum === 0;
+    calar.kayitZorla = false;
+    clearInterval(calar.dongu_id);
+    calar.dongu_id = setInterval(calarZamanla, ARALIK_MS);
+    if (calar.mod === 'dinle') {
+      calar.basTik = calar.konum;
+      calar.t0 = ctx.currentTime + 0.12 - calarSaniye(calar.konum);
+      calar.sira = 0;
+      calar.bolumNo = c.bolumler.findIndex(b => calar.konum < b.bit) - 1;
+      if (calar.bolumNo < -1) calar.bolumNo = c.bolumler.length - 2;
+      calarZamanla();
+    } else {
+      if (calar.yeniBaslangic) calar.gorunenBolum = -1;
+      let no = calar.adimlar.findIndex(a => a.t >= calar.konum);
+      if (no < 0) no = calar.adimlar.length;
+      // İlk adımdan önce öbür elin çaldığı bir giriş varsa onu çal
+      const ilkTik = no < calar.adimlar.length ? calar.adimlar[no].t : c.toplam;
+      if (ilkTik > calar.konum) calarAraligiCal(calar.konum, ilkTik);
+      calarAdimaGec(no);
+    }
+    calarArayuzGuncelle();
+  }
+
+  function calarDuraklat() {
+    if (calar.durum !== 'caliyor') return;
+    if (calar.mod === 'dinle') calar.konum = calarTik(ctx.currentTime);
+    clearInterval(calar.dongu_id);
+    clearTimeout(calar.bitisSayaci);
+    calarSesleriKes();
+    calar.durum = 'durakladi';
+    calarArayuzGuncelle();
+  }
+
+  function calarDurdur() {
+    clearInterval(calar.dongu_id);
+    clearTimeout(calar.bitisSayaci);
+    calarSesleriKes();
+    calar.durum = calar.parca ? 'hazir' : 'bos';
+    calar.konum = 0;
+    calar.yanlis = 0;
+    calar.adim = 0;
+    calarArayuzGuncelle();
+  }
+
+  function calarKonumaGit(tik) {
+    const caliyordu = calar.durum === 'caliyor';
+    if (caliyordu) calarDuraklat();
+    calar.konum = clamp(tik, 0, calar.cizelge.toplam);
+    calar.kayitZorla = true;
+    calar.adim = Math.max(0, calar.adimlar.findIndex(a => a.t >= calar.konum));
+    if (calar.durum === 'bitti') calar.durum = 'durakladi';
+    if (caliyordu) calarBasla();
+    calarArayuzGuncelle();
+  }
+
+  function calarHizAyarla(yuzde) {
+    const caliyordu = calar.durum === 'caliyor' && calar.mod === 'dinle';
+    if (caliyordu) calarDuraklat();
+    calar.hiz = yuzde;
+    if (caliyordu) calarBasla();
+    calarArayuzGuncelle();
+  }
+
+  function calarKapat() {
+    calarDurdur();
+    calar.parca = null;
+    calar.cizelge = null;
+    calar.durum = 'bos';
+    adresiTemizle();
+    calarArayuzGuncelle();
+  }
+
+  /* ================= Şarkı çalar: arayüz ================= */
+  const ETIKET_ADI = { ilahi: 'İlahi', noel: 'Noel', klasik: 'Klasik', opera: 'Opera', caz: 'Caz', dugun: 'Düğün', ozgun: 'Özgün' };
+  const ZORLUK_ADI = { 1: 'Kolay', 2: 'Orta', 3: 'Zor' };
+  const DOGRULAMA_ADI = { kaynak: 'Kaynakla karşılaştırıldı', 'kaynak-elle': 'Kaynağa bakılarak denetlendi', ezber: 'Ezberden; doğrulanmadı', ozgun: 'Özgün parça' };
+  const DURUM_ADI = { hazir: 'Hazır', caliyor: 'Çalıyor', durakladi: 'Durakladı', bitti: 'Bitti' };
+  const calarEl = $('#calar');
+  const liste = { kutu: $('#parcaListesi'), ara: $('#parcaAra'), ul: $('#parcaSatirlari'), etiketler: $('#parcaEtiketleri'), secili: null };
+  const dokunmatik = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+  // Adresi yalnızca değiştiğinde yaz (Safari, replaceState'i 30 saniyede 100 kezle sınırlar)
+  function adresiYaz(u) {
+    try { if (u.href !== location.href) history.replaceState(null, '', u); } catch (_) {}
+  }
+
+  function parcaAdresi(id, mod) {
+    const u = new URL(location.href);
+    u.search = '';
+    u.hash = '';
+    if (id) u.searchParams.set('parca', id);
+    if (id && mod === 'ogren') u.searchParams.set('mod', 'ogren');
+    return u;
+  }
+
+  // Bölüm düğmelerini ve el seçimlerini parçaya göre kurar (parça yüklenince bir kez).
+  function calarArayuzKur() {
+    const p = calar.parca, c = calar.cizelge;
+    $('#calarNo').textContent = p.no + '.';
+    $('#calarAd').textContent = p.ad;
+    $('#calarBesteci').textContent = p.besteci;
+    $('#calarBilgi').textContent = `${p.ton} · ${p.olcu} · ${ZORLUK_ADI[p.zorluk]} · ${DOGRULAMA_ADI[p.dogrulama]}`;
+    const host = $('#calarBolumler');
+    host.textContent = '';
+    c.bolumler.forEach((b, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'bolum';
+      d.textContent = b.ad;
+      d.dataset.no = i;
+      d.title = 'Bu bölüme git';
+      d.addEventListener('click', () => calarKonumaGit(b.bas));
+      host.appendChild(d);
+    });
+    $('#elSolKutu').hidden = !c.eller.includes('sol');
+    $('#elSagKutu').hidden = !c.eller.includes('sag');
+    adresiYaz(parcaAdresi(p.id, calar.mod));
+  }
+
+  function calarIlerlemeGuncelle() {
+    if (!calar.cizelge) return;
+    $('#calarCubuk').style.width = (100 * calar.konum / calar.cizelge.toplam).toFixed(2) + '%';
+    const no = calar.cizelge.bolumler.findIndex(b => calar.konum < b.bit);
+    const simdiki = calar.durum === 'bitti' ? -1 : (no < 0 ? calar.cizelge.bolumler.length - 1 : no);
+    $('#calarBolumler').querySelectorAll('.bolum').forEach((d, i) => d.setAttribute('aria-current', String(i === simdiki)));
+  }
+
+  // Öğren modunda sıradaki adımların tuşlarını yazar.
+  function calarSiradakiYaz() {
+    const el = $('#calarSiradaki');
+    el.textContent = '';
+    if (calar.mod !== 'ogren' || !calar.parca || calar.durum === 'bitti') { el.hidden = true; return; }
+    el.hidden = false;
+    const bas = document.createElement('span');
+    bas.className = 'siradaki-bas';
+    bas.textContent = 'Sıradaki:';
+    el.appendChild(bas);
+    calar.adimlar.slice(calar.adim, calar.adim + 10).forEach((a, i) => {
+      const k = document.createElement('kbd');
+      if (i === 0) k.className = 'simdi';
+      const oktav = calar.cizelge.bolumler[a.sira].oktav;
+      k.textContent = a.notalar.map(m => {
+        const kod = notaTusu(calar.parca, m, a.eller.get(m), oktav);
+        return dokunmatik || !kod ? noteName(m) : labels[kod];
+      }).join('+');
+      el.appendChild(k);
+    });
+    if (calar.adim >= calar.adimlar.length) { const s = document.createElement('span'); s.textContent = ' —'; el.appendChild(s); }
+  }
+
+  function calarArayuzGuncelle() {
+    const var_ = !!calar.parca;
+    calarEl.hidden = !var_;
+    $('#parcaSec').hidden = var_;
+    if (!var_) return;
+    const caliyor = calar.durum === 'caliyor';
+    const oynat = $('#calarOynat');
+    oynat.textContent = caliyor ? '❚❚' : '▶';
+    oynat.setAttribute('aria-label', caliyor ? 'Duraklat' : (calar.mod === 'ogren' ? 'Başla' : 'Çal'));
+    oynat.setAttribute('aria-pressed', String(caliyor));
+    $('#modDinle').setAttribute('aria-pressed', String(calar.mod === 'dinle'));
+    $('#modOgren').setAttribute('aria-pressed', String(calar.mod === 'ogren'));
+    $('#calarHiz').value = calar.hiz;
+    $('#calarHizOut').textContent = calar.hiz + '%';
+    $('#elSag').value = calar.eller.sag;
+    $('#elSol').value = calar.eller.sol;
+    $('#calarDongu').setAttribute('aria-pressed', String(calar.dongu));
+    let durum = DURUM_ADI[calar.durum] || '';
+    if (calar.mod === 'ogren') {
+      const toplam = calar.adimlar.length;
+      if (calar.durum === 'bitti') durum = `Bitti: ${toplam} adım, ${calar.yanlis} yanlış tuş`;
+      else if (calar.durum === 'caliyor') durum = `Adım ${Math.min(calar.adim + 1, toplam)}/${toplam} · Yanlış: ${calar.yanlis}`;
+      else durum += ' · Yanan tuşa bas, program seni bekler';
+    } else if (calar.cizelge.eller.some(el => calar.eller[el] === 'ben') && calar.durum !== 'bitti') {
+      durum += ' · Yanan tuşlar senin elin';
+    }
+    $('#calarDurum').textContent = durum;
+    calarEl.dataset.durum = calar.durum;
+    calarEl.dataset.mod = calar.mod;
+    calarIlerlemeGuncelle();
+    calarSiradakiYaz();
+    adresiYaz(parcaAdresi(calar.parca.id, calar.mod));
+  }
+
+  function calarYanlisGoster(midi) {
+    const k = keyEls[midi - baseMidi()];
+    if (!k) return;
+    k.classList.add('yanlis');
+    setTimeout(() => k.classList.remove('yanlis'), 350);
+  }
+
+  /* ---- Parça listesi ---- */
+  function listeYaz() {
+    const ara = liste.ara.value.trim().toLocaleLowerCase('tr');
+    liste.ul.textContent = '';
+    let adet = 0;
+    for (const p of PARCALAR) {
+      if (liste.secili && !p.etiketler.includes(liste.secili)) continue;
+      if (ara && !(p.ad + ' ' + p.besteci).toLocaleLowerCase('tr').includes(ara)) continue;
+      adet++;
+      const li = document.createElement('li');
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'parca-satiri';
+      d.dataset.id = p.id;
+      d.innerHTML = '<span class="p-no"></span><span class="p-ad"></span><span class="p-besteci"></span><span class="p-ek"></span>';
+      d.children[0].textContent = p.no;
+      d.children[1].textContent = p.ad;
+      d.children[2].textContent = p.besteci;
+      d.children[3].textContent = `${ZORLUK_ADI[p.zorluk]}${p.dogrulama === 'ezber' ? ' · doğrulanmadı' : ''}`;
+      d.addEventListener('click', () => {
+        liste.kutu.close();
+        calarYukle(p.id, 'dinle');
+        // Klavye ile çalar paneli birlikte görünsün
+        $('.manual-wrap').scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
+      li.appendChild(d);
+      liste.ul.appendChild(li);
+    }
+    $('#parcaYok').hidden = adet > 0;
+  }
+
+  function listeKur() {
+    const etiketler = [...new Set(PARCALAR.flatMap(p => p.etiketler))];
+    const ekle = (deger, ad) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'etiket';
+      d.textContent = ad;
+      d.setAttribute('aria-pressed', String(liste.secili === deger));
+      d.addEventListener('click', () => {
+        liste.secili = deger;
+        liste.etiketler.querySelectorAll('.etiket').forEach(x => x.setAttribute('aria-pressed', String(x === d)));
+        listeYaz();
+      });
+      liste.etiketler.appendChild(d);
+    };
+    ekle(null, 'Hepsi');
+    for (const e of Object.keys(ETIKET_ADI)) if (etiketler.includes(e)) ekle(e, ETIKET_ADI[e]);
+    liste.ara.addEventListener('input', listeYaz);
+    const ac = () => { listeYaz(); if (liste.kutu.showModal) liste.kutu.showModal(); else liste.kutu.setAttribute('open', ''); };
+    $('#parcalarBtn').addEventListener('click', ac);
+    $('#parcaSec').addEventListener('click', ac);
+    $('#parcaListesiKapat').addEventListener('click', () => liste.kutu.close());
+    liste.kutu.addEventListener('click', e => { if (e.target === liste.kutu) liste.kutu.close(); });
+  }
+
+  function calarOlaylariBagla() {
+    $('#calarOynat').addEventListener('click', () => (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla()));
+    $('#calarBas').addEventListener('click', calarDurdur);
+    $('#calarKapat').addEventListener('click', calarKapat);
+    $('#modDinle').addEventListener('click', () => calarModSec('dinle'));
+    $('#modOgren').addEventListener('click', () => calarModSec('ogren'));
+    $('#calarHiz').addEventListener('input', e => calarHizAyarla(Number(e.target.value)));
+    $('#elSag').addEventListener('change', e => { calarElSec('sag', e.target.value); e.target.blur(); });
+    $('#elSol').addEventListener('change', e => { calarElSec('sol', e.target.value); e.target.blur(); });
+    $('#calarDongu').addEventListener('click', () => { calar.dongu = !calar.dongu; calarArayuzGuncelle(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) calarDuraklat(); });
+  }
+
+  // Adresteki ?parca=… ile gelen parçayı yükler.
+  function calarAdrestenYukle() {
+    let q;
+    try { q = new URL(location.href).searchParams; } catch (_) { return; }
+    if (!q.get('parca')) return;
+    // Bilinmeyen parça: adresi temizle, sayfa olduğu gibi açılsın
+    if (!calarYukle(q.get('parca'), q.get('mod'))) adresiTemizle();
+  }
+
+  function adresiTemizle() { adresiYaz(parcaAdresi(null)); }
+
+  // Testler ve meraklılar için: sayfanın dışından okunabilen küçük bir arayüz.
+  window.kiliseOrgu = {
+    surum: 2,
+    parcalar: PARCALAR,
+    cizelge: id => parcaCizelgesi(PARCA_BY_ID[id]),
+    saniye: (id, tik) => parcaSaniyesi(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id]), tik),
+    tus: (id, midi, el, oktav) => notaTusu(PARCA_BY_ID[id], midi, el, oktav),
+    calar,
+    yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
+    sesZamani: () => (ctx ? ctx.currentTime : 0),
+  };
+
   /* ================= Olaylar ================= */
   const windBtn = $('#wind');
   const holdBtn = $('#hold');
@@ -1041,6 +1945,7 @@
   windBtn.addEventListener('click', () => {
     if (windOn) {
       windOn = false;
+      if (calar.parca) calarDurdur();
       releaseAll();
       updateWindUI();
       setTimeout(() => { if (!windOn && ctx) ctx.suspend().catch(() => {}); }, 3000);
@@ -1058,7 +1963,12 @@
       if (!e.repeat) { sustainKey = true; updateSustain(); }
       return;
     }
-    if (e.code === 'Escape') { releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (e.code === 'Escape') { calarDuraklat(); releaseAll(); sustainLatch = false; updateSustain(); return; }
+    if (e.code === 'Enter' && !inField && calar.parca && tag !== 'BUTTON') {
+      e.preventDefault();
+      if (!e.repeat) (calar.durum === 'caliyor' ? calarDuraklat() : calarBasla());
+      return;
+    }
     if (!inField && (e.code === 'ArrowUp' || e.code === 'ArrowDown')) {
       e.preventDefault();
       if (!e.repeat) shiftOctave(e.code === 'ArrowUp' ? 1 : -1);
@@ -1151,6 +2061,10 @@
   refreshView();
   updateFocusHint();
   readLayout();
+  listeKur();
+  calarOlaylariBagla();
+  calarArayuzGuncelle();
+  calarAdrestenYukle();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };

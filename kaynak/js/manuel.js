@@ -78,6 +78,8 @@
     } catch (_) {}
   }
 
+  function setOctave(n) { shiftOctave(n - settings.octave); }
+
   function shiftOctave(d) {
     const n = clamp(settings.octave + d, 1, 5);
     if (n === settings.octave) return;

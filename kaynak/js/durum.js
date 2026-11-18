@@ -5,9 +5,10 @@
 
   const settings = { room: 'kilise', reverb: 45, volume: 70, octave: 3 };
   const stopsOn = new Set(PISTONS[4].stops);
-  const STORE_KEY = 'kilise-orgu-v1';
+  // Özgün sürüm (v1/) aynı adreste kendi ayarlarını 'kilise-orgu-v1' altında tutar; ilk açılışta oradan devralınır.
+  const STORE_KEY = 'kilise-orgu-v2';
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || localStorage.getItem('kilise-orgu-v1') || 'null');
     if (saved) {
       if (ROOMS[saved.room]) settings.room = saved.room;
       if (Number.isFinite(saved.reverb)) settings.reverb = clamp(saved.reverb, 0, 100);

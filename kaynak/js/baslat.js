@@ -8,6 +8,10 @@
   refreshView();
   updateFocusHint();
   readLayout();
+  listeKur();
+  calarOlaylariBagla();
+  calarArayuzGuncelle();
+  calarAdrestenYukle();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };
