@@ -75,7 +75,7 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 ## Aşama 6: Nota ve alıştırma
 
 - [x] Porte: parçanın notaları sol ve fa anahtarlı çift portede; çalarken imleç ilerler, Öğren'de sıradaki nota yanar.
-- [ ] Metronom: serbest çalarken kendi temposunda, parça çalarken parçanın temposunda ve ölçüsünde.
+- [x] Metronom: serbest çalarken kendi temposunda, parça çalarken parçanın temposunda ve ölçüsünde.
 - [ ] İlerleme: Öğren'de her parçanın en iyi sonucu saklanır, listede görünür.
 
 ## Aşama 7: Paylaşma ve içe aktarma

@@ -268,6 +268,19 @@
             <button id="kayitSesIndir" class="hold" type="button" title="Hoparlöre giden ses">Ses indir</button>
           </span>
         </div>
+        <div class="metronom-kutu">
+          <button id="metronomBtn" class="hold" type="button" aria-pressed="false" title="Serbest çalarken kendi temposunda, parça çalarken parçanın vuruşunda tıklar">Metronom</button>
+          <span class="metronom-isik" id="metronomIsik" aria-hidden="true"></span>
+          <input type="number" id="metronomTempo" class="metronom-tempo" min="30" max="240" step="1" value="90" inputmode="numeric" aria-label="Metronom temposu, dakikada vuruş">
+          <select id="metronomOlcu" class="metronom-olcu" aria-label="Ölçüdeki vuruş sayısı; ilk vuruş vurgulu">
+            <option value="0">Vurgusuz</option>
+            <option value="2">2 vuruş</option>
+            <option value="3">3 vuruş</option>
+            <option value="4">4 vuruş</option>
+            <option value="6">6 vuruş</option>
+          </select>
+          <span class="metronom-durum" id="metronomDurum" aria-live="polite"></span>
+        </div>
         <div class="midi-kutu">
           <button id="midiBagla" class="hold" type="button" aria-pressed="false" title="USB ya da Bluetooth MIDI klavyeyi bağla">MIDI klavye</button>
           <span class="midi-durum" id="midiDurum" aria-live="polite"></span>
@@ -379,6 +392,7 @@
 /*@ekle js/gorunum.js*/
 /*@ekle js/cephe.js*/
 /*@ekle js/parca.js*/
+/*@ekle js/metronom.js*/
 /*@ekle js/calar.js*/
 /*@ekle js/calar-arayuz.js*/
 /*@ekle js/kendi-parca.js*/

@@ -15,6 +15,7 @@
     adimlar: [], adim: 0, taze: new Set(), yanlis: 0, bitisSayaci: 0,
     gunluk: null,                              // testler için: zamanlanan program notaları
     basEli: 'sol', pedalSayisi: 0,             // otomatik pedal: bas çizgisini çalan el, zamanlanan pedal notası sayısı
+    vuruslar: [], vurusSira: 0,                // metronom: parçanın vuruşları ve sıradaki
   };
   const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
   const ARALIK_MS = 25;
@@ -106,6 +107,8 @@
     });
   }
 
+  const ilkVurus = tik => { const i = calar.vuruslar.findIndex(v => v.t >= tik); return i < 0 ? calar.vuruslar.length : i; };
+
   function calarZamanla() {
     if (calar.durum !== 'caliyor') return;
     const c = calar.cizelge, ufuk = ctx.currentTime + UFUK;
@@ -118,6 +121,8 @@
         calar.t0 += calarSaniye(b.bit) - calarSaniye(b.bas);
         calar.sira = c.olaylar.findIndex(o => o.t >= b.bas);
         if (calar.sira < 0) calar.sira = c.olaylar.length;
+        calar.vurusSira = ilkVurus(b.bas);
+        calar.basTik = Math.min(calar.basTik, b.bas); // bölümün ortasından başlandıysa yinelemede başı da çalınsın
         continue;
       }
       if (calar.bolumNo + 1 < c.bolumler.length) {
@@ -127,6 +132,12 @@
           calarBolumeGir(calar.bolumNo, Math.max(zaman, ctx.currentTime));
           continue;
         }
+      }
+      // Metronom: parçanın vuruşları notalarla aynı döngüde zamanlanır
+      for (const V = calar.vuruslar; calar.vurusSira < V.length; calar.vurusSira++) {
+        const v = V[calar.vurusSira], zaman = calar.t0 + calarSaniye(v.t);
+        if (zaman >= ufuk) break;
+        if (metronom.acik && v.t >= calar.basTik) metronomTik(Math.max(zaman, ctx.currentTime), v.vurgu, 'parca');
       }
       if (calar.sira >= c.olaylar.length) break;
       const o = c.olaylar[calar.sira];
@@ -263,6 +274,7 @@
     if (calar.parca) calarDurdur();
     calar.parca = parca;
     calar.cizelge = parcaCizelgesi(parca);
+    calar.vuruslar = parcaVuruslari(parca, calar.cizelge);
     calar.basEli = calar.cizelge.eller.includes('sol') ? 'sol' : 'sag';
     calar.hiz = 100;
     calar.dongu = false;
@@ -331,6 +343,7 @@
       calar.basTik = calar.konum;
       calar.t0 = ctx.currentTime + 0.12 - calarSaniye(calar.konum);
       calar.sira = 0;
+      calar.vurusSira = ilkVurus(calar.konum);
       calar.bolumNo = c.bolumler.findIndex(b => calar.konum < b.bit) - 1;
       if (calar.bolumNo < -1) calar.bolumNo = c.bolumler.length - 2;
       calarZamanla();

@@ -299,6 +299,15 @@
   .kayit-durum:empty { display: none; }
   .kayit-sure { color: var(--ivory-dim); font-size: .9rem; }
   .kayit-sure b { color: var(--ivory); font: 500 .9rem var(--font-mono); }
+  .metronom-kutu { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 36px; }
+  .metronom-isik { width: 12px; height: 12px; border-radius: 50%; background: rgba(86,59,39,.9); box-shadow: inset 0 1px 2px rgba(0,0,0,.5); flex: none; }
+  .metronom-isik.vur { background: var(--gilt-bright); box-shadow: 0 0 8px var(--gilt); }
+  .metronom-isik.vurgu { background: #f08a74; box-shadow: 0 0 10px #d0573f; }
+  .metronom-tempo { width: 4.6em; font: 500 .95rem var(--font-mono); color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 8px; padding: 6px 6px; }
+  .metronom-olcu { font: 500 .9rem var(--font-ui); }
+  .metronom-tempo:disabled, .metronom-olcu:disabled { opacity: .5; }
+  .metronom-durum { color: var(--ivory-dim); font-size: .85rem; }
+  .metronom-durum:empty { display: none; }
   .midi-kutu { display: flex; align-items: center; gap: 10px; min-height: 36px; }
   .midi-durum { color: var(--ivory-dim); font-size: .9rem; max-width: 32ch; }
   .midi-durum:empty { display: none; }
@@ -843,6 +852,19 @@
             <button id="kayitSesIndir" class="hold" type="button" title="Hoparlöre giden ses">Ses indir</button>
           </span>
         </div>
+        <div class="metronom-kutu">
+          <button id="metronomBtn" class="hold" type="button" aria-pressed="false" title="Serbest çalarken kendi temposunda, parça çalarken parçanın vuruşunda tıklar">Metronom</button>
+          <span class="metronom-isik" id="metronomIsik" aria-hidden="true"></span>
+          <input type="number" id="metronomTempo" class="metronom-tempo" min="30" max="240" step="1" value="90" inputmode="numeric" aria-label="Metronom temposu, dakikada vuruş">
+          <select id="metronomOlcu" class="metronom-olcu" aria-label="Ölçüdeki vuruş sayısı; ilk vuruş vurgulu">
+            <option value="0">Vurgusuz</option>
+            <option value="2">2 vuruş</option>
+            <option value="3">3 vuruş</option>
+            <option value="4">4 vuruş</option>
+            <option value="6">6 vuruş</option>
+          </select>
+          <span class="metronom-durum" id="metronomDurum" aria-live="polite"></span>
+        </div>
         <div class="midi-kutu">
           <button id="midiBagla" class="hold" type="button" aria-pressed="false" title="USB ya da Bluetooth MIDI klavyeyi bağla">MIDI klavye</button>
           <span class="midi-durum" id="midiDurum" aria-live="polite"></span>
@@ -1107,6 +1129,7 @@
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
     konsol: 'tek', otoPedal: false, sandik: 100, midi: false, porte: true,
+    metronom: { tempo: 90, olcu: 4 }, // metronomun serbest temposu (dakikada vuruş) ve ölçüdeki vuruş sayısı (0: vurgusuz)
     // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
     caz: {
       cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
@@ -1134,6 +1157,8 @@
       if (typeof saved.otoPedal === 'boolean') settings.otoPedal = saved.otoPedal;
       if (typeof saved.midi === 'boolean') settings.midi = saved.midi;
       if (typeof saved.porte === 'boolean') settings.porte = saved.porte;
+      if (saved.metronom && Number.isFinite(saved.metronom.tempo)) settings.metronom.tempo = clamp(Math.round(saved.metronom.tempo), 30, 240);
+      if (saved.metronom && [0, 2, 3, 4, 6].includes(saved.metronom.olcu)) settings.metronom.olcu = saved.metronom.olcu;
       if (Number.isFinite(saved.sandik)) settings.sandik = clamp(saved.sandik, 0, 100);
       if (Array.isArray(saved.stops)) {
         stopsOn.clear();
@@ -1249,7 +1274,10 @@
     'Sıradaki tuş yanar, sen basınca ilerler': 'The next key lights up; it moves on when you press it', 'Öğren': 'Learn',
     'Başa dön': 'Back to start', 'Bölümü yinele': 'Repeat section', 'İçinde bulunulan bölümü yinele': 'Repeat the current section',
     'Hız': 'Speed', 'Sağ el': 'Right hand', 'Sol el': 'Left hand', 'Program çalsın': 'Program plays', 'Ben çalacağım': 'I will play', 'Sessiz': 'Silent',
-    'Bölümler': 'Sections', 'Nota': 'Notation', 'Parçanın notası': 'The notation of the piece', 'Notayı göster ya da gizle': 'Show or hide the notation', 'Bu bölüme git': 'Go to this section', 'Sıradaki:': 'Next:',
+    'Bölümler': 'Sections', 'Nota': 'Notation', 'Parçanın notası': 'The notation of the piece', 'Notayı göster ya da gizle': 'Show or hide the notation',
+    'Metronom': 'Metronome', 'Serbest çalarken kendi temposunda, parça çalarken parçanın vuruşunda tıklar': 'Clicks at its own tempo when you play freely, and on the beat of the piece while a piece plays',
+    'Metronom temposu, dakikada vuruş': 'Metronome tempo, beats per minute', 'Ölçüdeki vuruş sayısı; ilk vuruş vurgulu': 'Beats per bar; the first beat is accented',
+    'Vurgusuz': 'No accent', '2 vuruş': '2 beats', '3 vuruş': '3 beats', '4 vuruş': '4 beats', '6 vuruş': '6 beats', 'parçanın vuruşunda': 'following the piece', 'Bu bölüme git': 'Go to this section', 'Sıradaki:': 'Next:',
     'Hazır': 'Ready', 'Çalıyor': 'Playing', 'Durakladı': 'Paused', 'Bitti': 'Finished',
     'Bitti: {toplam} adım, {yanlis} yanlış tuş': 'Finished: {toplam} steps, {yanlis} wrong keys',
     'Adım {adim}/{toplam} · Yanlış: {yanlis}': 'Step {adim}/{toplam} · Wrong: {yanlis}',
@@ -2863,6 +2891,41 @@
     return (vurus + kaymis) * TPQ;
   }
 
+  // Ölçü ızgarası: her bölümün ölçülerinin nereden sayıldığı (köken). Bölümün uzunluğu ölçünün katı değilse artan
+  // kısım ilk bölümde ve ölçüden kısa bölümlerde baştaki ön vuruş sayılır (ezgilerin çoğu böyle başlar); öbür
+  // bölümlerde sonda kalır. Vuruş, ölçünün paydasıdır; 6/8, 9/8, 12/8'de tempo elverirse noktalı dörtlük.
+  function olcuIzgarasi(parca, c) {
+    const [pay, payda] = String(parca.olcu || '4/4').split('/').map(Number);
+    const olcu = TPQ * 4 * pay / payda;
+    const birlesik = payda === 8 && pay % 3 === 0 && pay > 3 && parca.tempo / 1.5 >= 40;
+    const vurus = birlesik ? TPQ * 3 / 2 : TPQ * 4 / payda;
+    const bolumler = c.bolumler.map((b, i) => {
+      const uzunluk = b.bit - b.bas, artan = uzunluk % olcu;
+      const onVurus = artan > 0 && (i === 0 || uzunluk < olcu);
+      return { bas: b.bas, bit: b.bit, koken: onVurus ? b.bas + artan - olcu : b.bas };
+    });
+    return { olcu, vurus, bolumler };
+  }
+
+  // Ölçü çizgilerinin yerleri (tik): bölüm başlarında ve her ölçüde
+  function olcuCizgileri(parca, c) {
+    const iz = olcuIzgarasi(parca, c), cizgiler = new Set();
+    for (const b of iz.bolumler) {
+      if (b.bas > 0) cizgiler.add(b.bas);
+      for (let t = b.koken + iz.olcu; t < b.bit - 1; t += iz.olcu) if (t > b.bas) cizgiler.add(t);
+    }
+    return [...cizgiler].sort((a, b) => a - b);
+  }
+
+  // Metronomun parçadaki vuruşları: [{ t, vurgu }]; ölçünün ilk vuruşu vurgulu
+  function parcaVuruslari(parca, c) {
+    const iz = olcuIzgarasi(parca, c), vuruslar = [];
+    for (const b of iz.bolumler) {
+      for (let t = b.koken; t < b.bit - 1; t += iz.vurus) if (t >= b.bas) vuruslar.push({ t, vurgu: (t - b.koken) % iz.olcu === 0 });
+    }
+    return vuruslar;
+  }
+
   // Parçanın başından `tik` anına kadar geçen süre (saniye), hız çarpanı 1 iken.
   function parcaSaniyesi(parca, cizelge, tik) {
     let sn = 0;
@@ -2886,6 +2949,106 @@
     return altta ? LOWER_ROW[fark] : UPPER_ROW[fark - 12];
   }
 
+  /* ================= Metronom ================= */
+  // Serbest çalarken kendi temposunda ve ölçüsünde vurur. Şarkı çalar Dinle'de çalarken parçanın vuruşlarına geçer:
+  // vuruşlar notalarla aynı döngüde zamanlanır (calarZamanla), hız, bölüm temposu ve yineleme kendiliğinden uyar.
+  // Ölçünün ilk vuruşu vurguludur. Tık sesi orgun yankısından ve kaydından geçmez, doğrudan hoparlöre gider.
+  const metronom = {
+    acik: false,
+    sonraki: 0, vurus: 0, zamanlayici: 0,  // serbest vuruşun zamanlaması
+    cikis: null, isiklar: new Set(),
+    gunluk: null,                           // testler için: zamanlanan vuruşlar [{ zaman, vurgu, kaynak }]
+  };
+  const METRONOM_UFUK = 0.12;
+
+  const metronomParcadaMi = () => calar.durum === 'caliyor' && calar.mod === 'dinle';
+
+  function metronomTik(zaman, vurgu, kaynak) {
+    if (metronom.gunluk) metronom.gunluk.push({ zaman, vurgu, kaynak });
+    if (!metronom.cikis) { metronom.cikis = ctx.createGain(); metronom.cikis.connect(ctx.destination); }
+    const vol = settings.volume / 100;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'triangle';
+    o.frequency.value = vurgu ? 1760 : 1175;
+    g.gain.setValueAtTime(0, zaman);
+    g.gain.linearRampToValueAtTime((vurgu ? 0.9 : 0.6) * vol * vol, zaman + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0005, zaman + 0.06);
+    o.connect(g); g.connect(metronom.cikis);
+    o.start(zaman); o.stop(zaman + 0.07);
+    // Göz için: vuruşta yanan ışık
+    const isik = $('#metronomIsik');
+    const yak = setTimeout(() => {
+      metronom.isiklar.delete(yak);
+      isik.className = 'metronom-isik ' + (vurgu ? 'vurgu' : 'vur');
+      const son = setTimeout(() => { metronom.isiklar.delete(son); isik.className = 'metronom-isik'; }, 90);
+      metronom.isiklar.add(son);
+    }, Math.max(0, (zaman - ctx.currentTime) * 1000));
+    metronom.isiklar.add(yak);
+  }
+
+  // Serbest vuruş: parça çalmıyorken
+  function metronomZamanla() {
+    if (!metronom.acik || !ctx) return;
+    if (metronomParcadaMi()) { metronom.sonraki = 0; return; }
+    const simdi = ctx.currentTime;
+    if (!metronom.sonraki || metronom.sonraki < simdi - 0.05) { metronom.sonraki = simdi + 0.05; metronom.vurus = 0; }
+    const { tempo, olcu } = settings.metronom;
+    while (metronom.sonraki < simdi + METRONOM_UFUK) {
+      metronomTik(metronom.sonraki, olcu > 0 && metronom.vurus % olcu === 0, 'serbest');
+      metronom.vurus++;
+      metronom.sonraki += 60 / tempo;
+    }
+  }
+
+  function metronomAc(acik) {
+    if (acik && !ensureWind()) return;
+    metronom.acik = acik;
+    clearInterval(metronom.zamanlayici);
+    metronom.sonraki = 0;
+    if (acik) {
+      metronom.zamanlayici = setInterval(metronomZamanla, 25);
+      metronomZamanla();
+    } else {
+      // Önceden zamanlanmış tıkları da sustur
+      if (metronom.cikis) { try { metronom.cikis.disconnect(); } catch (_) {} metronom.cikis = null; }
+      for (const id of metronom.isiklar) clearTimeout(id);
+      metronom.isiklar.clear();
+      $('#metronomIsik').className = 'metronom-isik';
+    }
+    metronomArayuzGuncelle();
+  }
+
+  function metronomArayuzGuncelle() {
+    $('#metronomBtn').setAttribute('aria-pressed', String(metronom.acik));
+    const parcada = metronom.acik && metronomParcadaMi();
+    $('#metronomTempo').disabled = parcada;
+    $('#metronomOlcu').disabled = parcada;
+    $('#metronomDurum').textContent = parcada ? t('parçanın vuruşunda') : '';
+  }
+
+  function metronomKur() {
+    const tempo = $('#metronomTempo'), olcu = $('#metronomOlcu');
+    tempo.value = settings.metronom.tempo;
+    olcu.value = String(settings.metronom.olcu);
+    $('#metronomBtn').addEventListener('click', () => metronomAc(!metronom.acik));
+    // Yazarken geçerli her değer hemen uygulanır; alandan çıkınca sınırlara oturtulur
+    tempo.addEventListener('input', () => {
+      const v = Number(tempo.value);
+      if (Number.isFinite(v) && v >= 30 && v <= 240) { settings.metronom.tempo = Math.round(v); save(); }
+    });
+    tempo.addEventListener('change', () => {
+      const v = Math.round(Number(tempo.value));
+      if (tempo.value !== '' && Number.isFinite(v)) settings.metronom.tempo = clamp(v, 30, 240);
+      tempo.value = settings.metronom.tempo;
+      save();
+    });
+    olcu.addEventListener('change', () => {
+      settings.metronom.olcu = Number(olcu.value);
+      metronom.vurus = 0; // yeni ölçü vurguyla başlasın
+      save();
+    });
+    metronomArayuzGuncelle();
+  }
   /* ================= Şarkı çalar ================= */
   // Dinle: program parçayı tempoda çalar. "Ben" seçilen el çalınmaz, yalnızca basılacak tuşlar yanar (eşlik).
   // Öğren: program, "Ben" seçilen elin sıradaki tuşlarına basılmasını bekler; öbür eli o adıma kadar kendisi çalar.
@@ -2903,6 +3066,7 @@
     adimlar: [], adim: 0, taze: new Set(), yanlis: 0, bitisSayaci: 0,
     gunluk: null,                              // testler için: zamanlanan program notaları
     basEli: 'sol', pedalSayisi: 0,             // otomatik pedal: bas çizgisini çalan el, zamanlanan pedal notası sayısı
+    vuruslar: [], vurusSira: 0,                // metronom: parçanın vuruşları ve sıradaki
   };
   const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
   const ARALIK_MS = 25;
@@ -2994,6 +3158,8 @@
     });
   }
 
+  const ilkVurus = tik => { const i = calar.vuruslar.findIndex(v => v.t >= tik); return i < 0 ? calar.vuruslar.length : i; };
+
   function calarZamanla() {
     if (calar.durum !== 'caliyor') return;
     const c = calar.cizelge, ufuk = ctx.currentTime + UFUK;
@@ -3006,6 +3172,8 @@
         calar.t0 += calarSaniye(b.bit) - calarSaniye(b.bas);
         calar.sira = c.olaylar.findIndex(o => o.t >= b.bas);
         if (calar.sira < 0) calar.sira = c.olaylar.length;
+        calar.vurusSira = ilkVurus(b.bas);
+        calar.basTik = Math.min(calar.basTik, b.bas); // bölümün ortasından başlandıysa yinelemede başı da çalınsın
         continue;
       }
       if (calar.bolumNo + 1 < c.bolumler.length) {
@@ -3015,6 +3183,12 @@
           calarBolumeGir(calar.bolumNo, Math.max(zaman, ctx.currentTime));
           continue;
         }
+      }
+      // Metronom: parçanın vuruşları notalarla aynı döngüde zamanlanır
+      for (const V = calar.vuruslar; calar.vurusSira < V.length; calar.vurusSira++) {
+        const v = V[calar.vurusSira], zaman = calar.t0 + calarSaniye(v.t);
+        if (zaman >= ufuk) break;
+        if (metronom.acik && v.t >= calar.basTik) metronomTik(Math.max(zaman, ctx.currentTime), v.vurgu, 'parca');
       }
       if (calar.sira >= c.olaylar.length) break;
       const o = c.olaylar[calar.sira];
@@ -3151,6 +3325,7 @@
     if (calar.parca) calarDurdur();
     calar.parca = parca;
     calar.cizelge = parcaCizelgesi(parca);
+    calar.vuruslar = parcaVuruslari(parca, calar.cizelge);
     calar.basEli = calar.cizelge.eller.includes('sol') ? 'sol' : 'sag';
     calar.hiz = 100;
     calar.dongu = false;
@@ -3219,6 +3394,7 @@
       calar.basTik = calar.konum;
       calar.t0 = ctx.currentTime + 0.12 - calarSaniye(calar.konum);
       calar.sira = 0;
+      calar.vurusSira = ilkVurus(calar.konum);
       calar.bolumNo = c.bolumler.findIndex(b => calar.konum < b.bit) - 1;
       if (calar.bolumNo < -1) calar.bolumNo = c.bolumler.length - 2;
       calarZamanla();
@@ -3377,6 +3553,7 @@
   function calarArayuzGuncelle() {
     const var_ = !!calar.parca;
     ekraniAcikTut(calar.durum === 'caliyor');
+    metronomArayuzGuncelle();
     calarEl.hidden = !var_;
     $('#parcaSec').hidden = var_;
     $('#dokOynat').hidden = !var_;
@@ -3526,6 +3703,8 @@
     saniye: (id, tik) => parcaSaniyesi(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id]), tik),
     tus: (id, midi, el, oktav) => notaTusu(PARCA_BY_ID[id], midi, el, oktav),
     calar,
+    metronom, metronomAc, vuruslar: id => parcaVuruslari(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
+    olcuCizgileri: id => olcuCizgileri(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
     frekans: notaFrekansi,
@@ -3715,19 +3894,6 @@
     if (ton.donanim > 0 && DIYEZ_SIRASI.slice(0, ton.donanim).includes(harf)) return 1;
     if (ton.donanim < 0 && BEMOL_SIRASI.slice(0, -ton.donanim).includes(harf)) return -1;
     return 0;
-  }
-
-  // Ölçü çizgileri: her bölümün başında ve bölüm içinde ölçü uzunluğunda. İlk bölümün uzunluğu ölçünün katı
-  // değilse artan kısım baştaki ön vuruş sayılır (ezgilerin çoğu böyle başlar); öbür bölümlerde artan kısım sonda kalır.
-  function olcuCizgileri(parca, c) {
-    const [pay, payda] = parca.olcu.split('/').map(Number);
-    const olcu = TPQ * 4 * pay / payda, cizgiler = new Set();
-    c.bolumler.forEach((b, i) => {
-      if (b.bas > 0) cizgiler.add(b.bas);
-      const onVurus = i === 0 ? (b.bit - b.bas) % olcu : 0;
-      for (let t = b.bas + (onVurus || olcu); t < b.bit - 1; t += olcu) cizgiler.add(t);
-    });
-    return [...cizgiler].sort((a, b) => a - b);
   }
 
   const portedeY = (ust, basamak, anahtar) => ust + (anahtar.ust - basamak) * ARALIK / 2;
@@ -4336,6 +4502,7 @@
   calarAdrestenYukle();
   midiKur();
   kayitKur();
+  metronomKur();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };

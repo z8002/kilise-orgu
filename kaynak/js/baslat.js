@@ -21,6 +21,7 @@
   calarAdrestenYukle();
   midiKur();
   kayitKur();
+  metronomKur();
 
   let resizeRaf = 0;
   const relayout = () => { cancelAnimationFrame(resizeRaf); resizeRaf = requestAnimationFrame(layoutFacade); };

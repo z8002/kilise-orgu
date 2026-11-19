@@ -268,6 +268,15 @@
   .kayit-durum:empty { display: none; }
   .kayit-sure { color: var(--ivory-dim); font-size: .9rem; }
   .kayit-sure b { color: var(--ivory); font: 500 .9rem var(--font-mono); }
+  .metronom-kutu { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 36px; }
+  .metronom-isik { width: 12px; height: 12px; border-radius: 50%; background: rgba(86,59,39,.9); box-shadow: inset 0 1px 2px rgba(0,0,0,.5); flex: none; }
+  .metronom-isik.vur { background: var(--gilt-bright); box-shadow: 0 0 8px var(--gilt); }
+  .metronom-isik.vurgu { background: #f08a74; box-shadow: 0 0 10px #d0573f; }
+  .metronom-tempo { width: 4.6em; font: 500 .95rem var(--font-mono); color: var(--ivory); background: var(--oak); border: 1px solid var(--oak-edge); border-radius: 8px; padding: 6px 6px; }
+  .metronom-olcu { font: 500 .9rem var(--font-ui); }
+  .metronom-tempo:disabled, .metronom-olcu:disabled { opacity: .5; }
+  .metronom-durum { color: var(--ivory-dim); font-size: .85rem; }
+  .metronom-durum:empty { display: none; }
   .midi-kutu { display: flex; align-items: center; gap: 10px; min-height: 36px; }
   .midi-durum { color: var(--ivory-dim); font-size: .9rem; max-width: 32ch; }
   .midi-durum:empty { display: none; }

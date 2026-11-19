@@ -84,6 +84,41 @@
     return (vurus + kaymis) * TPQ;
   }
 
+  // Ölçü ızgarası: her bölümün ölçülerinin nereden sayıldığı (köken). Bölümün uzunluğu ölçünün katı değilse artan
+  // kısım ilk bölümde ve ölçüden kısa bölümlerde baştaki ön vuruş sayılır (ezgilerin çoğu böyle başlar); öbür
+  // bölümlerde sonda kalır. Vuruş, ölçünün paydasıdır; 6/8, 9/8, 12/8'de tempo elverirse noktalı dörtlük.
+  function olcuIzgarasi(parca, c) {
+    const [pay, payda] = String(parca.olcu || '4/4').split('/').map(Number);
+    const olcu = TPQ * 4 * pay / payda;
+    const birlesik = payda === 8 && pay % 3 === 0 && pay > 3 && parca.tempo / 1.5 >= 40;
+    const vurus = birlesik ? TPQ * 3 / 2 : TPQ * 4 / payda;
+    const bolumler = c.bolumler.map((b, i) => {
+      const uzunluk = b.bit - b.bas, artan = uzunluk % olcu;
+      const onVurus = artan > 0 && (i === 0 || uzunluk < olcu);
+      return { bas: b.bas, bit: b.bit, koken: onVurus ? b.bas + artan - olcu : b.bas };
+    });
+    return { olcu, vurus, bolumler };
+  }
+
+  // Ölçü çizgilerinin yerleri (tik): bölüm başlarında ve her ölçüde
+  function olcuCizgileri(parca, c) {
+    const iz = olcuIzgarasi(parca, c), cizgiler = new Set();
+    for (const b of iz.bolumler) {
+      if (b.bas > 0) cizgiler.add(b.bas);
+      for (let t = b.koken + iz.olcu; t < b.bit - 1; t += iz.olcu) if (t > b.bas) cizgiler.add(t);
+    }
+    return [...cizgiler].sort((a, b) => a - b);
+  }
+
+  // Metronomun parçadaki vuruşları: [{ t, vurgu }]; ölçünün ilk vuruşu vurgulu
+  function parcaVuruslari(parca, c) {
+    const iz = olcuIzgarasi(parca, c), vuruslar = [];
+    for (const b of iz.bolumler) {
+      for (let t = b.koken; t < b.bit - 1; t += iz.vurus) if (t >= b.bas) vuruslar.push({ t, vurgu: (t - b.koken) % iz.olcu === 0 });
+    }
+    return vuruslar;
+  }
+
   // Parçanın başından `tik` anına kadar geçen süre (saniye), hız çarpanı 1 iken.
   function parcaSaniyesi(parca, cizelge, tik) {
     let sn = 0;

@@ -92,6 +92,7 @@
   function calarArayuzGuncelle() {
     const var_ = !!calar.parca;
     ekraniAcikTut(calar.durum === 'caliyor');
+    metronomArayuzGuncelle();
     calarEl.hidden = !var_;
     $('#parcaSec').hidden = var_;
     $('#dokOynat').hidden = !var_;
@@ -241,6 +242,8 @@
     saniye: (id, tik) => parcaSaniyesi(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id]), tik),
     tus: (id, midi, el, oktav) => notaTusu(PARCA_BY_ID[id], midi, el, oktav),
     calar,
+    metronom, metronomAc, vuruslar: id => parcaVuruslari(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
+    olcuCizgileri: id => olcuCizgileri(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
     frekans: notaFrekansi,

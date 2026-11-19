@@ -13,6 +13,7 @@
   const settings = {
     room: 'kilise', reverb: 45, volume: 70, octave: 3, hafif: false, akort: 'esit', diyapazon: 440, stereo: 50,
     konsol: 'tek', otoPedal: false, sandik: 100, midi: false, porte: true,
+    metronom: { tempo: 90, olcu: 4 }, // metronomun serbest temposu (dakikada vuruş) ve ölçüdeki vuruş sayısı (0: vurgusuz)
     // Caz orgu: dokuz çekme çubuğu (0–8), perküsyon, vibrato/koro, dönen hoparlör, sürüş, tuş tıkırtısı
     caz: {
       cekme: [8, 8, 8, 0, 0, 0, 0, 0, 0], perkusyon: true, harmonik: 3, hizli: true, yumusak: false,
@@ -40,6 +41,8 @@
       if (typeof saved.otoPedal === 'boolean') settings.otoPedal = saved.otoPedal;
       if (typeof saved.midi === 'boolean') settings.midi = saved.midi;
       if (typeof saved.porte === 'boolean') settings.porte = saved.porte;
+      if (saved.metronom && Number.isFinite(saved.metronom.tempo)) settings.metronom.tempo = clamp(Math.round(saved.metronom.tempo), 30, 240);
+      if (saved.metronom && [0, 2, 3, 4, 6].includes(saved.metronom.olcu)) settings.metronom.olcu = saved.metronom.olcu;
       if (Number.isFinite(saved.sandik)) settings.sandik = clamp(saved.sandik, 0, 100);
       if (Array.isArray(saved.stops)) {
         stopsOn.clear();

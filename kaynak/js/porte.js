@@ -39,19 +39,6 @@
     return 0;
   }
 
-  // Ölçü çizgileri: her bölümün başında ve bölüm içinde ölçü uzunluğunda. İlk bölümün uzunluğu ölçünün katı
-  // değilse artan kısım baştaki ön vuruş sayılır (ezgilerin çoğu böyle başlar); öbür bölümlerde artan kısım sonda kalır.
-  function olcuCizgileri(parca, c) {
-    const [pay, payda] = parca.olcu.split('/').map(Number);
-    const olcu = TPQ * 4 * pay / payda, cizgiler = new Set();
-    c.bolumler.forEach((b, i) => {
-      if (b.bas > 0) cizgiler.add(b.bas);
-      const onVurus = i === 0 ? (b.bit - b.bas) % olcu : 0;
-      for (let t = b.bas + (onVurus || olcu); t < b.bit - 1; t += olcu) cizgiler.add(t);
-    });
-    return [...cizgiler].sort((a, b) => a - b);
-  }
-
   const portedeY = (ust, basamak, anahtar) => ust + (anahtar.ust - basamak) * ARALIK / 2;
 
   function porteKur() {
