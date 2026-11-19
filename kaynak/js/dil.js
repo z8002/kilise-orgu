@@ -79,7 +79,7 @@
     'Sıradaki tuş yanar, sen basınca ilerler': 'The next key lights up; it moves on when you press it', 'Öğren': 'Learn',
     'Başa dön': 'Back to start', 'Bölümü yinele': 'Repeat section', 'İçinde bulunulan bölümü yinele': 'Repeat the current section',
     'Hız': 'Speed', 'Sağ el': 'Right hand', 'Sol el': 'Left hand', 'Program çalsın': 'Program plays', 'Ben çalacağım': 'I will play', 'Sessiz': 'Silent',
-    'Bölümler': 'Sections', 'Bu bölüme git': 'Go to this section', 'Sıradaki:': 'Next:',
+    'Bölümler': 'Sections', 'Nota': 'Notation', 'Parçanın notası': 'The notation of the piece', 'Notayı göster ya da gizle': 'Show or hide the notation', 'Bu bölüme git': 'Go to this section', 'Sıradaki:': 'Next:',
     'Hazır': 'Ready', 'Çalıyor': 'Playing', 'Durakladı': 'Paused', 'Bitti': 'Finished',
     'Bitti: {toplam} adım, {yanlis} yanlış tuş': 'Finished: {toplam} steps, {yanlis} wrong keys',
     'Adım {adim}/{toplam} · Yanlış: {yanlis}': 'Step {adim}/{toplam} · Wrong: {yanlis}',

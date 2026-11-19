@@ -42,6 +42,7 @@
     $('#elSolKutu').hidden = !c.eller.includes('sol');
     $('#elSagKutu').hidden = !c.eller.includes('sag');
     adresiYaz(parcaAdresi(p.id, calar.mod));
+    porteKur();
   }
 
   function calarIlerlemeGuncelle() {
@@ -50,6 +51,7 @@
     const no = calar.cizelge.bolumler.findIndex(b => calar.konum < b.bit);
     const simdiki = calar.durum === 'bitti' ? -1 : (no < 0 ? calar.cizelge.bolumler.length - 1 : no);
     $('#calarBolumler').querySelectorAll('.bolum').forEach((d, i) => d.setAttribute('aria-current', String(i === simdiki)));
+    porteGuncelle();
   }
 
   // Öğren modunda sıradaki adımların tuşlarını yazar.

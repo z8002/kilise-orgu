@@ -16,6 +16,7 @@
   listeKur();
   kendiParcaFormuKur();
   calarOlaylariBagla();
+  porteOlaylariBagla();
   calarArayuzGuncelle();
   calarAdrestenYukle();
   midiKur();

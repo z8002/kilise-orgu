@@ -10,6 +10,9 @@ Kilise Orgu'nun özgün sürümü [`v1/`](v1/) klasöründe saklıdır. Bu dosya
 | 3. Telefon | Parmakla çalınabilen klavye, internetsiz kullanım | Bitti |
 | 4. Daha gerçek org | İki klavye, pedal, yeni sesler | Bitti |
 | 5. Dış dünya | MIDI klavye, kayıt, kendi parçanı ekleme | Bitti |
+| 6. Nota ve alıştırma | Porte görünümü, metronom, ilerleme kaydı | Sürüyor |
+| 7. Paylaşma ve içe aktarma | Kendi parçanı bağlantıyla paylaşma ve düzenleme, MIDI dosyasından parça | Bekliyor |
+| 8. Ses ve erişilebilirlik | Rüzgâr dalgalanması ve boru konuşması, klavyeyle tam gezinme, ekran okuyucu | Bekliyor |
 
 ## Aşama 0: Temeli sağlamlaştır
 
@@ -68,3 +71,21 @@ Bulunan hata: parça açıkken çalar düğmeleri 360 piksellik ekrana sığmıy
 - [x] Kendi parçanı ekleme: Türkçe ya da İngilizce nota adlarıyla yazılır, yanlış yazım yeri gösterilerek reddedilir; tarayıcıda saklanır, iki sayfada da listede; Dinle, Öğren ve eşlik çalışır. Oktav, sağ el bilgisayar klavyesinin üst sırasına düşecek biçimde kendiliğinden seçilir.
 - [x] İngilizce arayüz: bütün metinler, register adları, parça adları, bölüm adları ve tonlar; İngilizcede nota adları C D E. Tarayıcı Türkçe değilse kendiliğinden; seçim saklanır, `?dil=en|tr` ile bağlantı verilir. Bir test, İngilizce sayfada görünen her metni ve ipucunu Türkçe kalıntı için tarar.
 - [x] Paylaşım önizlemesi: bağlantı paylaşılınca her sayfa kendi başlığını, açıklamasını ve 1200 × 630 görselini gösterir (Open Graph, Twitter kartı). Görseller `node araclar/simgeler.js` ile çizilir.
+
+## Aşama 6: Nota ve alıştırma
+
+- [x] Porte: parçanın notaları sol ve fa anahtarlı çift portede; çalarken imleç ilerler, Öğren'de sıradaki nota yanar.
+- [ ] Metronom: serbest çalarken kendi temposunda, parça çalarken parçanın temposunda ve ölçüsünde.
+- [ ] İlerleme: Öğren'de her parçanın en iyi sonucu saklanır, listede görünür.
+
+## Aşama 7: Paylaşma ve içe aktarma
+
+- [ ] Kendi parçanı bağlantıyla paylaşma: parça adrese sığar, açan kişi çalar ve isterse saklar.
+- [ ] Kendi parçanı düzenleme.
+- [ ] MIDI dosyasından parça (kendi kaydın ya da dışarıdan bir .mid).
+
+## Aşama 8: Ses ve erişilebilirlik
+
+- [ ] Rüzgâr dalgalanması: büyük akorda rüzgâr basıncı hafifçe düşer, ses kıpırdar.
+- [ ] Klavyeyle tam gezinme ve ekran okuyucu duyuruları.
+

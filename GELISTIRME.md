@@ -52,6 +52,7 @@ npm test
 - MIDI klavye: tarayıcının MIDI arayüzü sahte bir klavyeyle değiştirilir; nota, sürdürme ve ifade pedalı, program değişimi, kanallar.
 - Kendi parçan: Türkçe ve İngilizce yazımın çizelgeye çevrilmesi (kısa kalan elin susla tamamlanması), çalınması, Öğren, saklanıp silinmesi, yanlış yazımın reddi.
 - Kayıt: indirilen MIDI dosyası çözülür; notaların sırası, süresi ve kanalı denetlenir; ses dosyası iner; kayıt geri çalınır.
+- Porte: otuz parçanın her olayı bir nota grubu, her notası bir nota başı olarak yazılıyor mu; ton donanımı, ölçü işareti, değiştirici işaretlerin ölçüde bir kez yazılması (Für Elise'nin Re♯'i, baladın Do♯'i); çalarken akması ve vurgular; Nota düğmesinin saklanması.
 - Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.

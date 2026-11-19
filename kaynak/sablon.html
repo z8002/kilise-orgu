@@ -198,6 +198,7 @@
             <button id="calarOynat" class="oynat" type="button" aria-label="Çal" aria-pressed="false">▶</button>
             <button id="calarBas" class="kucuk" type="button" aria-label="Başa dön" title="Başa dön">⏮</button>
             <button id="calarDongu" class="kucuk" type="button" aria-pressed="false" aria-label="Bölümü yinele" title="İçinde bulunulan bölümü yinele">↻</button>
+            <button id="porteBtn" class="hold porte-dugme" type="button" aria-pressed="true" title="Notayı göster ya da gizle">Nota</button>
           </div>
           <label class="ctl" for="calarHiz">
             <span class="ctl-label">Hız <output id="calarHizOut">100%</output></span>
@@ -221,6 +222,9 @@
           </label>
         </div>
         <div class="calar-bolumler" id="calarBolumler" role="group" aria-label="Bölümler"></div>
+        <div class="porte-kutu" id="porteKutu">
+          <svg id="porte" class="porte" role="img" aria-label="Parçanın notası" width="100%" height="0"></svg>
+        </div>
         <div class="calar-ilerleme" aria-hidden="true"><div id="calarCubuk"></div></div>
         <p class="calar-siradaki" id="calarSiradaki" hidden></p>
         <p class="calar-durum" id="calarDurum" aria-live="polite"></p>
@@ -378,6 +382,7 @@
 /*@ekle js/calar.js*/
 /*@ekle js/calar-arayuz.js*/
 /*@ekle js/kendi-parca.js*/
+/*@ekle js/porte.js*/
 /*@ekle js/olaylar.js*/
 /*@ekle js/midi.js*/
 /*@ekle js/kayit.js*/
