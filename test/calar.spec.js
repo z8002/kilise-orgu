@@ -153,7 +153,7 @@ test.describe('Öğren', () => {
       if (i < adimlar.length - 1) await expect(page.locator('#calarDurum')).toHaveText(`Adım ${i + 2}/${adimlar.length} · Yanlış: 1`);
     }
     await bekle(page, 'bitti');
-    await expect(page.locator('#calarDurum')).toHaveText(`Bitti: ${adimlar.length} adım, 1 yanlış tuş`);
+    await expect(page.locator('#calarDurum')).toHaveText(`Bitti: ${adimlar.length} adım, 1 yanlış tuş · İlk kez bitirdin!`);
   });
 
   test('öbür eli program çalar: baladda sağ el basılınca sol el akoru gelir', async ({ page }) => {

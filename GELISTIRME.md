@@ -54,6 +54,7 @@ npm test
 - Kayıt: indirilen MIDI dosyası çözülür; notaların sırası, süresi ve kanalı denetlenir; ses dosyası iner; kayıt geri çalınır.
 - Porte: otuz parçanın her olayı bir nota grubu, her notası bir nota başı olarak yazılıyor mu; ton donanımı, ölçü işareti, değiştirici işaretlerin ölçüde bir kez yazılması (Für Elise'nin Re♯'i, baladın Do♯'i); çalarken akması ve vurgular; Nota düğmesinin saklanması.
 - Metronom: serbest tempoda vuruş aralığı ve vurgu; kapatınca susması; tempo ve ölçünün saklanması; parça çalarken vuruşların parçanın ilk notasıyla aynı anda, hıza uygun aralıkla gelmesi; ölçü ızgarası (Für Elise'nin ön vuruşu, 6/8'de noktalı dörtlük ya da ağır tempoda sekizlik, 4/2'de ikilik); ortadan başlanan bölüm yinelemesinin bölüm başını da çalması.
+- İlerleme: Öğren bitince sonucun saklanması, daha iyisiyle yenilenmesi, kötüsünün en iyiyi bozmaması; ellere göre ayrı kayıt; listedeki yıldızlar (caz orgunda da); ortadan başlanan Öğren'in sayılmaması; bozuk kaydın atlanması.
 - Kendi kombinasyonları: Ayarla ile kaydetme, geri çağırma, sayfa yenilenince durması, boş pistonun registrasyona dokunmaması.
 - Akort: sayfanın hesapladığı sapmalar yayımlanmış tablolarla aynı mı; Werckmeister'de Do4 gerçekten 11,7 sent tiz mi; basılı notanın perdesi diyapazonla kayıyor mu; Do borusu solda, Do♯ borusu sağda mı.
 - Otuz parçanın her notası: README'de yazan tuşa basılınca parça dosyasındaki nota çalıyor mu.

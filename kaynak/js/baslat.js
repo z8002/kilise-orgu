@@ -13,6 +13,7 @@
   updateFocusHint();
   readLayout();
   kendiParcalariYukle();
+  ilerlemeYukle();
   listeKur();
   kendiParcaFormuKur();
   calarOlaylariBagla();

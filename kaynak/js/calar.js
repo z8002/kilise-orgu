@@ -16,6 +16,7 @@
     gunluk: null,                              // testler için: zamanlanan program notaları
     basEli: 'sol', pedalSayisi: 0,             // otomatik pedal: bas çizgisini çalan el, zamanlanan pedal notası sayısı
     vuruslar: [], vurusSira: 0,                // metronom: parçanın vuruşları ve sıradaki
+    ogrenTam: false, ogrenSonuc: null,         // Öğren baştan, atlamadan mı çalınıyor; bitince kaydedilen sonuç
   };
   const UFUK = 0.25;        // saniye: notalar bu kadar önceden zamanlanır
   const ARALIK_MS = 25;
@@ -169,6 +170,11 @@
 
   function calarBitir() {
     calarSesleriKes();
+    // Öğren baştan sona, atlamadan ve yinelemesiz bitti: sonuç ilerlemeye yazılır
+    if (calar.mod === 'ogren' && calar.ogrenTam && !calar.dongu && calar.adimlar.length && elTuru()) {
+      calar.ogrenSonuc = ilerlemeKaydet(calar.parca.id, elTuru(), calar.adimlar.length, calar.yanlis);
+    }
+    calar.ogrenTam = false;
     calar.durum = 'bitti';
     calar.konum = calar.cizelge.toplam;
     calarArayuzGuncelle();
@@ -317,6 +323,7 @@
     const caliyordu = calar.durum === 'caliyor';
     if (caliyordu) calarDuraklat();
     calar.eller[el] = rol;
+    if (calar.konum > 0) calar.ogrenTam = false; // yolun ortasında el değişince sonuç sayılmaz
     // Öğren'de bir eli kullanıcı çalmalı: kullanıcı elini bırakınca öbür el ona geçer (yoksa seçim geri alınır)
     if (calar.mod === 'ogren' && !calar.cizelge.eller.some(e => calar.eller[e] === 'ben')) {
       const obur = calar.cizelge.eller.find(e => e !== el);
@@ -333,6 +340,8 @@
     if (!ensureWind()) return;
     const c = calar.cizelge;
     if (calar.durum === 'bitti' || calar.konum >= c.toplam) { calar.konum = 0; calar.yanlis = 0; }
+    if (calar.konum === 0) { calar.ogrenTam = true; calar.yanlis = 0; }
+    calar.ogrenSonuc = null;
     calar.durum = 'caliyor';
     // Baştan başlarken ya da bir bölüme atlanınca o bölümün registrasyonu uygulanır; duraklatıp sürdürünce dokunulmaz.
     calar.yeniBaslangic = calar.kayitZorla || calar.konum === 0;
@@ -385,6 +394,7 @@
     if (caliyordu) calarDuraklat();
     calar.konum = clamp(tik, 0, calar.cizelge.toplam);
     calar.kayitZorla = true;
+    calar.ogrenTam = false; // atlanınca sonuç sayılmaz (başa dönülürse yeniden sayılır)
     calar.adim = Math.max(0, calar.adimlar.findIndex(a => a.t >= calar.konum));
     if (calar.durum === 'bitti') calar.durum = 'durakladi';
     if (caliyordu) calarBasla();

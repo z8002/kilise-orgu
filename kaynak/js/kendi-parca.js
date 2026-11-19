@@ -131,6 +131,7 @@
     kendiParcalariYaz(kendiParcalari().filter(k => k.id !== id));
     if (calar.parca && calar.parca.id === id) calarKapat();
     kendiParcayiCikar(id);
+    ilerlemeSil(id);
     etiketleriYaz();
     listeYaz();
   }

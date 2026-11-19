@@ -29,6 +29,7 @@ Ya da bilgisayarına indir:
 ## Özellikler
 
 - **Şarkı çalar:** 30 parçayı program kendisi çalar (Dinle) ya da sana adım adım öğretir (Öğren): sıradaki tuş yanar, doğru tuşa basınca ilerler. Bir eli programa bırakıp öbürünü kendin çalabilir, hızı düşürebilir, bir bölümü yineletebilirsin. Registrasyon ve oktav parçaya göre kendiliğinden ayarlanır. Parçanın notası çift portede görünür: çalarken notalar akar, çalan notalar sarı, Öğren'de basacağın notalar yeşil yanar (**Nota** düğmesiyle gizlenir).
+- **İlerleme:** Öğren'de baştan sona bitirdiğin her parçanın en iyi sonucu (sağ el, sol el, iki el ayrı) tarayıcıda saklanır; parça listesinde yıldızla görünür: hiç yanlış yoksa ★★★, yanlışlar adımların yüzde 5'ini geçmezse ★★☆. Bitince yeni bir en iyi sonuç olup olmadığını söyler.
 - **Metronom:** Serbest çalarken seçtiğin tempoda (30–240) ve ölçüde vurur, ölçünün ilk vuruşu vurgulu; yanındaki ışık vuruşta yanar. Şarkı çalar Dinle'de çalarken metronom parçanın vuruşuna geçer: hız, bölüm temposu ve yineleme ona da uyar. Tık sesi kayda girmez.
 - **Sürekli ses:** Tuş basılı kaldıkça nota çalar, bırakınca yankıyla söner. `Boşluk` basılıyken bıraktığın notalar da çalmaya devam eder.
 - **26 register, iki manuel ve pedal:** I. manuelin 13 registerine ek olarak panjurlu Sandık'ta (II. manuel) 9, pedalda 4 register. "İki manuel ve pedal" konsolunda bilgisayar klavyesinin üst sırası Sandık'ı çalar; ekranda iki manuel ve ahşap pedal klavyesi görünür. Registerler çalarken de açılıp kapatılabilir.

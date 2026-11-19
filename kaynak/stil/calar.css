@@ -120,7 +120,8 @@
   .p-no { font: 500 .85rem var(--font-mono); color: var(--ivory-mute); grid-row: span 2; }
   .p-ad { font-weight: 500; }
   .p-besteci { grid-column: 2; font-size: .85rem; color: var(--ivory-mute); }
-  .p-ek { grid-column: 3; grid-row: 1 / span 2; font-size: .8rem; color: var(--ivory-mute); text-align: right; }
+  .p-ek { grid-column: 3; grid-row: 1 / span 2; font-size: .8rem; color: var(--ivory-mute); text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .p-yildiz { font-size: .95rem; letter-spacing: 1px; color: var(--gilt-bright); }
   #parcaYok { margin: 0; color: var(--ivory-mute); }
   .liste[open] { grid-template-rows: auto auto auto 1fr auto auto; }
   .kendi-satir { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px; }

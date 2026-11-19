@@ -114,9 +114,14 @@
     let durum = t(DURUM_ADI[calar.durum] || '');
     if (calar.mod === 'ogren') {
       const toplam = calar.adimlar.length;
-      if (calar.durum === 'bitti') durum = t('Bitti: {toplam} adım, {yanlis} yanlış tuş', { toplam, yanlis: calar.yanlis });
+      if (calar.durum === 'bitti') {
+        durum = t('Bitti: {toplam} adım, {yanlis} yanlış tuş', { toplam, yanlis: calar.yanlis });
+        const s = calar.ogrenSonuc;
+        if (s && s.yeni) durum += s.onceki ? t(' · Yeni en iyi sonuç! (önceki: {yanlis} yanlış)', { yanlis: s.onceki.yanlis }) : t(' · İlk kez bitirdin!');
+        else if (s) durum += t(' · En iyi: {yanlis} yanlış', { yanlis: s.onceki.yanlis });
+      }
       else if (calar.durum === 'caliyor') durum = t('Adım {adim}/{toplam} · Yanlış: {yanlis}', { adim: Math.min(calar.adim + 1, toplam), toplam, yanlis: calar.yanlis });
-      else durum += t(' · Yanan tuşa bas, program seni bekler');
+      else durum += t(' · Yanan tuşa bas, program seni bekler') + ilerlemeOzeti();
     } else if (calar.cizelge.eller.some(el => calar.eller[el] === 'ben') && calar.durum !== 'bitti') {
       durum += t(' · Yanan tuşlar senin elin');
     }
@@ -154,6 +159,8 @@
       d.children[1].textContent = parcaAdi(p);
       d.children[2].textContent = besteciAdi(p);
       d.children[3].textContent = t(ZORLUK_ADI[p.zorluk]) + (p.dogrulama === 'ezber' ? t(' · doğrulanmadı') : '');
+      const rozet = ilerlemeRozeti(p.id);
+      if (rozet) d.children[3].appendChild(rozet);
       d.addEventListener('click', () => {
         liste.kutu.close();
         calarYukle(p.id, 'dinle');
@@ -242,7 +249,7 @@
     saniye: (id, tik) => parcaSaniyesi(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id]), tik),
     tus: (id, midi, el, oktav) => notaTusu(PARCA_BY_ID[id], midi, el, oktav),
     calar,
-    metronom, metronomAc, vuruslar: id => parcaVuruslari(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
+    metronom, metronomAc, ilerleme: () => JSON.parse(JSON.stringify(ilerleme)), vuruslar: id => parcaVuruslari(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
     olcuCizgileri: id => olcuCizgileri(PARCA_BY_ID[id], parcaCizelgesi(PARCA_BY_ID[id])),
     yukle: calarYukle, basla: calarBasla, duraklat: calarDuraklat, durdur: calarDurdur, hiz: calarHizAyarla, git: calarKonumaGit,
     sesZamani: () => (ctx ? ctx.currentTime : 0),
